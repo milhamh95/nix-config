@@ -28,10 +28,9 @@
       fi
     '';
     configureHammerflow = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    if [ ! -e "$HOME/.hammerspon/Spoons/Hammerflow.spoon" ]; then
+    if [ ! -e "$HOME/.hammerspoon/Spoons/Hammerflow.spoon" ]; then
         echo "Configuring Hammerflow... ⚙️"
         export PATH="/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
-        $DRY_RUN_CMD mkdir -p $HOME/.hammerspoon
         $DRY_RUN_CMD git clone https://github.com/saml-dev/Hammerflow.spoon.git $HOME/.hammerspoon/Spoons/Hammerflow.spoon
         $DRY_RUN_CMD cp -f ${./hammerflow/home.toml} $HOME/.hammerspoon/home.toml
         $DRY_RUN_CMD cp -f ${./hammerflow/init.lua} $HOME/.hammerspoon/init.lua
