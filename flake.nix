@@ -161,7 +161,6 @@
               "homerow"
               "jordanbaird-ice"
               "karabiner-elements"
-              "leader-key"
               "librewolf"
               "logitune"
               "macupdater"

@@ -1,0 +1,51 @@
+#################################################
+# This file is a sample of some things you
+# can do with this leader key setup. It's active
+# right now! Set leader_key below and try it! The
+# lua prioritizes home.toml, then work.toml,
+# then falls back to this sample.toml. If you
+# want different profile names, you can add it
+# to the list in ~/.hammerspoon/init.lua.
+#################################################
+
+# settings
+leader_key = "f18"        # required, the leader key that starts the sequence
+leader_key_mods = ""      # optional, default "", not recommended - a dedicated leader key is better
+                             # supports cmd ctrl alt shift
+auto_reload = true        # optional, default true, reload when any file in this directory is saved
+toast_on_reload = true    # optional, default false, show a toast when the config is reloaded
+show_ui = true            # optional, default true, show the ui with your key maps
+
+# set a key to open an app
+b = "Brave Browser"
+c = "Google Chrome"
+d = "DBngin"
+f = "Floorp"
+h = "Heptabase"
+o = "OrbStack"
+t = "TablePlus"
+v = ["Visual Studio Code", "VS Code"]
+w = "Windsurf"
+z = "Zen"
+
+[g]
+label = "[g]"
+h = "Ghostty"
+i = "Github Desktop"
+
+[p]
+label = "[p]"
+o = "Postman"
+r = "Pritunl"
+
+[s]
+label = "[s]"
+l = "Slack"
+p = "Spark"
+
+# this group is handy to copy over
+# for quick access to your config
+[q]
+label = "[hammerspoon]"
+c = "code: ~/.hammerspoon"
+r = "reload" # reserved for reloading your hammerspoon config (helpful when auto_reload is false)
