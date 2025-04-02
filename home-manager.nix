@@ -54,60 +54,6 @@
         complex_modifications = {
           rules = [
             {
-              description = "Mac OSX: double-tap right cmd key → f18 toggle";
-              manipulators = [
-                {
-                  conditions = [
-                    {
-                      name = "right_command pressed";
-                      type = "variable_if";
-                      value = 1;
-                    }
-                  ];
-                  from = {
-                    key_code = "right_command";
-                    modifiers.optional = ["any"];
-                  };
-                  to = [{ key_code = "f18"; }];
-                  type = "basic";
-                }
-                {
-                  from = {
-                    key_code = "right_command";
-                    modifiers.optional = ["any"];
-                  };
-                  to = [
-                    {
-                      set_variable = {
-                        name = "right_command pressed";
-                        value = 1;
-                      };
-                    }
-                    { key_code = "right_command"; }
-                  ];
-                  to_delayed_action = {
-                    to_if_canceled = [
-                      {
-                        set_variable = {
-                          name = "right_command pressed";
-                          value = 0;
-                        };
-                      }
-                    ];
-                    to_if_invoked = [
-                      {
-                        set_variable = {
-                          name = "right_command pressed";
-                          value = 0;
-                        };
-                      }
-                    ];
-                  };
-                  type = "basic";
-                }
-              ];
-            }
-            {
               description = "Mac OSX: double-tap right shift key → caps lock toggle";
               manipulators = [
                 {
@@ -198,6 +144,12 @@
         };
         name = "Default profile";
         selected = true;
+        simple_modifications = [
+          {
+            from = { key_code = "right_command"; };
+            to = [{ key_code = "f18"; }];
+          }
+        ];
         virtual_hid_keyboard.keyboard_type_v2 = "ansi";
       }
     ];

@@ -156,6 +156,7 @@
               "floorp"
               "github"
               "ghostty"
+              "hammerspoon"
               "heptabase"
               "homerow"
               "jordanbaird-ice"
