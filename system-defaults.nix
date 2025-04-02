@@ -36,7 +36,7 @@
         springboard-page-duration = 0.0;
       };
       "com.apple.TimeMachine" = {
-        # prevent Time Machine from prompting to use 
+        # prevent Time Machine from prompting to use
         # new hard drives as backup volume
         DoNotOfferNewDisksForBackup = true;
       };
@@ -56,18 +56,18 @@
       AppleICUForce24HourTime = true;
       # set to "Dark" to enable dark mode, or leave unset for normal mode.
       AppleInterfaceStyle = "Dark";
-      # use centimeters (metric) or inches (US, UK) as the measurement unit. 
+      # use centimeters (metric) or inches (US, UK) as the measurement unit.
       # the default is based on region settings.
       AppleMeasurementUnits = "Centimeters";
-      # use the metric system. 
+      # use the metric system.
       # the default is based on region settings
       AppleMetricUnits = 1;
-      # enable the press-and-hold feature. 
+      # enable the press-and-hold feature.
       # The default is true.
       ApplePressAndHoldEnabled = false;
       # jump to the spot that’s clicked on the scroll bar
       AppleScrollerPagingBehavior = true;
-      # when to show the scrollbars. 
+      # when to show the scrollbars.
       # options are "WhenScrolling", "Automatic" and "Always".
       AppleShowScrollBars = "Always";
       # whether to use Celsius or Fahrenheit
@@ -201,7 +201,7 @@
       LSQuarantine = false;
     };
     spaces = {
-      # displays have separate Spaces 
+      # displays have separate Spaces
       # Apple menu > System Preferences > Mission Control
       # false = each physical display has a separate space (mac default)
       spans-displays = false;
@@ -217,11 +217,5 @@
       # disable transparency in the menu bar and elsewhere.
       reduceTransparency = true;
     };
-  };
-  system.keyboard = {
-    # enable keyboard mappings
-    enableKeyMapping = true;
-    # remap the Caps Lock key to Escape
-    remapCapsLockToEscape = true;
   };
 }

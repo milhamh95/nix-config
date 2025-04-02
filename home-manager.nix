@@ -46,10 +46,162 @@
     background-opacity = 1
     font-family = "BlexMono Nerd Font Mono"
     window-inherit-working-directory = false
-    font-thicken = true
-    keybind = opt+cmd+right=next_tab
-    keybind = opt+cmd+left=previous_tab
   '';
+
+  home.file.".config/karabiner/karabiner.json".text = builtins.toJSON {
+    profiles = [
+      {
+        complex_modifications = {
+          rules = [
+            {
+              description = "Mac OSX: double-tap right cmd key → f18 toggle";
+              manipulators = [
+                {
+                  conditions = [
+                    {
+                      name = "right_command pressed";
+                      type = "variable_if";
+                      value = 1;
+                    }
+                  ];
+                  from = {
+                    key_code = "right_command";
+                    modifiers.optional = ["any"];
+                  };
+                  to = [{ key_code = "f18"; }];
+                  type = "basic";
+                }
+                {
+                  from = {
+                    key_code = "right_command";
+                    modifiers.optional = ["any"];
+                  };
+                  to = [
+                    {
+                      set_variable = {
+                        name = "right_command pressed";
+                        value = 1;
+                      };
+                    }
+                    { key_code = "right_command"; }
+                  ];
+                  to_delayed_action = {
+                    to_if_canceled = [
+                      {
+                        set_variable = {
+                          name = "right_command pressed";
+                          value = 0;
+                        };
+                      }
+                    ];
+                    to_if_invoked = [
+                      {
+                        set_variable = {
+                          name = "right_command pressed";
+                          value = 0;
+                        };
+                      }
+                    ];
+                  };
+                  type = "basic";
+                }
+              ];
+            }
+            {
+              description = "Mac OSX: double-tap right shift key → caps lock toggle";
+              manipulators = [
+                {
+                  conditions = [
+                    {
+                      name = "right_shift pressed";
+                      type = "variable_if";
+                      value = 1;
+                    }
+                  ];
+                  from = {
+                    key_code = "right_shift";
+                    modifiers.optional = ["any"];
+                  };
+                  to = [{ key_code = "caps_lock"; }];
+                  type = "basic";
+                }
+                {
+                  from = {
+                    key_code = "right_shift";
+                    modifiers.optional = ["any"];
+                  };
+                  to = [
+                    {
+                      set_variable = {
+                        name = "right_shift pressed";
+                        value = 1;
+                      };
+                    }
+                    { key_code = "right_shift"; }
+                  ];
+                  to_delayed_action = {
+                    to_if_canceled = [
+                      {
+                        set_variable = {
+                          name = "right_shift pressed";
+                          value = 0;
+                        };
+                      }
+                    ];
+                    to_if_invoked = [
+                      {
+                        set_variable = {
+                          name = "right_shift pressed";
+                          value = 0;
+                        };
+                      }
+                    ];
+                  };
+                  type = "basic";
+                }
+              ];
+            }
+            {
+              description = "Hyper Key: Caps Lock → left control + left shift + right command (⌃⇧⌘). Quick Caps Lock → Escape";
+              manipulators = [
+                {
+                  from = {
+                    key_code = "caps_lock";
+                    modifiers.optional = ["any"];
+                  };
+                  to = [
+                    {
+                      set_variable = {
+                        name = "hyper_caps_lock";
+                        value = 1;
+                      };
+                    }
+                    {
+                      key_code = "left_control";
+                      modifiers = ["left_shift" "right_command"];
+                    }
+                  ];
+                  to_after_key_up = [
+                    {
+                      set_variable = {
+                        name = "hyper_caps_lock";
+                        value = 0;
+                      };
+                    }
+                  ];
+                  to_if_alone = [{ key_code = "escape"; }];
+                  type = "basic";
+                }
+              ];
+            }
+          ];
+        };
+        name = "Default profile";
+        selected = true;
+        virtual_hid_keyboard.keyboard_type_v2 = "ansi";
+      }
+    ];
+  };
 
   programs.wezterm = {
     enable = true;
@@ -186,6 +338,8 @@
     ];
 
     shellAbbrs = {
+      vc = "open $1 -a \"Visual Studio Code\"";
+      ws = "open $1 -a \"Windsurf\"";
       g = "git";
       ga = "git add";
       gaa = "git add --all";
