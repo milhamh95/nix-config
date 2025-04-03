@@ -27,143 +27,43 @@
         echo "SDKMAN configured ✅"
       fi
     '';
-    configureHammerflow = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    if [ ! -e "$HOME/.hammerspoon/Spoons/Hammerflow.spoon" ]; then
-        echo "Configuring Hammerflow... ⚙️"
-        export PATH="/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
-        $DRY_RUN_CMD git clone https://github.com/saml-dev/Hammerflow.spoon.git $HOME/.hammerspoon/Spoons/Hammerflow.spoon
-        $DRY_RUN_CMD cp -f ${./hammerflow/home.toml} $HOME/.hammerspoon/home.toml
-        $DRY_RUN_CMD cp -f ${./hammerflow/init.lua} $HOME/.hammerspoon/init.lua
-        echo "Hammerflow configured ✅"
-      fi
-    '';
+    # configureHammerflow = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    # if [ ! -e "$HOME/.hammerspoon/Spoons/Hammerflow.spoon" ]; then
+    #     echo "Configuring Hammerflow... ⚙️"
+    #     export PATH="/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
+    #     $DRY_RUN_CMD git clone https://github.com/saml-dev/Hammerflow.spoon.git $HOME/.hammerspoon/Spoons/Hammerflow.spoon
+    #     $DRY_RUN_CMD cp -f ${./hammerflow/home.toml} $HOME/.hammerspoon/home.toml
+    #     $DRY_RUN_CMD cp -f ${./hammerflow/init.lua} $HOME/.hammerspoon/init.lua
+    #     echo "Hammerflow configured ✅"
+    #   fi
+    # '';
   };
 
-  home.file.".config/ghostty/config".text = ''
-    font-size = 16
-    theme = catppuccin-mocha
-    cursor-style = bar
-    confirm-close-surface = false
-    shell-integration = "fish"
-    bold-is-bright = true
-    cursor-style-blink = true
-    macos-titlebar-style = "transparent"
-    macos-window-shadow = false
-    custom-shader-animation = true
-    window-padding-x = 8
-    window-padding-y = 5
-    window-padding-color = "background"
-    background-opacity = 1
-    font-family = "BlexMono Nerd Font Mono"
-    window-inherit-working-directory = false
-  '';
+  # home.file.".config/ghostty/config".text = ''
+  #   font-size = 16
+  #   theme = catppuccin-mocha
+  #   cursor-style = bar
+  #   confirm-close-surface = false
+  #   shell-integration = "fish"
+  #   bold-is-bright = true
+  #   cursor-style-blink = true
+  #   macos-titlebar-style = "transparent"
+  #   macos-window-shadow = false
+  #   custom-shader-animation = true
+  #   window-padding-x = 8
+  #   window-padding-y = 5
+  #   window-padding-color = "background"
+  #   background-opacity = 1
+  #   font-family = "BlexMono Nerd Font Mono"
+  #   window-inherit-working-directory = false
+  # '';
 
-  home.file.".config/karabiner/karabiner.json".text = builtins.toJSON {
-    profiles = [
-      {
-        complex_modifications = {
-          rules = [
-            {
-              description = "Mac OSX: double-tap right shift key → caps lock toggle";
-              manipulators = [
-                {
-                  conditions = [
-                    {
-                      name = "right_shift pressed";
-                      type = "variable_if";
-                      value = 1;
-                    }
-                  ];
-                  from = {
-                    key_code = "right_shift";
-                    modifiers.optional = ["any"];
-                  };
-                  to = [{ key_code = "caps_lock"; }];
-                  type = "basic";
-                }
-                {
-                  from = {
-                    key_code = "right_shift";
-                    modifiers.optional = ["any"];
-                  };
-                  to = [
-                    {
-                      set_variable = {
-                        name = "right_shift pressed";
-                        value = 1;
-                      };
-                    }
-                    { key_code = "right_shift"; }
-                  ];
-                  to_delayed_action = {
-                    to_if_canceled = [
-                      {
-                        set_variable = {
-                          name = "right_shift pressed";
-                          value = 0;
-                        };
-                      }
-                    ];
-                    to_if_invoked = [
-                      {
-                        set_variable = {
-                          name = "right_shift pressed";
-                          value = 0;
-                        };
-                      }
-                    ];
-                  };
-                  type = "basic";
-                }
-              ];
-            }
-            {
-              description = "Hyper Key: Caps Lock → left control + left shift + right command (⌃⇧⌘). Quick Caps Lock → Escape";
-              manipulators = [
-                {
-                  from = {
-                    key_code = "caps_lock";
-                    modifiers.optional = ["any"];
-                  };
-                  to = [
-                    {
-                      set_variable = {
-                        name = "hyper_caps_lock";
-                        value = 1;
-                      };
-                    }
-                    {
-                      key_code = "left_control";
-                      modifiers = ["left_shift" "right_command"];
-                    }
-                  ];
-                  to_after_key_up = [
-                    {
-                      set_variable = {
-                        name = "hyper_caps_lock";
-                        value = 0;
-                      };
-                    }
-                  ];
-                  to_if_alone = [{ key_code = "escape"; }];
-                  type = "basic";
-                }
-              ];
-            }
-          ];
-        };
-        name = "Default profile";
-        selected = true;
-        simple_modifications = [
-          {
-            from = { key_code = "right_command"; };
-            to = [{ key_code = "f18"; }];
-          }
-        ];
-        virtual_hid_keyboard.keyboard_type_v2 = "ansi";
-      }
-    ];
-  };
+  home.file.".config/karabiner/karabiner.json".source = ./karabiner/karabiner.json;
+  home.file.".config/ghostty/config".source = ./ghostty/config;
+  home.file.".config/hammerflow/home.toml".source = ./hammerflow/home.toml;
+  home.file.".config/hammerflow/init.lua".source = ./hammerflow/init.lua;
+  home.file.".config/flashspace/settings.json".source = ./flashspace/settings.json;
+  home.file.".config/flashspace/profiles.json".source = ./flashspace/profiles.json;
 
   programs.wezterm = {
     enable = true;
