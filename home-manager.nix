@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ hostname }: { config, pkgs, lib, ... }: {
   home.stateVersion = "25.05";
 
   home.activation = {
@@ -86,8 +86,13 @@
         echo "Creating FlashSpace config directory... ⚙️"
         $DRY_RUN_CMD mkdir -p "$HOME/.config/flashspace"
         echo "Copying FlashSpace config files..."
-        $DRY_RUN_CMD cp ${./flashspace/profiles.json} "$HOME/.config/flashspace/profiles.json"
-        $DRY_RUN_CMD cp ${./flashspace/settings.json} "$HOME/.config/flashspace/settings.json"
+        if [ "${hostname}" = "mac-desktop" ]; then
+          $DRY_RUN_CMD cp ${./flashspace/desktop/settings.json} "$HOME/.config/flashspace/settings.json"
+          $DRY_RUN_CMD cp ${./flashspace/desktop/profiles.json} "$HOME/.config/flashspace/profiles.json"
+        else
+          $DRY_RUN_CMD cp ${./flashspace/mbp/settings.json} "$HOME/.config/flashspace/settings.json"
+          $DRY_RUN_CMD cp ${./flashspace/mbp/profiles.json} "$HOME/.config/flashspace/profiles.json"
+        fi
         echo "FlashSpace configured ✅"
       fi
     '';
@@ -130,16 +135,20 @@
         echo "Ghostty config changed"
       '';
     };
-    ".config/flashspace/settings.json" = {
-      source = ./flashspace/settings.json;
-      onChange = ''
-        echo "Flashspace settings changed"
-      '';
-    };
     ".config/flashspace/profiles.json" = {
-      source = ./flashspace/profiles.json;
+      source = if hostname == "mac-desktop"
+               then ./flashspace/desktop/profiles.json
+               else ./flashspace/mbp/profiles.json;
       onChange = ''
         echo "Flashspace profiles changed"
+      '';
+    };
+    ".config/flashspace/settings.json" = {
+      source = if hostname == "mac-desktop"
+               then ./flashspace/desktop/settings.json
+               else ./flashspace/mbp/settings.json;
+      onChange = ''
+        echo "Flashspace settings changed"
       '';
     };
     ".config/karabiner/karabiner.json" = {

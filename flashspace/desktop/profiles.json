@@ -1,8 +1,8 @@
 {
   "profiles" : [
     {
-      "id" : "53D03348-E27D-4A6F-9C1E-244E65DEBC97",
-      "name" : "Default",
+      "id" : "C41C1519-A042-4274-8F01-1B1E1A5830A7",
+      "name" : "Mac Desktop",
       "workspaces" : [
         {
           "apps" : [
@@ -18,8 +18,8 @@
             }
           ],
           "assignAppShortcut" : "cmd+ctrl+opt+1",
-          "display" : "Built-in Retina Display",
-          "id" : "BEC0D6C6-D2A3-432E-9E04-EFE148B0FF54",
+          "display" : "XG27UCS",
+          "id" : "405EAAED-B478-440B-A7B8-1D4C0384126A",
           "name" : "Communication",
           "shortcut" : "cmd+ctrl+shift+a",
           "symbolIconName" : "1.square.fill"
@@ -53,19 +53,14 @@
             }
           ],
           "assignAppShortcut" : "cmd+ctrl+opt+2",
-          "display" : "Built-in Retina Display",
-          "id" : "69D32A1C-60D9-4F30-8F50-6BBD593D46E2",
+          "display" : "XG27UCS",
+          "id" : "05301AC4-6CD0-4764-BB27-4FAD670875F8",
           "name" : "Code",
           "shortcut" : "cmd+ctrl+shift+s",
           "symbolIconName" : "2.square.fill"
         },
         {
           "apps" : [
-            {
-              "bundleIdentifier" : "com.tinyapp.DBngin",
-              "iconPath" : "/Applications/DBngin.app/Contents/Resources/AppIcon.icns",
-              "name" : "DBngin"
-            },
             {
               "bundleIdentifier" : "com.tinyapp.TablePlus-setapp",
               "iconPath" : "/Applications/Setapp/TablePlus.app/Contents/Resources/AppIcon.icns",
@@ -78,8 +73,8 @@
             }
           ],
           "assignAppShortcut" : "cmd+ctrl+opt+3",
-          "display" : "Built-in Retina Display",
-          "id" : "D3A8FC62-CF23-42CF-9066-4FF1923C6C45",
+          "display" : "XG27UCS",
+          "id" : "DF16E61A-0A4A-4D27-85C7-51B216A33865",
           "name" : "Dev Support",
           "shortcut" : "cmd+ctrl+shift+d",
           "symbolIconName" : "3.square.fill"
@@ -103,8 +98,8 @@
             }
           ],
           "assignAppShortcut" : "cmd+ctrl+opt+4",
-          "display" : "Built-in Retina Display",
-          "id" : "7BFEF7DC-883B-4C9C-9577-FF963FB751E2",
+          "display" : "XG27UCS",
+          "id" : "A58FD797-25E7-4E3A-A212-CFEFFF158774",
           "name" : "General",
           "shortcut" : "cmd+ctrl+shift+f",
           "symbolIconName" : "4.square.fill"
@@ -112,5 +107,5 @@
       ]
     }
   ],
-  "selectedProfileId" : "53D03348-E27D-4A6F-9C1E-244E65DEBC97"
+  "selectedProfileId" : "C41C1519-A042-4274-8F01-1B1E1A5830A7"
 }

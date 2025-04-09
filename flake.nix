@@ -49,7 +49,6 @@
           pkgs.git
           pkgs.lazygit
           pkgs.lsd
-          pkgs.openssh
           pkgs.pnpm
           pkgs.ripgrep
           pkgs.vim
@@ -99,30 +98,29 @@
       };
 
     };
-  in
-  {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
+
+    mkDarwinConfig = hostname: nix-darwin.lib.darwinSystem {
       modules = [
         configuration
         ./system-defaults.nix
 
+        # Add hostname printing script
+        {
+          system.activationScripts.preUserActivation.text = ''
+            echo "🖥️  Building configuration for hostname: ${hostname}"
+          '';
+        }
+
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
-            # Install Homebrew under the default prefix
             enable = true;
-
             user = "milhamh95";
-
-            # Optional: Declarative tap management
             taps = {
               "homebrew/homebrew-core" = homebrew-core;
               "homebrew/homebrew-cask" = homebrew-cask;
               "homebrew/homebrew-bundle" = homebrew-bundle;
             };
-
             autoMigrate = true;
           };
         }
@@ -130,12 +128,10 @@
         {
           homebrew = {
             enable = true;
-
             brews = [
               "helix"
               "mas"
             ];
-
             casks = [
               "alt-tab"
               "appcleaner"
@@ -189,19 +185,23 @@
             onActivation.cleanup = "zap";
             onActivation.autoUpdate = true;
             onActivation.upgrade = true;
-
           };
         }
 
         home-manager.darwinModules.home-manager
         {
-          # `home-manager` config
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.milhamh95 = import ./home-manager.nix;
+          home-manager.users.milhamh95 = import ./home-manager.nix { inherit hostname; };
           home-manager.backupFileExtension = "backup";
         }
       ];
+    };
+  in
+  {
+    darwinConfigurations = {
+      "mac-desktop" = mkDarwinConfig "mac-desktop";
+      "mbp" = mkDarwinConfig "mbp";
     };
   };
 }

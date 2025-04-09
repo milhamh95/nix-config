@@ -1,0 +1,111 @@
+{
+  "profiles" : [
+    {
+      "id" : "53D03348-E27D-4A6F-9C1E-244E65DEBC97",
+      "name" : "Default",
+      "workspaces" : [
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.readdle.smartemail-Mac",
+              "iconPath" : "/Applications/Spark.app/Contents/Resources/AppIcon.icns",
+              "name" : "Spark"
+            },
+            {
+              "bundleIdentifier" : "com.tinyspeck.slackmacgap",
+              "iconPath" : "/Applications/Slack.app/Contents/Resources/electron.icns",
+              "name" : "Slack"
+            }
+          ],
+          "assignAppShortcut" : "cmd+ctrl+opt+1",
+          "display" : "Built-in Retina Display",
+          "id" : "BEC0D6C6-D2A3-432E-9E04-EFE148B0FF54",
+          "name" : "Communication",
+          "shortcut" : "cmd+ctrl+shift+a",
+          "symbolIconName" : "1.square.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.mitchellh.ghostty",
+              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/AppIcon.icns",
+              "name" : "Ghostty"
+            },
+            {
+              "bundleIdentifier" : "com.exafunction.windsurf",
+              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
+              "name" : "Windsurf"
+            },
+            {
+              "bundleIdentifier" : "com.github.GitHubClient",
+              "iconPath" : "/Applications/GitHub Desktop.app/Contents/Resources/electron.icns",
+              "name" : "GitHub Desktop"
+            },
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            },
+            {
+              "bundleIdentifier" : "com.google.Chrome",
+              "iconPath" : "/Applications/Google Chrome.app/Contents/Resources/app.icns",
+              "name" : "Google Chrome"
+            }
+          ],
+          "assignAppShortcut" : "cmd+ctrl+opt+2",
+          "display" : "Built-in Retina Display",
+          "id" : "69D32A1C-60D9-4F30-8F50-6BBD593D46E2",
+          "name" : "Code",
+          "shortcut" : "cmd+ctrl+shift+s",
+          "symbolIconName" : "2.square.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.tinyapp.TablePlus-setapp",
+              "iconPath" : "/Applications/Setapp/TablePlus.app/Contents/Resources/AppIcon.icns",
+              "name" : "TablePlus"
+            },
+            {
+              "bundleIdentifier" : "com.electron.pritunl",
+              "iconPath" : "/Applications/Pritunl.app/Contents/Resources/electron.icns",
+              "name" : "Pritunl"
+            }
+          ],
+          "assignAppShortcut" : "cmd+ctrl+opt+3",
+          "display" : "Built-in Retina Display",
+          "id" : "D3A8FC62-CF23-42CF-9066-4FF1923C6C45",
+          "name" : "Dev Support",
+          "shortcut" : "cmd+ctrl+shift+d",
+          "symbolIconName" : "3.square.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "org.mozilla.floorp",
+              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
+              "name" : "Floorp"
+            },
+            {
+              "bundleIdentifier" : "app.projectmeta.projectmeta",
+              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
+              "name" : "Heptabase"
+            },
+            {
+              "bundleIdentifier" : "com.brave.Browser",
+              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
+              "name" : "Brave Browser"
+            }
+          ],
+          "assignAppShortcut" : "cmd+ctrl+opt+4",
+          "display" : "Built-in Retina Display",
+          "id" : "7BFEF7DC-883B-4C9C-9577-FF963FB751E2",
+          "name" : "General",
+          "shortcut" : "cmd+ctrl+shift+f",
+          "symbolIconName" : "4.square.fill"
+        }
+      ]
+    }
+  ],
+  "selectedProfileId" : "53D03348-E27D-4A6F-9C1E-244E65DEBC97"
+}

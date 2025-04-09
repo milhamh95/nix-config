@@ -19,7 +19,6 @@ Notes:
 - Please login to mac apple store first.
 - To install package using mas
 
-
 ### 2. Add Full Disk Access to Terminal
 
 - To change `universal` seeting, need to add Terminal to Full Disk Access config
@@ -61,7 +60,12 @@ Press `n` to skip installing `Determinate` package.
 ```sh
 git clone https://github.com/milhamh95/nix-config.git
 cd nix-config
-nix run nix-darwin -- switch --flake .#mac
+
+# Install for mac desktop
+nix run nix-darwin -- switch --flake .#mac-desktop
+
+# Install for macbook pro
+nix run nix-darwin -- switch --flake .#mbp
 ```
 
 2. Reload Bash
@@ -77,7 +81,9 @@ source ~/.bash_profile
 After updating the configuration, run the following command:
 
 ```sh
-darwin-rebuild switch --flake .#mac
+darwin-rebuild switch --flake .#mac-desktop
+
+darwin-rebuild switch --flake .#mbp
 ```
 
 ## Update Flake
