@@ -49,7 +49,6 @@
           pkgs.git
           pkgs.lazygit
           pkgs.lsd
-          pkgs.openssh
           pkgs.pnpm
           pkgs.ripgrep
           pkgs.vim
