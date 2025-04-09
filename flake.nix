@@ -99,11 +99,8 @@
       };
 
     };
-  in
-  {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
+
+    mkDarwinConfig = hostname: nix-darwin.lib.darwinSystem {
       modules = [
         configuration
         ./system-defaults.nix
@@ -111,18 +108,13 @@
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
-            # Install Homebrew under the default prefix
             enable = true;
-
             user = "milhamh95";
-
-            # Optional: Declarative tap management
             taps = {
               "homebrew/homebrew-core" = homebrew-core;
               "homebrew/homebrew-cask" = homebrew-cask;
               "homebrew/homebrew-bundle" = homebrew-bundle;
             };
-
             autoMigrate = true;
           };
         }
@@ -130,12 +122,10 @@
         {
           homebrew = {
             enable = true;
-
             brews = [
               "helix"
               "mas"
             ];
-
             casks = [
               "alt-tab"
               "appcleaner"
@@ -176,32 +166,36 @@
               "zoom"
             ];
 
-            # masApps = {
-            #   "Amphetamine" = 937984704;
-            #   "DaisyDisk" = 411643860;
-            #   "Fantastical - Calendar" = 975937182;
-            #   "LilyView" = 529490330;
-            #   "PDF Expert – Edit, Sign PDFs" = 1055273043;
-            #   "rcmd • App Switcher" = 1596283165;
-            #   "Spark Classic – Email App" = 1176895641;
-            # };
+            masApps = {
+              "Amphetamine" = 937984704;
+              "DaisyDisk" = 411643860;
+              "Fantastical - Calendar" = 975937182;
+              "LilyView" = 529490330;
+              "PDF Expert – Edit, Sign PDFs" = 1055273043;
+              "rcmd • App Switcher" = 1596283165;
+              "Spark Classic – Email App" = 1176895641;
+            };
 
             onActivation.cleanup = "zap";
             onActivation.autoUpdate = true;
             onActivation.upgrade = true;
-
           };
         }
 
         home-manager.darwinModules.home-manager
         {
-          # `home-manager` config
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.milhamh95 = import ./home-manager.nix;
+          home-manager.users.milhamh95 = import ./home-manager.nix { inherit hostname; };
           home-manager.backupFileExtension = "backup";
         }
       ];
+    };
+  in
+  {
+    darwinConfigurations = {
+      "mac-desktop" = mkDarwinConfig "mac-desktop";
+      "mbp" = mkDarwinConfig "mbp";
     };
   };
 }
