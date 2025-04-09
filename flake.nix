@@ -1,5 +1,5 @@
 {
-  description = "Example nix-darwin system flake";
+  description = "Nix Darwin Config for Mac";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -139,10 +139,10 @@
             casks = [
               "alt-tab"
               "appcleaner"
+              "batfi"
               "betterdisplay"
               "bettermouse"
               "brave-browser"
-              "dbngin"
               "discord"
               "elgato-stream-deck"
               "flashspace"
