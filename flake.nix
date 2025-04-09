@@ -105,6 +105,13 @@
         configuration
         ./system-defaults.nix
 
+        # Add hostname printing script
+        {
+          system.activationScripts.preUserActivation.text = ''
+            echo "🖥️  Building configuration for hostname: ${hostname}"
+          '';
+        }
+
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {

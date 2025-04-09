@@ -86,7 +86,13 @@
         echo "Creating FlashSpace config directory... ⚙️"
         $DRY_RUN_CMD mkdir -p "$HOME/.config/flashspace"
         echo "Copying FlashSpace config files..."
-        $DRY_RUN_CMD cp ${./flashspace/settings.json} "$HOME/.config/flashspace/settings.json"
+        if [ "${hostname}" = "mac-desktop" ]; then
+          $DRY_RUN_CMD cp ${./flashspace/desktop/settings.json} "$HOME/.config/flashspace/settings.json"
+          $DRY_RUN_CMD cp ${./flashspace/desktop/profiles.json} "$HOME/.config/flashspace/profiles.json"
+        else
+          $DRY_RUN_CMD cp ${./flashspace/mbp/settings.json} "$HOME/.config/flashspace/settings.json"
+          $DRY_RUN_CMD cp ${./flashspace/mbp/profiles.json} "$HOME/.config/flashspace/profiles.json"
+        fi
         echo "FlashSpace configured ✅"
       fi
     '';
