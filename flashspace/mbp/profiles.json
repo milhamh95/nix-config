@@ -62,11 +62,6 @@
         {
           "apps" : [
             {
-              "bundleIdentifier" : "com.tinyapp.DBngin",
-              "iconPath" : "/Applications/DBngin.app/Contents/Resources/AppIcon.icns",
-              "name" : "DBngin"
-            },
-            {
               "bundleIdentifier" : "com.tinyapp.TablePlus-setapp",
               "iconPath" : "/Applications/Setapp/TablePlus.app/Contents/Resources/AppIcon.icns",
               "name" : "TablePlus"
