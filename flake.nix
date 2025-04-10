@@ -49,6 +49,7 @@
           pkgs.git
           pkgs.lazygit
           pkgs.lsd
+          pkgs.nodejs_22
           pkgs.pnpm
           pkgs.ripgrep
           pkgs.vim
