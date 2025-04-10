@@ -52,6 +52,20 @@
         echo "CleanShot directory created at $HOME/Documents/cleanshot ✅"
       fi
     '';
+    configureWorkFolder = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -d "$HOME/work" ]; then
+        echo "Creating Work directory... ⚙️"
+        $DRY_RUN_CMD mkdir -p "$HOME/work"
+        echo "Work directory created at $HOME/work ✅"
+      fi
+    '';
+    configurePersonalFolder = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -d "$HOME/personal" ]; then
+        echo "Creating Personal directory... ⚙️"
+        $DRY_RUN_CMD mkdir -p "$HOME/personal"
+        echo "Personal directory created at $HOME/personal ✅"
+      fi
+    '';
     configureSdkman = lib.hm.dag.entryAfter ["writeBoundary"] ''
       if [ ! -e "$HOME/sdkman_configured" ]; then
         echo "Configuring SDKMAN... ⚙️"
