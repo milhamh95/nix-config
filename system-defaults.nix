@@ -163,6 +163,7 @@
       show-recents = false;
       # make icons of hidden applications tranclucent
       showhidden = true;
+      static-only = true;
       # hot corner action for bottom left corner. 1 -> disabled
       wvous-bl-corner = 1;
       # hot corner action for bottom right corner. 1 -> disabled
