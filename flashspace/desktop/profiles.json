@@ -37,11 +37,6 @@
               "name" : "Windsurf"
             },
             {
-              "bundleIdentifier" : "com.github.GitHubClient",
-              "iconPath" : "/Applications/GitHub Desktop.app/Contents/Resources/electron.icns",
-              "name" : "GitHub Desktop"
-            },
-            {
               "bundleIdentifier" : "com.microsoft.VSCode",
               "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
               "name" : "Code"
@@ -50,6 +45,11 @@
               "bundleIdentifier" : "com.google.Chrome",
               "iconPath" : "/Applications/Google Chrome.app/Contents/Resources/app.icns",
               "name" : "Google Chrome"
+            },
+            {
+              "bundleIdentifier" : "app.projectmeta.projectmeta",
+              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
+              "name" : "Heptabase"
             }
           ],
           "assignAppShortcut" : "cmd+ctrl+opt+2",
@@ -70,6 +70,11 @@
               "bundleIdentifier" : "com.electron.pritunl",
               "iconPath" : "/Applications/Pritunl.app/Contents/Resources/electron.icns",
               "name" : "Pritunl"
+            },
+            {
+              "bundleIdentifier" : "com.github.GitHubClient",
+              "iconPath" : "/Applications/GitHub Desktop.app/Contents/Resources/electron.icns",
+              "name" : "GitHub Desktop"
             }
           ],
           "assignAppShortcut" : "cmd+ctrl+opt+3",
@@ -95,6 +100,16 @@
               "bundleIdentifier" : "com.brave.Browser",
               "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
               "name" : "Brave Browser"
+            },
+            {
+              "bundleIdentifier" : "com.exafunction.windsurf",
+              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
+              "name" : "Windsurf"
+            },
+            {
+              "bundleIdentifier" : "us.zoom.xos",
+              "iconPath" : "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns",
+              "name" : "zoom.us"
             }
           ],
           "assignAppShortcut" : "cmd+ctrl+opt+4",
