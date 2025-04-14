@@ -47,9 +47,9 @@
               "name" : "Google Chrome"
             },
             {
-              "bundleIdentifier" : "com.brave.Browser",
-              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-              "name" : "Brave Browser"
+              "bundleIdentifier" : "app.projectmeta.projectmeta",
+              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
+              "name" : "Heptabase"
             }
           ],
           "assignAppShortcut" : "cmd+ctrl+opt+2",
@@ -100,6 +100,16 @@
               "bundleIdentifier" : "com.brave.Browser",
               "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
               "name" : "Brave Browser"
+            },
+            {
+              "bundleIdentifier" : "com.exafunction.windsurf",
+              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
+              "name" : "Windsurf"
+            },
+            {
+              "bundleIdentifier" : "us.zoom.xos",
+              "iconPath" : "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns",
+              "name" : "zoom.us"
             }
           ],
           "assignAppShortcut" : "cmd+ctrl+opt+4",
