@@ -112,7 +112,7 @@
       # always show hidden files
       AppleShowAllFiles = true;
       # show icons on the desktop or not
-      CreateDesktop = false;
+      CreateDesktop = true;
       # default search scope. `SCcf` -> search the current folder
       FXDefaultSearchScope = "SCcf";
       # show warnings when change the file extension of files
@@ -217,6 +217,9 @@
       reduceMotion = true;
       # disable transparency in the menu bar and elsewhere.
       reduceTransparency = true;
+    };
+    WindowManager = {
+      EnableStandardClickToShowDesktop = false;
     };
   };
 }
