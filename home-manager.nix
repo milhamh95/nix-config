@@ -350,8 +350,7 @@
       lsaf = "lsd -AF --group-dirs=first -1";
       lsla = "lsd -la";
       prsl = "cd /Users/milhamh95/personal";
-      nr = "nix run nix-darwin -- switch --flake /etc/nix-config#mac";
-      dr = "darwin-rebuild switch --flake /etc/nix-config#mac";
+      work = "cd /Users/milhamh95/work";
     };
     shellInit = ''
       set -g fish_greeting
