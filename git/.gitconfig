@@ -1,6 +1,9 @@
 [includeIf "gitdir:~/personal/"]
 	path = ~/.gitconfig-personal
 
+[includeIf "gitdir:~/nix/"]
+	path = ~/.gitconfig-personal
+
 [init]
 	defaultBranch = main
 

@@ -21,18 +21,24 @@ Notes:
 
 ### 2. Add Full Disk Access to Terminal
 
-- To change `universal` seeting, need to add Terminal to Full Disk Access config
+- To change mac system default `universal` setting, need to add your Terminal (`Terminal.app` / `Ghostty` / `iTerm2` / `WezTerm`) to `Full Disk Access` config
 - You can do this by going to `System Settings > Security & Privacy > Privacy > Full Disk Access`
-- Add your terminal
+
+NOTE:
 
 ## Installation Using Script
 
-1. Download nix-config repo
-2. Put it into `/etc/nix-config`
-3. Open Terminal, open `/etc/nix-config` folder
+1. In `$HOME` folder, create `.nix` folder using terminal
 
 ```sh
-cd /etc/nix-config
+mkdir ~/.nix
+```
+
+2. Download nix-config repo to `.nix` folder
+3. Open Terminal, open `/.nix/nix-config` folder
+
+```sh
+cd ~/.nix/nix-config
 ```
 
 4. Add executable permission to install script
@@ -53,27 +59,20 @@ Please make sure to not install `Determinate` package, [we only need](https://gi
 
 Press `n` to skip installing `Determinate` package.
 
-## Installation Manually
+6. Choose your mac config
 
-1. Clone and Apply Configuration
+In the terminal, it will appear `Choose your nix-darwin configuration:` message.
+- Type `1` for `mac-desktop` -> Mac Desktop
+- Type `2` for `mbp` -> MacBook Pro
+
+At the end of installation script, it will run the proper nix config
 
 ```sh
-git clone https://github.com/milhamh95/nix-config.git
-cd nix-config
-
 # Install for mac desktop
 nix run nix-darwin -- switch --flake .#mac-desktop
 
 # Install for macbook pro
 nix run nix-darwin -- switch --flake .#mbp
-```
-
-2. Reload Bash
-
-Reload bash by opening new terminal tab or running
-
-```sh
-source ~/.bash_profile
 ```
 
 ## Rebuild config

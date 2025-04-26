@@ -1,0 +1,97 @@
+{
+  "enableStaticCycle" : false,
+  "triggerKeys" : [
+    5,
+    7
+  ],
+  "minimizeKey" : "minus",
+  "appSwitcherUseNumbersForWindows" : false,
+  "whenAlreadyFocusedAction" : 2,
+  "switcherScreenPlacement" : 1,
+  "windowSwitcherAppearance" : "comfortable",
+  "allowWindowSwitcher" : false,
+  "fnWindowSwitching" : false,
+  "zeroAsLastFocusedWindow" : false,
+  "windowKeyPatterns" : [
+    {
+      "id" : "com.sublimetext.4",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    },
+    {
+      "id" : "com.sublimetext.3",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    },
+    {
+      "id" : "com.sublimetext.2",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    },
+    {
+      "id" : "com.sublimetext.",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    },
+    {
+      "id" : "com.visualstudio.code.oss",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    },
+    {
+      "id" : "com.visualstudio.code",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    },
+    {
+      "id" : "com.microsoft.VSCodiumInsiders",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    },
+    {
+      "id" : "com.microsoft.VSCode",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    },
+    {
+      "id" : "com.microsoft.VSCodeInsiders",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    },
+    {
+      "id" : "com.microsoft.VSCod",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    },
+    {
+      "id" : "com.todesktop.",
+      "pattern" : ".* — [^\\w\\d]*(.)"
+    }
+  ],
+  "windowTriggerKeys" : [
+    5
+  ],
+  "ignoredApps" : [
+
+  ],
+  "specialKey" : "equal",
+  "showWindowSwitcher" : true,
+  "focusOnKeyUp" : false,
+  "enableHideOnFocusHotkey" : false,
+  "windowSwitcherFeatures" : 57,
+  "windowSwitchOSDDelay" : 350,
+  "hideOnlyFocusedAppOnMinus" : false,
+  "activateAllWindows" : true,
+  "appSortReverse" : false,
+  "windowOnlySwitchOSDDelay" : 0,
+  "showAppSwitcher" : false,
+  "ignoredKeys" : [
+
+  ],
+  "minimizeOnlyFocusedWindowOnMinus" : true,
+  "keyTapThreshold" : 0.14,
+  "windowSwitcherDimFocused" : false,
+  "enableCycleHotkey" : true,
+  "appSort" : "name",
+  "windowKeyAssignments" : [
+
+  ],
+  "notificationsPermissionsGranted" : false,
+  "appSwitcherFeatures" : 38,
+  "alwaysHideOthers" : false,
+  "hideStaticSettings" : false,
+  "appKeyAssignments" : [
+
+  ],
+  "enableAssignHotkey" : true
+}

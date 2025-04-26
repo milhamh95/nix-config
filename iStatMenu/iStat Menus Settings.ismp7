@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>build</key>
+	<string>2250</string>
+	<key>preferences</key>
+	<dict>
+		<key>Combined.Menubar.Items</key>
+		<array/>
+		<key>Device.Auth-Identifier</key>
+		<string>44FE8BD9-0FE2-4625-9FD2-61837149CF6E</string>
+		<key>Device.Device</key>
+		<string>0bba7af6d28b94c9d2012899e60d41a1b1d4ea33</string>
+		<key>Device.Model</key>
+		<string>Mac13,2</string>
+		<key>Menubar.Style</key>
+		<integer>1</integer>
+		<key>Migration.CombinedPowerItems</key>
+		<true/>
+		<key>Migration.Profiles</key>
+		<true/>
+		<key>Profiles.Available.identifier</key>
+		<string>default</string>
+		<key>Profiles.Settings.default.Combined.Menubar.Items</key>
+		<array/>
+		<key>Profiles.Settings.default.Weather.Menubar.Enabled</key>
+		<integer>1</integer>
+		<key>Sensors.Global.DetailLevel</key>
+		<integer>1</integer>
+		<key>Status.Build.Last</key>
+		<real>2250</real>
+		<key>Status.Version.Last</key>
+		<real>7.0999999046325684</real>
+		<key>Weather.Global.AvailableProviders</key>
+		<array>
+			<dict>
+				<key>key</key>
+				<string>apple</string>
+				<key>name</key>
+				<string>🌍 Apple Weather</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>accuweather</string>
+				<key>name</key>
+				<string>🌍 AccuWeather</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>aeris</string>
+				<key>name</key>
+				<string>🌍 Xweather (formerly Aeris)</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>apple</string>
+				<key>name</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>environmentcanada</string>
+				<key>name</key>
+				<string>🇨🇦 Environment Canada</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>willyweather</string>
+				<key>name</key>
+				<string>🇦🇺 WillyWeather (BoM)</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>dwd</string>
+				<key>name</key>
+				<string>🇩🇪 DWD</string>
+			</dict>
+			<dict>
+				<key>key</key>
+				<string>meteofrance</string>
+				<key>name</key>
+				<string>🇫🇷 Meteo France</string>
+			</dict>
+		</array>
+	</dict>
+	<key>version</key>
+	<string>7</string>
+</dict>
+</plist>
