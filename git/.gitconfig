@@ -1,7 +1,7 @@
 [includeIf "gitdir:~/personal/"]
 	path = ~/.gitconfig-personal
 
-[includeIf "gitdir:~/nix/"]
+[includeIf "gitdir:~/.nix/"]
 	path = ~/.gitconfig-personal
 
 [init]
