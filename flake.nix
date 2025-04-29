@@ -33,7 +33,9 @@
       # $ nix-env -qaP | grep wget
 
       environment.systemPackages =
-        [ pkgs.bat
+        [
+          pkgs.atuin
+          pkgs.bat
           pkgs.bun
           pkgs.deno
           pkgs.fastfetch
@@ -52,6 +54,7 @@
           pkgs.nodejs_22
           pkgs.pnpm
           pkgs.ripgrep
+          pkgs.uv
           pkgs.vim
           pkgs.wget
           pkgs.wifi-password

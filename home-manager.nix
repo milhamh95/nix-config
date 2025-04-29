@@ -191,7 +191,16 @@
     };
   };
 
+  home.sessionPath = [
+    "$HOME/go/bin"
+  ];
+
   xdg.enable = true;
+
+  programs.atuin = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 
   programs.fastfetch = {
     enable = true;
@@ -351,8 +360,8 @@
       lsla = "lsd -la";
       prsl = "cd /Users/milhamh95/personal";
       work = "cd /Users/milhamh95/work";
-      nixmd= "darwin-rebuild switch --flake .#mac-desktop"
-      nixmbp= "darwin-rebuild switch --flake .#mbp"
+      nixmd= "darwin-rebuild switch --flake .#mac-desktop";
+      nixmbp= "darwin-rebuild switch --flake .#mbp";
     };
     shellInit = ''
       set -g fish_greeting
