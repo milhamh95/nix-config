@@ -58,6 +58,7 @@
           pkgs.vim
           pkgs.wget
           pkgs.wifi-password
+          pkgs.yarn-berry
         ];
 
       fonts.packages = with pkgs; [
