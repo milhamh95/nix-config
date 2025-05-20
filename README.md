@@ -80,9 +80,10 @@ nix run nix-darwin -- switch --flake .#mbp
 After updating the configuration, run the following command:
 
 ```sh
-darwin-rebuild switch --flake .#mac-desktop
+Based on: https://github.com/nix-darwin/nix-darwin/issues/1457
+sudo darwin-rebuild switch --flake .#mac-desktop
 
-darwin-rebuild switch --flake .#mbp
+sudo darwin-rebuild switch --flake .#mbp
 ```
 
 ## Update Flake

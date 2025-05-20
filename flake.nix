@@ -82,6 +82,7 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 6;
 
+      # based on https://github.com/nix-darwin/nix-darwin/issues/1457
       system.primaryUser = "milhamh95";
 
       # The platform the configuration will be used on.
@@ -106,15 +107,9 @@
         configuration
         ./system-defaults.nix
 
-        # Add hostname printing script
-        {
-          system.activationScripts.displayHostname = {
-            text = ''
-              echo "🖥️  Building configuration for hostname: ${hostname}"
-            '';
-            deps = [];
-          };
-        }
+        ({ lib, ... }: {
+          nixpkgs.config = lib.mkOrder 1500 (builtins.trace "🖥️  Building configuration for hostname: ${hostname}" {});
+        })
 
         nix-homebrew.darwinModules.nix-homebrew
         {
