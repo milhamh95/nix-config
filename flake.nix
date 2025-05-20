@@ -82,15 +82,12 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 6;
 
+      system.primaryUser = "milhamh95";
+
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
 
       nixpkgs.config.allowUnfree = true;
-
-      system.activationScripts.postUserActivation.text = ''
-        # Following line should allow us to avoid a logout/login cycle
-        /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-      '';
 
       # ref: https://github.com/LnL7/nix-darwin/issues/1237#issuecomment-2562242340
       # to set fish shells as default
@@ -111,9 +108,12 @@
 
         # Add hostname printing script
         {
-          system.activationScripts.preUserActivation.text = ''
-            echo "🖥️  Building configuration for hostname: ${hostname}"
-          '';
+          system.activationScripts.displayHostname = {
+            text = ''
+              echo "🖥️  Building configuration for hostname: ${hostname}"
+            '';
+            deps = [];
+          };
         }
 
         nix-homebrew.darwinModules.nix-homebrew
