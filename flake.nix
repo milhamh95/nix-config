@@ -140,6 +140,7 @@
               "bettermouse"
               "brave-browser"
               "discord"
+              "dotnet-sdk"
               "elgato-stream-deck"
               "flashspace"
               "floorp"
