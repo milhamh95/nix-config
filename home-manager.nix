@@ -173,7 +173,6 @@
     };
     ".config/karabiner/karabiner.json" = {
       source = ./karabiner/karabiner.json;
-      force = true;
       onChange = ''
         echo "Karabiner config changed"
       '';
