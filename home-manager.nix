@@ -118,6 +118,12 @@
         $DRY_RUN_CMD cp ${./karabiner/karabiner.json} "$HOME/.config/karabiner/karabiner.json"
         echo "Karabiner configured ✅"
       fi
+
+      if [ -f "$HOME/.config/karabiner/karabiner.json.backup" ]; then
+        echo "Removing existing Karabiner backup file..."
+        $DRY_RUN_CMD rm "$HOME/.config/karabiner/karabiner.json.backup"
+        echo "Karabiner backup file removed ✅"
+      fi
     '';
     configureWezTerm = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
       if [ ! -f "$HOME/.wezterm.lua" ]; then
