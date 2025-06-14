@@ -25,7 +25,6 @@ o = "OrbStack"
 t = "TablePlus"
 v = ["Visual Studio Code", "VS Code"]
 w = "Windsurf"
-z = "Zen"
 
 [g]
 label = "[g]"

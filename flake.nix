@@ -167,7 +167,6 @@
               "visual-studio-code"
               "wezterm"
               "windsurf"
-              "zen-browser"
               "zoom"
             ];
 
