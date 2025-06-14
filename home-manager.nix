@@ -366,8 +366,8 @@
       lsla = "lsd -la";
       prsl = "cd /Users/milhamh95/personal";
       work = "cd /Users/milhamh95/work";
-      nixmd= "darwin-rebuild switch --flake .#mac-desktop";
-      nixmbp= "darwin-rebuild switch --flake .#mbp";
+      nixmd= "sudo darwin-rebuild switch --flake .#mac-desktop";
+      nixmbp= "sudo darwin-rebuild switch --flake .#mbp";
     };
     shellInit = ''
       set -g fish_greeting

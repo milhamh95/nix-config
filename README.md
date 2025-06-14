@@ -104,7 +104,7 @@ To see all these generations of systems
 darwin-rebuild --list-generations
 ```
 
-To clean up leftover generations older than7 days
+To clean up leftover generations older than 7 days
 
 ```sh
 nix-collect-garbage --delete-older-than 7d
