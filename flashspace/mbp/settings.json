@@ -1,4 +1,5 @@
 {
+  "alternativeDisplays" : "",
   "centerCursorOnFocusChange" : true,
   "centerCursorOnWorkspaceChange" : false,
   "changeWorkspaceOnAppAssign" : true,
@@ -8,18 +9,62 @@
   "enablePictureInPictureSupport" : true,
   "enableSpaceControl" : true,
   "enableSpaceControlAnimations" : false,
+  "enableSwipeGestures" : false,
+  "enableWorkspaceTransitions" : false,
+  "floatingApps" : [
+    {
+      "bundleIdentifier" : "com.google.Chrome",
+      "iconPath" : "/Applications/Google Chrome.app/Contents/Resources/app.icns",
+      "name" : "Google Chrome"
+    },
+    {
+      "bundleIdentifier" : "us.zoom.xos",
+      "iconPath" : "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns",
+      "name" : "zoom.us"
+    },
+    {
+      "bundleIdentifier" : "com.brave.Browser",
+      "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
+      "name" : "Brave Browser"
+    },
+    {
+      "bundleIdentifier" : "com.hnc.Discord",
+      "iconPath" : "/Applications/Discord.app/Contents/Resources/electron.icns",
+      "name" : "Discord"
+    }
+  ],
+  "focusFrontmostWindow" : false,
   "focusNextWorkspaceApp" : "ctrl+opt+.",
   "focusNextWorkspaceWindow" : "cmd+opt+.",
   "focusPreviousWorkspaceApp" : "ctrl+opt+,",
   "focusPreviousWorkspaceWindow" : "cmd+opt+,",
+  "keepUnassignedAppsOnSwitch" : false,
   "menuBarDisplayAliases" : "",
   "menuBarTitleTemplate" : "$WORKSPACE",
+  "pipApps" : [
+
+  ],
+  "pipScreenCornerOffset" : 15,
+  "restoreHiddenAppsOnSwitch" : true,
   "runScriptOnLaunch" : "",
   "runScriptOnProfileChange" : "sketchybar --reload",
   "runScriptOnWorkspaceChange" : "sketchybar --trigger flashspace_workspace_change WORKSPACE=\"$WORKSPACE\" DISPLAY=\"$DISPLAY\"",
   "showFloatingNotifications" : true,
+  "showMenuBarIcon" : true,
   "showMenuBarTitle" : false,
   "showSpaceControl" : "cmd+ctrl+opt+up",
+  "skipEmptyWorkspacesOnSwitch" : false,
   "spaceControlCurrentDisplayWorkspaces" : false,
-  "spaceControlMaxColumns" : 6
+  "spaceControlMaxColumns" : 6,
+  "swipeDown3FingerAction" : "none",
+  "swipeDown4FingerAction" : "none",
+  "swipeLeft3FingerAction" : "previousWorkspace",
+  "swipeLeft4FingerAction" : "none",
+  "swipeRight3FingerAction" : "nextWorkspace",
+  "swipeRight4FingerAction" : "none",
+  "swipeThreshold" : 0.2,
+  "swipeUp3FingerAction" : "none",
+  "swipeUp4FingerAction" : "none",
+  "workspaceTransitionDimming" : 0.2,
+  "workspaceTransitionDuration" : 0.3
 }

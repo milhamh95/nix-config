@@ -1,8 +1,85 @@
 {
   "profiles" : [
     {
+      "id" : "26176108-1F50-4837-8371-F4B1EE4AB1C2",
+      "name" : "Personal",
+      "workspaces" : [
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.readdle.smartemail-Mac",
+              "iconPath" : "/Applications/Spark.app/Contents/Resources/AppIcon.icns",
+              "name" : "Spark"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "2137853C-5004-43B7-A509-9916FB3E2BA0",
+          "name" : "Communication",
+          "shortcut" : "cmd+ctrl+shift+a",
+          "symbolIconName" : "1.square.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.exafunction.windsurf",
+              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
+              "name" : "Windsurf"
+            },
+            {
+              "bundleIdentifier" : "app.projectmeta.projectmeta",
+              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
+              "name" : "Heptabase"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "A0D39978-79D6-4868-A9B4-33FC2B50B4DA",
+          "name" : "Code",
+          "shortcut" : "cmd+ctrl+shift+s",
+          "symbolIconName" : "2.square.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.tinyapp.TablePlus-setapp",
+              "iconPath" : "/Applications/Setapp/TablePlus.app/Contents/Resources/AppIcon.icns",
+              "name" : "TablePlus"
+            },
+            {
+              "bundleIdentifier" : "com.mitchellh.ghostty",
+              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/AppIcon.icns",
+              "name" : "Ghostty"
+            },
+            {
+              "bundleIdentifier" : "com.postmanlabs.mac.canary",
+              "iconPath" : "/Applications/PostmanCanary.app/Contents/Resources/app.icns",
+              "name" : "PostmanCanary"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "0CEEE6B4-1B3D-413D-8B3F-084B99A199B2",
+          "name" : "Dev Support",
+          "shortcut" : "cmd+ctrl+shift+d",
+          "symbolIconName" : "3.square.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "org.mozilla.floorp",
+              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
+              "name" : "Floorp"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "3AF71805-546C-4A9E-BA4B-682649BA1106",
+          "name" : "General",
+          "shortcut" : "cmd+ctrl+shift+f",
+          "symbolIconName" : "4.square.fill"
+        }
+      ]
+    },
+    {
       "id" : "C41C1519-A042-4274-8F01-1B1E1A5830A7",
-      "name" : "Mac Desktop",
+      "name" : "Work",
       "workspaces" : [
         {
           "apps" : [
@@ -17,7 +94,6 @@
               "name" : "Slack"
             }
           ],
-          "assignAppShortcut" : "cmd+ctrl+opt+1",
           "display" : "XG27UCS",
           "id" : "405EAAED-B478-440B-A7B8-1D4C0384126A",
           "name" : "Communication",
@@ -26,11 +102,6 @@
         },
         {
           "apps" : [
-            {
-              "bundleIdentifier" : "com.mitchellh.ghostty",
-              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/AppIcon.icns",
-              "name" : "Ghostty"
-            },
             {
               "bundleIdentifier" : "com.exafunction.windsurf",
               "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
@@ -42,7 +113,6 @@
               "name" : "Heptabase"
             }
           ],
-          "assignAppShortcut" : "cmd+ctrl+opt+2",
           "display" : "XG27UCS",
           "id" : "05301AC4-6CD0-4764-BB27-4FAD670875F8",
           "name" : "Code",
@@ -65,9 +135,18 @@
               "bundleIdentifier" : "com.github.GitHubClient",
               "iconPath" : "/Applications/GitHub Desktop.app/Contents/Resources/electron.icns",
               "name" : "GitHub Desktop"
+            },
+            {
+              "bundleIdentifier" : "com.mitchellh.ghostty",
+              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/AppIcon.icns",
+              "name" : "Ghostty"
+            },
+            {
+              "bundleIdentifier" : "com.postmanlabs.mac.canary",
+              "iconPath" : "/Applications/PostmanCanary.app/Contents/Resources/app.icns",
+              "name" : "PostmanCanary"
             }
           ],
-          "assignAppShortcut" : "cmd+ctrl+opt+3",
           "display" : "XG27UCS",
           "id" : "DF16E61A-0A4A-4D27-85C7-51B216A33865",
           "name" : "Dev Support",
@@ -77,17 +156,11 @@
         {
           "apps" : [
             {
-              "bundleIdentifier" : "app.projectmeta.projectmeta",
-              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
-              "name" : "Heptabase"
-            },
-            {
-              "bundleIdentifier" : "com.exafunction.windsurf",
-              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
-              "name" : "Windsurf"
+              "bundleIdentifier" : "org.mozilla.floorp",
+              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
+              "name" : "Floorp"
             }
           ],
-          "assignAppShortcut" : "cmd+ctrl+opt+4",
           "display" : "XG27UCS",
           "id" : "A58FD797-25E7-4E3A-A212-CFEFFF158774",
           "name" : "General",
@@ -96,6 +169,5 @@
         }
       ]
     }
-  ],
-  "selectedProfileId" : "C41C1519-A042-4274-8F01-1B1E1A5830A7"
+  ]
 }

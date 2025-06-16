@@ -23,14 +23,14 @@
       "name" : "zoom.us"
     },
     {
-      "bundleIdentifier" : "com.microsoft.VSCode",
-      "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
-      "name" : "Code"
-    },
-    {
       "bundleIdentifier" : "com.brave.Browser",
       "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
       "name" : "Brave Browser"
+    },
+    {
+      "bundleIdentifier" : "com.hnc.Discord",
+      "iconPath" : "/Applications/Discord.app/Contents/Resources/electron.icns",
+      "name" : "Discord"
     }
   ],
   "focusFrontmostWindow" : false,
@@ -38,16 +38,19 @@
   "focusNextWorkspaceWindow" : "cmd+opt+.",
   "focusPreviousWorkspaceApp" : "ctrl+opt+,",
   "focusPreviousWorkspaceWindow" : "cmd+opt+,",
+  "keepUnassignedAppsOnSwitch" : false,
   "menuBarDisplayAliases" : "",
   "menuBarTitleTemplate" : "$WORKSPACE",
   "pipApps" : [
 
   ],
   "pipScreenCornerOffset" : 15,
+  "restoreHiddenAppsOnSwitch" : true,
   "runScriptOnLaunch" : "",
   "runScriptOnProfileChange" : "sketchybar --reload",
   "runScriptOnWorkspaceChange" : "sketchybar --trigger flashspace_workspace_change WORKSPACE=\"$WORKSPACE\" DISPLAY=\"$DISPLAY\"",
   "showFloatingNotifications" : true,
+  "showMenuBarIcon" : true,
   "showMenuBarTitle" : false,
   "showSpaceControl" : "cmd+ctrl+opt+up",
   "skipEmptyWorkspacesOnSwitch" : false,

@@ -68,6 +68,10 @@
         nerd-fonts.jetbrains-mono
       ];
 
+      # system.activationScripts.postActivation.text = ''
+      #   su - "$(logname)" -c '${pkgs.skhd}/bin/skhd -r'
+      # '';
+
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
@@ -107,9 +111,19 @@
         configuration
         ./system-defaults.nix
 
-        ({ lib, ... }: {
-          nixpkgs.config = lib.mkOrder 1500 (builtins.trace "🖥️  Building configuration for hostname: ${hostname}" {});
-        })
+        {
+          system.activationScripts.displayHostname = {
+            text = ''
+              echo "🖥️  Building configuration for hostname: ${hostname}"
+            '';
+            deps = [];
+          };
+        }
+
+        # ({ lib, ... }: {
+        #   nixpkgs.config = lib.mkOrder 1500 (builtins.trace "🖥️  Building configuration for hostname: ${hostname}" {});
+        # })
+
 
         nix-homebrew.darwinModules.nix-homebrew
         {
@@ -165,6 +179,7 @@
               "setapp"
               "slack"
               "visual-studio-code"
+              "vlc"
               "wezterm"
               "windsurf"
               "zoom"
@@ -183,6 +198,14 @@
             onActivation.cleanup = "zap";
             onActivation.autoUpdate = true;
             onActivation.upgrade = true;
+          };
+
+          services.skhd = {
+            enable = true;
+            skhdConfig = ''
+              ctrl + shift + cmd - 9: flashspace profile Personal
+              ctrl + shift + cmd - 0: flashspace profile Work 
+            '';
           };
         }
 
