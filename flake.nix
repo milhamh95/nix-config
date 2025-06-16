@@ -111,18 +111,9 @@
         configuration
         ./system-defaults.nix
 
-        {
-          system.activationScripts.displayHostname = {
-            text = ''
-              echo "🖥️  Building configuration for hostname: ${hostname}"
-            '';
-            deps = [];
-          };
-        }
-
-        # ({ lib, ... }: {
-        #   nixpkgs.config = lib.mkOrder 1500 (builtins.trace "🖥️  Building configuration for hostname: ${hostname}" {});
-        # })
+        ({ lib, ... }: {
+          nixpkgs.config = lib.mkOrder 1500 (builtins.trace "🖥️  Building configuration for hostname: ${hostname}" {});
+        })
 
 
         nix-homebrew.darwinModules.nix-homebrew
