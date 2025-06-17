@@ -388,7 +388,6 @@
     config = ''
       ctrl + shift + cmd - 9: flashspace profile Personal
       ctrl + shift + cmd - 0: flashspace profile Work 
-      ctrl + shift + cmd - 8: flashspace profile Work 
     '';
   };
 }
