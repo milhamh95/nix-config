@@ -191,14 +191,14 @@
             onActivation.upgrade = true;
           };
 
-          services.skhd = {
-            enable = true;
-            skhdConfig = ''
-              ctrl + shift + cmd - 9: flashspace profile Personal
-              ctrl + shift + cmd - 0: flashspace profile Work 
-              ctrl + shift + cmd - 8: flashspace profile Work 
-            '';
-          };
+          # services.skhd = {
+          #   enable = true;
+          #   skhdConfig = ''
+          #     ctrl + shift + cmd - 9: flashspace profile Personal
+          #     ctrl + shift + cmd - 0: flashspace profile Work 
+          #     ctrl + shift + cmd - 8: flashspace profile Work 
+          #   '';
+          # };
         }
 
         home-manager.darwinModules.home-manager
