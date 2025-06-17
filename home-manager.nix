@@ -381,10 +381,9 @@
     '';
   };
 
-  services.skhd = {
+  options.services.skhd = {
     enable = true;
-    package = pkgs.skhd;
-    skhdConfig = ''
+    config = ''
       ctrl + shift + cmd - 9: flashspace profile Personal
       ctrl + shift + cmd - 0: flashspace profile Work 
     '';
