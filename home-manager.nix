@@ -339,15 +339,6 @@
       }
     ];
 
-    services.skhd = {
-      enable = true;
-      package = pkgs.skhd;
-      skhdConfig = ''
-        ctrl + shift + cmd - 9: flashspace profile Personal
-        ctrl + shift + cmd - 0: flashspace profile Work 
-      '';
-    };
-
     shellAbbrs = {
       vc = "open $1 -a \"Visual Studio Code\"";
       ws = "open $1 -a \"Windsurf\"";
@@ -387,6 +378,15 @@
         fisher install catppuccin/fish
         fish_config theme save "Catppuccin Mocha"
       end
+    '';
+  };
+
+  services.skhd = {
+    enable = true;
+    package = pkgs.skhd;
+    skhdConfig = ''
+      ctrl + shift + cmd - 9: flashspace profile Personal
+      ctrl + shift + cmd - 0: flashspace profile Work 
     '';
   };
 }
