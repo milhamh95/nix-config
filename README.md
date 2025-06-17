@@ -31,14 +31,14 @@ NOTE:
 1. In `$HOME` folder, create `.nix` folder using terminal
 
 ```sh
-mkdir ~/.nix
+mkdir ~/nix
 ```
 
-2. Download nix-config repo to `.nix` folder
-3. Open Terminal, open `/.nix/nix-config` folder
+2. Download nix-config repo to `~/nix` folder
+3. Open Terminal, open `~/nix/nix-config` folder
 
 ```sh
-cd ~/.nix/nix-config
+cd ~/nix/nix-config
 ```
 
 4. Add executable permission to install script
