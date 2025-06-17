@@ -1,6 +1,14 @@
 { hostname }: { config, pkgs, lib, ... }: {
   home.stateVersion = "25.05";
 
+  options.services.skhd = {
+    enable = true;
+    config = ''
+      ctrl + shift + cmd - 9: flashspace profile Personal
+      ctrl + shift + cmd - 0: flashspace profile Work 
+    '';
+  };
+
   home.activation = {
     configureGit = lib.hm.dag.entryAfter ["writeBoundary"] ''
       if [ ! -e "$HOME/git_configured" ]; then
@@ -378,14 +386,6 @@
         fisher install catppuccin/fish
         fish_config theme save "Catppuccin Mocha"
       end
-    '';
-  };
-
-  options.services.skhd = {
-    enable = true;
-    config = ''
-      ctrl + shift + cmd - 9: flashspace profile Personal
-      ctrl + shift + cmd - 0: flashspace profile Work 
     '';
   };
 }
