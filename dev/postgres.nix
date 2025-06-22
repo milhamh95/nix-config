@@ -2,7 +2,7 @@
 
 let
   # Configuration variables
-  pgPort = 5433;  # Changed from default 5432
+  defaultPort = 5433;  # Default port (changed from PostgreSQL default 5432)
   pgData = "$HOME/Documents/postgres_data";
 in
 pkgs.mkShell {
@@ -13,6 +13,8 @@ pkgs.mkShell {
   shellHook = ''
     # Directory for persistent data
     export dataDir="$HOME/Documents/postgres_data"
+    export PGPORT=${toString defaultPort}
+    export PGHOST=localhost  # Force TCP/IP connection
 
     # Create data directory if it doesn't exist
     if [ ! -d "$dataDir" ]; then
@@ -26,17 +28,17 @@ pkgs.mkShell {
       # Configure PostgreSQL
       echo "host all all 127.0.0.1/32 trust" >> "$dataDir/pg_hba.conf"
       echo "listen_addresses='127.0.0.1'" >> "$dataDir/postgresql.conf"
-      echo "port=${toString pgPort}" >> "$dataDir/postgresql.conf"
+      echo "port=${toString defaultPort}" >> "$dataDir/postgresql.conf"
       echo "unix_socket_directories='/tmp'" >> "$dataDir/postgresql.conf"
 
       # Start PostgreSQL temporarily to create default database
       echo "Starting PostgreSQL to create default database..."
-      pg_ctl -D "$dataDir" -o "-p ${toString pgPort} -k /tmp" -l "$dataDir/logfile" start -w -t 60
+      pg_ctl -D "$dataDir" -o "-p ${toString defaultPort} -k /tmp" -l "$dataDir/logfile" start -w -t 60
 
       if [ $? -eq 0 ]; then
         # Create default database for user
         echo "Creating default database for user $(whoami)..."
-        createdb -h localhost -p ${toString pgPort} "$(whoami)"
+        createdb -h localhost -p ${toString defaultPort} "$(whoami)"
 
         # Stop PostgreSQL
         echo "Stopping PostgreSQL..."
@@ -47,27 +49,23 @@ pkgs.mkShell {
       fi
     fi
 
-    # Set environment variables
-    export PGPORT=${toString pgPort}
-    export PGHOST=localhost  # Force TCP/IP connection
-
     # Function to show help
     pg_help() {
       echo "PostgreSQL Development Shell Commands:"
       echo ""
       echo "Database Server:"
-      echo "  start_postgres              - Start PostgreSQL server"
+      echo "  start_postgres              - Start PostgreSQL server with port selection"
       echo "  stop_postgres               - Stop PostgreSQL server"
       echo "  postgres_status             - Check PostgreSQL status and list databases"
       echo ""
       echo "Database Management:"
-      echo "  create_db <name>            - Create a new database"
+      echo "  create_db <n>            - Create a new database"
       echo "  restore_db <db> <dumpfile>  - Restore database from dump file"
       echo "  psql                        - Connect to PostgreSQL"
       echo "  pg_help                     - Show this help message"
       echo ""
       echo "Environment:"
-      echo "  Port: ${toString pgPort}"
+      echo "  Port: $PGPORT"
       echo "  Data: $dataDir"
       echo ""
       echo "Usage Examples:"
@@ -79,20 +77,52 @@ pkgs.mkShell {
 
     # Define functions
     start_postgres() {
-      if ! pg_ctl -D "$dataDir" status >/dev/null 2>&1; then
-        echo "Starting PostgreSQL..."
-        pg_ctl -D "$dataDir" -o "-p ${toString pgPort} -k /tmp" -l "$dataDir/logfile" start -w -t 60
+      echo "Select PostgreSQL port:"
+      echo "1) 5433 (default)"
+      echo "2) 5432"
+      echo "3) Custom port"
+      echo -n "Enter your choice [1-3]: "
+      read -r choice
+      
+      case $choice in
+        1) port=5433 ;;
+        2) port=5432 ;;
+        3) 
+          while true; do
+            echo -n "Enter custom port number: "
+            read -r port
+            if [[ "$port" =~ ^[0-9]+$ ]] && [ "$port" -ge 1 ] && [ "$port" -le 65535 ]; then
+              break
+            else
+              echo "Invalid port number. Please enter a number between 1 and 65535."
+            fi
+          done
+          ;;
+        *) port=5433 ;;
+      esac
 
-        if [ $? -eq 0 ]; then
-          echo "PostgreSQL started successfully on port ${toString pgPort}"
-          echo "You can now connect using: psql -h localhost -p ${toString pgPort}"
-        else
-          echo "Error: PostgreSQL failed to start. Checking logs:"
-          cat "$dataDir/logfile"
-          return 1
-        fi
+      # Update environment variables
+      export PGPORT="$port"
+      
+      # Check if PostgreSQL is already running
+      if pg_ctl -D "$dataDir" status >/dev/null 2>&1; then
+        echo "PostgreSQL is already running. Please stop it first."
+        return 1
+      fi
+
+      # Update port in postgresql.conf if needed
+      sed -i.bak "s/^port = .*/port = $port/" "$dataDir/postgresql.conf"
+      
+      echo "Starting PostgreSQL on port $port..."
+      pg_ctl -D "$dataDir" -o "-p $port -k /tmp" -l "$dataDir/logfile" start -w -t 60
+
+      if [ $? -eq 0 ]; then
+        echo "PostgreSQL started successfully on port $port"
+        echo "You can now connect using: psql -h localhost -p $port"
       else
-        echo "PostgreSQL is already running"
+        echo "Error: PostgreSQL failed to start. Checking logs:"
+        cat "$dataDir/logfile"
+        return 1
       fi
     }
 
@@ -144,7 +174,7 @@ pkgs.mkShell {
 
     postgres_status() {
       if pg_ctl -D "$dataDir" status >/dev/null 2>&1; then
-        echo "PostgreSQL is running on port ${toString pgPort}"
+        echo "PostgreSQL is running on port $PGPORT"
         psql -l
       else
         echo "PostgreSQL is not running"
@@ -153,14 +183,14 @@ pkgs.mkShell {
 
     # Show initial help
     echo "PostgreSQL 17 Development Shell (run 'pg_help' for commands)"
-    echo "Port: ${toString pgPort}"
+    echo "Port: $PGPORT"
     echo "Data: $dataDir"
     echo ""
     echo "Available commands:"
-    echo "  start_postgres              - Start PostgreSQL server"
+    echo "  start_postgres              - Start PostgreSQL server with port selection"
     echo "  stop_postgres               - Stop PostgreSQL server"
     echo "  postgres_status             - Check PostgreSQL status and list databases"
-    echo "  create_db <name>            - Create a new database"
+    echo "  create_db <n>            - Create a new database"
     echo "  restore_db <db> <dumpfile>  - Restore database from dump file"
     echo "  psql                        - Connect to PostgreSQL"
     echo "  pg_help                     - Show this help message"
