@@ -27,7 +27,7 @@ NOTE:
 
 ## Installation Using Script
 
-1. In `$HOME` folder, create `.nix` folder using terminal
+1. In `$HOME` folder, create `nix` folder using terminal
 
 ```sh
 mkdir ~/nix
