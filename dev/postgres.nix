@@ -54,13 +54,13 @@ pkgs.mkShell {
       echo "PostgreSQL Development Shell Commands:"
       echo ""
       echo "Database Server:"
-      echo "  start_postgres              - Start PostgreSQL server with port selection"
-      echo "  stop_postgres               - Stop PostgreSQL server"
-      echo "  postgres_status             - Check PostgreSQL status and list databases"
+      echo "  pg_start                    - Start PostgreSQL server with port selection"
+      echo "  pg_stop                     - Stop PostgreSQL server"
+      echo "  pg_status                   - Check PostgreSQL status and list databases"
       echo ""
       echo "Database Management:"
-      echo "  create_db <n>            - Create a new database"
-      echo "  restore_db <db> <dumpfile>  - Restore database from dump file"
+      echo "  pg_create_db <name>         - Create a new database"
+      echo "  pg_restore_db <db> <dumpfile> - Restore database from dump file"
       echo "  psql                        - Connect to PostgreSQL"
       echo "  pg_help                     - Show this help message"
       echo ""
@@ -69,14 +69,14 @@ pkgs.mkShell {
       echo "  Data: $dataDir"
       echo ""
       echo "Usage Examples:"
-      echo "  start_postgres              # Start the server"
-      echo "  create_db myproject         # Create a new database"
+      echo "  pg_start                    # Start the server"
+      echo "  pg_create_db myproject      # Create a new database"
       echo "  psql -d myproject           # Connect to specific database"
-      echo "  restore_db db ~/dump.sql    # Restore from SQL dump"
+      echo "  pg_restore_db db ~/dump.sql # Restore from SQL dump"
     }
 
     # Define functions
-    start_postgres() {
+    pg_start() {
       echo "Select PostgreSQL port:"
       echo "1) 5433 (default)"
       echo "2) 5432"
@@ -126,7 +126,7 @@ pkgs.mkShell {
       fi
     }
 
-    stop_postgres() {
+    pg_stop() {
       if pg_ctl -D "$dataDir" status >/dev/null 2>&1; then
         pg_ctl -D "$dataDir" stop
         echo "PostgreSQL stopped"
@@ -135,7 +135,7 @@ pkgs.mkShell {
       fi
     }
 
-    create_db() {
+    pg_create_db() {
       if [ -z "$1" ]; then
         echo "Usage: create_db <database_name>"
         return 1
@@ -144,7 +144,7 @@ pkgs.mkShell {
       echo "Database $1 created"
     }
 
-    restore_db() {
+    pg_restore_db() {
       if [ "$#" -lt 2 ]; then
         echo "Usage: restore_db <database_name> <dump_file>"
         echo "Example: restore_db mydb ./backup.dump"
@@ -172,7 +172,7 @@ pkgs.mkShell {
       echo "Database $db_name restored from $dump_file"
     }
 
-    postgres_status() {
+    pg_status() {
       if pg_ctl -D "$dataDir" status >/dev/null 2>&1; then
         echo "PostgreSQL is running on port $PGPORT"
         psql -l
@@ -187,13 +187,13 @@ pkgs.mkShell {
     echo "Data: $dataDir"
     echo ""
     echo "Available commands:"
-    echo "  start_postgres              - Start PostgreSQL server with port selection"
-    echo "  stop_postgres               - Stop PostgreSQL server"
-    echo "  postgres_status             - Check PostgreSQL status and list databases"
-    echo "  create_db <n>            - Create a new database"
-    echo "  restore_db <db> <dumpfile>  - Restore database from dump file"
-    echo "  psql                        - Connect to PostgreSQL"
-    echo "  pg_help                     - Show this help message"
+    echo "  pg_start                      - Start PostgreSQL server with port selection"
+    echo "  pg_stop                       - Stop PostgreSQL server"
+    echo "  pg_status                     - Check PostgreSQL status and list databases"
+    echo "  pg_create_db <name>           - Create a new database"
+    echo "  pg_restore_db <db> <dumpfile> - Restore database from dump file"
+    echo "  psql                          - Connect to PostgreSQL"
+    echo "  pg_help                       - Show this help message"
 
     echo ""
     echo "PostgreSQL Version:"
