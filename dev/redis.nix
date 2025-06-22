@@ -44,8 +44,8 @@ pkgs.mkShell {
 
     redis_help() {
       echo "Redis Development Shell Commands:"
-      echo "  start_redis      - Start Redis server with port selection"
-      echo "  stop_redis       - Stop Redis server"
+      echo "  redis_start      - Start Redis server with port selection"
+      echo "  redis_stop       - Stop Redis server"
       echo "  redis_status     - Show Redis server status"
       echo "  redis_cli        - Open Redis CLI"
       echo "  redis_help       - Show this help message"
@@ -55,7 +55,7 @@ pkgs.mkShell {
       echo "  Config: $REDIS_CONF"
     }
 
-    start_redis() {
+    redis_start() {
       echo "Select Redis port:"
       echo "1) 6380 (default)"
       echo "2) 6379"
@@ -110,7 +110,7 @@ pkgs.mkShell {
       fi
     }
 
-    stop_redis() {
+    redis_stop() {
       if [ -f "$REDIS_PIDFILE" ] && kill -0 $(cat "$REDIS_PIDFILE") 2>/dev/null; then
         echo "Stopping Redis on port $REDIS_PORT..."
         if redis-cli -p "$REDIS_PORT" shutdown; then
@@ -142,8 +142,8 @@ pkgs.mkShell {
     echo "Config file: $REDIS_CONF"
     echo ""
     echo "Available commands:"
-    echo "  start_redis      - Start Redis server with port selection"
-    echo "  stop_redis       - Stop Redis server"
+    echo "  redis_start      - Start Redis server with port selection"
+    echo "  redis_stop       - Stop Redis server"
     echo "  redis_status     - Show Redis server status"
     echo "  redis_cli        - Open Redis CLI"
     echo "  redis_help       - Show this help message"
