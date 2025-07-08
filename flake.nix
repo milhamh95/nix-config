@@ -35,10 +35,6 @@
       # Import system packages and fonts configuration
       imports = [ ./nix-packages.nix ];
 
-      # system.activationScripts.postActivation.text = ''
-      #   su - "$(logname)" -c '${pkgs.skhd}/bin/skhd -r'
-      # '';
-
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 

@@ -6,6 +6,5 @@
     ./atuin.nix
     ./fastfetch.nix
     ./fish.nix
-    ./skhd.nix
   ];
 }
