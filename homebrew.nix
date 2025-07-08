@@ -22,6 +22,7 @@
       "github"
       "ghostty"
       "google-chrome"
+      "google-chrome@beta"
       "hammerspoon"
       "heptabase"
       "homerow"
