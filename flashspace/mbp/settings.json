@@ -23,14 +23,29 @@
       "name" : "zoom.us"
     },
     {
-      "bundleIdentifier" : "com.brave.Browser",
-      "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-      "name" : "Brave Browser"
-    },
-    {
       "bundleIdentifier" : "com.hnc.Discord",
       "iconPath" : "/Applications/Discord.app/Contents/Resources/electron.icns",
       "name" : "Discord"
+    },
+    {
+      "bundleIdentifier" : "com.google.Chrome.beta",
+      "iconPath" : "/Applications/Google Chrome Beta.app/Contents/Resources/app.icns",
+      "name" : "Google Chrome Beta"
+    },
+    {
+      "bundleIdentifier" : "app.projectmeta.projectmeta",
+      "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
+      "name" : "Heptabase"
+    },
+    {
+      "bundleIdentifier" : "com.readdle.PDFExpert-Mac",
+      "iconPath" : "/Applications/PDF Expert.app/Contents/Resources/AppIcon.icns",
+      "name" : "PDF Expert"
+    },
+    {
+      "bundleIdentifier" : "com.apple.iWork.Numbers",
+      "iconPath" : "/Applications/Numbers.app/Contents/Resources/AppIcon.icns",
+      "name" : "Numbers"
     }
   ],
   "focusFrontmostWindow" : false,
@@ -40,7 +55,7 @@
   "focusPreviousWorkspaceWindow" : "cmd+opt+,",
   "keepUnassignedAppsOnSwitch" : false,
   "menuBarDisplayAliases" : "",
-  "menuBarTitleTemplate" : "$WORKSPACE",
+  "menuBarTitleTemplate" : "$WORKSPACE_$DISPLAY",
   "pipApps" : [
 
   ],
@@ -51,7 +66,7 @@
   "runScriptOnWorkspaceChange" : "sketchybar --trigger flashspace_workspace_change WORKSPACE=\"$WORKSPACE\" DISPLAY=\"$DISPLAY\"",
   "showFloatingNotifications" : true,
   "showMenuBarIcon" : true,
-  "showMenuBarTitle" : false,
+  "showMenuBarTitle" : true,
   "showSpaceControl" : "cmd+ctrl+opt+up",
   "skipEmptyWorkspacesOnSwitch" : false,
   "spaceControlCurrentDisplayWorkspaces" : false,

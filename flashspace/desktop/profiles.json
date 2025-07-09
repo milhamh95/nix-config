@@ -26,9 +26,19 @@
               "name" : "Windsurf"
             },
             {
-              "bundleIdentifier" : "app.projectmeta.projectmeta",
-              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
-              "name" : "Heptabase"
+              "bundleIdentifier" : "com.jetbrains.intellij",
+              "iconPath" : "/Applications/IntelliJ IDEA.app/Contents/Resources/idea.icns",
+              "name" : "IntelliJ IDEA"
+            },
+            {
+              "bundleIdentifier" : "com.jetbrains.goland",
+              "iconPath" : "/Applications/GoLand.app/Contents/Resources/goland.icns",
+              "name" : "GoLand"
+            },
+            {
+              "bundleIdentifier" : "com.jetbrains.pycharm",
+              "iconPath" : "/Applications/PyCharm.app/Contents/Resources/pycharm.icns",
+              "name" : "PyCharm"
             }
           ],
           "display" : "XG27UCS",
@@ -64,9 +74,14 @@
         {
           "apps" : [
             {
-              "bundleIdentifier" : "org.mozilla.floorp",
-              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
-              "name" : "Floorp"
+              "bundleIdentifier" : "com.brave.Browser",
+              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
+              "name" : "Brave Browser"
+            },
+            {
+              "bundleIdentifier" : "company.thebrowser.dia",
+              "iconPath" : "/Applications/Dia.app/Contents/Resources/AppIcon.icns",
+              "name" : "Dia"
             }
           ],
           "display" : "XG27UCS",
@@ -74,6 +89,20 @@
           "name" : "General",
           "shortcut" : "cmd+ctrl+shift+f",
           "symbolIconName" : "4.square.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "org.mozilla.floorp",
+              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
+              "name" : "Floorp"
+            }
+          ],
+          "display" : "U28P2G6B",
+          "id" : "9F86A9F6-1817-4E58-A606-E24D0B1B716D",
+          "name" : "Second Display",
+          "shortcut" : "cmd+ctrl+shift+g",
+          "symbolIconName" : "5.circle"
         }
       ]
     },
@@ -108,9 +137,24 @@
               "name" : "Windsurf"
             },
             {
-              "bundleIdentifier" : "app.projectmeta.projectmeta",
-              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
-              "name" : "Heptabase"
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            },
+            {
+              "bundleIdentifier" : "com.jetbrains.intellij",
+              "iconPath" : "/Applications/IntelliJ IDEA.app/Contents/Resources/idea.icns",
+              "name" : "IntelliJ IDEA"
+            },
+            {
+              "bundleIdentifier" : "com.jetbrains.pycharm",
+              "iconPath" : "/Applications/PyCharm.app/Contents/Resources/pycharm.icns",
+              "name" : "PyCharm"
+            },
+            {
+              "bundleIdentifier" : "com.jetbrains.goland",
+              "iconPath" : "/Applications/GoLand.app/Contents/Resources/goland.icns",
+              "name" : "GoLand"
             }
           ],
           "display" : "XG27UCS",
@@ -156,9 +200,14 @@
         {
           "apps" : [
             {
-              "bundleIdentifier" : "org.mozilla.floorp",
-              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
-              "name" : "Floorp"
+              "bundleIdentifier" : "com.brave.Browser",
+              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
+              "name" : "Brave Browser"
+            },
+            {
+              "bundleIdentifier" : "company.thebrowser.dia",
+              "iconPath" : "/Applications/Dia.app/Contents/Resources/AppIcon.icns",
+              "name" : "Dia"
             }
           ],
           "display" : "XG27UCS",
@@ -166,6 +215,20 @@
           "name" : "General",
           "shortcut" : "cmd+ctrl+shift+f",
           "symbolIconName" : "4.square.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "org.mozilla.floorp",
+              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
+              "name" : "Floorp"
+            }
+          ],
+          "display" : "U28P2G6B",
+          "id" : "79F62A0D-44F8-4FE6-8AEE-B148D680C167",
+          "name" : "Second Display",
+          "shortcut" : "cmd+ctrl+shift+g",
+          "symbolIconName" : "5.square"
         }
       ]
     }

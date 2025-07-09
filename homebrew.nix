@@ -32,6 +32,7 @@
       "logitune"
       "macupdater"
       "microsoft-edge"
+      "mockoon"
       "orbstack"
       "postman"
       "postman@canary"
