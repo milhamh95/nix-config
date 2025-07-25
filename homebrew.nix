@@ -29,7 +29,6 @@
       "iina"
       "jordanbaird-ice"
       "karabiner-elements"
-      "logitune"
       "macupdater"
       "microsoft-edge"
       "mockoon"
@@ -51,8 +50,10 @@
     masApps = {
       "Amphetamine" = 937984704;
       "DaisyDisk" = 411643860;
+      "ExcalidrawZ" = 6636493997;
       "Fantastical - Calendar" = 975937182;
       "LilyView" = 529490330;
+      "Numbers" = 409203825;
       "PDF Expert – Edit, Sign PDFs" = 1055273043;
       "rcmd • App Switcher" = 1596283165;
       "Spark Classic – Email App" = 1176895641;
