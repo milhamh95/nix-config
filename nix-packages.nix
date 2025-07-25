@@ -7,6 +7,7 @@
     pkgs.atuin
     pkgs.bat
     pkgs.bun
+    pkgs.claude-code
     pkgs.deno
     pkgs.fastfetch
     pkgs.fzf
