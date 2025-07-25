@@ -7,9 +7,9 @@
         echo "Configuring Git... ⚙️"
 
         echo "Copying Git config files..."
-        $DRY_RUN_CMD cp ${./git/.gitconfig} "$HOME/.gitconfig"
-        $DRY_RUN_CMD cp ${./git/.gitconfig-personal} "$HOME/.gitconfig-personal"
-        $DRY_RUN_CMD cp ${./git/.gitignore} "$HOME/.gitignore"
+        $DRY_RUN_CMD cp ${./app-config/git/.gitconfig} "$HOME/.gitconfig"
+        $DRY_RUN_CMD cp ${./app-config/git/.gitconfig-personal} "$HOME/.gitconfig-personal"
+        $DRY_RUN_CMD cp ${./app-config/git/.gitignore} "$HOME/.gitignore"
 
         $DRY_RUN_CMD touch "$HOME/git_configured"
         echo "Git configured ✅"
@@ -19,16 +19,16 @@
       if [ ! -e "$HOME/ssh_configured" ]; then
         echo "Configuring SSH... ⚙️"
         $DRY_RUN_CMD mkdir -p "$HOME/.ssh"
-        $DRY_RUN_CMD cp ${./ssh/id_github_personal.pub} "$HOME/.ssh/id_github_personal.pub"
+        $DRY_RUN_CMD cp ${./app-config/ssh/id_github_personal.pub} "$HOME/.ssh/id_github_personal.pub"
         $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_personal.pub"
 
         echo "Setting up SSH config..."
         if [ -f "$HOME/.ssh/config" ]; then
           echo "Appending to existing SSH config..."
-          $DRY_RUN_CMD cat ${./ssh/config} >> "$HOME/.ssh/config"
+          $DRY_RUN_CMD cat ${./app-config/ssh/config} >> "$HOME/.ssh/config"
         else
           echo "Creating new SSH config..."
-          $DRY_RUN_CMD cp ${./ssh/config} "$HOME/.ssh/config"
+          $DRY_RUN_CMD cp ${./app-config/ssh/config} "$HOME/.ssh/config"
         fi
         $DRY_RUN_CMD chmod 600 "$HOME/.ssh/config"
 
@@ -91,7 +91,7 @@
         echo "Creating Ghostty config directory... ⚙️"
         $DRY_RUN_CMD mkdir -p "$HOME/.config/ghostty"
         echo "Copying initial Ghostty config... ⚙️"
-        $DRY_RUN_CMD cp ${./ghostty/config} "$HOME/.config/ghostty/config"
+        $DRY_RUN_CMD cp ${./app-config/ghostty/config} "$HOME/.config/ghostty/config"
         echo "Ghostty configured ✅"
       fi
     '';
@@ -101,11 +101,11 @@
         $DRY_RUN_CMD mkdir -p "$HOME/.config/flashspace"
         echo "Copying FlashSpace config files..."
         if [ "${hostname}" = "mac-desktop" ]; then
-          $DRY_RUN_CMD cp ${./flashspace/desktop/settings.json} "$HOME/.config/flashspace/settings.json"
-          $DRY_RUN_CMD cp ${./flashspace/desktop/profiles.json} "$HOME/.config/flashspace/profiles.json"
+          $DRY_RUN_CMD cp ${./app-config/flashspace/desktop/settings.json} "$HOME/.config/flashspace/settings.json"
+          $DRY_RUN_CMD cp ${./app-config/flashspace/desktop/profiles.json} "$HOME/.config/flashspace/profiles.json"
         else
-          $DRY_RUN_CMD cp ${./flashspace/mbp/settings.json} "$HOME/.config/flashspace/settings.json"
-          $DRY_RUN_CMD cp ${./flashspace/mbp/profiles.json} "$HOME/.config/flashspace/profiles.json"
+          $DRY_RUN_CMD cp ${./app-config/flashspace/mbp/settings.json} "$HOME/.config/flashspace/settings.json"
+          $DRY_RUN_CMD cp ${./app-config/flashspace/mbp/profiles.json} "$HOME/.config/flashspace/profiles.json"
         fi
         echo "FlashSpace configured ✅"
       fi
@@ -115,7 +115,7 @@
         echo "Creating Karabiner config directory... ⚙️"
         $DRY_RUN_CMD mkdir -p "$HOME/.config/karabiner"
         echo "Copying Karabiner config file..."
-        $DRY_RUN_CMD cp ${./karabiner/karabiner.json} "$HOME/.config/karabiner/karabiner.json"
+        $DRY_RUN_CMD cp ${./app-config/karabiner/karabiner.json} "$HOME/.config/karabiner/karabiner.json"
         echo "Karabiner configured ✅"
       fi
 
@@ -128,7 +128,7 @@
     configureWezTerm = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
       if [ ! -f "$HOME/.wezterm.lua" ]; then
         echo "Creating WezTerm config... ⚙️"
-        $DRY_RUN_CMD cp ${./wezterm/wezterm.lua} "$HOME/.wezterm.lua"
+        $DRY_RUN_CMD cp ${./app-config/wezterm/wezterm.lua} "$HOME/.wezterm.lua"
         echo "WezTerm config created ✅"
       fi
     '';
@@ -141,8 +141,8 @@
         $DRY_RUN_CMD ${pkgs.git}/bin/git clone https://github.com/saml-dev/Hammerflow.spoon.git "$HOME/.hammerspoon/Spoons/Hammerflow.spoon"
 
         echo "Copying Hammerflow config files..."
-        $DRY_RUN_CMD cp ${./hammerflow/home.toml} "$HOME/.hammerspoon/home.toml"
-        $DRY_RUN_CMD cp ${./hammerflow/init.lua} "$HOME/.hammerspoon/init.lua"
+        $DRY_RUN_CMD cp ${./app-config/hammerflow/home.toml} "$HOME/.hammerspoon/home.toml"
+        $DRY_RUN_CMD cp ${./app-config/hammerflow/init.lua} "$HOME/.hammerspoon/init.lua"
         echo "Hammerflow configured ✅"
       fi
     '';
@@ -150,47 +150,47 @@
 
   home.file = {
     ".config/ghostty/config" = {
-      source = ./ghostty/config;
+      source = ./app-config/ghostty/config;
       onChange = ''
         echo "Ghostty config changed"
       '';
     };
     ".config/flashspace/profiles.json" = {
       source = if hostname == "mac-desktop"
-               then ./flashspace/desktop/profiles.json
-               else ./flashspace/mbp/profiles.json;
+               then ./app-config/flashspace/desktop/profiles.json
+               else ./app-config/flashspace/mbp/profiles.json;
       onChange = ''
         echo "Flashspace profiles changed"
       '';
     };
     ".config/flashspace/settings.json" = {
       source = if hostname == "mac-desktop"
-               then ./flashspace/desktop/settings.json
-               else ./flashspace/mbp/settings.json;
+               then ./app-config/flashspace/desktop/settings.json
+               else ./app-config/flashspace/mbp/settings.json;
       onChange = ''
         echo "Flashspace settings changed"
       '';
     };
     ".config/karabiner/karabiner.json" = {
-      source = ./karabiner/karabiner.json;
+      source = ./app-config/karabiner/karabiner.json;
       onChange = ''
         echo "Karabiner config changed"
       '';
     };
     ".wezterm.lua" = {
-      source = ./wezterm/wezterm.lua;
+      source = ./app-config/wezterm/wezterm.lua;
       onChange = ''
         echo "WezTerm config changed"
       '';
     };
     ".hammerspoon/home.toml" = {
-      source = ./hammerflow/home.toml;
+      source = ./app-config/hammerflow/home.toml;
       onChange = ''
         echo "Hammerspoon home config changed"
       '';
     };
     ".hammerspoon/init.lua" = {
-      source = ./hammerflow/init.lua;
+      source = ./app-config/hammerflow/init.lua;
       onChange = ''
         echo "Hammerspoon init config changed"
       '';
