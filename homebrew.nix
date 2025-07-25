@@ -30,6 +30,7 @@
       "iina"
       "jordanbaird-ice"
       "karabiner-elements"
+      "logitune"
       "macupdater"
       "microsoft-edge"
       "mockoon"
