@@ -100,13 +100,8 @@
         echo "Creating FlashSpace config directory... ⚙️"
         $DRY_RUN_CMD mkdir -p "$HOME/.config/flashspace"
         echo "Copying FlashSpace config files..."
-        if [ "${hostname}" = "mac-desktop" ]; then
-          $DRY_RUN_CMD cp ${./app-config/flashspace/desktop/settings.json} "$HOME/.config/flashspace/settings.json"
-          $DRY_RUN_CMD cp ${./app-config/flashspace/desktop/profiles.json} "$HOME/.config/flashspace/profiles.json"
-        else
-          $DRY_RUN_CMD cp ${./app-config/flashspace/mbp/settings.json} "$HOME/.config/flashspace/settings.json"
-          $DRY_RUN_CMD cp ${./app-config/flashspace/mbp/profiles.json} "$HOME/.config/flashspace/profiles.json"
-        fi
+        $DRY_RUN_CMD cp ${./app-config/flashspace/settings.json} "$HOME/.config/flashspace/settings.json"
+        $DRY_RUN_CMD cp ${./app-config/flashspace/profiles.json} "$HOME/.config/flashspace/profiles.json"
         echo "FlashSpace configured ✅"
       fi
     '';
@@ -156,17 +151,13 @@
       '';
     };
     ".config/flashspace/profiles.json" = {
-      source = if hostname == "mac-desktop"
-               then ./app-config/flashspace/desktop/profiles.json
-               else ./app-config/flashspace/mbp/profiles.json;
+      source = ./app-config/flashspace/profiles.json;
       onChange = ''
         echo "Flashspace profiles changed"
       '';
     };
     ".config/flashspace/settings.json" = {
-      source = if hostname == "mac-desktop"
-               then ./app-config/flashspace/desktop/settings.json
-               else ./app-config/flashspace/mbp/settings.json;
+      source = ./app-config/flashspace/settings.json;
       onChange = ''
         echo "Flashspace settings changed"
       '';

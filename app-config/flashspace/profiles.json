@@ -74,11 +74,6 @@
         {
           "apps" : [
             {
-              "bundleIdentifier" : "com.brave.Browser",
-              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-              "name" : "Brave Browser"
-            },
-            {
               "bundleIdentifier" : "company.thebrowser.dia",
               "iconPath" : "/Applications/Dia.app/Contents/Resources/AppIcon.icns",
               "name" : "Dia"
@@ -89,20 +84,6 @@
           "name" : "General",
           "shortcut" : "cmd+ctrl+shift+f",
           "symbolIconName" : "4.square.fill"
-        },
-        {
-          "apps" : [
-            {
-              "bundleIdentifier" : "org.mozilla.floorp",
-              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
-              "name" : "Floorp"
-            }
-          ],
-          "display" : "U28P2G6B",
-          "id" : "9F86A9F6-1817-4E58-A606-E24D0B1B716D",
-          "name" : "Second Display",
-          "shortcut" : "cmd+ctrl+shift+g",
-          "symbolIconName" : "5.circle"
         }
       ]
     },
@@ -200,11 +181,6 @@
         {
           "apps" : [
             {
-              "bundleIdentifier" : "com.brave.Browser",
-              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-              "name" : "Brave Browser"
-            },
-            {
               "bundleIdentifier" : "company.thebrowser.dia",
               "iconPath" : "/Applications/Dia.app/Contents/Resources/AppIcon.icns",
               "name" : "Dia"
@@ -215,20 +191,6 @@
           "name" : "General",
           "shortcut" : "cmd+ctrl+shift+f",
           "symbolIconName" : "4.square.fill"
-        },
-        {
-          "apps" : [
-            {
-              "bundleIdentifier" : "org.mozilla.floorp",
-              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
-              "name" : "Floorp"
-            }
-          ],
-          "display" : "U28P2G6B",
-          "id" : "79F62A0D-44F8-4FE6-8AEE-B148D680C167",
-          "name" : "Second Display",
-          "shortcut" : "cmd+ctrl+shift+g",
-          "symbolIconName" : "5.square"
         }
       ]
     }
