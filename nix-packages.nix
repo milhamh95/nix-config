@@ -24,7 +24,6 @@
     pkgs.nodejs_22
     pkgs.pnpm
     pkgs.ripgrep
-    pkgs.skhd
     pkgs.uv
     pkgs.vim
     pkgs.wget
