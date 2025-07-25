@@ -1,9 +1,11 @@
 {
+  "activeWorkspaceOnFocusChange" : true,
   "alternativeDisplays" : "",
   "centerCursorOnFocusChange" : true,
   "centerCursorOnWorkspaceChange" : false,
   "changeWorkspaceOnAppAssign" : true,
   "checkForUpdatesAutomatically" : true,
+  "displayMode" : "static",
   "enableFocusManagement" : true,
   "enableIntegrations" : false,
   "enablePictureInPictureSupport" : true,
@@ -46,6 +48,11 @@
       "bundleIdentifier" : "com.apple.iWork.Numbers",
       "iconPath" : "/Applications/Numbers.app/Contents/Resources/AppIcon.icns",
       "name" : "Numbers"
+    },
+    {
+      "bundleIdentifier" : "com.brave.Browser",
+      "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
+      "name" : "Brave Browser"
     }
   ],
   "focusFrontmostWindow" : false,
@@ -54,12 +61,14 @@
   "focusPreviousWorkspaceApp" : "ctrl+opt+,",
   "focusPreviousWorkspaceWindow" : "cmd+opt+,",
   "keepUnassignedAppsOnSwitch" : false,
+  "loopWorkspaces" : true,
   "menuBarDisplayAliases" : "",
   "menuBarTitleTemplate" : "$WORKSPACE_$DISPLAY",
   "pipApps" : [
 
   ],
   "pipScreenCornerOffset" : 15,
+  "restartAppOnWakeUp" : false,
   "restoreHiddenAppsOnSwitch" : true,
   "runScriptOnLaunch" : "",
   "runScriptOnProfileChange" : "sketchybar --reload",
@@ -80,6 +89,7 @@
   "swipeThreshold" : 0.2,
   "swipeUp3FingerAction" : "none",
   "swipeUp4FingerAction" : "none",
+  "switchWorkspaceWhenPipCloses" : true,
   "workspaceTransitionDimming" : 0.2,
   "workspaceTransitionDuration" : 0.3
 }
