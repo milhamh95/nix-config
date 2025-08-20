@@ -186,6 +186,12 @@
         echo "Hammerspoon init config changed"
       '';
     };
+    ".config/sftpgo/sftpgo.json" = {
+      source = ./app-config/sftpgo/sftpgo.json;
+      onChange = ''
+        echo "SFTPGo config changed"
+      '';
+    };
   };
 
   home.sessionPath = [
