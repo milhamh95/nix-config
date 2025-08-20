@@ -144,50 +144,12 @@
   };
 
   home.file = {
-    ".config/ghostty/config" = {
-      source = ./app-config/ghostty/config;
-      onChange = ''
-        echo "Ghostty config changed"
-      '';
-    };
-    ".config/flashspace/profiles.json" = {
-      source = ./app-config/flashspace/profiles.json;
-      onChange = ''
-        echo "Flashspace profiles changed"
-      '';
-    };
-    ".config/flashspace/settings.json" = {
-      source = ./app-config/flashspace/settings.json;
-      onChange = ''
-        echo "Flashspace settings changed"
-      '';
-    };
-    ".config/karabiner/karabiner.json" = {
-      source = ./app-config/karabiner/karabiner.json;
-      onChange = ''
-        echo "Karabiner config changed"
-      '';
-    };
-    ".wezterm.lua" = {
-      source = ./app-config/wezterm/wezterm.lua;
-      onChange = ''
-        echo "WezTerm config changed"
-      '';
-    };
-    ".hammerspoon/home.toml" = {
-      source = ./app-config/hammerflow/home.toml;
-      onChange = ''
-        echo "Hammerspoon home config changed"
-      '';
-    };
-    ".hammerspoon/init.lua" = {
-      source = ./app-config/hammerflow/init.lua;
-      onChange = ''
-        echo "Hammerspoon init config changed"
-      '';
-    };
     ".config/sftpgo/sftpgo.json" = {
-      text = builtins.toJSON {
+      text = builtins.toJSON (let
+        sftpgoTemplatesPath = "${pkgs.sftpgo}/share/sftpgo/templates";
+        sftpgoStaticPath = "${pkgs.sftpgo}/share/sftpgo/static";
+        sftpgoOpenApiPath = "${pkgs.sftpgo}/share/sftpgo/openapi";
+      in {
         sftpd = {
           bindings = [{
             port = 2022;
@@ -391,9 +353,9 @@
               };
             };
           }];
-          templates_path = "${pkgs.sftpgo}/share/sftpgo/templates";
-          static_files_path = "${pkgs.sftpgo}/share/sftpgo/static";
-          openapi_path = "${pkgs.sftpgo}/share/sftpgo/openapi";
+          templates_path = sftpgoTemplatesPath;
+          static_files_path = sftpgoStaticPath;
+          openapi_path = sftpgoOpenApiPath;
           web_root = "";
           certificate_file = "";
           certificate_key_file = "";
@@ -478,9 +440,54 @@
           level = "debug";
           utc_time = false;
         };
-      };
+      });
       onChange = ''
         echo "SFTPGo config changed"
+      '';
+    };
+    ".config/sftpgo/templates".source = "${pkgs.sftpgo}/share/sftpgo/templates";
+    ".config/sftpgo/static".source = "${pkgs.sftpgo}/share/sftpgo/static";
+    ".config/sftpgo/openapi".source = "${pkgs.sftpgo}/share/sftpgo/openapi";
+    ".config/ghostty/config" = {
+      source = ./app-config/ghostty/config;
+      onChange = ''
+        echo "Ghostty config changed"
+      '';
+    };
+    ".config/flashspace/profiles.json" = {
+      source = ./app-config/flashspace/profiles.json;
+      onChange = ''
+        echo "Flashspace profiles changed"
+      '';
+    };
+    ".config/flashspace/settings.json" = {
+      source = ./app-config/flashspace/settings.json;
+      onChange = ''
+        echo "Flashspace settings changed"
+      '';
+    };
+    ".config/karabiner/karabiner.json" = {
+      source = ./app-config/karabiner/karabiner.json;
+      onChange = ''
+        echo "Karabiner config changed"
+      '';
+    };
+    ".wezterm.lua" = {
+      source = ./app-config/wezterm/wezterm.lua;
+      onChange = ''
+        echo "WezTerm config changed"
+      '';
+    };
+    ".hammerspoon/home.toml" = {
+      source = ./app-config/hammerflow/home.toml;
+      onChange = ''
+        echo "Hammerspoon home config changed"
+      '';
+    };
+    ".hammerspoon/init.lua" = {
+      source = ./app-config/hammerflow/init.lua;
+      onChange = ''
+        echo "Hammerspoon init config changed"
       '';
     };
   };
