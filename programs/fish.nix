@@ -62,7 +62,7 @@
       work = "cd /Users/milhamh95/work";
       nixmd = "sudo darwin-rebuild switch --flake .#mac-desktop";
       nixmbp = "sudo darwin-rebuild switch --flake .#mbp";
-      mocksftp = "sftpgo serve -c ~/.config/sftpgo"
+      mocksftp = "sftpgo serve -c ~/.config/sftpgo";
     };
     shellInit = ''
       set -g fish_greeting
