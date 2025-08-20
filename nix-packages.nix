@@ -6,11 +6,12 @@
   environment.systemPackages = [
     pkgs.atuin
     pkgs.bat
+    pkgs.bruno
     pkgs.bun
     pkgs.claude-code
     pkgs.deno
+    pkgs.discord
     pkgs.fastfetch
-    pkgs.fzf
     pkgs.fishPlugins.forgit
     pkgs.fishPlugins.tide
     pkgs.fishPlugins.sponge
@@ -18,18 +19,23 @@
     pkgs.fishPlugins.colored-man-pages
     pkgs.fishPlugins.z
     pkgs.fishPlugins.done
+    pkgs.floorp
+    pkgs.fzf
     pkgs.go
     pkgs.git
+    pkgs.iina
     pkgs.lazygit
     pkgs.lsd
     pkgs.nodejs_22
     pkgs.pnpm
     pkgs.ripgrep
+    pkgs.sftpgo
     pkgs.uv
     pkgs.vim
     pkgs.wget
     pkgs.wifi-password
     pkgs.yarn-berry_4
+    pkgs.zoom-us
   ];
 
   # Font configuration
