@@ -75,17 +75,6 @@
         echo "SDKMAN configured ✅"
       fi
     '';
-    configureFastfetch = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-      if [ ! -d "$HOME/.config/fastfetch" ]; then
-        echo "Configuring Fastfetch... ⚙️"
-        $DRY_RUN_CMD ${pkgs.fastfetch}/bin/fastfetch  --gen-config
-        if [ -d "$HOME/.config/fastfetch" ]; then
-          echo "Fastfetch configured ✅"
-        else
-          echo "⚠️ Something is wrong when configuring Fastfetch"
-        fi
-      fi
-    '';
     configureGhostty = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
       if [ ! -d "$HOME/.config/ghostty" ]; then
         echo "Creating Ghostty config directory... ⚙️"
