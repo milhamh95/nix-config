@@ -120,13 +120,7 @@
         echo "Karabiner backup file removed ✅"
       fi
     '';
-    configureWezTerm = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-      if [ ! -f "$HOME/.wezterm.lua" ]; then
-        echo "Creating WezTerm config... ⚙️"
-        $DRY_RUN_CMD cp ${./app-config/wezterm/wezterm.lua} "$HOME/.wezterm.lua"
-        echo "WezTerm config created ✅"
-      fi
-    '';
+
     configureHammerflow = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
       if [ ! -d "$HOME/.hammerspoon" ]; then
         echo "Creating Hammerspoon directories... ⚙️"
