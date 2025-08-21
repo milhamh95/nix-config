@@ -30,7 +30,6 @@
       "microsoft-edge"
       "mockoon"
       "orbstack"
-      "postman@canary"
       "pritunl"
       "raycast"
       "rectangle-pro"
