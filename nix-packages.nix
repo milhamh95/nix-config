@@ -30,6 +30,7 @@
     pkgs.pnpm
     pkgs.ripgrep
     pkgs.sftpgo
+    pkgs.slack
     pkgs.uv
     pkgs.vim
     pkgs.wezterm

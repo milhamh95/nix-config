@@ -34,7 +34,6 @@
       "raycast"
       "rectangle-pro"
       "setapp"
-      "slack"
       "visual-studio-code"
       "vlc"
       "windsurf"
