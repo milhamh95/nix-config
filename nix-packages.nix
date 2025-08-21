@@ -32,6 +32,7 @@
     pkgs.sftpgo
     pkgs.uv
     pkgs.vim
+    pkgs.wezterm
     pkgs.wget
     pkgs.wifi-password
     pkgs.yarn-berry_4

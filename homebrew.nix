@@ -37,7 +37,6 @@
       "slack"
       "visual-studio-code"
       "vlc"
-      "wezterm"
       "windsurf"
     ];
 
