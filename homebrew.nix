@@ -15,8 +15,11 @@
       "betterdisplay"
       "bettermouse"
       "brave-browser"
+      "bruno"
+      "discord"
       "dotnet-sdk"
       "flashspace"
+      "floorp"
       "github"
       "ghostty"
       "google-chrome"
@@ -24,6 +27,7 @@
       "hammerspoon"
       "heptabase"
       "homerow"
+      "iina"
       "jordanbaird-ice"
       "karabiner-elements"
       "macupdater"
@@ -34,9 +38,12 @@
       "raycast"
       "rectangle-pro"
       "setapp"
+      "slack"
       "visual-studio-code"
       "vlc"
+      "wezterm"
       "windsurf"
+      "zoom"
     ];
 
     masApps = {

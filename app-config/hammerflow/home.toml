@@ -11,13 +11,17 @@
 # settings
 leader_key = "f18"        # required, the leader key that starts the sequence
 leader_key_mods = ""      # optional, default "", not recommended - a dedicated leader key is better
-                             # supports cmd ctrl alt shift
+                          # supports cmd ctrl alt shift
 auto_reload = true        # optional, default true, reload when any file in this directory is saved
 toast_on_reload = true    # optional, default false, show a toast when the config is reloaded
 show_ui = true            # optional, default true, show the ui with your key maps
 
 # set a key to open an app
+[b]
+label = "[b]"
 b = "Brave Browser"
+r = "Bruno"
+
 c = "Google Chrome"
 f = "Floorp"
 h = "Heptabase"
@@ -31,10 +35,7 @@ label = "[g]"
 h = "Ghostty"
 i = "Github Desktop"
 
-[p]
-label = "[p]"
-o = "Postman"
-r = "Pritunl"
+p = "Pritunl"
 
 [s]
 label = "[s]"

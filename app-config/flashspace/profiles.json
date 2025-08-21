@@ -58,11 +58,6 @@
               "bundleIdentifier" : "com.mitchellh.ghostty",
               "iconPath" : "/Applications/Ghostty.app/Contents/Resources/AppIcon.icns",
               "name" : "Ghostty"
-            },
-            {
-              "bundleIdentifier" : "com.postmanlabs.mac.canary",
-              "iconPath" : "/Applications/PostmanCanary.app/Contents/Resources/app.icns",
-              "name" : "PostmanCanary"
             }
           ],
           "display" : "XG27UCS",
