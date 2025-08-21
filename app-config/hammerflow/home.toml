@@ -17,25 +17,26 @@ toast_on_reload = true    # optional, default false, show a toast when the confi
 show_ui = true            # optional, default true, show the ui with your key maps
 
 # set a key to open an app
-[b]
-label = "[b]"
-b = "Brave Browser"
-r = "Bruno"
 
 c = "Google Chrome"
 f = "Floorp"
 h = "Heptabase"
 o = "OrbStack"
+p = "Pritunl"
 t = "TablePlus"
 v = ["Visual Studio Code", "VS Code"]
 w = "Windsurf"
+
+
+[b]
+label = "[b]"
+b = "Brave Browser"
+r = "Bruno"
 
 [g]
 label = "[g]"
 h = "Ghostty"
 i = "Github Desktop"
-
-p = "Pritunl"
 
 [s]
 label = "[s]"
