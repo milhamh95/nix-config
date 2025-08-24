@@ -7,7 +7,6 @@ Notes:
 
 ## To Do
 
-- Refactor config, split into smaller files.
 - Put private key in this repo (need to find a way to encrypt and decrypt the key automatically)
 - Use [nixos-unified](https://nixos-unified.org/index.html) to unitfy nix-darwin + home-manager in a single flake.
 
