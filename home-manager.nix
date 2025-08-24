@@ -75,16 +75,6 @@
         echo "SDKMAN configured ✅"
       fi
     '';
-    configureFlashspace = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-      if [ ! -d "$HOME/.config/flashspace" ]; then
-        echo "Creating FlashSpace config directory... ⚙️"
-        $DRY_RUN_CMD mkdir -p "$HOME/.config/flashspace"
-        echo "Copying FlashSpace config files..."
-        $DRY_RUN_CMD cp ${./app-config/flashspace/settings.json} "$HOME/.config/flashspace/settings.json"
-        $DRY_RUN_CMD cp ${./app-config/flashspace/profiles.json} "$HOME/.config/flashspace/profiles.json"
-        echo "FlashSpace configured ✅"
-      fi
-    '';
     configureKarabiner = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
       if [ ! -d "$HOME/.config/karabiner" ]; then
         echo "Creating Karabiner config directory... ⚙️"
