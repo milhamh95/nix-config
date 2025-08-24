@@ -2,19 +2,6 @@
   home.stateVersion = "25.05";
 
   home.activation = {
-    configureGit = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      if [ ! -e "$HOME/git_configured" ]; then
-        echo "Configuring Git... ⚙️"
-
-        echo "Copying Git config files..."
-        $DRY_RUN_CMD cp ${./app-config/git/.gitconfig} "$HOME/.gitconfig"
-        $DRY_RUN_CMD cp ${./app-config/git/.gitconfig-personal} "$HOME/.gitconfig-personal"
-        $DRY_RUN_CMD cp ${./app-config/git/.gitignore} "$HOME/.gitignore"
-
-        $DRY_RUN_CMD touch "$HOME/git_configured"
-        echo "Git configured ✅"
-      fi
-    '';
     configureSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
       if [ ! -e "$HOME/ssh_configured" ]; then
         echo "Configuring SSH... ⚙️"
@@ -76,14 +63,6 @@
       fi
     '';
     configureKarabiner = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-      if [ ! -d "$HOME/.config/karabiner" ]; then
-        echo "Creating Karabiner config directory... ⚙️"
-        $DRY_RUN_CMD mkdir -p "$HOME/.config/karabiner"
-        echo "Copying Karabiner config file..."
-        $DRY_RUN_CMD cp ${./app-config/karabiner/karabiner.json} "$HOME/.config/karabiner/karabiner.json"
-        echo "Karabiner configured ✅"
-      fi
-
       if [ -f "$HOME/.config/karabiner/karabiner.json.backup" ]; then
         echo "Removing existing Karabiner backup file..."
         $DRY_RUN_CMD rm -f "$HOME/.config/karabiner/karabiner.json.backup"
@@ -157,6 +136,24 @@
       source = ./app-config/hammerflow/init.lua;
       onChange = ''
         echo "Hammerspoon init config changed"
+      '';
+    };
+    ".gitconfig" = {
+      source = ./app-config/git/.gitconfig;
+      onChange = ''
+        echo "Git config changed"
+      '';
+    };
+    ".gitconfig-personal" = {
+      source = ./app-config/git/.gitconfig-personal;
+      onChange = ''
+        echo "Git personal config changed"
+      '';
+    };
+    ".gitignore" = {
+      source = ./app-config/git/.gitignore;
+      onChange = ''
+        echo "Git ignore changed"
       '';
     };
   };
