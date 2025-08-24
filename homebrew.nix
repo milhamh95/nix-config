@@ -9,7 +9,6 @@
       "mas"
     ];
     casks = [
-      "alt-tab"
       "appcleaner"
       "batfi"
       "betterdisplay"
