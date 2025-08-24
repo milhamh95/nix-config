@@ -75,15 +75,6 @@
         echo "SDKMAN configured ✅"
       fi
     '';
-    configureGhostty = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-      if [ ! -d "$HOME/.config/ghostty" ]; then
-        echo "Creating Ghostty config directory... ⚙️"
-        $DRY_RUN_CMD mkdir -p "$HOME/.config/ghostty"
-        echo "Copying initial Ghostty config... ⚙️"
-        $DRY_RUN_CMD cp ${./app-config/ghostty/config} "$HOME/.config/ghostty/config"
-        echo "Ghostty configured ✅"
-      fi
-    '';
     configureFlashspace = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
       if [ ! -d "$HOME/.config/flashspace" ]; then
         echo "Creating FlashSpace config directory... ⚙️"
