@@ -1,3 +1,6 @@
+[includeIf "gitdir:/Users/milhamh95/work/alami-group/**"]
+	path = ~/.gitconfig-alami-group
+
 [includeIf "gitdir:~/personal/"]
 	path = ~/.gitconfig-personal
 
