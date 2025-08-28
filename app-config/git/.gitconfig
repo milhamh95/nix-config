@@ -17,10 +17,6 @@
 	excludesfile = /Users/milhamh95/.gitignore
 	editor = code --wait
 
-[user]
-	email = m.ilham.hidayat.95@gmail.com
-	name = M Ilham Hidayat
-
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
