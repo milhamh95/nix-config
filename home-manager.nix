@@ -150,6 +150,12 @@
         echo "Git personal config changed"
       '';
     };
+    ".gitconfig-alami-group" = {
+      source = ./app-config/git/.gitconfig-alami-group;
+      onChange = ''
+        echo "Git alami-group config changed"
+      '';
+    };
     ".gitignore" = {
       source = ./app-config/git/.gitignore;
       onChange = ''
