@@ -38,6 +38,7 @@
       "rectangle-pro"
       "setapp"
       "slack"
+      "soundsource"
       "visual-studio-code"
       "vlc"
       "wezterm"
