@@ -15,8 +15,8 @@
     globalConfig = {
       tools = {
         node = ["latest"];
-        go = ["latest"]
-      }
-    }
+        go = ["latest"];
+      };
+    };
   };
 }
