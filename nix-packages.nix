@@ -21,6 +21,7 @@
     pkgs.lazygit
     pkgs.lsd
     pkgs.mise
+    pkgs.openssl
     pkgs.ripgrep
     pkgs.sftpgo
     pkgs.uv
