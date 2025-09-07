@@ -36,6 +36,7 @@
       "karabiner-elements"
       "macupdater"
       "microsoft-edge"
+      "mise"
       "mockoon"
       "orbstack"
       "pritunl"

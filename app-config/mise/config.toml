@@ -1,0 +1,8 @@
+[tools]
+go = ["latest", "1.24.7"]
+node = ["latest", "lts"]
+
+[settings]
+verbose = false 
+experimental = false
+disable_tools = ['node']   
