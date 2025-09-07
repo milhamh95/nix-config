@@ -6,10 +6,9 @@
   environment.systemPackages = [
     pkgs.atuin
     pkgs.bat
-    pkgs.bun
     pkgs.claude-code
-    pkgs.deno
     pkgs.fastfetch
+    pkgs.fd
     pkgs.fishPlugins.forgit
     pkgs.fishPlugins.tide
     pkgs.fishPlugins.sponge
@@ -18,12 +17,10 @@
     pkgs.fishPlugins.z
     pkgs.fishPlugins.done
     pkgs.fzf
-    pkgs.go
     pkgs.git
     pkgs.lazygit
     pkgs.lsd
-    pkgs.nodejs_22
-    pkgs.pnpm
+    pkgs.mise
     pkgs.ripgrep
     pkgs.sftpgo
     pkgs.uv
