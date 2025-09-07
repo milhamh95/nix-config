@@ -1,6 +1,9 @@
 # homebrew.nix - Homebrew package configuration
 { config, lib, pkgs, ... }:
 
+# Install app like brave, chrome, etc using homebrew
+# So I can easier map application to FlashSpace
+# Using nix packages, the app path will be inconsistent each machine
 {
   homebrew = {
     enable = true;

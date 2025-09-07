@@ -60,6 +60,7 @@ Press `n` to skip installing `Determinate` package.
 6. Choose your mac config
 
 In the terminal, it will appear `Choose your nix-darwin configuration:` message.
+
 - Type `1` for `mac-desktop` -> Mac Desktop
 - Type `2` for `mbp` -> MacBook Pro
 
