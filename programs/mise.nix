@@ -2,7 +2,7 @@
 
 {
   programs.mise = {
-    enable = false;
+    enable = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
 
@@ -14,8 +14,8 @@
 
     globalConfig = {
       tools = {
-        node = ["latest"];
-        go = ["latest"];
+        node = ["latest", "22.0"];
+        go = ["latest", "1.24.7"];
       };
     };
   };
