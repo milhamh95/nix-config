@@ -4,6 +4,12 @@
 {
   homebrew = {
     enable = true;
+    taps = [
+      "homebrew/core"
+      "homebrew/cask"
+      "homebrew/cask-versions" 
+      "homebrew/bundle"
+    ];
     brews = [
       "helix"
       "mas"
