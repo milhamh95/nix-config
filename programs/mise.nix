@@ -25,6 +25,6 @@
     ${pkgs.mise}/bin/mise use --global node@latest
     ${pkgs.mise}/bin/mise use --global bun@latest
     ${pkgs.mise}/bin/mise use --global deno@latest
-    ${pkgs.mise}/bin/mise use --global rust@stable
+    ${pkgs.mise}/bin/mise use --global rust@latest
   '';
 }
