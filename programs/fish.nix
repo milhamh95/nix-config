@@ -73,6 +73,11 @@
         fisher install catppuccin/fish
         fish_config theme save "Catppuccin Mocha"
       end
+
+      # activate mise
+      if type -q mise
+        mise activate fish | source
+      end
     '';
   };
 }
