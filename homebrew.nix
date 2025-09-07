@@ -10,8 +10,8 @@
       "homebrew/bundle"
     ];
     brews = [
-      "helix"
       "mas"
+      "mise"
     ];
     casks = [
       "appcleaner"
@@ -36,7 +36,6 @@
       "karabiner-elements"
       "macupdater"
       "microsoft-edge"
-      "mise"
       "mockoon"
       "orbstack"
       "pritunl"
