@@ -9,13 +9,13 @@
     settings = {
       experimental = false;
       verbose = false;
-      auto_install = true;
+      disable_tools = ["node"];
     };
 
     globalConfig = {
       tools = {
         node = ["latest" "lts"];
-        go = ["latest" "1.24.6"];
+        go = ["1.24.6" "latest"];
       };
     };
   };
