@@ -7,6 +7,7 @@
     pkgs.atuin
     pkgs.bat
     pkgs.claude-code
+    pkgs.curl
     pkgs.fastfetch
     pkgs.fd
     pkgs.fishPlugins.forgit
