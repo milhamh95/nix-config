@@ -7,7 +7,6 @@
     taps = [
       "homebrew/core"
       "homebrew/cask"
-      "homebrew/cask-versions" 
       "homebrew/bundle"
     ];
     brews = [
