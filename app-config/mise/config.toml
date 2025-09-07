@@ -1,8 +1,14 @@
 [tools]
 go = ["latest", "1.24.7"]
+erlang = "latest"
+elixir = "latest"
 node = ["latest", "lts"]
+bun = "latest"
+deno = "latest"
+yarn = "latest"
+pnpm = "latest"
+uv = "latest"
 
 [settings]
 verbose = false 
-experimental = false
-disable_tools = ['node']   
+experimental = false 
