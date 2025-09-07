@@ -11,8 +11,9 @@
       verbose = false;
       auto_install = true;
     };
+  };
 
-    # activation script to set up mise configuration
+  # activation script to set up mise configuration
   home.activation.setupMise = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     # enable corepack (pnpm, yarn, etc.)
     ${pkgs.mise}/bin/mise set MISE_NODE_COREPACK=true
@@ -26,5 +27,4 @@
     ${pkgs.mise}/bin/mise use --global deno@latest
     ${pkgs.mise}/bin/mise use --global rust@stable
   '';
-  };
 }
