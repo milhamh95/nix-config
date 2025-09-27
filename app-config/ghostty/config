@@ -1,5 +1,5 @@
 font-size = 16
-theme = Adwaita
+theme = Cappuccin Mocha
 cursor-style = bar
 confirm-close-surface = false
 shell-integration = "fish"
