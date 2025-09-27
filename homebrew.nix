@@ -51,6 +51,7 @@
       "vlc"
       "wezterm"
       "windsurf"
+      "windsurf@next"
       "zoom"
     ];
 
