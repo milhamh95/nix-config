@@ -36,6 +36,7 @@
     shellAbbrs = {
       vc = "open $1 -a \"Visual Studio Code\"";
       ws = "open $1 -a \"Windsurf\"";
+      wsn = "open $1 -a \"Windsurf@next\"";
       g = "git";
       ga = "git add";
       gaa = "git add --all";
