@@ -247,6 +247,11 @@
               "bundleIdentifier" : "org.mozilla.floorp",
               "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
               "name" : "Floorp"
+            },
+            {
+              "bundleIdentifier" : "com.exafunction.windsurfNext",
+              "iconPath" : "/Applications/Windsurf - Next.app/Contents/Resources/Windsurf - Next.icns",
+              "name" : "Windsurf - Next"
             }
           ],
           "display" : "XG27UCS",

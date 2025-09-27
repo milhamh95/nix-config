@@ -36,7 +36,6 @@
   "showSpaceControl" : "cmd+ctrl+shift+up",
   "skipEmptyWorkspacesOnSwitch" : false,
   "spaceControlCurrentDisplayWorkspaces" : false,
-  "spaceControlMaxColumns" : 6,
   "spaceControlUpdateScreenshotsOnOpen" : false,
   "swipeDown3FingerAction" : "none",
   "swipeDown4FingerAction" : "none",
