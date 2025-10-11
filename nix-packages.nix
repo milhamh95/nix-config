@@ -4,6 +4,7 @@
 {
   # System packages
   environment.systemPackages = [
+    pkgs.amp-cli
     pkgs.atuin
     pkgs.bat
     pkgs.claude-code
