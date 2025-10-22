@@ -22,6 +22,7 @@
     pkgs.git
     pkgs.lazygit
     pkgs.lsd
+    pkgs.opencode
     pkgs.openssl
     pkgs.ripgrep
     pkgs.sftpgo
