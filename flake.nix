@@ -57,6 +57,15 @@
 
       nixpkgs.config.allowUnfree = true;
 
+      # Override fish package to disable tests (they fail on darwin)
+      nixpkgs.overlays = [
+        (final: prev: {
+          fish = prev.fish.overrideAttrs (oldAttrs: {
+            doCheck = false;
+          });
+        })
+      ];
+
       # ref: https://github.com/LnL7/nix-darwin/issues/1237#issuecomment-2562242340
       # to set fish shells as default
       users.knownUsers = ["milhamh95"];

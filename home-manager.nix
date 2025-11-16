@@ -1,6 +1,9 @@
 { hostname }: { config, pkgs, lib, ... }: {
   home.stateVersion = "25.11";
 
+  # Disable macOS application linking to avoid permission errors
+  disabledModules = [ "targets/darwin/linkapps.nix" ];
+
   home.activation = {
     configureSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
       if [ ! -e "$HOME/ssh_configured" ]; then
