@@ -1,5 +1,5 @@
 { hostname }: { config, pkgs, lib, ... }: {
-  home.stateVersion = "25.11";
+  home.stateVersion = "25.05";
 
   home.activation = {
     configureSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
