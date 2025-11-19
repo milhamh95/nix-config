@@ -67,7 +67,6 @@
       clp = "env CLAUDE_CONFIG_DIR=~/.claude-personal claude";
       clpal = "env CLAUDE_CONFIG_DIR=~/.claude-alami claude";
       hw = "echo Hello World";
-
     };
     shellInit = ''
       set -g fish_greeting
