@@ -64,8 +64,8 @@
       nixmd = "sudo darwin-rebuild switch --flake .#mac-desktop";
       nixmbp = "sudo darwin-rebuild switch --flake .#mbp";
       mocksftp = "sftpgo serve -c ~/.config/sftpgo";
-      cp = "env CLAUDE_CONFIG_DIR=~/.claude-personal claude";
-      cpal = "env CLAUDE_CONFIG_DIR=~/.claude-alami claude";
+      clp = "env CLAUDE_CONFIG_DIR=~/.claude-personal claude";
+      clpal = "env CLAUDE_CONFIG_DIR=~/.claude-alami claude";
     };
     shellInit = ''
       set -g fish_greeting
