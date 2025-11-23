@@ -8,6 +8,7 @@ deno = "latest"
 yarn = "latest"
 pnpm = "latest"
 uv = "latest"
+rust = "latest"
 
 [settings]
 verbose = false 
