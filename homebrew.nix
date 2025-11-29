@@ -15,14 +15,18 @@
     brews = [
       "mas"
       "mise"
+      "opencode"
     ];
     casks = [
       "appcleaner"
       "batfi"
       "betterdisplay"
       "bettermouse"
+      "bettertouchtool"
       "brave-browser"
       "bruno"
+      "claude-code"
+      "datagrip"
       "discord"
       "dotnet-sdk"
       "flashspace"
@@ -37,6 +41,7 @@
       "iina"
       "jordanbaird-ice"
       "karabiner-elements"
+      "keka"
       "macupdater"
       "microsoft-edge"
       "mockoon"
@@ -45,13 +50,14 @@
       "raycast"
       "rectangle-pro"
       "setapp"
+      "shottr"
       "slack"
       "soundsource"
+      "stats"
       "visual-studio-code"
       "vlc"
       "wezterm"
       "windsurf"
-      "windsurf@next"
       "zoom"
     ];
 
@@ -62,9 +68,12 @@
       "Fantastical - Calendar" = 975937182;
       "LilyView" = 529490330;
       "Numbers" = 409203825;
+      "OpenIn" = 1643649331;
       "PDF Expert – Edit, Sign PDFs" = 1055273043;
+      "Presentify" = 1507246666;
       "rcmd • App Switcher" = 1596283165;
       "Spark Classic – Email App" = 1176895641;
+      "SnippetsLab" = 1006087419;
     };
 
     onActivation.cleanup = "zap";

@@ -4,10 +4,8 @@
 {
   # System packages
   environment.systemPackages = [
-    pkgs.amp-cli
     pkgs.atuin
     pkgs.bat
-    pkgs.claude-code
     pkgs.curl
     pkgs.fastfetch
     pkgs.fd
@@ -22,11 +20,9 @@
     pkgs.git
     pkgs.lazygit
     pkgs.lsd
-    pkgs.opencode
     pkgs.openssl
     pkgs.ripgrep
     pkgs.sftpgo
-    pkgs.uv
     pkgs.vim
     pkgs.wget
     pkgs.yarn-berry_4
