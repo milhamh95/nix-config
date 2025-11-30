@@ -18,19 +18,19 @@ show_ui = true            # optional, default true, show the ui with your key ma
 
 # set a key to open an app
 
-c = "Google Chrome"
 f = "Floorp"
 h = "Heptabase"
 o = "OrbStack"
 p = "Pritunl"
-t = "TablePlus"
+d = "DataGrip"
 v = ["Visual Studio Code", "VS Code"]
+w = "Windsurf"
 
-[w]
-label = "[w]"
-s = "Windsurf"
-n = "Windsurf - Next"
-
+[c]
+label = "[c]"
+a = "Cap"
+h = "Google Chrome"
+b = "Google Chrome Beta"
 
 [b]
 label = "[b]"
@@ -46,6 +46,7 @@ i = "Github Desktop"
 label = "[s]"
 l = "Slack"
 p = "Spark"
+b = "SnippetsLab"
 
 # this group is handy to copy over
 # for quick access to your config
