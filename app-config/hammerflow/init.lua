@@ -1,13 +1,9 @@
 hs.loadSpoon("Hammerflow")
-spoon.Hammerflow.loadFirstValidTomlFile({
-    "home.toml",
-    "work.toml",
-    "Spoons/Hammerflow.spoon/sample.toml"
-})
 
 -- optionally set ui format (must be done before loading toml config)
 -- 🧛 Dracula inspired theme
 spoon.Hammerflow.registerFormat({
+	atScreenEdge = 2,
 	fillColor = { alpha = .875, hex = "282b36" },
 	padding = 18,
 	radius = 12,
@@ -20,6 +16,12 @@ spoon.Hammerflow.registerFormat({
 	strokeWidth = 6,
 	textFont = "Monaco",
 	textSize = 18,
+})
+
+spoon.Hammerflow.loadFirstValidTomlFile({
+    "home.toml",
+    "work.toml",
+    "Spoons/Hammerflow.spoon/sample.toml"
 })
 
 -- optionally respect auto_reload setting in the toml config.
