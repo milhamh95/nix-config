@@ -25,6 +25,7 @@
       "bettertouchtool"
       "brave-browser"
       "bruno"
+      "cap"
       "claude-code"
       "datagrip"
       "discord"
