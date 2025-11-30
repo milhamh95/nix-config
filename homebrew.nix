@@ -67,6 +67,7 @@
       "DaisyDisk" = 411643860;
       "ExcalidrawZ" = 6636493997;
       "Fantastical - Calendar" = 975937182;
+      "iStat Menus" = 6499559693
       "LilyView" = 529490330;
       "Numbers" = 409203825;
       "OpenIn" = 1643649331;
