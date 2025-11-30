@@ -14,11 +14,39 @@
   "enableSpaceControlTilesAnimations" : false,
   "enableSwipeGestures" : false,
   "enableWorkspaceTransitions" : false,
+  "floatingApps" : [
+    {
+      "bundleIdentifier" : "com.brave.Browser",
+      "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
+      "name" : "Brave Browser"
+    },
+    {
+      "bundleIdentifier" : "us.zoom.xos",
+      "iconPath" : "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns",
+      "name" : "zoom.us"
+    },
+    {
+      "bundleIdentifier" : "com.hnc.Discord",
+      "iconPath" : "/Applications/Discord.app/Contents/Resources/electron.icns",
+      "name" : "Discord"
+    },
+    {
+      "bundleIdentifier" : "com.google.Chrome.beta",
+      "iconPath" : "/Applications/Google Chrome Beta.app/Contents/Resources/app.icns",
+      "name" : "Google Chrome Beta"
+    },
+    {
+      "bundleIdentifier" : "so.cap.desktop",
+      "iconPath" : "/Applications/Cap.app/Contents/Resources/icon.icns",
+      "name" : "Cap"
+    }
+  ],
   "focusFrontmostWindow" : false,
   "focusLeft" : "cmd+ctrl+shift+h",
   "focusRight" : "cmd+ctrl+shift+l",
   "keepUnassignedAppsOnSwitch" : false,
   "loopWorkspaces" : true,
+  "loopWorkspacesOnAllDisplays" : false,
   "menuBarDisplayAliases" : "",
   "menuBarTitleTemplate" : "$WORKSPACE_$WORKSPACE_NUMBER",
   "pipApps" : [
@@ -27,6 +55,7 @@
   "pipScreenCornerOffset" : 15,
   "restartAppOnWakeUp" : false,
   "restoreHiddenAppsOnSwitch" : false,
+  "runScriptAfterWorkspaceChange" : "",
   "runScriptOnLaunch" : "",
   "runScriptOnProfileChange" : "sketchybar --reload",
   "runScriptOnWorkspaceChange" : "sketchybar --trigger flashspace_workspace_change WORKSPACE=\"$WORKSPACE\" DISPLAY=\"$DISPLAY\"",
@@ -36,6 +65,8 @@
   "showSpaceControl" : "cmd+ctrl+shift+up",
   "skipEmptyWorkspacesOnSwitch" : false,
   "spaceControlCurrentDisplayWorkspaces" : false,
+  "spaceControlHideEmptyWorkspaces" : false,
+  "spaceControlNumberOfColumns" : 0,
   "spaceControlUpdateScreenshotsOnOpen" : false,
   "swipeDown3FingerAction" : "none",
   "swipeDown4FingerAction" : "none",
@@ -46,6 +77,7 @@
   "swipeThreshold" : 0.2,
   "swipeUp3FingerAction" : "none",
   "swipeUp4FingerAction" : "none",
+  "switchWorkspaceOnCursorScreen" : false,
   "switchWorkspaceWhenPipCloses" : true,
   "workspaceTransitionDimming" : 0.2,
   "workspaceTransitionDuration" : 0.3

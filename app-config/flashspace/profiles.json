@@ -10,37 +10,12 @@
               "bundleIdentifier" : "com.readdle.smartemail-Mac",
               "iconPath" : "/Applications/Spark.app/Contents/Resources/AppIcon.icns",
               "name" : "Spark"
-            },
-            {
-              "bundleIdentifier" : "com.brave.Browser",
-              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-              "name" : "Brave Browser"
-            },
-            {
-              "bundleIdentifier" : "com.google.Chrome.beta",
-              "iconPath" : "/Applications/Google Chrome Beta.app/Contents/Resources/app.icns",
-              "name" : "Google Chrome Beta"
-            },
-            {
-              "bundleIdentifier" : "com.hnc.Discord",
-              "iconPath" : "/Applications/Discord.app/Contents/Resources/electron.icns",
-              "name" : "Discord"
-            },
-            {
-              "bundleIdentifier" : "us.zoom.xos",
-              "iconPath" : "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns",
-              "name" : "zoom.us"
-            },
-            {
-              "bundleIdentifier" : "org.mozilla.floorp",
-              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
-              "name" : "Floorp"
             }
           ],
           "display" : "XG27UCS",
           "id" : "4D99E18C-D739-47E8-B9EE-984C26E1772B",
-          "name" : "Communication",
-          "shortcut" : "cmd+ctrl+shift+a",
+          "name" : "P_Communication",
+          "openAppsOnActivation" : false,
           "symbolIconName" : "1.square"
         },
         {
@@ -51,34 +26,19 @@
               "name" : "Windsurf"
             },
             {
-              "bundleIdentifier" : "com.jetbrains.goland",
-              "iconPath" : "/Applications/GoLand.app/Contents/Resources/goland.icns",
-              "name" : "GoLand"
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
             },
             {
-              "bundleIdentifier" : "com.jetbrains.pycharm",
-              "iconPath" : "/Applications/PyCharm.app/Contents/Resources/pycharm.icns",
-              "name" : "PyCharm"
+              "bundleIdentifier" : "com.jetbrains.datagrip",
+              "iconPath" : "/Applications/DataGrip.app/Contents/Resources/datagrip.icns",
+              "name" : "DataGrip"
             },
             {
-              "bundleIdentifier" : "com.tinyapp.TablePlus-setapp",
-              "iconPath" : "/Applications/Setapp/TablePlus.app/Contents/Resources/AppIcon.icns",
-              "name" : "TablePlus"
-            },
-            {
-              "bundleIdentifier" : "com.brave.Browser",
-              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-              "name" : "Brave Browser"
-            },
-            {
-              "bundleIdentifier" : "com.google.Chrome.beta",
-              "iconPath" : "/Applications/Google Chrome Beta.app/Contents/Resources/app.icns",
-              "name" : "Google Chrome Beta"
-            },
-            {
-              "bundleIdentifier" : "com.hnc.Discord",
-              "iconPath" : "/Applications/Discord.app/Contents/Resources/electron.icns",
-              "name" : "Discord"
+              "bundleIdentifier" : "com.mitchellh.ghostty",
+              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/Ghostty.icns",
+              "name" : "Ghostty"
             },
             {
               "bundleIdentifier" : "app.projectmeta.projectmeta",
@@ -87,73 +47,33 @@
             },
             {
               "bundleIdentifier" : "com.readdle.PDFExpert-Mac",
-              "iconPath" : "/Applications/PDF Expert.app/Contents/Resources/AppIcon.icns",
+              "iconPath" : "/Applications/PDF Expert.app/Contents/Resources/PE_OS26_icon.icns",
               "name" : "PDF Expert"
-            },
-            {
-              "bundleIdentifier" : "us.zoom.xos",
-              "iconPath" : "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns",
-              "name" : "zoom.us"
-            },
-            {
-              "bundleIdentifier" : "com.soarsql.app",
-              "iconPath" : "/Applications/soarSQL.app/Contents/Resources/icon.icns",
-              "name" : "soarSQL"
-            },
-            {
-              "bundleIdentifier" : "org.mozilla.floorp",
-              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
-              "name" : "Floorp"
             }
           ],
           "display" : "XG27UCS",
           "id" : "0EABFA62-A507-4BFA-A9C3-AA8E2204E8FF",
-          "name" : "Code",
-          "shortcut" : "cmd+ctrl+shift+s",
+          "name" : "P_Code",
+          "openAppsOnActivation" : false,
           "symbolIconName" : "2.square"
         },
         {
           "apps" : [
-            {
-              "bundleIdentifier" : "com.mitchellh.ghostty",
-              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/AppIcon.icns",
-              "name" : "Ghostty"
-            },
             {
               "bundleIdentifier" : "com.usebruno.app",
               "iconPath" : "/Applications/Bruno.app/Contents/Resources/icon.icns",
               "name" : "Bruno"
             },
             {
-              "bundleIdentifier" : "com.brave.Browser",
-              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-              "name" : "Brave Browser"
-            },
-            {
-              "bundleIdentifier" : "com.google.Chrome.beta",
-              "iconPath" : "/Applications/Google Chrome Beta.app/Contents/Resources/app.icns",
-              "name" : "Google Chrome Beta"
-            },
-            {
-              "bundleIdentifier" : "com.hnc.Discord",
-              "iconPath" : "/Applications/Discord.app/Contents/Resources/electron.icns",
-              "name" : "Discord"
-            },
-            {
-              "bundleIdentifier" : "us.zoom.xos",
-              "iconPath" : "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns",
-              "name" : "zoom.us"
-            },
-            {
-              "bundleIdentifier" : "org.mozilla.floorp",
-              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
-              "name" : "Floorp"
+              "bundleIdentifier" : "dev.kdrag0n.MacVirt",
+              "iconPath" : "/Applications/OrbStack.app/Contents/Resources/AppIcon.icns",
+              "name" : "OrbStack"
             }
           ],
           "display" : "XG27UCS",
           "id" : "5D39ACD6-D68B-4541-9635-34182E208B6E",
-          "name" : "Dev Support",
-          "shortcut" : "cmd+ctrl+shift+d",
+          "name" : "P_Utility",
+          "openAppsOnActivation" : false,
           "symbolIconName" : "3.square"
         }
       ]
@@ -173,27 +93,12 @@
               "bundleIdentifier" : "com.readdle.smartemail-Mac",
               "iconPath" : "/Applications/Spark.app/Contents/Resources/AppIcon.icns",
               "name" : "Spark"
-            },
-            {
-              "bundleIdentifier" : "com.brave.Browser",
-              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-              "name" : "Brave Browser"
-            },
-            {
-              "bundleIdentifier" : "com.google.Chrome",
-              "iconPath" : "/Applications/Google Chrome.app/Contents/Resources/app.icns",
-              "name" : "Google Chrome"
-            },
-            {
-              "bundleIdentifier" : "org.mozilla.floorp",
-              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
-              "name" : "Floorp"
             }
           ],
           "display" : "XG27UCS",
           "id" : "56ADFC37-A0BF-4B2C-972E-E710B6D451F4",
-          "name" : "Communication",
-          "shortcut" : "cmd+ctrl+shift+a",
+          "name" : "W_Communication",
+          "openAppsOnActivation" : false,
           "symbolIconName" : "1.circle.fill"
         },
         {
@@ -204,14 +109,24 @@
               "name" : "Windsurf"
             },
             {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            },
+            {
               "bundleIdentifier" : "com.jetbrains.intellij",
               "iconPath" : "/Applications/IntelliJ IDEA.app/Contents/Resources/idea.icns",
               "name" : "IntelliJ IDEA"
             },
             {
-              "bundleIdentifier" : "com.tinyapp.TablePlus-setapp",
-              "iconPath" : "/Applications/Setapp/TablePlus.app/Contents/Resources/AppIcon.icns",
-              "name" : "TablePlus"
+              "bundleIdentifier" : "com.mitchellh.ghostty",
+              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/Ghostty.icns",
+              "name" : "Ghostty"
+            },
+            {
+              "bundleIdentifier" : "com.jetbrains.datagrip",
+              "iconPath" : "/Applications/DataGrip.app/Contents/Resources/datagrip.icns",
+              "name" : "DataGrip"
             },
             {
               "bundleIdentifier" : "app.projectmeta.projectmeta",
@@ -220,18 +135,8 @@
             },
             {
               "bundleIdentifier" : "com.readdle.PDFExpert-Mac",
-              "iconPath" : "/Applications/PDF Expert.app/Contents/Resources/AppIcon.icns",
+              "iconPath" : "/Applications/PDF Expert.app/Contents/Resources/PE_OS26_icon.icns",
               "name" : "PDF Expert"
-            },
-            {
-              "bundleIdentifier" : "com.brave.Browser",
-              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-              "name" : "Brave Browser"
-            },
-            {
-              "bundleIdentifier" : "com.google.Chrome",
-              "iconPath" : "/Applications/Google Chrome.app/Contents/Resources/app.icns",
-              "name" : "Google Chrome"
             },
             {
               "bundleIdentifier" : "com.soarsql.app",
@@ -239,69 +144,39 @@
               "name" : "soarSQL"
             },
             {
-              "bundleIdentifier" : "com.apple.iWork.Numbers",
-              "iconPath" : "/Applications/Numbers.app/Contents/Resources/AppIcon.icns",
-              "name" : "Numbers"
-            },
-            {
-              "bundleIdentifier" : "org.mozilla.floorp",
-              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
-              "name" : "Floorp"
-            },
-            {
-              "bundleIdentifier" : "com.exafunction.windsurfNext",
-              "iconPath" : "/Applications/Windsurf - Next.app/Contents/Resources/Windsurf - Next.icns",
-              "name" : "Windsurf - Next"
+              "bundleIdentifier" : "com.github.GitHubClient",
+              "iconPath" : "/Applications/GitHub Desktop.app/Contents/Resources/electron.icns",
+              "name" : "GitHub Desktop"
             }
           ],
           "display" : "XG27UCS",
           "id" : "59BE9720-4CC4-4BB1-ABAD-1AA472398F75",
-          "name" : "Code",
-          "shortcut" : "cmd+ctrl+shift+s",
+          "name" : "W_Code",
+          "openAppsOnActivation" : false,
           "symbolIconName" : "2.circle.fill"
         },
         {
           "apps" : [
-            {
-              "bundleIdentifier" : "com.mitchellh.ghostty",
-              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/AppIcon.icns",
-              "name" : "Ghostty"
-            },
             {
               "bundleIdentifier" : "com.usebruno.app",
               "iconPath" : "/Applications/Bruno.app/Contents/Resources/icon.icns",
               "name" : "Bruno"
             },
             {
-              "bundleIdentifier" : "com.electron.pritunl",
-              "iconPath" : "/Applications/Pritunl.app/Contents/Resources/electron.icns",
-              "name" : "Pritunl"
+              "bundleIdentifier" : "com.apple.iWork.Numbers",
+              "iconPath" : "/Applications/Numbers.app/Contents/Resources/AppIcon.icns",
+              "name" : "Numbers"
             },
             {
-              "bundleIdentifier" : "com.github.GitHubClient",
-              "iconPath" : "/Applications/GitHub Desktop.app/Contents/Resources/electron.icns",
-              "name" : "GitHub Desktop"
-            },
-            {
-              "bundleIdentifier" : "com.brave.Browser",
-              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-              "name" : "Brave Browser"
-            },
-            {
-              "bundleIdentifier" : "com.google.Chrome",
-              "iconPath" : "/Applications/Google Chrome.app/Contents/Resources/app.icns",
-              "name" : "Google Chrome"
-            },
-            {
-              "bundleIdentifier" : "org.mozilla.floorp",
-              "iconPath" : "/Applications/Floorp.app/Contents/Resources/firefox.icns",
-              "name" : "Floorp"
+              "bundleIdentifier" : "dev.kdrag0n.MacVirt",
+              "iconPath" : "/Applications/OrbStack.app/Contents/Resources/AppIcon.icns",
+              "name" : "OrbStack"
             }
           ],
           "display" : "XG27UCS",
-          "id" : "300BC876-D14C-4959-8D19-B892D0E34BC0",
-          "name" : "Dev Support",
-          "shortcut" : "cmd+ctrl+shift+d",
+          "id" : "7B19C25A-F006-4A17-A07F-6A76F8CB7966",
+          "name" : "W_Utility",
+          "openAppsOnActivation" : false,
           "symbolIconName" : "3.circle.fill"
         }
       ]
