@@ -8,7 +8,6 @@ spoon.Hammerflow.loadFirstValidTomlFile({
 -- optionally set ui format (must be done before loading toml config)
 -- 🧛 Dracula inspired theme
 spoon.Hammerflow.registerFormat({
-	atScreenEdge = 2,
 	fillColor = { alpha = .875, hex = "282b36" },
 	padding = 18,
 	radius = 12,
