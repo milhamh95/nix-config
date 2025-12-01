@@ -26,6 +26,7 @@
     pkgs.vim
     pkgs.wget
     pkgs.yarn-berry_4
+    pkgs.zstd
   ];
 
   # Font configuration
