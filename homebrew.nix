@@ -64,18 +64,21 @@
 
     masApps = {
       "Amphetamine" = 937984704;
+      "BarMarks" = 6739710035;
       "DaisyDisk" = 411643860;
       "ExcalidrawZ" = 6636493997;
       "Fantastical - Calendar" = 975937182;
+      "Flow" = 1423210932;
       "iStat Menus" = 6499559693;
       "LilyView" = 529490330;
       "Numbers" = 409203825;
       "OpenIn" = 1643649331;
+      "PastePal" = 1503446680;
       "PDF Expert – Edit, Sign PDFs" = 1055273043;
       "Presentify" = 1507246666;
       "rcmd • App Switcher" = 1596283165;
-      "Spark Classic – Email App" = 1176895641;
       "SnippetsLab" = 1006087419;
+      "Spark Classic – Email App" = 1176895641;
     };
 
     onActivation.cleanup = "zap";
