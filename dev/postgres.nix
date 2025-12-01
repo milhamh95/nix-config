@@ -147,6 +147,8 @@ pkgs.mkShell {
     pg_restore_db() {
       if [ "$#" -lt 2 ]; then
         echo "Usage: restore_db <database_name> <dump_file>"
+        echo "Supports both .sql and .dump formats"
+        echo "Example: restore_db mydb ./backup.sql"
         echo "Example: restore_db mydb ./backup.dump"
         return 1
       fi
@@ -191,7 +193,7 @@ pkgs.mkShell {
     echo "  pg_stop                       - Stop PostgreSQL server"
     echo "  pg_status                     - Check PostgreSQL status and list databases"
     echo "  pg_create_db <name>           - Create a new database"
-    echo "  pg_restore_db <db> <dumpfile> - Restore database from dump file"
+    echo "  pg_restore_db <db> <dumpfile> - Restore database from dump and sql file"
     echo "  psql                          - Connect to PostgreSQL"
     echo "  pg_help                       - Show this help message"
 
