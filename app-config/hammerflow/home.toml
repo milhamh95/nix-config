@@ -18,10 +18,10 @@ show_ui = true            # optional, default true, show the ui with your key ma
 
 # set a key to open an app
 
+d = "DataGrip"
 h = "Heptabase"
 o = "OrbStack"
 p = "Pritunl"
-d = "DataGrip"
 v = ["Visual Studio Code", "VS Code"]
 w = "Windsurf"
 y = "Yaak"
