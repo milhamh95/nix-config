@@ -51,6 +51,7 @@
       "pritunl"
       "raycast"
       "rectangle-pro"
+      "rewritebar"
       "setapp"
       "shottr"
       "slack"
