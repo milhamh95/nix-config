@@ -18,24 +18,29 @@ show_ui = true            # optional, default true, show the ui with your key ma
 
 # set a key to open an app
 
-f = "Floorp"
 h = "Heptabase"
 o = "OrbStack"
 p = "Pritunl"
 d = "DataGrip"
 v = ["Visual Studio Code", "VS Code"]
 w = "Windsurf"
+y = "Yaak"
 
 [c]
 label = "[c]"
 a = "Cap"
-h = "Google Chrome"
-b = "Google Chrome Beta"
+h = ["Google Chrome", "Chrome"]
+b = ["Google Chrome Beta", "Chrome Beta"]
 
 [b]
 label = "[b]"
 b = "Brave Browser"
+l = "Bloom"
 r = "Bruno"
+
+[f]
+label = "[f]"
+l = "Flow"
 
 [g]
 label = "[g]"
