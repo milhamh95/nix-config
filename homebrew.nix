@@ -23,6 +23,7 @@
       "betterdisplay"
       "bettermouse"
       "bettertouchtool"
+      "bloom"
       "brave-browser"
       "bruno"
       "cap"
