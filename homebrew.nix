@@ -81,6 +81,7 @@
       "rcmd • App Switcher" = 1596283165;
       "SnippetsLab" = 1006087419;
       "Spark Classic – Email App" = 1176895641;
+      "Spokenly" = 6740315592;
     };
 
     onActivation.cleanup = "zap";
