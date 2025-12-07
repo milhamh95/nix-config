@@ -13,6 +13,7 @@
       "homebrew/bundle"
     ];
     brews = [
+      "claude-code-router"
       "mas"
       "mise"
       "opencode"
