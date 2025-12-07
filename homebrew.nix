@@ -18,6 +18,7 @@
       "opencode"
     ];
     casks = [
+      "antigravity"
       "appcleaner"
       "batfi"
       "betterdisplay"
@@ -61,6 +62,7 @@
       "vlc"
       "wezterm"
       "windsurf"
+      "zed"
       "zoom"
     ];
 
