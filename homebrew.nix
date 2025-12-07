@@ -54,6 +54,7 @@
       "raycast"
       "rectangle-pro"
       "rewritebar"
+      "rocket"
       "setapp"
       "shottr"
       "slack"
