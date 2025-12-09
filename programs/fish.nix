@@ -16,6 +16,16 @@
           mkdir -p $argv[1] && cd $argv[1]
         end
       '';
+      claude-personal = ''
+        function claude-personal --description "Run Claude with personal account"
+          env CLAUDE_CONFIG_DIR=~/.claude-personal claude $argv
+        end
+      '';
+      claude-alami = ''
+        function claude-alami --description "Run Claude with work (Alami) account"
+          env CLAUDE_CONFIG_DIR=~/.claude-alami claude $argv
+        end
+      '';
     };
     plugins = [
       {
