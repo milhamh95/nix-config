@@ -6,28 +6,31 @@
     enable = true;
     functions = {
       current_branch = "git branch --show-current";
-      mkcd = ''
-        function mkcd --description "Create and change directory"
+      mkcd = {
+        description = "Create and change directory";
+        body = ''
           if test (count $argv) -ne 1
               echo "Usage: mkcd <directory>"
               return 1
           end
 
           mkdir -p $argv[1] && cd $argv[1]
-        end
-      '';
-      claude-personal = ''
-        function claude-personal --description "Run Claude with personal account"
+        '';
+      };
+      claude-personal = {
+        description = "Run Claude with personal account";
+        body = ''
           set -lx CLAUDE_CONFIG_DIR ~/.claude-personal
           claude $argv
-        end
-      '';
-      claude-alami = ''
-        function claude-alami --description "Run Claude with work (Alami) account"
+        '';
+      };
+      claude-alami = {
+        description = "Run Claude with work (Alami) account";
+        body = ''
           set -lx CLAUDE_CONFIG_DIR ~/.claude-alami
           claude $argv
-        end
-      '';
+        '';
+      };
     };
     plugins = [
       {
