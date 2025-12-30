@@ -60,6 +60,7 @@
       "slack"
       "soundsource"
       "stats"
+      "tableplus"
       "visual-studio-code"
       "vlc"
       "wezterm"
