@@ -33,7 +33,10 @@
       # $ nix-env -qaP | grep wget
 
       # Import system packages and fonts configuration
-      imports = [ ./nix-packages.nix ];
+      imports = [ 
+        ./nix-packages.nix
+        ./soundsource-install.nix
+      ];
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
