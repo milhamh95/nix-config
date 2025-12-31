@@ -13,7 +13,6 @@
       "homebrew/bundle"
     ];
     brews = [
-      "claude-code-router"
       "mas"
       "mise"
       "opencode"
@@ -30,7 +29,6 @@
       "bruno"
       "cap"
       "claude-code"
-      "datagrip"
       "discord"
       "dotnet-sdk"
       "flashspace"
@@ -58,7 +56,6 @@
       "setapp"
       "shottr"
       "slack"
-      "soundsource"
       "stats"
       "tableplus"
       "visual-studio-code"
