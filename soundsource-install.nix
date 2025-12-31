@@ -6,7 +6,7 @@ let
   soundsourceUrl = "https://rogueamoeba.com/legacy/downloads/SoundSource-5812.zip";
 in
 {
-  system.activationScripts.postUserActivation.text = ''
+  system.activationScripts.installSoundSource.text = ''
     # Install SoundSource ${soundsourceVersion}
     echo "Checking SoundSource installation..."
     
