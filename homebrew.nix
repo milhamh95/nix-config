@@ -15,6 +15,7 @@
     brews = [
       "mas"
       "mise"
+      "mole"
       "opencode"
     ];
     casks = [
