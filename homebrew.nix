@@ -49,6 +49,7 @@
       "microsoft-edge"
       "mockoon"
       "orbstack"
+      "pearcleaner"
       "pritunl"
       "raycast"
       "rectangle-pro"
