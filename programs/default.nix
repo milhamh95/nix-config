@@ -3,7 +3,7 @@
 
 {
   imports = [
-    ./atuin.nix
+    # ./atuin.nix
     ./fastfetch.nix
     ./fish.nix
   ];
