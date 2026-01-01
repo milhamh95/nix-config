@@ -4,6 +4,7 @@
 {
   programs.fish = {
     enable = true;
+    useBabelfish = true;
     functions = {
       current_branch = "git branch --show-current";
       mkcd = {
