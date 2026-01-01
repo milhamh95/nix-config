@@ -2,6 +2,7 @@ font-size = 16
 theme = Catppuccin Mocha
 cursor-style = bar
 confirm-close-surface = false
+command = /run/current-system/sw/bin/fish
 shell-integration = "fish"
 bold-is-bright = true
 cursor-style-blink = true
