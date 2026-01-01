@@ -172,6 +172,7 @@
       wvous-tl-corner = 1;
       # hot corner action for top right corner. 1 -> disabled
       wvous-tr-corner = 1;
+      persistent-apps.*.spacer.small = true;
     };
     menuExtraClock = {
       # show a 24-hour clock, instead of a 12-hour clock
