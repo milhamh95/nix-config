@@ -173,8 +173,7 @@
       # hot corner action for top right corner. 1 -> disabled
       wvous-tr-corner = 1;
       persistent-apps = [
-        { app = "/Applications/Safari.app"; }
-        { app = "/Applications/Visual Studio Code.app"; }
+        { app = "/Applications/Bloom.app"; }
         { spacer = { small = true; }; }
       ];
     };
