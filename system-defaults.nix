@@ -172,7 +172,11 @@
       wvous-tl-corner = 1;
       # hot corner action for top right corner. 1 -> disabled
       wvous-tr-corner = 1;
-      persistent-apps.*.spacer.small = true;
+      persistent-apps = [
+        { app = "/Applications/Safari.app"; }
+        { app = "/Applications/Visual Studio Code.app"; }
+        { spacer = { small = true; }; }
+      ];
     };
     menuExtraClock = {
       # show a 24-hour clock, instead of a 12-hour clock
