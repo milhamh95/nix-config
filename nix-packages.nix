@@ -4,7 +4,7 @@
 {
   # System packages
   environment.systemPackages = [
-    # pkgs.atuin
+    pkgs.atuin
     pkgs.bat
     pkgs.curl
     pkgs.fastfetch
