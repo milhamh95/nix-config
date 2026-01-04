@@ -45,6 +45,7 @@
       "jordanbaird-ice"
       "karabiner-elements"
       "keka"
+      "losslessswitcher"
       "macupdater"
       "microsoft-edge"
       "mockoon"
