@@ -35,6 +35,7 @@
       "flashspace"
       "floorp"
       "github"
+      "gcloud-cli"
       "ghostty"
       "google-chrome"
       "google-chrome@beta"
