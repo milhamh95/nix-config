@@ -184,7 +184,7 @@
           packages = with pkgs; [ postgresql_17 redis ];
           shellHook = ''
             echo "Development shell - PostgreSQL and Redis tools available"
-            echo "Commands: nix run .#postgres | nix run .#redis"
+            echo "Use: nix develop .#postgres | nix develop .#redis"
           '';
         };
 
@@ -193,15 +193,42 @@
           shellHook = ''
             export PGPORT=5433
             export PGHOST=localhost
-            export dataDir="$HOME/Documents/postgres_data"
+            export PGDATA="$HOME/Documents/postgres_data"
 
-            pg_create_db() {
-              if [ -z "$1" ]; then
-                echo "Usage: pg_create_db <database_name>"
-                return 1
+            # Initialize database if needed
+            if [ ! -d "$PGDATA" ]; then
+              echo "Initializing PostgreSQL data directory..."
+              mkdir -p "$PGDATA"
+              chmod 700 "$PGDATA"
+              initdb -D "$PGDATA"
+              echo "host all all 127.0.0.1/32 trust" >> "$PGDATA/pg_hba.conf"
+              echo "listen_addresses='127.0.0.1'" >> "$PGDATA/postgresql.conf"
+              echo "port=$PGPORT" >> "$PGDATA/postgresql.conf"
+              echo "unix_socket_directories='/tmp'" >> "$PGDATA/postgresql.conf"
+            fi
+
+            pg_start() {
+              if pg_ctl -D "$PGDATA" status > /dev/null 2>&1; then
+                echo "PostgreSQL is already running"
+                return 0
               fi
-              createdb -h localhost -p $PGPORT "$1"
-              echo "Database $1 created"
+              echo "Starting PostgreSQL on port $PGPORT..."
+              pg_ctl -D "$PGDATA" -l "$PGDATA/logfile" -o "-p $PGPORT -k /tmp" start
+              if [ $? -eq 0 ]; then
+                echo "PostgreSQL started successfully"
+              else
+                echo "Failed to start PostgreSQL. Check $PGDATA/logfile"
+              fi
+            }
+
+            pg_stop() {
+              if pg_ctl -D "$PGDATA" status > /dev/null 2>&1; then
+                echo "Stopping PostgreSQL..."
+                pg_ctl -D "$PGDATA" stop
+                echo "PostgreSQL stopped"
+              else
+                echo "PostgreSQL is not running"
+              fi
             }
 
             pg_status() {
@@ -213,20 +240,32 @@
               fi
             }
 
-            pg_help() {
-              echo "PostgreSQL Development Shell Commands:"
-              echo ""
-              echo "  pg_status       - Check PostgreSQL status and list databases"
-              echo "  pg_create_db    - Create a new database"
-              echo "  psql            - Connect to PostgreSQL"
-              echo ""
-              echo "Start server: nix run .#postgres"
+            pg_create_db() {
+              if [ -z "$1" ]; then
+                echo "Usage: pg_create_db <database_name>"
+                return 1
+              fi
+              createdb -h localhost -p $PGPORT "$1"
+              echo "Database '$1' created"
             }
 
-            echo "PostgreSQL Dev Shell (port $PGPORT)"
-            echo "Run 'pg_help' for available commands"
-            echo "Start server: nix run .#postgres"
+            pg_help() {
+              echo ""
+              echo "PostgreSQL Commands:"
+              echo "  pg_start      - Start PostgreSQL server"
+              echo "  pg_stop       - Stop PostgreSQL server"
+              echo "  pg_status     - Check status and list databases"
+              echo "  pg_create_db  - Create a new database"
+              echo "  psql          - Connect to PostgreSQL"
+              echo "  pg_help       - Show this help"
+              echo ""
+            }
+
+            echo ""
+            echo "=== PostgreSQL Dev Shell ==="
+            echo "Port: $PGPORT | Data: $PGDATA"
             psql --version
+            pg_help
           '';
         };
 
@@ -235,30 +274,78 @@
           shellHook = ''
             export REDIS_PORT=6380
             export REDIS_DATA="$HOME/Documents/redis_data"
+            export REDIS_CONF="$REDIS_DATA/redis.conf"
+            export REDIS_PID="$REDIS_DATA/redis.pid"
+
+            # Initialize redis data directory if needed
+            if [ ! -d "$REDIS_DATA" ]; then
+              echo "Initializing Redis data directory..."
+              mkdir -p "$REDIS_DATA"
+            fi
+
+            # Create config if needed
+            if [ ! -f "$REDIS_CONF" ]; then
+              cat > "$REDIS_CONF" << EOF
+            port $REDIS_PORT
+            bind 127.0.0.1
+            dir $REDIS_DATA
+            dbfilename dump.rdb
+            pidfile $REDIS_PID
+            daemonize yes
+            logfile $REDIS_DATA/redis.log
+            EOF
+            fi
+
+            redis_start() {
+              if [ -f "$REDIS_PID" ] && kill -0 $(cat "$REDIS_PID") 2>/dev/null; then
+                echo "Redis is already running"
+                return 0
+              fi
+              echo "Starting Redis on port $REDIS_PORT..."
+              redis-server "$REDIS_CONF"
+              sleep 1
+              if redis-cli -p $REDIS_PORT ping 2>/dev/null | grep -q PONG; then
+                echo "Redis started successfully"
+              else
+                echo "Failed to start Redis. Check $REDIS_DATA/redis.log"
+              fi
+            }
+
+            redis_stop() {
+              if [ -f "$REDIS_PID" ] && kill -0 $(cat "$REDIS_PID") 2>/dev/null; then
+                echo "Stopping Redis..."
+                redis-cli -p $REDIS_PORT shutdown 2>/dev/null
+                echo "Redis stopped"
+              else
+                echo "Redis is not running"
+              fi
+            }
 
             redis_status() {
               if redis-cli -p $REDIS_PORT ping 2>/dev/null | grep -q PONG; then
                 echo "Redis is running on port $REDIS_PORT"
+                redis-cli -p $REDIS_PORT info server | grep -E "^(redis_version|uptime)"
               else
                 echo "Redis is not running"
               fi
             }
 
             redis_help() {
-              echo "Redis Development Shell Commands:"
               echo ""
-              echo "  redis_status    - Check if Redis is running"
-              echo "  redis_cli       - Open Redis CLI (alias for redis-cli -p $REDIS_PORT)"
+              echo "Redis Commands:"
+              echo "  redis_start   - Start Redis server"
+              echo "  redis_stop    - Stop Redis server"
+              echo "  redis_status  - Check Redis status"
+              echo "  redis-cli -p $REDIS_PORT  - Connect to Redis"
+              echo "  redis_help    - Show this help"
               echo ""
-              echo "Start server: nix run .#redis"
             }
 
-            alias redis_cli="redis-cli -p $REDIS_PORT"
-
-            echo "Redis Dev Shell (port $REDIS_PORT)"
-            echo "Run 'redis_help' for available commands"
-            echo "Start server: nix run .#redis"
+            echo ""
+            echo "=== Redis Dev Shell ==="
+            echo "Port: $REDIS_PORT | Data: $REDIS_DATA"
             redis-server --version
+            redis_help
           '';
         };
       };
