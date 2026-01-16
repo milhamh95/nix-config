@@ -74,8 +74,8 @@
       ls = "lsd --group-dirs=first -1";
       lsaf = "lsd -AF --group-dirs=first -1";
       lsla = "lsd -la";
-      prsl = "cd /Users/milhamh95/personal";
-      work = "cd /Users/milhamh95/work";
+      prsl = "cd $HOME/personal";
+      work = "cd $HOME/work";
       nixmd = "sudo darwin-rebuild switch --flake .#mac-desktop";
       nixmbp = "sudo darwin-rebuild switch --flake .#mbp";
       mocksftp = "sftpgo serve -c ~/.config/sftpgo";

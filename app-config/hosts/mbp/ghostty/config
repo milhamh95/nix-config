@@ -1,0 +1,19 @@
+font-size = 18
+theme = Catppuccin Mocha
+cursor-style = bar
+confirm-close-surface = false
+command = /run/current-system/sw/bin/fish
+shell-integration = "fish"
+bold-is-bright = true
+cursor-style-blink = true
+macos-titlebar-style = "transparent"
+macos-window-shadow = false
+custom-shader-animation = true
+window-padding-x = 8
+window-padding-y = 5
+window-padding-color = "background"
+background-opacity = 1
+font-family = "BlexMono Nerd Font Mono"
+window-inherit-working-directory = false
+keybind = super+alt+left=previous_tab
+keybind = super+alt+right=next_tab

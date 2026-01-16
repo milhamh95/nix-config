@@ -1,9 +1,8 @@
-# homebrew.nix - Homebrew package configuration
+# common/homebrew.nix - Shared Homebrew package configuration
 { config, lib, pkgs, ... }:
 
-# Install app like brave, chrome, etc using homebrew
-# So I can easier map application to FlashSpace
-# Using nix packages, the app path will be inconsistent each machine
+# Install apps using homebrew for consistent paths across machines
+# This makes it easier to map applications to FlashSpace
 {
   homebrew = {
     enable = true;
@@ -12,32 +11,27 @@
       "homebrew/cask"
       "homebrew/bundle"
     ];
+
+    # CLI tools (shared across all machines)
     brews = [
       "mas"
       "mise"
       "mole"
       "opencode"
     ];
+
+    # GUI Apps (shared across all machines)
     casks = [
-      "antigravity"
       "appcleaner"
-      "batfi"
-      "betterdisplay"
-      "bettermouse"
       "bettertouchtool"
       "bloom"
       "brave-browser"
-      "bruno"
       "cap"
       "claude-code"
       "discord"
       "flashspace"
-      "floorp"
-      "github"
-      "gcloud-cli"
       "ghostty"
       "google-chrome"
-      "google-chrome@beta"
       "hammerspoon"
       "heptabase"
       "homerow"
@@ -45,44 +39,32 @@
       "jordanbaird-ice"
       "karabiner-elements"
       "keka"
-      "microsoft-edge"
-      "mockoon"
-      "orbstack"
-      "pritunl"
       "raycast"
       "rectangle-pro"
-      "rewritebar"
       "rocket"
-      "setapp"
       "shottr"
-      "slack"
-      "tableplus"
       "visual-studio-code"
       "vlc"
-      "wezterm"
-      "windsurf"
-      "zed"
       "zoom"
     ];
 
+    # Mac App Store apps (shared across all machines)
     masApps = {
       "Amphetamine" = 937984704;
       "BarMarks" = 6739710035;
       "DaisyDisk" = 411643860;
       "ExcalidrawZ" = 6636493997;
       "Fantastical - Calendar" = 975937182;
-      "Flow" = 1423210932;
       "iStat Menus" = 6499559693;
       "LilyView" = 529490330;
-      "Numbers" = 409203825;
       "OpenIn" = 1643649331;
       "PastePal" = 1503446680;
       "PDF Expert – Edit, Sign PDFs" = 1055273043;
-      "Presentify" = 1507246666;
+      "Presentify" = 1507246666; 
       "rcmd • App Switcher" = 1596283165;
       "SnippetsLab" = 1006087419;
       "Spark Classic – Email App" = 1176895641;
-      "Spokenly" = 6740315592;
+      "Spokenly" = 6740315592; 
     };
 
     onActivation.cleanup = "zap";

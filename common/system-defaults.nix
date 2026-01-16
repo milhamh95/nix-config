@@ -1,3 +1,4 @@
+# common/system-defaults.nix - Shared macOS system defaults
 {
   system.defaults = {
     CustomUserPreferences = {
@@ -49,6 +50,7 @@
         CriticalUpdateInstall = 1;
       };
     };
+
     NSGlobalDomain = {
       # level of font smoothing (sub-pixel font rendering)
       AppleFontSmoothing = 2;
@@ -65,7 +67,7 @@
       # enable the press-and-hold feature.
       # The default is true.
       ApplePressAndHoldEnabled = false;
-      # jump to the spot that’s clicked on the scroll bar
+      # jump to the spot that's clicked on the scroll bar
       AppleScrollerPagingBehavior = true;
       # when to show the scrollbars.
       # options are "WhenScrolling", "Automatic" and "Always".
@@ -83,7 +85,7 @@
       NSDocumentSaveNewDocumentsToCloud = false;
       #  enable automatic spelling correction
       NSAutomaticSpellingCorrectionEnabled = false;
-      # enable “Natural” scrolling direction
+      # enable "Natural" scrolling direction
       "com.apple.swipescrolldirection" = false;
       # enable automatic capitalization
       NSAutomaticCapitalizationEnabled = false;
@@ -103,9 +105,8 @@
       "com.apple.springing.delay" = 0.0;
       # enable the focus ring animation
       NSUseAnimatedFocusRing = false;
-      # configures the trackpad tracking speed (0.0 to 3.0). The default is “1.0”.
-      "com.apple.trackpad.scaling" = 1.5;
     };
+
     finder = {
       # always show file extensions
       AppleShowAllExtensions = true;
@@ -132,6 +133,7 @@
       # keep folders on top when sorting by name
       _FXSortFoldersFirst = true;
     };
+
     dock = {
       # automatically hide and show the dock
       autohide = true;
@@ -145,7 +147,7 @@
       enable-spring-load-actions-on-all-items = false;
       # speed of the Mission Control animations
       expose-animation-duration = 0.0;
-      # group windows by application in Mission Control’s Exposé
+      # group windows by application in Mission Control's Exposé
       expose-group-apps = false;
       # animate opening applications from the Dock
       launchanim = false;
@@ -155,8 +157,6 @@
       minimize-to-application = true;
       # automatically rearrange spaces based on most recent use
       mru-spaces = false;
-      # size of the icons in the dock
-      tilesize = 65;
       # show process indicators
       show-process-indicators = true;
       # show recent applications in the dock
@@ -172,27 +172,27 @@
       wvous-tl-corner = 1;
       # hot corner action for top right corner. 1 -> disabled
       wvous-tr-corner = 1;
-      persistent-apps = [
-        { app = "/Applications/Bloom.app"; }
-        { spacer = { small = true; }; }
-      ];
+      # Note: tilesize and persistent-apps are set per-host
     };
+
     menuExtraClock = {
       # show a 24-hour clock, instead of a 12-hour clock
       Show24Hour = true;
       # show the clock with second precision, instead of minutes
       ShowSeconds = true;
     };
+
     controlcenter = {
-      # Show a battery percentage in menu bar
-      BatteryShowPercentage = true;
       # Show a sound control in menu bar
       Sound = true;
+      # Note: BatteryShowPercentage is set per-host
     };
+
     trackpad = {
       # enable trackpad tap to click
       Clicking = true;
     };
+
     ActivityMonitor = {
       # change which processes to show. 100 -> All processes
       ShowCategory = 100;
@@ -201,27 +201,27 @@
       # sort direction of the sort column. 0 -> descending
       SortDirection = 0;
     };
+
     LaunchServices = {
       # enable quarantine for downloaded applications
       LSQuarantine = false;
     };
+
     spaces = {
       # displays have separate Spaces
       # Apple menu > System Preferences > Mission Control
       # false = each physical display has a separate space (mac default)
       spans-displays = false;
     };
-    # https://github.com/mathiasbynens/dotfiles/issues/820#issuecomment-498324762
-    # https://github.com/LnL7/nix-darwin/issues/1049#issuecomment-2323300537
-    # add terminal to full disk access permission
+
     universalaccess = {
-      # set the size of cursor. 1 for normal, 4 for maximum.
-      mouseDriverCursorSize = 1.3;
       # disable animation when switching screens or opening apps
       reduceMotion = true;
       # disable transparency in the menu bar and elsewhere.
       reduceTransparency = true;
+      # Note: mouseDriverCursorSize is set per-host
     };
+
     WindowManager = {
       EnableStandardClickToShowDesktop = false;
     };
