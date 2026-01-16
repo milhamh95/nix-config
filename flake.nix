@@ -133,8 +133,8 @@
 
     # Per-system outputs
     perSystem = { pkgs, ... }: {
-      # Import development shells from separate file
-      devShells = import ./dev-shells.nix { inherit pkgs; };
+      # Import development shells from shells folder
+      devShells = import ./shells { inherit pkgs; };
     };
   };
 }
