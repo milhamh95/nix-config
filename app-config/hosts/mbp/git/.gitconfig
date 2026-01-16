@@ -1,0 +1,24 @@
+# NOTE: Update the username paths below to match your MacBook Pro username
+# Example: If your username is "john.doe", change /Users/milhamh95/ to /Users/john.doe/
+
+[includeIf "gitdir:~/personal/"]
+	path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/nix/"]
+	path = ~/.gitconfig-personal
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[core]
+	excludesfile = ~/.gitignore
+	editor = code --wait
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
