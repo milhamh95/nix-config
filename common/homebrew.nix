@@ -22,6 +22,7 @@
 
     # GUI Apps (shared across all machines)
     casks = [
+      "antigravity"
       "appcleaner"
       "bettertouchtool"
       "bloom"
