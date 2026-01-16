@@ -11,12 +11,6 @@
         echo "Git config changed"
       '';
     };
-    ".config/ghostty/config" = {
-      source = ../../app-config/hosts/mbp/ghostty/config;
-      onChange = ''
-        echo "Ghostty config changed"
-      '';
-    };
     ".config/flashspace/profiles.json" = {
       source = ../../app-config/hosts/mbp/flashspace/profiles.json;
       onChange = ''
@@ -27,12 +21,6 @@
       source = ../../app-config/hosts/mbp/flashspace/settings.json;
       onChange = ''
         echo "Flashspace settings changed"
-      '';
-    };
-    ".wezterm.lua" = {
-      source = ../../app-config/hosts/mbp/wezterm/wezterm.lua;
-      onChange = ''
-        echo "WezTerm config changed"
       '';
     };
     ".hammerspoon/home.toml" = {
@@ -47,5 +35,10 @@
         echo "Hammerspoon init config changed"
       '';
     };
+  };
+
+  # Laptop-specific shell abbreviations
+  programs.fish.shellAbbrs = {
+    nixmbp = "sudo darwin-rebuild switch --flake .#mbp";
   };
 }

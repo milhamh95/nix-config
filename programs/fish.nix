@@ -17,20 +17,6 @@
           mkdir -p $argv[1] && cd $argv[1]
         '';
       };
-      claude-personal = {
-        description = "Run Claude with personal account";
-        body = ''
-          set -lx CLAUDE_CONFIG_DIR ~/.claude-personal
-          claude $argv
-        '';
-      };
-      claude-alami = {
-        description = "Run Claude with work (Alami) account";
-        body = ''
-          set -lx CLAUDE_CONFIG_DIR ~/.claude-alami
-          claude $argv
-        '';
-      };
     };
     plugins = [
       {
@@ -51,7 +37,6 @@
     shellAbbrs = {
       vc = "open $1 -a \"Visual Studio Code\"";
       ws = "open $1 -a \"Windsurf\"";
-      wsn = "open $1 -a \"Windsurf - Next\"";
       g = "git";
       ga = "git add";
       gaa = "git add --all";
@@ -75,10 +60,6 @@
       lsaf = "lsd -AF --group-dirs=first -1";
       lsla = "lsd -la";
       prsl = "cd $HOME/personal";
-      work = "cd $HOME/work";
-      nixmd = "sudo darwin-rebuild switch --flake .#mac-desktop";
-      nixmbp = "sudo darwin-rebuild switch --flake .#mbp";
-      mocksftp = "sftpgo serve -c ~/.config/sftpgo";
     };
     shellInit = ''
       set -g fish_greeting

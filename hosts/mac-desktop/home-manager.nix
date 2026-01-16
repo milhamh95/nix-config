@@ -92,7 +92,7 @@
   home.file = {
     # SFTPGo config (mac-desktop only)
     ".config/sftpgo/sftpgo.json" = {
-      text = builtins.toJSON (import ../../app-config/common/sftpgo/config.nix { inherit pkgs; });
+      text = builtins.toJSON (import ../../app-config/hosts/mac-desktop/sftpgo/config.nix { inherit pkgs; });
       onChange = ''
         echo "SFTPGo config changed"
       '';
@@ -115,12 +115,6 @@
         echo "Git alami-group config changed"
       '';
     };
-    ".config/ghostty/config" = {
-      source = ../../app-config/hosts/mac-desktop/ghostty/config;
-      onChange = ''
-        echo "Ghostty config changed"
-      '';
-    };
     ".config/flashspace/profiles.json" = {
       source = ../../app-config/hosts/mac-desktop/flashspace/profiles.json;
       onChange = ''
@@ -131,12 +125,6 @@
       source = ../../app-config/hosts/mac-desktop/flashspace/settings.json;
       onChange = ''
         echo "Flashspace settings changed"
-      '';
-    };
-    ".wezterm.lua" = {
-      source = ../../app-config/hosts/mac-desktop/wezterm/wezterm.lua;
-      onChange = ''
-        echo "WezTerm config changed"
       '';
     };
     ".hammerspoon/home.toml" = {
@@ -151,5 +139,12 @@
         echo "Hammerspoon init config changed"
       '';
     };
+  };
+
+  # Desktop-specific shell abbreviations
+  programs.fish.shellAbbrs = {
+    work = "cd $HOME/work";
+    nixmd = "sudo darwin-rebuild switch --flake .#mac-desktop";
+    mocksftp = "sftpgo serve -c ~/.config/sftpgo";
   };
 }

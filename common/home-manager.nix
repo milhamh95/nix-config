@@ -61,6 +61,10 @@
         echo "Copying Mise config files..."
         $DRY_RUN_CMD cp ${../app-config/common/mise/config.toml} "$HOME/.config/mise/config.toml"
         echo "Mise configured ✅"
+
+        echo "Installing Mise tools... ⚙️"
+        $DRY_RUN_CMD /opt/homebrew/bin/mise install -y
+        echo "Mise tools installed ✅"
       fi
     '';
 
@@ -112,6 +116,18 @@
       source = ../app-config/common/git/.gitignore;
       onChange = ''
         echo "Git ignore changed"
+      '';
+    };
+    ".config/ghostty/config" = {
+      source = ../app-config/common/ghostty/config;
+      onChange = ''
+        echo "Ghostty config changed"
+      '';
+    };
+    ".wezterm.lua" = {
+      source = ../app-config/common/wezterm/wezterm.lua;
+      onChange = ''
+        echo "WezTerm config changed"
       '';
     };
   };

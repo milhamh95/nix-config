@@ -105,6 +105,7 @@
       "com.apple.springing.delay" = 0.0;
       # enable the focus ring animation
       NSUseAnimatedFocusRing = false;
+      "com.apple.trackpad.scaling" = 1.5;
     };
 
     finder = {
@@ -214,12 +215,16 @@
       spans-displays = false;
     };
 
+    # https://github.com/mathiasbynens/dotfiles/issues/820#issuecomment-498324762
+    # https://github.com/LnL7/nix-darwin/issues/1049#issuecomment-2323300537
+    # add terminal to full disk access permission
     universalaccess = {
+      # set the size of cursor. 1 for normal, 4 for maximum.
+      mouseDriverCursorSize = 1.3;
       # disable animation when switching screens or opening apps
       reduceMotion = true;
       # disable transparency in the menu bar and elsewhere.
       reduceTransparency = true;
-      # Note: mouseDriverCursorSize is set per-host
     };
 
     WindowManager = {
