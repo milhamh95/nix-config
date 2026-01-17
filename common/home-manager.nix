@@ -2,6 +2,18 @@
 { config, pkgs, lib, ... }: {
   home.stateVersion = "25.05";
 
+  # Sops secrets configuration
+  sops = {
+    age.keyFile = "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt";
+
+    secrets.id_github_personal = {
+      sopsFile = ../secrets/id_github_personal.enc;
+      format = "binary";
+      path = "${config.home.homeDirectory}/.ssh/id_github_personal";
+      mode = "0600";
+    };
+  };
+
   # Shared activation scripts
   home.activation = {
     configureSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''

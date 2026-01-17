@@ -25,13 +25,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Secrets management
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # flake-parts for modular flake structure
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew,
                      homebrew-core, homebrew-cask, homebrew-bundle,
-                     home-manager, flake-parts, ... }:
+                     home-manager, sops-nix, flake-parts, ... }:
   let
     # Host configurations - define username per machine
     hostConfigs = {
@@ -140,8 +146,10 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.${username} = { config, pkgs, lib, ... }: {
               imports = [
+                inputs.sops-nix.homeManagerModules.sops
                 ./common/home-manager.nix
                 ./hosts/${hostname}/home-manager.nix
               ];
