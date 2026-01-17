@@ -76,7 +76,7 @@ keys:
   - &user_age $AGE_PUBLIC_KEY
 
 creation_rules:
-  - path_regex: secrets/.*\.enc\$
+  - path_regex: secrets/raw/.*
     key_groups:
       - age:
           - *user_age

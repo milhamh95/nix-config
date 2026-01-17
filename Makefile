@@ -32,7 +32,7 @@ setup-secrets:
 	@echo "1. Put your private key in secrets/raw/id_github_personal"
 	@echo "2. This will generate age key, update .sops.yaml, and encrypt"
 	@echo ""
-	@bash scripts/setup-secrets.sh
+	@nix-shell -p age sops --run "bash scripts/setup-secrets.sh"
 
 # Help
 help:

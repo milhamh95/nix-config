@@ -1,9 +1,8 @@
 keys:
-  # Replace with your age public key (run: age-keygen to generate)
-  - &user_age age1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  - &user_age age1vfhs5y5nmtmw9n9tq5eqtx07a5u8j2qfjenjj08dmalaccesmq9quzctvw
 
 creation_rules:
-  - path_regex: secrets/.*\.enc$
+  - path_regex: secrets/raw/.*
     key_groups:
       - age:
           - *user_age
