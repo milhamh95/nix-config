@@ -1,4 +1,4 @@
-.PHONY: install-desktop install-mbp switch-desktop switch-mbp update check clean
+.PHONY: install-desktop install-mbp switch-desktop switch-mbp update check clean setup-secrets
 
 # First-time installation
 install-desktop:
@@ -26,6 +26,14 @@ check:
 clean:
 	nix-collect-garbage -d
 
+# Secrets management
+setup-secrets:
+	@echo "Setting up secrets..."
+	@echo "1. Put your private key in secrets/raw/id_github_personal"
+	@echo "2. This will generate age key, update .sops.yaml, and encrypt"
+	@echo ""
+	@bash scripts/setup-secrets.sh
+
 # Help
 help:
 	@echo "Nix Darwin Configuration"
@@ -42,3 +50,6 @@ help:
 	@echo "  make update           - Update flake inputs"
 	@echo "  make check            - Check flake configuration"
 	@echo "  make clean            - Garbage collection"
+	@echo ""
+	@echo "Secrets:"
+	@echo "  make setup-secrets    - Setup and encrypt secrets (age key + sops)"

@@ -4,6 +4,7 @@
 {
   # System packages (shared across all machines)
   environment.systemPackages = [
+    pkgs.age
     pkgs.atuin
     pkgs.bat
     pkgs.curl
@@ -21,6 +22,7 @@
     pkgs.lsd
     pkgs.openssl
     pkgs.ripgrep
+    pkgs.sops
     pkgs.vim
     pkgs.wget
     pkgs.yarn-berry_4

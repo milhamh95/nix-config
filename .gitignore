@@ -1,0 +1,9 @@
+# Secrets - ignore raw keys, allow encrypted
+secrets/raw/
+
+# macOS
+.DS_Store
+
+# Nix
+result
+result-*

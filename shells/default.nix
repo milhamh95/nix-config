@@ -11,4 +11,5 @@
 
   postgres = import ./postgres.nix { inherit pkgs; };
   redis = import ./redis.nix { inherit pkgs; };
+  sops = import ./sops.nix { inherit pkgs; };
 }
