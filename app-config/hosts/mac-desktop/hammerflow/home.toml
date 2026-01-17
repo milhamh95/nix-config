@@ -18,7 +18,6 @@ show_ui = true            # optional, default true, show the ui with your key ma
 
 # set a key to open an app
 
-d = "DataGrip"
 f = "Flow"
 h = "Heptabase"
 o = "OrbStack"
