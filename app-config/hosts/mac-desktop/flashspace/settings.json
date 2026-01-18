@@ -86,6 +86,8 @@
   "swipeThreshold" : 0.2,
   "swipeUp3FingerAction" : "none",
   "swipeUp4FingerAction" : "none",
+  "switchToNextProfile" : "cmd+ctrl+shift+9",
+  "switchToPreviousProfile" : "cmd+ctrl+shift+0",
   "switchWorkspaceOnCursorScreen" : false,
   "switchWorkspaceWhenPipCloses" : true,
   "workspaceTransitionDimming" : 0.2,

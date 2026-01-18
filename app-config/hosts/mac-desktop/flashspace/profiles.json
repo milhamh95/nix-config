@@ -3,6 +3,7 @@
     {
       "id" : "26176108-1F50-4837-8371-F4B1EE4AB1C2",
       "name" : "Personal",
+      "shortcut" : "cmd+ctrl+shift+7",
       "workspaces" : [
         {
           "apps" : [
@@ -137,6 +138,7 @@
     {
       "id" : "C41C1519-A042-4274-8F01-1B1E1A5830A7",
       "name" : "Work",
+      "shortcut" : "cmd+ctrl+shift+8",
       "workspaces" : [
         {
           "apps" : [
