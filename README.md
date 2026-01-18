@@ -24,7 +24,9 @@ nix-config/
 │   │   ├── homebrew.nix
 │   │   ├── nix-packages.nix
 │   │   └── system-defaults.nix
-│   └── mbp/
+│   ├── mbp/
+│   │   └── ... (same structure)
+│   └── alami-mbp/
 │       └── ... (same structure)
 ├── programs/                     # Shared program configs (fish, atuin, etc.)
 ├── app-config/
@@ -65,6 +67,14 @@ flowchart TB
         m_sd["system-defaults.nix"]
     end
 
+    subgraph Alami["hosts/alami-mbp/"]
+        a_def["default.nix"]
+        a_hm["home-manager.nix"]
+        a_hb["homebrew.nix"]
+        a_np["nix-packages.nix"]
+        a_sd["system-defaults.nix"]
+    end
+
     subgraph Programs["programs/"]
         prog["default.nix"]
         fish["fish.nix"]
@@ -76,6 +86,7 @@ flowchart TB
     flake --> c_hm & c_hb & c_np & c_sd
     flake -->|"#mac-desktop"| d_def & d_hm & d_hb & d_np & d_sd
     flake -->|"#mbp"| m_def & m_hm & m_hb & m_np & m_sd
+    flake -->|"#alami-mbp"| a_def & a_hm & a_hb & a_np & a_sd
     c_hm --> prog
     prog --> fish & atuin & fastfetch & mise
 ```
@@ -94,6 +105,10 @@ flowchart TB
 
     subgraph MBPHM["hosts/mbp/home-manager.nix"]
         mhm_files["home.file"]
+    end
+
+    subgraph AlamiHM["hosts/alami-mbp/home-manager.nix"]
+        ahm_files["home.file"]
     end
 
     subgraph CommonConfig["app-config/common/"]
@@ -118,9 +133,17 @@ flowchart TB
         am_hammer["hammerflow/home.toml<br/>hammerflow/init.lua"]
     end
 
+    subgraph AlamiConfig["app-config/hosts/alami-mbp/"]
+        aa_git["git/.gitconfig"]
+        aa_flash["flashspace/profiles.json<br/>flashspace/settings.json"]
+        aa_hammer["hammerflow/home.toml<br/>hammerflow/init.lua"]
+        aa_sftpgo["sftpgo/config.nix"]
+    end
+
     chm_files --> ac_ghostty & ac_wezterm & ac_git & ac_karabiner & ac_mise & ac_ssh
     dhm_files --> ad_git & ad_flash & ad_hammer & ad_sftpgo
     mhm_files --> am_git & am_flash & am_hammer
+    ahm_files --> aa_git & aa_flash & aa_hammer & aa_sftpgo
 ```
 
 ### Installation Flow
@@ -130,12 +153,14 @@ flowchart LR
     subgraph Make["Makefile"]
         make_d["make install-desktop"]
         make_m["make install-mbp"]
+        make_a["make install-alami"]
     end
 
     subgraph Scripts["scripts/"]
         setup["setup-nix.sh"]
         inst_d["install-desktop.sh"]
         inst_m["install-mbp.sh"]
+        inst_a["install-alami.sh"]
     end
 
     subgraph Steps["Installation Steps"]
@@ -143,15 +168,19 @@ flowchart LR
         s2["2. Install Nix"]
         s3d["3. Apply #mac-desktop"]
         s3m["3. Apply #mbp"]
+        s3a["3. Apply #alami-mbp"]
     end
 
     make_d --> inst_d
     make_m --> inst_m
+    make_a --> inst_a
     inst_d --> setup
     inst_m --> setup
+    inst_a --> setup
     setup --> s1 --> s2
     inst_d --> s3d
     inst_m --> s3m
+    inst_a --> s3a
 ```
 
 ### Module Merging
@@ -192,7 +221,9 @@ cd nix-config
 # 3. Run installation
 make install-desktop  # For Mac Desktop
 # or
-make install-mbp      # For MacBook Pro
+make install-mbp      # For MacBook Pro (personal)
+# or
+make install-alami    # For Alami MacBook Pro (work)
 ```
 
 > **Note:** When prompted about `Determinate` package, press `n` to skip.
@@ -206,11 +237,13 @@ After installation, restart your terminal to use fish shell.
 ```sh
 # Fish abbreviations (recommended for daily use)
 nixmd                 # Rebuild Mac Desktop
-nixmbp                # Rebuild MacBook Pro
+nixmbp                # Rebuild MacBook Pro (personal)
+nixalami              # Rebuild Alami MacBook Pro (work)
 
 # Or use Makefile
 make switch-desktop   # Rebuild Mac Desktop
 make switch-mbp       # Rebuild MacBook Pro
+make switch-alami     # Rebuild Alami MacBook Pro
 make update           # Update flake inputs
 make check            # Check configuration
 make clean            # Garbage collection

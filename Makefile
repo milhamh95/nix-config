@@ -1,4 +1,4 @@
-.PHONY: install-desktop install-mbp switch-desktop switch-mbp update check clean setup-secrets
+.PHONY: install-desktop install-mbp install-alami switch-desktop switch-mbp switch-alami update check clean setup-secrets
 
 # First-time installation
 install-desktop:
@@ -7,12 +7,18 @@ install-desktop:
 install-mbp:
 	bash scripts/install-mbp.sh
 
+install-alami:
+	bash scripts/install-alami.sh
+
 # Daily rebuild (after nix-darwin is installed)
 switch-desktop:
 	sudo darwin-rebuild switch --flake .#mac-desktop
 
 switch-mbp:
 	sudo darwin-rebuild switch --flake .#mbp
+
+switch-alami:
+	sudo darwin-rebuild switch --flake .#alami-mbp
 
 # Update flake inputs
 update:
@@ -40,11 +46,13 @@ help:
 	@echo ""
 	@echo "First-time installation:"
 	@echo "  make install-desktop  - Install for Mac Desktop"
-	@echo "  make install-mbp      - Install for MacBook Pro"
+	@echo "  make install-mbp      - Install for MacBook Pro (personal)"
+	@echo "  make install-alami    - Install for Alami MacBook Pro (work)"
 	@echo ""
 	@echo "Daily usage:"
 	@echo "  make switch-desktop   - Rebuild Mac Desktop config"
 	@echo "  make switch-mbp       - Rebuild MacBook Pro config"
+	@echo "  make switch-alami     - Rebuild Alami MacBook Pro config"
 	@echo ""
 	@echo "Maintenance:"
 	@echo "  make update           - Update flake inputs"
