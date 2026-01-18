@@ -232,6 +232,10 @@ nix-collect-garbage -d
 sudo nix-collect-garbage -d
 ```
 
+## Documentation
+
+- [Secrets Management](docs/secrets-management.md) - How to securely store SSH keys, API keys, etc.
+
 ## Reference
 
 - [github.com/r17x/universe](https://github.com/r17x/universe)
@@ -240,5 +244,4 @@ sudo nix-collect-garbage -d
 
 ## To Do
 
-- Put private key in this repo (encrypt/decrypt automatically)
 - Use [nixos-unified](https://nixos-unified.org/index.html) to unify nix-darwin + home-manager
