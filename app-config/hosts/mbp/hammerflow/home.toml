@@ -12,23 +12,21 @@ show_ui = true            # optional, default true, show the ui with your key ma
 
 # set a key to open an app
 
-d = "DataGrip"
 h = "Heptabase"
 o = "OrbStack"
-p = "Pritunl"
+t = "TablePlus"
 v = ["Visual Studio Code", "VS Code"]
 w = "Windsurf"
-y = "Yaak"
-
-[c]
-label = "[c]"
-a = "Cap"
-h = ["Google Chrome", "Chrome"]
 
 [b]
 label = "[b]"
 b = "Brave Browser"
 r = "Bruno"
+
+[c]
+label = "[c]"
+a = "Cap"
+h = ["Google Chrome", "Chrome"]
 
 [g]
 label = "[g]"
