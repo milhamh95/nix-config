@@ -5,14 +5,11 @@
   homebrew = {
     # Desktop-specific casks
     casks = [
-      "bruno"
       "bettermouse"
       "betterdisplay"
-      "bloom" 
+      "bloom"
       "github"
       "google-chrome@beta"
-      "mockoon"
-      "orbstack"
       "pritunl"
       "rewritebar"
       "slack"

@@ -26,6 +26,7 @@
       "appcleaner"
       "bettertouchtool"
       "bloom"
+      "bruno"
       "brave-browser"
       "cap"
       "claude-code"
@@ -40,6 +41,8 @@
       "jordanbaird-ice"
       "karabiner-elements"
       "keka"
+      "mockoon"
+      "orbstack"
       "raycast"
       "rectangle-pro"
       "rocket"
@@ -61,11 +64,11 @@
       "OpenIn" = 1643649331;
       "PastePal" = 1503446680;
       "PDF Expert – Edit, Sign PDFs" = 1055273043;
-      "Presentify" = 1507246666; 
+      "Presentify" = 1507246666;
       "rcmd • App Switcher" = 1596283165;
       "SnippetsLab" = 1006087419;
       "Spark Classic – Email App" = 1176895641;
-      "Spokenly" = 6740315592; 
+      "Spokenly" = 6740315592;
     };
 
     onActivation.cleanup = "zap";
