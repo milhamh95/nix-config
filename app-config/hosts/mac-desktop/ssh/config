@@ -1,0 +1,8 @@
+Host alami-group
+    HostName ssh.github.com
+    Port 443
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentityFile ~/.ssh/id_github_alami_group
+    User git
+    IdentitiesOnly yes

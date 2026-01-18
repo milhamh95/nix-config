@@ -101,11 +101,11 @@ for raw_file in "$RAW_DIR"/*; do
 
     if [ -f "$enc_file" ]; then
         echo -e "${YELLOW}[SKIP]${NC} $filename - already encrypted"
-        ((skipped_count++))
+        skipped_count=$((skipped_count + 1))
     else
         echo -e "${GREEN}[ENCRYPT]${NC} $filename -> ${filename}.enc"
         sops --encrypt "$raw_file" > "$enc_file"
-        ((encrypted_count++))
+        encrypted_count=$((encrypted_count + 1))
     fi
 done
 

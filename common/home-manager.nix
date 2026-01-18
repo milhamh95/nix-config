@@ -17,25 +17,23 @@
   # Shared activation scripts
   home.activation = {
     configureSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      if [ ! -e "$HOME/ssh_configured" ]; then
-        echo "Configuring SSH... ⚙️"
-        $DRY_RUN_CMD mkdir -p "$HOME/.ssh"
+      echo "Configuring SSH..."
+      $DRY_RUN_CMD mkdir -p "$HOME/.ssh"
+
+      # Copy public key if not exists
+      if [ ! -f "$HOME/.ssh/id_github_personal.pub" ]; then
         $DRY_RUN_CMD cp ${../app-config/common/ssh/id_github_personal.pub} "$HOME/.ssh/id_github_personal.pub"
         $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_personal.pub"
-
-        echo "Setting up SSH config..."
-        if [ -f "$HOME/.ssh/config" ]; then
-          echo "Appending to existing SSH config..."
-          $DRY_RUN_CMD cat ${../app-config/common/ssh/config} >> "$HOME/.ssh/config"
-        else
-          echo "Creating new SSH config..."
-          $DRY_RUN_CMD cp ${../app-config/common/ssh/config} "$HOME/.ssh/config"
-        fi
-        $DRY_RUN_CMD chmod 600 "$HOME/.ssh/config"
-
-        $DRY_RUN_CMD touch "$HOME/ssh_configured"
-        echo "SSH configured ✅"
       fi
+
+      # Append SSH config only if "Host personal" not already present
+      if ! grep -q "Host personal" "$HOME/.ssh/config" 2>/dev/null; then
+        echo "Adding personal SSH config..."
+        echo "" >> "$HOME/.ssh/config"
+        $DRY_RUN_CMD cat ${../app-config/common/ssh/config} >> "$HOME/.ssh/config"
+        $DRY_RUN_CMD chmod 600 "$HOME/.ssh/config"
+      fi
+      echo "SSH configured"
     '';
 
     configureTide = lib.hm.dag.entryAfter ["writeBoundary"] ''

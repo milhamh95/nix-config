@@ -2,6 +2,14 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Sops secrets configuration (mac-desktop only)
+  sops.secrets.id_github_alami_group = {
+    sopsFile = ../../secrets/id_github_alami_group.enc;
+    format = "binary";
+    path = "${config.home.homeDirectory}/.ssh/id_github_alami_group";
+    mode = "0600";
+  };
+
   # Desktop-specific activation scripts
   home.activation = {
     configureWorkFolder = lib.hm.dag.entryAfter ["writeBoundary"] ''
@@ -85,6 +93,20 @@
 
         rm -rf "$TEMP_DIR"
       fi
+    '';
+
+    configureWorkSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      echo "Configuring work SSH..."
+      $DRY_RUN_CMD mkdir -p "$HOME/.ssh"
+      $DRY_RUN_CMD cp ${../../app-config/hosts/mac-desktop/ssh/id_github_alami_group.pub} "$HOME/.ssh/id_github_alami_group.pub"
+      $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_alami_group.pub"
+
+      # Append work SSH config if not already present
+      if ! grep -q "Host alami-group" "$HOME/.ssh/config" 2>/dev/null; then
+        echo "" >> "$HOME/.ssh/config"
+        $DRY_RUN_CMD cat ${../../app-config/hosts/mac-desktop/ssh/config} >> "$HOME/.ssh/config"
+      fi
+      echo "Work SSH configured"
     '';
   };
 

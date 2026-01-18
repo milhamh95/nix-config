@@ -11,6 +11,7 @@ This guide explains how to securely store and manage secrets (SSH keys, API keys
   - [Example 1: GitHub SSH Private Key](#example-1-github-ssh-private-key)
   - [Example 2: API Key (e.g., Claude, OpenAI)](#example-2-api-key-eg-claude-openai)
 - [Adding Multiple Secrets](#adding-multiple-secrets)
+- [Host-Specific Secrets](#host-specific-secrets)
 - [Setting Up on a New Machine](#setting-up-on-a-new-machine)
 - [File Structure](#file-structure)
 - [Troubleshooting](#troubleshooting)
@@ -293,6 +294,105 @@ git add secrets/*.enc
 git commit -m "Add encrypted secrets"
 make switch-desktop
 ```
+
+---
+
+## Host-Specific Secrets
+
+Some secrets should only be available on specific machines. For example, a work SSH key that should only exist on your desktop, not your laptop.
+
+### Architecture
+
+- **Common secrets**: Configured in `common/home-manager.nix` - available on all hosts
+- **Host-specific secrets**: Configured in `hosts/<hostname>/home-manager.nix` - only available on that host
+
+### Example: Work SSH Key (mac-desktop only)
+
+#### Step 1: Create the secret file
+
+```bash
+vim secrets/raw/id_github_alami_group
+# Paste your private key content, save and exit
+```
+
+#### Step 2: Encrypt
+
+```bash
+make setup-secrets
+```
+
+#### Step 3: Add public key to app-config
+
+Create the public key file:
+
+```bash
+# Copy your public key
+cp ~/.ssh/id_github_alami_group.pub app-config/hosts/mac-desktop/ssh/id_github_alami_group.pub
+```
+
+#### Step 4: Add to host-specific home-manager.nix
+
+Edit `hosts/mac-desktop/home-manager.nix` (NOT `common/home-manager.nix`):
+
+```nix
+{ config, pkgs, lib, ... }:
+
+{
+  # Sops secrets configuration (mac-desktop only)
+  sops.secrets.id_github_alami_group = {
+    sopsFile = ../../secrets/id_github_alami_group.enc;
+    format = "binary";
+    path = "${config.home.homeDirectory}/.ssh/id_github_alami_group";
+    mode = "0600";
+  };
+
+  # ... rest of the file
+}
+```
+
+#### Step 5: Add activation script for SSH config
+
+Also in `hosts/mac-desktop/home-manager.nix`, add an activation script:
+
+```nix
+home.activation.configureWorkSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  echo "Configuring work SSH..."
+  $DRY_RUN_CMD mkdir -p "$HOME/.ssh"
+  $DRY_RUN_CMD cp ${../../app-config/hosts/mac-desktop/ssh/id_github_alami_group.pub} "$HOME/.ssh/id_github_alami_group.pub"
+  $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_alami_group.pub"
+
+  # Append work SSH config if not already present
+  if ! grep -q "Host alami-group" "$HOME/.ssh/config" 2>/dev/null; then
+    echo "" >> "$HOME/.ssh/config"
+    $DRY_RUN_CMD cat ${../../app-config/hosts/mac-desktop/ssh/config} >> "$HOME/.ssh/config"
+  fi
+  echo "Work SSH configured"
+'';
+```
+
+#### Step 6: Commit and rebuild
+
+```bash
+git add secrets/id_github_alami_group.enc app-config/hosts/mac-desktop/ssh/
+git commit -m "Add work SSH key (mac-desktop only)"
+make switch-desktop
+```
+
+#### Step 7: Verify
+
+```bash
+# Check files exist
+ls -la ~/.ssh/id_github_alami_group
+ls -la ~/.ssh/id_github_alami_group.pub
+
+# Check SSH config
+grep -A7 "alami-group" ~/.ssh/config
+
+# Test connection
+ssh -T git@alami-group
+```
+
+On mbp, the secret will NOT be decrypted (no `~/.ssh/id_github_alami_group` file).
 
 ---
 
