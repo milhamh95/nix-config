@@ -74,12 +74,14 @@
     };
     ".config/flashspace/profiles.json" = {
       source = ../../app-config/hosts/alami-mbp/flashspace/profiles.json;
+      force = true;
       onChange = ''
         echo "Flashspace profiles changed"
       '';
     };
     ".config/flashspace/settings.json" = {
       source = ../../app-config/hosts/alami-mbp/flashspace/settings.json;
+      force = true;
       onChange = ''
         echo "Flashspace settings changed"
       '';
