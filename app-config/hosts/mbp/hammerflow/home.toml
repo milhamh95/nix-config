@@ -24,25 +24,18 @@ y = "Yaak"
 label = "[c]"
 a = "Cap"
 h = ["Google Chrome", "Chrome"]
-b = ["Google Chrome Beta", "Chrome Beta"]
 
 [b]
 label = "[b]"
 b = "Brave Browser"
 r = "Bruno"
 
-[f]
-label = "[f]"
-l = "Flow"
-
 [g]
 label = "[g]"
 h = "Ghostty"
-i = "Github Desktop"
 
 [s]
 label = "[s]"
-l = "Slack"
 p = "Spark"
 b = "SnippetsLab"
 
