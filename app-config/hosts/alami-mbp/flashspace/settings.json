@@ -1,0 +1,95 @@
+{
+  "activeWorkspaceOnFocusChange" : true,
+  "alternativeDisplays" : "",
+  "centerCursorOnFocusChange" : true,
+  "centerCursorOnWorkspaceChange" : true,
+  "changeWorkspaceOnAppAssign" : true,
+  "checkForUpdatesAutomatically" : true,
+  "displayMode" : "dynamic",
+  "enableFocusManagement" : true,
+  "enableIntegrations" : false,
+  "enablePictureInPictureSupport" : true,
+  "enableSpaceControl" : true,
+  "enableSpaceControlAnimations" : false,
+  "enableSpaceControlTilesAnimations" : false,
+  "enableSwipeGestures" : false,
+  "enableWorkspaceTransitions" : false,
+  "floatingApps" : [
+    {
+      "bundleIdentifier" : "com.brave.Browser",
+      "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
+      "name" : "Brave Browser"
+    },
+    {
+      "bundleIdentifier" : "us.zoom.xos",
+      "iconPath" : "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns",
+      "name" : "zoom.us"
+    },
+    {
+      "bundleIdentifier" : "com.hnc.Discord",
+      "iconPath" : "/Applications/Discord.app/Contents/Resources/electron.icns",
+      "name" : "Discord"
+    },
+    {
+      "bundleIdentifier" : "com.google.Chrome.beta",
+      "iconPath" : "/Applications/Google Chrome Beta.app/Contents/Resources/app.icns",
+      "name" : "Google Chrome Beta"
+    },
+    {
+      "bundleIdentifier" : "so.cap.desktop",
+      "iconPath" : "/Applications/Cap.app/Contents/Resources/icon.icns",
+      "name" : "Cap"
+    },
+    {
+      "bundleIdentifier" : "com.google.Chrome",
+      "iconPath" : "/Applications/Google Chrome.app/Contents/Resources/app.icns",
+      "name" : "Google Chrome"
+    }
+  ],
+  "focusDown" : "cmd+ctrl+shift+k",
+  "focusFrontmostWindow" : false,
+  "focusLeft" : "cmd+ctrl+shift+h",
+  "focusNextWorkspaceApp" : "cmd+ctrl+shift+.",
+  "focusPreviousWorkspaceApp" : "cmd+ctrl+shift+,",
+  "focusRight" : "cmd+ctrl+shift+l",
+  "focusUp" : "cmd+ctrl+shift+j",
+  "keepUnassignedAppsOnSwitch" : false,
+  "loopWorkspaces" : true,
+  "loopWorkspacesOnAllDisplays" : false,
+  "menuBarDisplayAliases" : "",
+  "menuBarTitleTemplate" : "$WORKSPACE_$WORKSPACE_NUMBER",
+  "pipApps" : [
+
+  ],
+  "pipScreenCornerOffset" : 15,
+  "restartAppOnWakeUp" : false,
+  "restoreHiddenAppsOnSwitch" : false,
+  "runScriptAfterWorkspaceChange" : "",
+  "runScriptOnLaunch" : "",
+  "runScriptOnProfileChange" : "sketchybar --reload",
+  "runScriptOnWorkspaceChange" : "sketchybar --trigger flashspace_workspace_change WORKSPACE=\"$WORKSPACE\" DISPLAY=\"$DISPLAY\"",
+  "showFloatingNotifications" : true,
+  "showMenuBarIcon" : true,
+  "showMenuBarTitle" : true,
+  "showSpaceControl" : "cmd+ctrl+shift+up",
+  "skipEmptyWorkspacesOnSwitch" : false,
+  "spaceControlCurrentDisplayWorkspaces" : true,
+  "spaceControlHideEmptyWorkspaces" : true,
+  "spaceControlNumberOfColumns" : 0,
+  "spaceControlUpdateScreenshotsOnOpen" : false,
+  "swipeDown3FingerAction" : "none",
+  "swipeDown4FingerAction" : "none",
+  "swipeLeft3FingerAction" : "previousWorkspace",
+  "swipeLeft4FingerAction" : "none",
+  "swipeRight3FingerAction" : "nextWorkspace",
+  "swipeRight4FingerAction" : "none",
+  "swipeThreshold" : 0.2,
+  "swipeUp3FingerAction" : "none",
+  "swipeUp4FingerAction" : "none",
+  "switchToNextProfile" : "cmd+ctrl+shift+9",
+  "switchToPreviousProfile" : "cmd+ctrl+shift+0",
+  "switchWorkspaceOnCursorScreen" : false,
+  "switchWorkspaceWhenPipCloses" : true,
+  "workspaceTransitionDimming" : 0.2,
+  "workspaceTransitionDuration" : 0.3
+}

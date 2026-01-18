@@ -49,6 +49,10 @@
         hostname = "mbp";
         username = "milhamh95";  # Change this to your MacBook Pro username
       };
+      "alami-mbp" = {
+        hostname = "alami-mbp";
+        username = "muhammadilhamhidayat";
+      };
     };
 
     # Base configuration shared across all hosts
@@ -168,6 +172,7 @@
       darwinConfigurations = {
         "mac-desktop" = mkDarwinConfig hostConfigs."mac-desktop";
         "mbp" = mkDarwinConfig hostConfigs."mbp";
+        "alami-mbp" = mkDarwinConfig hostConfigs."alami-mbp";
       };
     };
 

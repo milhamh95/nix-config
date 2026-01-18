@@ -1,0 +1,24 @@
+[includeIf "gitdir:/Users/muhammadilhamhidayat/work/alami-group/**"]
+	path = ~/.gitconfig-alami-group
+
+[includeIf "gitdir:~/personal/"]
+	path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/nix/"]
+	path = ~/.gitconfig-personal
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[core]
+	excludesfile = /Users/muhammadilhamhidayat/.gitignore
+	editor = code --wait
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

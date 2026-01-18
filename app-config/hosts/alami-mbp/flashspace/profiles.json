@@ -1,0 +1,298 @@
+{
+  "profiles" : [
+    {
+      "id" : "26176108-1F50-4837-8371-F4B1EE4AB1C2",
+      "name" : "Personal",
+      "shortcut" : "cmd+ctrl+shift+7",
+      "workspaces" : [
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.readdle.smartemail-Mac",
+              "iconPath" : "/Applications/Spark.app/Contents/Resources/AppIcon.icns",
+              "name" : "Spark"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "4D99E18C-D739-47E8-B9EE-984C26E1772B",
+          "name" : "P_Communication",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "1.square"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            },
+            {
+              "bundleIdentifier" : "com.mitchellh.ghostty",
+              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/Ghostty.icns",
+              "name" : "Ghostty"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "0EABFA62-A507-4BFA-A9C3-AA8E2204E8FF",
+          "name" : "P_Code",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "2.square"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.usebruno.app",
+              "iconPath" : "/Applications/Bruno.app/Contents/Resources/icon.icns",
+              "name" : "Bruno"
+            },
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "5D39ACD6-D68B-4541-9635-34182E208B6E",
+          "name" : "P_Bruno",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "3.square"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "app.projectmeta.projectmeta",
+              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
+              "name" : "Heptabase"
+            },
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "40938A74-1B63-44C4-A36D-7FC1FE3B6276",
+          "name" : "P_Heptabase",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "4.square"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.readdle.PDFExpert-Mac",
+              "iconPath" : "/Applications/PDF Expert.app/Contents/Resources/PE_OS26_icon.icns",
+              "name" : "PDF Expert"
+            },
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "A88AC758-D678-4CD0-B748-80347AB7C8BC",
+          "name" : "P_PDF",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "5.square"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.tinyapp.TablePlus",
+              "iconPath" : "/Applications/TablePlus.app/Contents/Resources/AppIcon.icns",
+              "name" : "TablePlus"
+            },
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "3D22E33D-A120-4B7E-A2E6-510F0BC02D56",
+          "name" : "P_Table Plus",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "6.square"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "dev.kdrag0n.MacVirt",
+              "iconPath" : "/Applications/OrbStack.app/Contents/Resources/AppIcon.icns",
+              "name" : "OrbStack"
+            },
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            }
+          ],
+          "display" : "U28P2G6B",
+          "id" : "80C824A2-84C9-41F3-9E5E-1DDA7A38B1AD",
+          "name" : "P_Orbstack",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "7.square"
+        }
+      ]
+    },
+    {
+      "id" : "C41C1519-A042-4274-8F01-1B1E1A5830A7",
+      "name" : "Work",
+      "shortcut" : "cmd+ctrl+shift+8",
+      "workspaces" : [
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.tinyspeck.slackmacgap",
+              "iconPath" : "/Applications/Slack.app/Contents/Resources/electron.icns",
+              "name" : "Slack"
+            },
+            {
+              "bundleIdentifier" : "com.readdle.smartemail-Mac",
+              "iconPath" : "/Applications/Spark.app/Contents/Resources/AppIcon.icns",
+              "name" : "Spark"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "56ADFC37-A0BF-4B2C-972E-E710B6D451F4",
+          "name" : "W_Communication",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "1.circle.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.exafunction.windsurf",
+              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
+              "name" : "Windsurf"
+            },
+            {
+              "bundleIdentifier" : "com.mitchellh.ghostty",
+              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/Ghostty.icns",
+              "name" : "Ghostty"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "59BE9720-4CC4-4BB1-ABAD-1AA472398F75",
+          "name" : "W_Windsurf",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "2.circle.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.github.GitHubClient",
+              "iconPath" : "/Applications/GitHub Desktop.app/Contents/Resources/electron.icns",
+              "name" : "GitHub Desktop"
+            },
+            {
+              "bundleIdentifier" : "com.exafunction.windsurf",
+              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
+              "name" : "Windsurf"
+            }
+          ],
+          "display" : "U28P2G6B",
+          "id" : "A1F72156-8671-4D4B-9A5E-BDF08D51B249",
+          "name" : "W_Github Desktop",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "3.circle.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            },
+            {
+              "bundleIdentifier" : "com.mitchellh.ghostty",
+              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/Ghostty.icns",
+              "name" : "Ghostty"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "5C389066-74DA-49F5-8545-EF0611C3FDB3",
+          "name" : "W_VsCode",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "4.circle.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.tinyapp.TablePlus",
+              "iconPath" : "/Applications/TablePlus.app/Contents/Resources/AppIcon.icns",
+              "name" : "TablePlus"
+            },
+            {
+              "bundleIdentifier" : "com.exafunction.windsurf",
+              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
+              "name" : "Windsurf"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "E3701F0C-40B3-4B08-BADD-B7EE0EF4E8EE",
+          "name" : "W_TablePlus",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "5.circle.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.usebruno.app",
+              "iconPath" : "/Applications/Bruno.app/Contents/Resources/icon.icns",
+              "name" : "Bruno"
+            },
+            {
+              "bundleIdentifier" : "com.exafunction.windsurf",
+              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
+              "name" : "Windsurf"
+            }
+          ],
+          "display" : "U28P2G6B",
+          "id" : "267BEE96-3099-4B9F-91B8-B353914C0C29",
+          "name" : "W_Bruno",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "6.circle.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.readdle.PDFExpert-Mac",
+              "iconPath" : "/Applications/PDF Expert.app/Contents/Resources/PE_OS26_icon.icns",
+              "name" : "PDF Expert"
+            },
+            {
+              "bundleIdentifier" : "com.exafunction.windsurf",
+              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
+              "name" : "Windsurf"
+            }
+          ],
+          "display" : "U28P2G6B",
+          "id" : "7E5B9625-94BA-44F7-8E29-FAC28A7C52CB",
+          "name" : "W_PDF",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "7.circle.fill"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "app.projectmeta.projectmeta",
+              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
+              "name" : "Heptabase"
+            },
+            {
+              "bundleIdentifier" : "com.exafunction.windsurf",
+              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
+              "name" : "Windsurf"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "FBFD97A4-3408-432D-BF74-21902AA5DE03",
+          "name" : "W_Heptabase",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "8.circle.fill"
+        }
+      ]
+    }
+  ]
+}
