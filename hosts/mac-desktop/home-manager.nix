@@ -139,12 +139,14 @@
     };
     ".config/flashspace/profiles.json" = {
       source = ../../app-config/hosts/mac-desktop/flashspace/profiles.json;
+      force = true;
       onChange = ''
         echo "Flashspace profiles changed"
       '';
     };
     ".config/flashspace/settings.json" = {
       source = ../../app-config/hosts/mac-desktop/flashspace/settings.json;
+      force = true;
       onChange = ''
         echo "Flashspace settings changed"
       '';
