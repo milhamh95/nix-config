@@ -231,7 +231,9 @@ make install-alami    # For Alami MacBook Pro (work)
 >
 > ![Determinate Package](nix_determinate.png)
 > https://github.com/nix-darwin/nix-darwin/issues/1349>
+
 > https://github.com/nix-darwin/nix-darwin/issues/1361
+
 > https://github.com/nix-darwin/nix-darwin/pull/1367
 
 After installation, restart your terminal to use fish shell.
