@@ -1,7 +1,7 @@
 {
   "activeWorkspaceOnFocusChange" : true,
   "alternativeDisplays" : "",
-  "centerCursorOnFocusChange" : false,
+  "centerCursorOnFocusChange" : true,
   "centerCursorOnWorkspaceChange" : true,
   "changeWorkspaceOnAppAssign" : true,
   "checkForUpdatesAutomatically" : true,
@@ -9,10 +9,10 @@
   "enableFocusManagement" : true,
   "enableIntegrations" : false,
   "enablePictureInPictureSupport" : true,
-  "enableSpaceControl" : false,
+  "enableSpaceControl" : true,
   "enableSpaceControlAnimations" : false,
   "enableSpaceControlTilesAnimations" : false,
-  "enableSwipeGestures" : true,
+  "enableSwipeGestures" : false,
   "enableWorkspaceTransitions" : false,
   "floatingApps" : [
     {
@@ -31,19 +31,23 @@
       "name" : "Discord"
     },
     {
-      "bundleIdentifier" : "com.google.Chrome.beta",
-      "iconPath" : "/Applications/Google Chrome Beta.app/Contents/Resources/app.icns",
-      "name" : "Google Chrome Beta"
-    },
-    {
       "bundleIdentifier" : "so.cap.desktop",
       "iconPath" : "/Applications/Cap.app/Contents/Resources/icon.icns",
       "name" : "Cap"
+    },
+    {
+      "bundleIdentifier" : "com.google.Chrome",
+      "iconPath" : "/Applications/Google Chrome.app/Contents/Resources/app.icns",
+      "name" : "Google Chrome"
     }
   ],
+  "focusDown" : "cmd+ctrl+shift+k",
   "focusFrontmostWindow" : false,
   "focusLeft" : "cmd+ctrl+shift+h",
+  "focusNextWorkspaceApp" : "cmd+ctrl+shift+.",
+  "focusPreviousWorkspaceApp" : "cmd+ctrl+shift+,",
   "focusRight" : "cmd+ctrl+shift+l",
+  "focusUp" : "cmd+ctrl+shift+j",
   "keepUnassignedAppsOnSwitch" : false,
   "loopWorkspaces" : true,
   "loopWorkspacesOnAllDisplays" : false,
@@ -64,8 +68,8 @@
   "showMenuBarTitle" : true,
   "showSpaceControl" : "cmd+ctrl+shift+up",
   "skipEmptyWorkspacesOnSwitch" : false,
-  "spaceControlCurrentDisplayWorkspaces" : false,
-  "spaceControlHideEmptyWorkspaces" : false,
+  "spaceControlCurrentDisplayWorkspaces" : true,
+  "spaceControlHideEmptyWorkspaces" : true,
   "spaceControlNumberOfColumns" : 0,
   "spaceControlUpdateScreenshotsOnOpen" : false,
   "swipeDown3FingerAction" : "none",
@@ -77,6 +81,8 @@
   "swipeThreshold" : 0.2,
   "swipeUp3FingerAction" : "none",
   "swipeUp4FingerAction" : "none",
+  "switchToNextProfile" : "cmd+ctrl+shift+9",
+  "switchToPreviousProfile" : "cmd+ctrl+shift+0",
   "switchWorkspaceOnCursorScreen" : false,
   "switchWorkspaceWhenPipCloses" : true,
   "workspaceTransitionDimming" : 0.2,

@@ -3,6 +3,7 @@
     {
       "id" : "26176108-1F50-4837-8371-F4B1EE4AB1C2",
       "name" : "Personal",
+      "shortcut" : "cmd+ctrl+shift+7",
       "workspaces" : [
         {
           "apps" : [
@@ -12,7 +13,7 @@
               "name" : "Spark"
             }
           ],
-          "display" : "Built-in Retina Display",
+          "display" : "XG27UCS",
           "id" : "4D99E18C-D739-47E8-B9EE-984C26E1772B",
           "name" : "P_Communication",
           "openAppsOnActivation" : false,
@@ -20,11 +21,6 @@
         },
         {
           "apps" : [
-            {
-              "bundleIdentifier" : "com.exafunction.windsurf",
-              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
-              "name" : "Windsurf"
-            },
             {
               "bundleIdentifier" : "com.microsoft.VSCode",
               "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
@@ -34,19 +30,9 @@
               "bundleIdentifier" : "com.mitchellh.ghostty",
               "iconPath" : "/Applications/Ghostty.app/Contents/Resources/Ghostty.icns",
               "name" : "Ghostty"
-            },
-            {
-              "bundleIdentifier" : "app.projectmeta.projectmeta",
-              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
-              "name" : "Heptabase"
-            },
-            {
-              "bundleIdentifier" : "com.readdle.PDFExpert-Mac",
-              "iconPath" : "/Applications/PDF Expert.app/Contents/Resources/PE_OS26_icon.icns",
-              "name" : "PDF Expert"
             }
           ],
-          "display" : "Built-in Retina Display",
+          "display" : "XG27UCS",
           "id" : "0EABFA62-A507-4BFA-A9C3-AA8E2204E8FF",
           "name" : "P_Code",
           "openAppsOnActivation" : false,
@@ -60,16 +46,92 @@
               "name" : "Bruno"
             },
             {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "5D39ACD6-D68B-4541-9635-34182E208B6E",
+          "name" : "P_Bruno",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "3.square"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "app.projectmeta.projectmeta",
+              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
+              "name" : "Heptabase"
+            },
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "40938A74-1B63-44C4-A36D-7FC1FE3B6276",
+          "name" : "P_Heptabase",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "4.square"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.readdle.PDFExpert-Mac",
+              "iconPath" : "/Applications/PDF Expert.app/Contents/Resources/PE_OS26_icon.icns",
+              "name" : "PDF Expert"
+            },
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "A88AC758-D678-4CD0-B748-80347AB7C8BC",
+          "name" : "P_PDF",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "5.square"
+        },
+        {
+          "apps" : [
+            {
+              "bundleIdentifier" : "com.tinyapp.TablePlus",
+              "iconPath" : "/Applications/TablePlus.app/Contents/Resources/AppIcon.icns",
+              "name" : "TablePlus"
+            },
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
+            }
+          ],
+          "display" : "XG27UCS",
+          "id" : "3D22E33D-A120-4B7E-A2E6-510F0BC02D56",
+          "name" : "P_Table Plus",
+          "openAppsOnActivation" : false,
+          "symbolIconName" : "6.square"
+        },
+        {
+          "apps" : [
+            {
               "bundleIdentifier" : "dev.kdrag0n.MacVirt",
               "iconPath" : "/Applications/OrbStack.app/Contents/Resources/AppIcon.icns",
               "name" : "OrbStack"
+            },
+            {
+              "bundleIdentifier" : "com.microsoft.VSCode",
+              "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
+              "name" : "Code"
             }
           ],
-          "display" : "Built-in Retina Display",
-          "id" : "5D39ACD6-D68B-4541-9635-34182E208B6E",
-          "name" : "P_Utility",
+          "display" : "U28P2G6B",
+          "id" : "80C824A2-84C9-41F3-9E5E-1DDA7A38B1AD",
+          "name" : "P_Orbstack",
           "openAppsOnActivation" : false,
-          "symbolIconName" : "3.square"
+          "symbolIconName" : "7.square"
         }
       ]
     }
