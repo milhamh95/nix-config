@@ -17,6 +17,32 @@
           mkdir -p $argv[1] && cd $argv[1]
         '';
       };
+      fcd = {
+        description = "Fuzzy change directory with preview (lsd for folders, bat for files)";
+        body = ''
+          # Set search directory (default: current directory)
+          if set -q argv[1]
+              set searchdir $argv[1]
+          else
+              set searchdir .
+          end
+
+          # Find files and directories, use fzf with conditional preview
+          set -l selection (fd --hidden --exclude .git --exclude node_modules --exclude __pycache__ . $searchdir | fzf --height 60% --preview 'if [ -d {} ]; then lsd --color=always -la {}; else bat --color=always --style=numbers --line-range=:100 {}; fi')
+
+          # If nothing selected, exit
+          if test -z "$selection"
+              return 0
+          end
+
+          # If directory, cd into it. If file, cd into its parent directory
+          if test -d "$selection"
+              cd $selection
+          else
+              cd (dirname $selection)
+          end
+        '';
+      };
     };
     plugins = [
       {
@@ -60,6 +86,8 @@
       lsaf = "lsd -AF --group-dirs=first -1";
       lsla = "lsd -la";
       prsl = "cd $HOME/personal";
+      fdc = "fcd";  # fuzzy cd from current directory
+      fdh = "fcd $HOME";  # fuzzy cd from home directory
     };
     shellInit = ''
       set -g fish_greeting
