@@ -86,8 +86,8 @@
       lsaf = "lsd -AF --group-dirs=first -1";
       lsla = "lsd -la";
       prsl = "cd $HOME/personal";
-      fdc = "fcd";  # fuzzy cd from current directory
-      fdh = "fcd $HOME";  # fuzzy cd from home directory
+      fcd = "fcd";  # fuzzy cd from current directory
+      fcdh = "fcd $HOME";  # fuzzy cd from home directory
     };
     shellInit = ''
       set -g fish_greeting
