@@ -28,7 +28,7 @@
           end
 
           # Find files and directories, use fzf with conditional preview
-          set -l selection (fd --hidden --exclude .git --exclude node_modules --exclude __pycache__ . $searchdir | fzf --height 60% --preview 'if [ -d "{}" ]; then lsd --color=always -la "{}"; else bat --color=always --style=numbers --line-range=:100 "{}"; fi')
+          set -l selection (fd --hidden --exclude .git --exclude node_modules --exclude __pycache__ . $searchdir | fzf --height 60% --preview "test -d {} && lsd --color=always --icon=always --group-dirs=first -1 {} || bat --color=always --style=numbers --line-range=:100 {}")
 
           # If nothing selected, exit
           if test -z "$selection"
