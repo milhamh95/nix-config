@@ -112,6 +112,102 @@
           git switch $branch
         '';
       };
+      fgbd = {
+        description = "Fuzzy delete local git branches (multi-select with Tab)";
+        body = ''
+          # Check if in a git repo
+          if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
+              echo "Not a git repository"
+              return 1
+          end
+
+          # Get current branch to exclude it
+          set -l current (git branch --show-current)
+
+          # Select branches to delete (multi-select with Tab)
+          set -l branches (git branch --color=always | grep -v "^\*" | fzf --ansi --multi --height 60% --preview "git log --oneline --color=always -20 {1}" --header "Tab to select multiple, Enter to confirm" | sed 's/^[ ]*//')
+
+          # If nothing selected, exit
+          if test -z "$branches"
+              echo "No branches selected"
+              return 0
+          end
+
+          # Show confirmation
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Branches to DELETE (local):"
+          for branch in $branches
+              echo "  - $branch"
+          end
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          read -P "Are you sure you want to delete these branches? (y/n): " confirm
+
+          if test "$confirm" != "y"
+              echo "Cancelled"
+              return 0
+          end
+
+          # Delete branches
+          for branch in $branches
+              echo "Deleting $branch..."
+              git branch -D $branch
+          end
+
+          echo ""
+          echo "Done!"
+        '';
+      };
+      fgbdr = {
+        description = "Fuzzy delete remote git branches (multi-select with Tab)";
+        body = ''
+          # Check if in a git repo
+          if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
+              echo "Not a git repository"
+              return 1
+          end
+
+          # Fetch latest remote info
+          echo "Fetching remote branches..."
+          git fetch --prune
+
+          # Select remote branches to delete (multi-select with Tab)
+          set -l branches (git branch -r --color=always | grep -v HEAD | grep -v main | grep -v master | fzf --ansi --multi --height 60% --preview "git log --oneline --color=always -20 {1}" --header "Tab to select multiple, Enter to confirm" | sed 's/^[ ]*//' | sed 's|origin/||')
+
+          # If nothing selected, exit
+          if test -z "$branches"
+              echo "No branches selected"
+              return 0
+          end
+
+          # Show confirmation
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Branches to DELETE (remote origin):"
+          for branch in $branches
+              echo "  - origin/$branch"
+          end
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "⚠️  WARNING: This will delete branches from the remote!"
+          read -P "Are you sure? (y/n): " confirm
+
+          if test "$confirm" != "y"
+              echo "Cancelled"
+              return 0
+          end
+
+          # Delete remote branches
+          for branch in $branches
+              echo "Deleting origin/$branch..."
+              git push origin --delete $branch
+          end
+
+          echo ""
+          echo "Done!"
+        '';
+      };
     };
     plugins = [
       {
@@ -160,6 +256,8 @@
       fgl = "fgl";  # fuzzy git log
       fgs = "fgs";  # fuzzy git status
       fgb = "fgb";  # fuzzy git branch switch
+      fgbd = "fgbd";  # fuzzy git branch delete (local)
+      fgbdr = "fgbdr";  # fuzzy git branch delete (remote)
       refish = "exec fish";  # reload fish shell
     };
     shellInit = ''
