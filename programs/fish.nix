@@ -86,6 +86,32 @@
           echo $file | awk '{print $2}'
         '';
       };
+      fgb = {
+        description = "Fuzzy switch git branch with commit preview";
+        body = ''
+          # Check if in a git repo
+          if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
+              echo "Not a git repository"
+              return 1
+          end
+
+          # Get branches (local by default, -a flag for all including remote)
+          set -l branch
+          if test "$argv[1]" = "-a"
+              set branch (git branch -a --color=always | grep -v HEAD | fzf --ansi --height 60% --preview "git log --oneline --color=always -20 {1}" | sed 's/^[* ]*//' | sed 's|remotes/origin/||')
+          else
+              set branch (git branch --color=always | fzf --ansi --height 60% --preview "git log --oneline --color=always -20 {1}" | sed 's/^[* ]*//')
+          end
+
+          # If nothing selected, exit
+          if test -z "$branch"
+              return 0
+          end
+
+          # Switch to branch
+          git switch $branch
+        '';
+      };
     };
     plugins = [
       {
@@ -133,6 +159,7 @@
       fdh = "fcd $HOME";  # fuzzy cd from home directory
       fgl = "fgl";  # fuzzy git log
       fgs = "fgs";  # fuzzy git status
+      fgb = "fgb";  # fuzzy git branch switch
     };
     shellInit = ''
       set -g fish_greeting
