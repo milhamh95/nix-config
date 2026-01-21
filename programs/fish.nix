@@ -239,33 +239,37 @@
               return 0
           end
 
-          # Show comparison options
-          echo ""
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "Comparing: $branch1 → $branch2"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo ""
-          echo "View options:"
-          echo "  1) File list only (stat)"
-          echo "  2) Full diff with delta"
-          echo "  3) Commits between branches"
-          echo "  0) Cancel"
-          read -P "Select [0-3]: " view_choice
+          # Show comparison options in a loop
+          while true
+              echo ""
+              echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+              echo "Comparing: $branch1 → $branch2"
+              echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+              echo ""
+              echo "View options:"
+              echo "  1) File list only (stat)"
+              echo "  2) Full diff with delta"
+              echo "  3) Commits between branches"
+              echo "  0) Exit"
+              read -P "Select [0-3]: " view_choice
 
-          switch $view_choice
-              case 1
-                  echo ""
-                  git diff --stat $branch1..$branch2
-              case 2
-                  echo ""
-                  git diff $branch1..$branch2 | delta
-              case 3
-                  echo ""
-                  echo "Commits in $branch2 not in $branch1:"
-                  git log --oneline --color=always $branch1..$branch2
-              case '*'
-                  echo "Cancelled"
-                  return 0
+              switch $view_choice
+                  case 1
+                      echo ""
+                      git diff --stat $branch1..$branch2
+                  case 2
+                      echo ""
+                      git diff $branch1..$branch2 | delta
+                  case 3
+                      echo ""
+                      echo "Commits in $branch2 not in $branch1:"
+                      git log --oneline --color=always $branch1..$branch2
+                  case 0
+                      echo "Done"
+                      return 0
+                  case '*'
+                      echo "Invalid option"
+              end
           end
         '';
       };
