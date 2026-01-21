@@ -2,6 +2,9 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports = [
+    ../../programs/fish-git-alami.nix
+  ];
   # Sops secrets configuration (mac-desktop only)
   sops.secrets.id_github_alami_group = {
     sopsFile = ../../secrets/id_github_alami_group.enc;
