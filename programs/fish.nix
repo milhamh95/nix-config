@@ -159,6 +159,54 @@
           echo "Done!"
         '';
       };
+      fkill = {
+        description = "Fuzzy kill process (multi-select with Tab)";
+        body = ''
+          # Get processes and select with fzf (multi-select with Tab)
+          set -l pids (ps -ef | sed 1d | fzf --multi --height 60% --header "Tab to select multiple, Enter to confirm" | awk '{print $2}')
+
+          # If nothing selected, exit
+          if test -z "$pids"
+              echo "No process selected"
+              return 0
+          end
+
+          # Show confirmation
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Processes to KILL:"
+          for pid in $pids
+              set -l proc_info (ps -p $pid -o pid=,comm= 2>/dev/null)
+              if test -n "$proc_info"
+                  echo "  - $proc_info"
+              else
+                  echo "  - PID $pid"
+              end
+          end
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          read -P "Kill these processes? (y/n): " confirm
+
+          if test "$confirm" != "y"
+              echo "Cancelled"
+              return 0
+          end
+
+          # Kill processes
+          for pid in $pids
+              echo "Killing PID $pid..."
+              kill -9 $pid 2>/dev/null
+              if test $status -eq 0
+                  echo "  Killed"
+              else
+                  echo "  Failed (may need sudo)"
+              end
+          end
+
+          echo ""
+          echo "Done!"
+        '';
+      };
       fgbdr = {
         description = "Fuzzy delete remote git branches (multi-select with Tab)";
         body = ''
@@ -258,6 +306,7 @@
       fgb = "fgb";  # fuzzy git branch switch
       fgbd = "fgbd";  # fuzzy git branch delete (local)
       fgbdr = "fgbdr";  # fuzzy git branch delete (remote)
+      fkill = "fkill";  # fuzzy kill process
       refish = "exec fish";  # reload fish shell
     };
     shellInit = ''
