@@ -162,8 +162,9 @@
       fkill = {
         description = "Fuzzy kill process (multi-select with Tab)";
         body = ''
-          # Get processes and select with fzf (multi-select with Tab)
-          set -l pids (ps -ef | sed 1d | fzf --multi --height 60% --header "Tab to select multiple, Enter to confirm" | awk '{print $2}')
+          # Get only current user's processes (like Activity Monitor)
+          # Format: PID, CPU%, MEM%, process name
+          set -l pids (ps -u $USER -o pid,pcpu,pmem,comm | sed 1d | sort -k2 -r | fzf --multi --height 60% --header "PID   CPU%  MEM%  COMMAND | Tab to select, Enter to confirm" | awk '{print $1}')
 
           # If nothing selected, exit
           if test -z "$pids"
