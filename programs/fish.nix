@@ -160,6 +160,7 @@
       fgl = "fgl";  # fuzzy git log
       fgs = "fgs";  # fuzzy git status
       fgb = "fgb";  # fuzzy git branch switch
+      refish = "exec fish";  # reload fish shell
     };
     shellInit = ''
       set -g fish_greeting
