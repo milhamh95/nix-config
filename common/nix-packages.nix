@@ -8,6 +8,7 @@
     pkgs.atuin
     pkgs.bat
     pkgs.curl
+    pkgs.delta
     pkgs.fastfetch
     pkgs.fd
     pkgs.fishPlugins.forgit

@@ -1,3 +1,6 @@
+[include]
+	path = ~/.config/git/catppuccin-delta.gitconfig
+
 [includeIf "gitdir:/Users/milhamh95/work/alami-group/**"]
 	path = ~/.gitconfig-alami-group
 
@@ -16,6 +19,22 @@
 [core]
 	excludesfile = /Users/milhamh95/.gitignore
 	editor = code --wait
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	features = catppuccin-mocha
+	navigate = true
+	line-numbers = true
+	side-by-side = false
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

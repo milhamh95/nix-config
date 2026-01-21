@@ -104,6 +104,12 @@
         echo "Hammerflow configured ✅"
       fi
     '';
+
+    configureBatTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      echo "Rebuilding bat cache for Catppuccin theme..."
+      $DRY_RUN_CMD ${pkgs.bat}/bin/bat cache --build
+      echo "Bat cache rebuilt ✅"
+    '';
   };
 
   # Shared home file configurations (common app configs)
@@ -126,6 +132,24 @@
       source = ../app-config/common/git/.gitignore;
       onChange = ''
         echo "Git ignore changed"
+      '';
+    };
+    ".config/git/catppuccin-delta.gitconfig" = {
+      source = ../app-config/common/git/catppuccin-delta.gitconfig;
+      onChange = ''
+        echo "Catppuccin delta theme changed"
+      '';
+    };
+    ".config/bat/config" = {
+      source = ../app-config/common/bat/config;
+      onChange = ''
+        echo "Bat config changed"
+      '';
+    };
+    ".config/bat/themes/Catppuccin Mocha.tmTheme" = {
+      source = ../app-config/common/bat/themes/Catppuccin-Mocha.tmTheme;
+      onChange = ''
+        echo "Bat Catppuccin theme changed"
       '';
     };
     ".config/ghostty/config" = {

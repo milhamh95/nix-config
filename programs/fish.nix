@@ -43,6 +43,49 @@
           end
         '';
       };
+      fgl = {
+        description = "Fuzzy search git log with commit preview (using delta)";
+        body = ''
+          # Check if in a git repo
+          if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
+              echo "Not a git repository"
+              return 1
+          end
+
+          # Show git log with fzf, preview shows commit diff with delta
+          set -l commit (git log --oneline --color=always --format="%C(yellow)%h%Creset %s %C(blue)<%an>%Creset %C(green)(%ar)%Creset" | fzf --ansi --height 60% --preview "git show {1} | delta")
+
+          # If nothing selected, exit
+          if test -z "$commit"
+              return 0
+          end
+
+          # Extract commit hash and echo it
+          set -l hash (echo $commit | awk '{print $1}')
+          echo $hash
+        '';
+      };
+      fgs = {
+        description = "Fuzzy search git status with diff preview (using delta)";
+        body = ''
+          # Check if in a git repo
+          if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
+              echo "Not a git repository"
+              return 1
+          end
+
+          # Show git status with fzf, preview shows file diff with delta
+          set -l file (git status --short | fzf --ansi --height 60% --preview "git diff {2} | delta")
+
+          # If nothing selected, exit
+          if test -z "$file"
+              return 0
+          end
+
+          # Extract file path and echo it
+          echo $file | awk '{print $2}'
+        '';
+      };
     };
     plugins = [
       {
@@ -86,8 +129,10 @@
       lsaf = "lsd -AF --group-dirs=first -1";
       lsla = "lsd -la";
       prsl = "cd $HOME/personal";
-      fcd = "fcd";  # fuzzy cd from current directory
-      fcdh = "fcd $HOME";  # fuzzy cd from home directory
+      fdc = "fcd";  # fuzzy cd from current directory
+      fdh = "fcd $HOME";  # fuzzy cd from home directory
+      fgl = "fgl";  # fuzzy git log
+      fgs = "fgs";  # fuzzy git status
     };
     shellInit = ''
       set -g fish_greeting
@@ -97,6 +142,16 @@
       if not test -e $__fish_config_dir/themes/Catppuccin\ Mocha.theme
         fisher install catppuccin/fish
         fish_config theme save "Catppuccin Mocha"
+      end
+
+      # remove PatrickF1/fzf.fish if installed (switched to native fzf)
+      if functions -q _fzf_search_directory
+        fisher remove PatrickF1/fzf.fish 2>/dev/null
+      end
+
+      # fzf native shell integration (Alt+C for cd, Ctrl+T for files, Ctrl+R for history)
+      if type -q fzf
+        fzf --fish | source
       end
 
       # activate mise

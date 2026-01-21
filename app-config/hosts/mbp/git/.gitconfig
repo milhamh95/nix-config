@@ -1,6 +1,9 @@
 # NOTE: Update the username paths below to match your MacBook Pro username
 # Example: If your username is "john.doe", change /Users/milhamh95/ to /Users/john.doe/
 
+[include]
+	path = ~/.config/git/catppuccin-delta.gitconfig
+
 [includeIf "gitdir:~/personal/"]
 	path = ~/.gitconfig-personal
 
@@ -16,6 +19,22 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = code --wait
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	features = catppuccin-mocha
+	navigate = true
+	line-numbers = true
+	side-by-side = false
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
