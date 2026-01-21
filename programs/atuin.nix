@@ -5,5 +5,10 @@
   programs.atuin = {
     enable = true;
     enableFishIntegration = true;
+    settings = {
+      theme = {
+        name = "catppuccin-mocha-red";
+      };
+    };
   };
 }

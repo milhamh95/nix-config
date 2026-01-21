@@ -152,6 +152,12 @@
         echo "Bat Catppuccin theme changed"
       '';
     };
+    ".config/atuin/themes/catppuccin-mocha-red.toml" = {
+      source = ../app-config/common/atuin/themes/catppuccin-mocha-red.toml;
+      onChange = ''
+        echo "Atuin Catppuccin theme changed"
+      '';
+    };
     ".config/ghostty/config" = {
       source = ../app-config/common/ghostty/config;
       onChange = ''
