@@ -134,14 +134,16 @@
         # Trim leading space if no type/scope
         set full_message (string trim $full_message)
 
-        # === CONFIRM ===
+        # === CONFIRM WITH FILE CHANGES ===
         echo ""
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo "Commit message:"
-        echo "  $full_message"
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "Commit: $full_message"
         echo ""
-        read -P "Commit and push to origin/$branch? (y/n): " confirm
+        echo "Files to commit:"
+        git diff --cached --stat | sed 's/^/  /'
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo ""
+        read -P "Push to origin/$branch? (y/n): " confirm
 
         if test "$confirm" != "y"
             echo "Cancelled"
