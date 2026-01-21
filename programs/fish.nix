@@ -208,6 +208,67 @@
           echo "Done!"
         '';
       };
+      fgbc = {
+        description = "Fuzzy compare two git branches with delta";
+        body = ''
+          # Check if in a git repo
+          if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
+              echo "Not a git repository"
+              return 1
+          end
+
+          # Get current branch as default for first selection
+          set -l current (git branch --show-current)
+
+          # Select first branch
+          echo "Select FIRST branch (base):"
+          set -l branch1 (git branch -a --color=always | grep -v HEAD | fzf --ansi --height 50% --preview "git log --oneline --color=always -15 {1}" --header "Select BASE branch" --query "$current" | sed 's/^[* ]*//' | sed 's|remotes/origin/||' | string trim)
+
+          if test -z "$branch1"
+              echo "No branch selected"
+              return 0
+          end
+
+          # Select second branch
+          echo ""
+          echo "Select SECOND branch (compare):"
+          set -l branch2 (git branch -a --color=always | grep -v HEAD | grep -v "$branch1\$" | fzf --ansi --height 50% --preview "git log --oneline --color=always -15 {1}" --header "Select COMPARE branch (comparing against $branch1)" | sed 's/^[* ]*//' | sed 's|remotes/origin/||' | string trim)
+
+          if test -z "$branch2"
+              echo "No branch selected"
+              return 0
+          end
+
+          # Show comparison options
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Comparing: $branch1 → $branch2"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "View options:"
+          echo "  1) File list only (stat)"
+          echo "  2) Full diff with delta"
+          echo "  3) Commits between branches"
+          echo "  0) Cancel"
+          read -P "Select [0-3]: " view_choice
+
+          switch $view_choice
+              case 1
+                  echo ""
+                  git diff --stat $branch1..$branch2
+              case 2
+                  echo ""
+                  git diff $branch1..$branch2 | delta
+              case 3
+                  echo ""
+                  echo "Commits in $branch2 not in $branch1:"
+                  git log --oneline --color=always $branch1..$branch2
+              case '*'
+                  echo "Cancelled"
+                  return 0
+          end
+        '';
+      };
       fgbdr = {
         description = "Fuzzy delete remote git branches (multi-select with Tab)";
         body = ''
@@ -307,6 +368,7 @@
       fgb = "fgb";  # fuzzy git branch switch
       fgbd = "fgbd";  # fuzzy git branch delete (local)
       fgbdr = "fgbdr";  # fuzzy git branch delete (remote)
+      fgbc = "fgbc";  # fuzzy git branch compare
       fkill = "fkill";  # fuzzy kill process
       refish = "exec fish";  # reload fish shell
     };
