@@ -75,15 +75,17 @@
           end
 
           # Show git status with fzf, preview shows file diff with delta
-          set -l file (git status --short | fzf --ansi --height 60% --preview "git diff {2} | delta")
+          # Using {2..} to capture full filename (handles spaces in filenames)
+          # Using -- to separate paths from revisions
+          set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff -- {2..} 2>/dev/null | delta')
 
           # If nothing selected, exit
-          if test -z "$file"
+          if test -z "$selection"
               return 0
           end
 
-          # Extract file path and echo it
-          echo $file | awk '{print $2}'
+          # Extract file path (everything after the 3-char status prefix "XY ")
+          echo $selection | string sub -s 4
         '';
       };
       fgb = {
