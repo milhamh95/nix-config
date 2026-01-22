@@ -111,6 +111,20 @@
       fi
       echo "Work SSH configured"
     '';
+
+    installSwitor = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      echo "Checking Switor installation..."
+      SWITOR_APP="/Applications/Switor.app"
+      SOURCE_APP="${../../app-config/switor/Switor.app}"
+
+      if [ -d "$SWITOR_APP" ]; then
+        echo "Switor is already installed ✅"
+      else
+        echo "Installing Switor to /Applications..."
+        $DRY_RUN_CMD cp -R "$SOURCE_APP" /Applications/
+        echo "Switor installed successfully ✅"
+      fi
+    '';
   };
 
   # Desktop-specific home file configurations
@@ -164,6 +178,12 @@
       source = ../../app-config/hosts/mac-desktop/hammerflow/init.lua;
       onChange = ''
         echo "Hammerspoon init config changed"
+      '';
+    };
+    ".config/switor/config.json" = {
+      source = ../../app-config/switor/config.json;
+      onChange = ''
+        echo "Switor config changed"
       '';
     };
   };

@@ -1,0 +1,50 @@
+{
+  "preferences" : {
+    "launchAtLogin" : false,
+    "showResolutionInMenuBar" : false
+  },
+  "presets" : [
+
+  ],
+  "shortcuts" : [
+    {
+      "description" : "Asus 1080p",
+      "displayID" : 7,
+      "displayName" : "External Display 7",
+      "id" : "D3204297-13CE-41AB-AC4C-0384214C930B",
+      "keyCode" : 24,
+      "modifiers" : {
+        "command" : false,
+        "control" : false,
+        "option" : true,
+        "shift" : false
+      },
+      "target" : {
+        "height" : 1080,
+        "isHiDPI" : true,
+        "refreshRate" : 144,
+        "width" : 1920
+      }
+    },
+    {
+      "description" : "Asus 1440p",
+      "displayID" : 7,
+      "displayName" : "External Display 7",
+      "id" : "8ED00A9F-8464-4D08-8C7E-3BC5709F3032",
+      "keyCode" : 27,
+      "modifiers" : {
+        "command" : false,
+        "control" : false,
+        "option" : true,
+        "shift" : false
+      },
+      "target" : {
+        "height" : 1440,
+        "isHiDPI" : true,
+        "refreshRate" : 144,
+        "width" : 2560
+      }
+    }
+  ],
+  "version" : 1
+}
