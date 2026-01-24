@@ -42,6 +42,7 @@
       "karabiner-elements"
       "keka"
       "mockoon"
+      "obsidian"
       "orbstack"
       "raycast"
       "rectangle-pro"
