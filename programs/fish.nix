@@ -377,6 +377,7 @@
       fgbc = "fgbc";  # fuzzy git branch compare
       fkill = "fkill";  # fuzzy kill process
       refish = "exec fish";  # reload fish shell
+      ucc = "brew upgrade --cask claude-code";  # update claude code
     };
     shellInit = ''
       set -g fish_greeting
