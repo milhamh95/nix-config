@@ -66,7 +66,7 @@
         '';
       };
       fgs = {
-        description = "Fuzzy search git status with diff preview (using delta)";
+        description = "Fuzzy search git status with diff preview (using delta, color-blind friendly)";
         body = ''
           # Check if in a git repo
           if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
@@ -75,8 +75,8 @@
           end
 
           # Show git status with fzf, preview shows file diff with delta
-          # Inline mode shows + and - symbols for added/removed lines
-          set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff HEAD -- {2} 2>/dev/null | delta || git diff --cached -- {2} 2>/dev/null | delta || bat --color=always --style=numbers {2} 2>/dev/null')
+          # Color-blind friendly: blue for removed (-), yellow for added (+)
+          set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff HEAD -- {2} 2>/dev/null | delta --minus-style="syntax bold blue" --minus-emph-style="syntax bold cyan" --plus-style="syntax bold yellow" --plus-emph-style="syntax bold \"#f9e2af\"" --line-numbers || git diff --cached -- {2} 2>/dev/null | delta --minus-style="syntax bold blue" --minus-emph-style="syntax bold cyan" --plus-style="syntax bold yellow" --plus-emph-style="syntax bold \"#f9e2af\"" --line-numbers || bat --color=always --style=numbers {2} 2>/dev/null')
 
           # If nothing selected, exit
           if test -z "$selection"
