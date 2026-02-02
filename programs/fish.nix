@@ -76,7 +76,7 @@
 
           # Show git status with fzf, preview shows file diff with delta
           # Color-blind friendly: white on blue for removed (-), black on yellow for added (+)
-          set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff HEAD -- {2} 2>/dev/null | delta --minus-style="white blue" --plus-style="black yellow" --minus-emph-style="white bold blue" --plus-emph-style="black bold yellow" --line-numbers-minus-style="white blue" --line-numbers-plus-style="black yellow" --line-numbers-zero-style="white" || git diff --cached -- {2} 2>/dev/null | delta --minus-style="white blue" --plus-style="black yellow" --minus-emph-style="white bold blue" --plus-emph-style="black bold yellow" --line-numbers-minus-style="white blue" --line-numbers-plus-style="black yellow" --line-numbers-zero-style="white" || bat --color=always --style=numbers {2} 2>/dev/null')
+          set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff HEAD -- {2} 2>/dev/null | delta --minus-style="normal white blue" --plus-style="normal black yellow" --minus-emph-style="normal bold white blue" --plus-emph-style="normal bold black yellow" --line-numbers-minus-style="white blue" --line-numbers-plus-style="black yellow" --line-numbers-zero-style="white" || git diff --cached -- {2} 2>/dev/null | delta --minus-style="normal white blue" --plus-style="normal black yellow" --minus-emph-style="normal bold white blue" --plus-emph-style="normal bold black yellow" --line-numbers-minus-style="white blue" --line-numbers-plus-style="black yellow" --line-numbers-zero-style="white" || bat --color=always --style=numbers {2} 2>/dev/null')
 
           # If nothing selected, exit
           if test -z "$selection"
