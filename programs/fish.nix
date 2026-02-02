@@ -65,6 +65,33 @@
           echo $hash
         '';
       };
+      _fgs_preview = {
+        description = "Helper for fgs: preview git diff with color-blind friendly delta";
+        body = ''
+          # Extract file path (skip 3-char status prefix "XY ")
+          set -l file (echo $argv | string sub -s 4)
+          set -l status_code (echo $argv | string sub -l 2)
+
+          # Color-blind friendly delta options (deuteranopia)
+          # Removed: white text on blue background
+          # Added: black text on yellow background
+          set -l delta_args \
+            --minus-style="#ffffff #2244aa" \
+            --plus-style="#000000 #f9e2af" \
+            --minus-emph-style="bold #ffffff #1a3380" \
+            --plus-emph-style="bold #000000 #e8c86e" \
+            --line-numbers-minus-style="#ffffff #2244aa" \
+            --line-numbers-plus-style="#000000 #f9e2af" \
+            --line-numbers-zero-style="#a6adc8"
+
+          if test "$status_code" = "??"
+              bat --color=always --style=numbers "$file"
+          else
+              git diff HEAD -- "$file" 2>/dev/null | delta $delta_args
+              or git diff --cached -- "$file" 2>/dev/null | delta $delta_args
+          end
+        '';
+      };
       fgs = {
         description = "Fuzzy search git status with diff preview (using delta, color-blind friendly)";
         body = ''
@@ -74,9 +101,8 @@
               return 1
           end
 
-          # Show git status with fzf, preview shows file diff with delta
-          # Color-blind friendly: white on blue for removed (-), black on yellow for added (+)
-          set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff HEAD -- {2} 2>/dev/null | delta --minus-style="normal white blue" --plus-style="normal black yellow" --minus-emph-style="normal bold white blue" --plus-emph-style="normal bold black yellow" --line-numbers-minus-style="white blue" --line-numbers-plus-style="black yellow" --line-numbers-zero-style="white" || git diff --cached -- {2} 2>/dev/null | delta --minus-style="normal white blue" --plus-style="normal black yellow" --minus-emph-style="normal bold white blue" --plus-emph-style="normal bold black yellow" --line-numbers-minus-style="white blue" --line-numbers-plus-style="black yellow" --line-numbers-zero-style="white" || bat --color=always --style=numbers {2} 2>/dev/null')
+          # Show git status with fzf, preview calls _fgs_preview helper
+          set -l selection (git status --short | fzf --ansi --height 60% --preview 'fish -c "_fgs_preview {}"')
 
           # If nothing selected, exit
           if test -z "$selection"
