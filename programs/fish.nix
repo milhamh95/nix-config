@@ -75,8 +75,8 @@
           end
 
           # Show git status with fzf, preview shows file diff with delta
-          # Color-blind friendly: blue for removed (-), yellow for added (+)
-          set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff HEAD -- {2} 2>/dev/null | delta --minus-style="syntax bold blue" --minus-emph-style="syntax bold cyan" --plus-style="syntax bold yellow" --plus-emph-style="syntax bold \"#f9e2af\"" --line-numbers || git diff --cached -- {2} 2>/dev/null | delta --minus-style="syntax bold blue" --minus-emph-style="syntax bold cyan" --plus-style="syntax bold yellow" --plus-emph-style="syntax bold \"#f9e2af\"" --line-numbers || bat --color=always --style=numbers {2} 2>/dev/null')
+          # Color-blind friendly: cyan text for removed (-), yellow text for added (+)
+          set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff HEAD -- {2} 2>/dev/null | delta --minus-style="bold cyan" --plus-style="bold yellow" --line-numbers-minus-style="bold cyan" --line-numbers-plus-style="bold yellow" --line-numbers-zero-style="white" || git diff --cached -- {2} 2>/dev/null | delta --minus-style="bold cyan" --plus-style="bold yellow" --line-numbers-minus-style="bold cyan" --line-numbers-plus-style="bold yellow" --line-numbers-zero-style="white" || bat --color=always --style=numbers {2} 2>/dev/null')
 
           # If nothing selected, exit
           if test -z "$selection"
