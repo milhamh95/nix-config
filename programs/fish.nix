@@ -77,7 +77,7 @@
           # Show git status with fzf, preview shows file diff with delta
           # For untracked files (??), show contents with bat
           # For tracked files, show git diff with delta
-          set -l selection (git status --short | fzf --ansi --height 60% --preview 'if test "{1}" = "??"; bat --color=always --style=numbers "{2..}"; else; git diff -- "{2..}" | delta; end')
+          set -l selection (git status --short | fzf --ansi --height 60% --preview 'sh -c "file=\$(echo {} | cut -c4-); if echo {} | grep -q \"^??\"; then bat --color=always --style=numbers \"\$file\"; else git diff HEAD -- \"\$file\" | delta || git diff --cached -- \"\$file\" | delta; fi"')
 
           # If nothing selected, exit
           if test -z "$selection"
