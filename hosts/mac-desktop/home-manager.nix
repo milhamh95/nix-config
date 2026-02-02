@@ -182,6 +182,7 @@
     };
     ".config/switor/config.json" = {
       source = ../../app-config/switor/config.json;
+      force = true;
       onChange = ''
         echo "Switor config changed"
       '';
