@@ -46,15 +46,15 @@
       _cb_delta_args = {
         description = "Shared color-blind friendly delta args (deuteranopia)";
         body = ''
-          echo \
+          printf '%s\n' \
             --keep-plus-minus-markers \
-            --minus-style="#000000 #ffd700" \
-            --plus-style="#ffffff #2244aa" \
-            --minus-emph-style="bold #000000 #ffaa00" \
-            --plus-emph-style="bold #ffffff #1a3380" \
-            --line-numbers-minus-style="#000000 #ffd700" \
-            --line-numbers-plus-style="#ffffff #2244aa" \
-            --line-numbers-zero-style="#a6adc8"
+            '--minus-style=#cdd6f4 #4a3d1a' \
+            '--plus-style=#cdd6f4 #2a4470' \
+            '--minus-emph-style=bold #ffffff #6b5a28' \
+            '--plus-emph-style=bold #ffffff #2a4a7a' \
+            '--line-numbers-minus-style=#f9e2af' \
+            '--line-numbers-plus-style=#89b4fa' \
+            '--line-numbers-zero-style=#a6adc8'
         '';
       };
       _fgl_preview = {
