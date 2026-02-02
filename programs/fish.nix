@@ -103,7 +103,7 @@
           end
 
           # Show git status with fzf, preview calls _fgs_preview helper
-          set -l selection (git status --short | fzf --ansi --height 60% --preview 'fish -c "_fgs_preview {}"')
+          set -l selection (git status --short | fzf --ansi --height 60% --header "Line numbers: OLD | NEW  |  Yellow bg (-) = removed  |  Blue bg (+) = added" --preview 'fish -c "_fgs_preview {}"')
 
           # If nothing selected, exit
           if test -z "$selection"
