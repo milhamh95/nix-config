@@ -43,8 +43,30 @@
           end
         '';
       };
+      _cb_delta_args = {
+        description = "Shared color-blind friendly delta args (deuteranopia)";
+        body = ''
+          echo \
+            --keep-plus-minus-markers \
+            --minus-style="#000000 #ffd700" \
+            --plus-style="#ffffff #2244aa" \
+            --minus-emph-style="bold #000000 #ffaa00" \
+            --plus-emph-style="bold #ffffff #1a3380" \
+            --line-numbers-minus-style="#000000 #ffd700" \
+            --line-numbers-plus-style="#ffffff #2244aa" \
+            --line-numbers-zero-style="#a6adc8"
+        '';
+      };
+      _fgl_preview = {
+        description = "Helper for fgl: preview git show with color-blind friendly delta";
+        body = ''
+          set -l hash $argv[1]
+          set -l delta_args (_cb_delta_args)
+          git show $hash | delta $delta_args
+        '';
+      };
       fgl = {
-        description = "Fuzzy search git log with commit preview (using delta)";
+        description = "Fuzzy search git log with commit preview (using delta, color-blind friendly)";
         body = ''
           # Check if in a git repo
           if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
@@ -53,7 +75,7 @@
           end
 
           # Show git log with fzf, preview shows commit diff with delta
-          set -l commit (git log --oneline --color=always --format="%C(yellow)%h%Creset %s %C(blue)<%an>%Creset %C(green)(%ar)%Creset" | fzf --ansi --height 60% --preview "git show {1} | delta")
+          set -l commit (git log --oneline --color=always --format="%C(yellow)%h%Creset %s %C(blue)<%an>%Creset %C(green)(%ar)%Creset" | fzf --ansi --height 60% --header "(-) Yellow bg = removed  |  (+) Blue bg = added" --preview 'fish -c "_fgl_preview {1}"')
 
           # If nothing selected, exit
           if test -z "$commit"
@@ -71,19 +93,7 @@
           # Extract file path (skip 3-char status prefix "XY ")
           set -l file (echo $argv | string sub -s 4)
           set -l status_code (echo $argv | string sub -l 2)
-
-          # Color-blind friendly delta options (deuteranopia)
-          # Removed: white text on blue background
-          # Added: black text on yellow background
-          set -l delta_args \
-            --keep-plus-minus-markers \
-            --minus-style="#000000 #ffd700" \
-            --plus-style="#ffffff #2244aa" \
-            --minus-emph-style="bold #000000 #ffaa00" \
-            --plus-emph-style="bold #ffffff #1a3380" \
-            --line-numbers-minus-style="#000000 #ffd700" \
-            --line-numbers-plus-style="#ffffff #2244aa" \
-            --line-numbers-zero-style="#a6adc8"
+          set -l delta_args (_cb_delta_args)
 
           if test "$status_code" = "??"
               bat --color=always --style=numbers "$file"
