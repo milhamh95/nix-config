@@ -75,6 +75,7 @@
           end
 
           # Show git status with fzf, preview shows file diff with delta
+          # Inline mode shows + and - symbols for added/removed lines
           set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff HEAD -- {2} 2>/dev/null | delta || git diff --cached -- {2} 2>/dev/null | delta || bat --color=always --style=numbers {2} 2>/dev/null')
 
           # If nothing selected, exit
