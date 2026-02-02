@@ -66,7 +66,7 @@
         '';
       };
       fgs = {
-        description = "Fuzzy search git status with diff preview";
+        description = "Fuzzy search git status with diff preview (using delta)";
         body = ''
           # Check if in a git repo
           if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
@@ -74,8 +74,8 @@
               return 1
           end
 
-          # Show git status with fzf, preview shows file diff
-          set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff HEAD -- {2} 2>/dev/null || git diff --cached -- {2} 2>/dev/null || bat --color=always --style=numbers {2} 2>/dev/null')
+          # Show git status with fzf, preview shows file diff with delta
+          set -l selection (git status --short | fzf --ansi --height 60% --preview 'git diff HEAD -- {2} 2>/dev/null | delta || git diff --cached -- {2} 2>/dev/null | delta || bat --color=always --style=numbers {2} 2>/dev/null')
 
           # If nothing selected, exit
           if test -z "$selection"
