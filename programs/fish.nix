@@ -106,6 +106,93 @@
           end
         '';
       };
+      _fga_preview = {
+        description = "Helper for fga: preview unstaged diff with color-blind friendly delta";
+        body = ''
+          # Extract file path (skip 3-char status prefix "XY ")
+          set -l file (echo $argv | string sub -s 4)
+          set -l status_code (echo $argv | string sub -l 2)
+          set -l delta_args (_cb_delta_args)
+
+          if test "$status_code" = "??"
+              bat --color=always --style=numbers "$file"
+          else
+              # Show only unstaged changes (working tree vs index)
+              git diff -- "$file" 2>/dev/null | delta $delta_args
+          end
+        '';
+      };
+      fga = {
+        description = "Fuzzy git add: interactively stage files with diff preview (multi-select with Tab)";
+        body = ''
+          # Check if in a git repo
+          if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
+              echo "Not a git repository"
+              return 1
+          end
+
+          # Only show files with unstaged changes or untracked files
+          # git status --short format: XY filename
+          #   X = staging area, Y = working tree
+          #   " M" = modified, not staged     "??" = untracked
+          #   "MM" = staged then modified      " D" = deleted, not staged
+          #   "AM" = added then modified
+          # Filter: Y (2nd char) is not a space, meaning working tree has changes
+          set -l unstaged (git status --short | string match -r -e '^.[^ ]')
+          if test -z "$unstaged"
+              echo "No unstaged changes to add"
+              return 0
+          end
+
+          # Show unstaged files with fzf, preview calls _fga_preview helper
+          set -l header_text "Status: ?? = untracked, _M = modified, _D = deleted
+(-) Yellow bg = old/removed line
+(+) Blue bg   = new/added line
+Tab to select multiple files, Enter to confirm"
+          set -l selections (printf '%s\n' $unstaged | fzf --ansi --multi --height 60% --header "$header_text" --preview 'fish -c "_fga_preview {}"')
+
+          # If nothing selected, exit
+          if test -z "$selections"
+              return 0
+          end
+
+          # Stage selected files
+          for selection in $selections
+              set -l file (echo $selection | string sub -s 4)
+              git add "$file"
+          end
+
+          # Show updated status with color-coded labels
+          echo ""
+          echo "Current status:"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          set -l status_lines (git status --short)
+          for line in $status_lines
+              set -l x (echo $line | string sub -l 1)
+              set -l y (echo $line | string sub -s 2 -l 1)
+              set -l file (echo $line | string sub -s 4)
+              if test "$x" != " " -a "$x" != "?"
+                  # Staged change (X has a letter) — blue
+                  set_color 89b4fa
+                  echo "  [staged]   $x  $file"
+                  set_color normal
+              end
+              if test "$y" != " " -a "$y" != "?"
+                  # Unstaged change (Y has a letter) — orange
+                  set_color fab387
+                  echo "  [unstaged] $y  $file"
+                  set_color normal
+              end
+              if test "$x" = "?" -a "$y" = "?"
+                  # Untracked file — white
+                  set_color cdd6f4
+                  echo "  [untracked]   $file"
+                  set_color normal
+              end
+          end
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        '';
+      };
       fgs = {
         description = "Fuzzy search git status with diff preview (using delta, color-blind friendly)";
         body = ''
@@ -417,6 +504,7 @@
       fgbd = "fgbd";  # fuzzy git branch delete (local)
       fgbdr = "fgbdr";  # fuzzy git branch delete (remote)
       fgbc = "fgbc";  # fuzzy git branch compare
+      fga = "fga";  # fuzzy git add (stage files)
       fkill = "fkill";  # fuzzy kill process
       refish = "exec fish";  # reload fish shell
       ucc = "brew upgrade --cask claude-code";  # update claude code
