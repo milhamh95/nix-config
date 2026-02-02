@@ -75,7 +75,10 @@
           end
 
           # Show git log with fzf, preview shows commit diff with delta
-          set -l commit (git log --oneline --color=always --format="%C(yellow)%h%Creset %s %C(blue)<%an>%Creset %C(green)(%ar)%Creset" | fzf --ansi --height 60% --header "(-) Yellow bg = removed  |  (+) Blue bg = added" --preview 'fish -c "_fgl_preview {1}"')
+          set -l header_text "(-) Yellow bg = old/removed line
+(+) Blue bg   = new/added line
+(-)(+) together = line was modified (old then new)"
+          set -l commit (git log --oneline --color=always --format="%C(yellow)%h%Creset %s %C(blue)<%an>%Creset %C(green)(%ar)%Creset" | fzf --ansi --height 60% --header "$header_text" --preview 'fish -c "_fgl_preview {1}"')
 
           # If nothing selected, exit
           if test -z "$commit"
@@ -113,8 +116,9 @@
           end
 
           # Show git status with fzf, preview calls _fgs_preview helper
-          set -l header_text "(-) Yellow bg = removed (old file line number on left)
-(+) Blue bg   = added   (new file line number on right)"
+          set -l header_text "(-) Yellow bg = old/removed line
+(+) Blue bg   = new/added line
+(-)(+) together = line was modified (old then new)"
           set -l selection (git status --short | fzf --ansi --height 60% --header "$header_text" --preview 'fish -c "_fgs_preview {}"')
 
           # If nothing selected, exit
