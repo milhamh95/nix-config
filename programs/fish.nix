@@ -76,6 +76,7 @@
           # Removed: white text on blue background
           # Added: black text on yellow background
           set -l delta_args \
+            --keep-plus-minus-markers \
             --minus-style="#ffffff #2244aa" \
             --plus-style="#000000 #f9e2af" \
             --minus-emph-style="bold #ffffff #1a3380" \
