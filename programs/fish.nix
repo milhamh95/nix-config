@@ -77,12 +77,12 @@
           # Added: black text on yellow background
           set -l delta_args \
             --keep-plus-minus-markers \
-            --minus-style="#ffffff #2244aa" \
-            --plus-style="#000000 #f9e2af" \
-            --minus-emph-style="bold #ffffff #1a3380" \
-            --plus-emph-style="bold #000000 #e8c86e" \
-            --line-numbers-minus-style="#ffffff #2244aa" \
-            --line-numbers-plus-style="#000000 #f9e2af" \
+            --minus-style="#000000 #ffd700" \
+            --plus-style="#ffffff #2244aa" \
+            --minus-emph-style="bold #000000 #ffaa00" \
+            --plus-emph-style="bold #ffffff #1a3380" \
+            --line-numbers-minus-style="#000000 #ffd700" \
+            --line-numbers-plus-style="#ffffff #2244aa" \
             --line-numbers-zero-style="#a6adc8"
 
           if test "$status_code" = "??"
