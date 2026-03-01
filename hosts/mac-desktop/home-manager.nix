@@ -40,41 +40,32 @@
       echo "Checking SoundSource installation..."
 
       SOUNDSOURCE_APP="/Applications/SoundSource.app"
-      TEMP_DIR=$(mktemp -d)
 
-      # Check if SoundSource is already installed with the correct version
+      # Compare two semver strings: returns 0 if $1 > $2, 1 otherwise
+      version_gt() {
+        local IFS=.
+        local i ver1=($1) ver2=($2)
+        for i in 0 1 2; do
+          local n1=''${ver1[$i]:-0}
+          local n2=''${ver2[$i]:-0}
+          if [ "$n1" -gt "$n2" ]; then return 0; fi
+          if [ "$n1" -lt "$n2" ]; then return 1; fi
+        done
+        return 1
+      }
+
+      INSTALLED_VERSION="0.0.0"
       if [ -d "$SOUNDSOURCE_APP" ]; then
-        INSTALLED_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$SOUNDSOURCE_APP/Contents/Info.plist" 2>/dev/null || echo "unknown")
-        if [ "$INSTALLED_VERSION" = "${soundsourceVersion}" ]; then
-          echo "SoundSource ${soundsourceVersion} is already installed ✅"
-        else
-          echo "Found SoundSource version $INSTALLED_VERSION, will install ${soundsourceVersion}"
+        INSTALLED_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$SOUNDSOURCE_APP/Contents/Info.plist" 2>/dev/null || echo "0.0.0")
+      fi
 
-          echo "Downloading SoundSource ${soundsourceVersion}..."
-          cd "$TEMP_DIR"
-
-          if ${pkgs.curl}/bin/curl -L -o soundsource.zip "${soundsourceUrl}"; then
-            echo "Download complete, extracting..."
-            ${pkgs.unzip}/bin/unzip -q soundsource.zip
-
-            APP_PATH=$(find "$TEMP_DIR" -name "SoundSource.app" -type d -maxdepth 2 | head -n 1)
-
-            if [ -n "$APP_PATH" ]; then
-              echo "Installing SoundSource to /Applications..."
-              $DRY_RUN_CMD rm -rf "$SOUNDSOURCE_APP"
-              $DRY_RUN_CMD cp -R "$APP_PATH" /Applications/
-              echo "SoundSource ${soundsourceVersion} installed successfully ✅"
-            else
-              echo "Error: Could not find SoundSource.app in the extracted files"
-            fi
-          else
-            echo "Error: Failed to download SoundSource"
-          fi
-
-          rm -rf "$TEMP_DIR"
-        fi
+      if version_gt "$INSTALLED_VERSION" "${soundsourceVersion}"; then
+        echo "SoundSource $INSTALLED_VERSION is already installed (newer than ${soundsourceVersion}), skipping ✅"
+      elif [ "$INSTALLED_VERSION" = "${soundsourceVersion}" ]; then
+        echo "SoundSource ${soundsourceVersion} is already installed ✅"
       else
-        echo "SoundSource not found, installing ${soundsourceVersion}..."
+        echo "Installing SoundSource ${soundsourceVersion}..."
+        TEMP_DIR=$(mktemp -d)
         cd "$TEMP_DIR"
 
         if ${pkgs.curl}/bin/curl -L -o soundsource.zip "${soundsourceUrl}"; then
@@ -85,6 +76,7 @@
 
           if [ -n "$APP_PATH" ]; then
             echo "Installing SoundSource to /Applications..."
+            [ -d "$SOUNDSOURCE_APP" ] && $DRY_RUN_CMD rm -rf "$SOUNDSOURCE_APP"
             $DRY_RUN_CMD cp -R "$APP_PATH" /Applications/
             echo "SoundSource ${soundsourceVersion} installed successfully ✅"
           else
