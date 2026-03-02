@@ -35,7 +35,6 @@
       "ghostty"
       "google-chrome"
       "hammerspoon"
-      "heptabase"
       "homerow"
       "iina"
       "jordanbaird-ice"

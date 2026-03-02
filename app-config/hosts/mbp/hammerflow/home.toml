@@ -12,7 +12,6 @@ show_ui = true            # optional, default true, show the ui with your key ma
 
 # set a key to open an app
 
-h = "Heptabase"
 o = "OrbStack"
 t = "TablePlus"
 v = ["Visual Studio Code", "VS Code"]
