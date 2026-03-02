@@ -60,19 +60,19 @@
         {
           "apps" : [
             {
-              "bundleIdentifier" : "app.projectmeta.projectmeta",
-              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
-              "name" : "Heptabase"
-            },
-            {
               "bundleIdentifier" : "com.microsoft.VSCode",
               "iconPath" : "/Applications/Visual Studio Code.app/Contents/Resources/Code.icns",
               "name" : "Code"
+            },
+            {
+              "bundleIdentifier" : "md.obsidian",
+              "iconPath" : "/Applications/Obsidian.app/Contents/Resources/icon.icns",
+              "name" : "Obsidian"
             }
           ],
           "display" : "XG27UCS",
           "id" : "40938A74-1B63-44C4-A36D-7FC1FE3B6276",
-          "name" : "P_Heptabase",
+          "name" : "P_Obsidian",
           "openAppsOnActivation" : false,
           "symbolIconName" : "4.square"
         },
@@ -276,19 +276,19 @@
         {
           "apps" : [
             {
-              "bundleIdentifier" : "app.projectmeta.projectmeta",
-              "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
-              "name" : "Heptabase"
-            },
-            {
               "bundleIdentifier" : "com.exafunction.windsurf",
               "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
               "name" : "Windsurf"
+            },
+            {
+              "bundleIdentifier" : "md.obsidian",
+              "iconPath" : "/Applications/Obsidian.app/Contents/Resources/icon.icns",
+              "name" : "Obsidian"
             }
           ],
           "display" : "XG27UCS",
           "id" : "FBFD97A4-3408-432D-BF74-21902AA5DE03",
-          "name" : "W_Heptabase",
+          "name" : "W_Obsidian",
           "openAppsOnActivation" : false,
           "symbolIconName" : "8.circle.fill"
         }
