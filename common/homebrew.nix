@@ -41,7 +41,6 @@
       "karabiner-elements"
       "keka"
       "mockoon"
-      "microsoft-edge"
       "obsidian"
       "orbstack"
       "raycast"
