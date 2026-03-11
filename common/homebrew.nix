@@ -30,6 +30,7 @@
       "brave-browser"
       "cap"
       "claude-code"
+      "conductor"
       "discord"
       "flashspace"
       "ghostty"
