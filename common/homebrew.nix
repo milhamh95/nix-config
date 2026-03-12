@@ -14,6 +14,7 @@
 
     # CLI tools (shared across all machines)
     brews = [
+      "gh"
       "mas"
       "mise"
       "mole"
