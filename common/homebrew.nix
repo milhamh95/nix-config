@@ -32,6 +32,7 @@
       "cap"
       "claude-code"
       "conductor"
+      "cmux"
       "discord"
       "flashspace"
       "ghostty"
