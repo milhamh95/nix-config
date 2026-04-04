@@ -56,7 +56,7 @@
 
     # Mac App Store apps (shared across all machines)
     masApps = {
-      "Amphetamine" = 937984704;
+      # "Amphetamine" = 937984704;
       "BarMarks" = 6739710035;
       "DaisyDisk" = 411643860;
       "ExcalidrawZ" = 6636493997;
