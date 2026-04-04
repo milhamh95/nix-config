@@ -18,7 +18,6 @@
       "mas"
       "mise"
       "mole"
-      "opencode"
     ];
 
     # GUI Apps (shared across all machines)
