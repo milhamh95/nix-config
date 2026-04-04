@@ -61,8 +61,6 @@
       # "DaisyDisk" = 411643860;
       # "ExcalidrawZ" = 6636493997;
       # "Fantastical - Calendar" = 975937182;
-      # "Flow" = 1423210932;
-      # "Folder Quick Look" = 6753110395;
       # "iStat Menus" = 6499559693;
       # "LilyView" = 529490330;
       # "OpenIn" = 1643649331;

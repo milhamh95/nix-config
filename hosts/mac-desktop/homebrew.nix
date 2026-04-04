@@ -21,8 +21,8 @@
 
     # Desktop-specific Mac App Store apps
     masApps = {
-      "Flow" = 1423210932;
-      "Numbers" = 409203825;
+      # "Flow" = 1423210932;
+      # "Numbers" = 409203825;
     };
   };
 }
