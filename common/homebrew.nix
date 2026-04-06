@@ -49,7 +49,7 @@
       "rectangle-pro"
       "rocket"
       "shottr"
-      # "visual-studio-code"
+      "visual-studio-code"
       "vlc"
       "zoom"
     ];

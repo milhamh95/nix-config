@@ -14,7 +14,7 @@
       "rewritebar"
       "slack"
       "tableplus"
-      # "windsurf"
+      "windsurf"
       "wezterm"
       "zed"
     ];
