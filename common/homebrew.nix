@@ -18,6 +18,7 @@
       "mas"
       "mise"
       "mole"
+      "rtk"
     ];
 
     # GUI Apps (shared across all machines)
