@@ -29,7 +29,6 @@
       "bloom"
       "bruno"
       "brave-browser"
-      "cap"
       "claude-code"
       "conductor"
       "cmux"
