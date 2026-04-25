@@ -4,6 +4,10 @@
 # Install apps using homebrew for consistent paths across machines
 # This makes it easier to map applications to FlashSpace
 {
+  environment.shellInit = lib.mkIf config.homebrew.enable ''
+    eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
+  '';
+
   homebrew = {
     enable = true;
     taps = [];
