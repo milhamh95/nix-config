@@ -5,7 +5,7 @@
 # This makes it easier to map applications to FlashSpace
 {
   environment.shellInit = lib.mkIf config.homebrew.enable ''
-    eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
+    eval "$(${config.homebrew.prefix}/bin/brew shellenv)"
   '';
 
   homebrew = {
