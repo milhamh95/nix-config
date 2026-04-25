@@ -5,21 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,9 +20,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew,
-                     homebrew-core, homebrew-cask, homebrew-bundle,
-                     home-manager, sops-nix, flake-parts, ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, sops-nix, flake-parts, ... }:
   let
     # Host configurations - define username per machine
     hostConfigs = {
@@ -129,21 +112,6 @@
           ({ lib, ... }: {
             nixpkgs.config = lib.mkOrder 1500 (builtins.trace "Building configuration for hostname: ${hostname}, username: ${username}" {});
           })
-
-          # Homebrew setup
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              enable = true;
-              user = username;
-              taps = {
-                "homebrew/homebrew-core" = homebrew-core;
-                "homebrew/homebrew-cask" = homebrew-cask;
-                "homebrew/homebrew-bundle" = homebrew-bundle;
-              };
-              autoMigrate = true;
-            };
-          }
 
           # Home-manager configuration
           home-manager.darwinModules.home-manager

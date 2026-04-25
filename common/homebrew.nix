@@ -70,9 +70,6 @@
     };
 
     onActivation.cleanup = "zap";
-    # solve issue mas apps fail
-    # https://github.com/zhaofengli/nix-homebrew/issues/131#issuecomment-4275059685
-    # onActivation.autoUpdate = false;
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
   };
