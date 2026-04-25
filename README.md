@@ -6,201 +6,294 @@ Personal Nix configuration for managing system packages, dev environment, and do
 
 ## Architecture
 
+### How It Works
+
+Configuration is built from **layers that merge together**:
+
+```mermaid
+block-beta
+    columns 2
+    lbl5["Host"]:1
+    block:layer5["hosts/{machine}/"]:1
+        l5["SoundSource, dock size, batfi"]
+    end
+    lbl4["Alami Profile"]:1
+    block:layer4["profiles/alami/"]:1
+        l4["sdkman, sftpgo, alami SSH, slack, claude-code"]
+    end
+    lbl3["Work Profile"]:1
+    block:layer3["profiles/work/"]:1
+        l3["bloom, tableplus"]
+    end
+    lbl2["Dev Profile"]:1
+    block:layer2["profiles/dev/"]:1
+        l2["lazygit, vscode, orbstack, git abbreviations, mise"]
+    end
+    lbl1["Common"]:1
+    block:layer1["common/"]:1
+        l1["browsers, media, fonts, karabiner, raycast, git"]
+    end
+
+    style lbl1 fill:#74c7ec,color:#1e1e2e
+    style lbl2 fill:#313244,color:#cdd6f4
+    style lbl3 fill:#a18072,color:#1e1e2e
+    style lbl4 fill:#f5a97f,color:#1e1e2e
+    style lbl5 fill:#f38ba8,color:#1e1e2e
+    style layer1 fill:#74c7ec,color:#1e1e2e
+    style layer2 fill:#313244,color:#cdd6f4
+    style layer3 fill:#a18072,color:#1e1e2e
+    style layer4 fill:#f5a97f,color:#1e1e2e
+    style layer5 fill:#f38ba8,color:#1e1e2e
+    style l1 fill:#74c7ec,color:#1e1e2e,stroke:#74c7ec
+    style l2 fill:#313244,color:#cdd6f4,stroke:#313244
+    style l3 fill:#a18072,color:#1e1e2e,stroke:#a18072
+    style l4 fill:#f5a97f,color:#1e1e2e,stroke:#f5a97f
+    style l5 fill:#f38ba8,color:#1e1e2e,stroke:#f38ba8
+```
+
+| Color | Layer | Applied to |
+|-------|-------|------------|
+| 🔷 Cyan | `common/` | All machines |
+| ⬛ Dark | `profiles/dev/` | Machines with dev tools |
+| 🟤 Brown | `profiles/work/` | Machines used for work |
+| 🟠 Peach | `profiles/alami/` | Machines for Alami job |
+| 🔶 Pink | `hosts/{machine}/` | This specific machine only |
+
+Each machine opts into the layers it needs:
+
+```mermaid
+flowchart LR
+    subgraph mac-desktop
+        md_c["common"]
+        md_d["dev"]
+        md_w["work"]
+        md_a["alami"]
+        md_h["hosts/mac-desktop"]
+    end
+
+    subgraph alami-mbp
+        a_c["common"]
+        a_d["dev"]
+        a_w["work"]
+        a_a["alami"]
+        a_h["hosts/alami-mbp"]
+    end
+
+    subgraph mbp["mbp (personal)"]
+        m_c["common"]
+        m_h["hosts/mbp"]
+    end
+
+    style md_c fill:#74c7ec,color:#1e1e2e
+    style md_d fill:#313244,color:#cdd6f4
+    style md_w fill:#a18072,color:#1e1e2e
+    style md_a fill:#f5a97f,color:#1e1e2e
+    style md_h fill:#f38ba8,color:#1e1e2e
+    style a_c fill:#74c7ec,color:#1e1e2e
+    style a_d fill:#313244,color:#cdd6f4
+    style a_w fill:#a18072,color:#1e1e2e
+    style a_a fill:#f5a97f,color:#1e1e2e
+    style a_h fill:#f38ba8,color:#1e1e2e
+    style m_c fill:#74c7ec,color:#1e1e2e
+    style m_h fill:#f38ba8,color:#1e1e2e
+```
+
+Configured in `flake.nix`:
+
+```nix
+"mac-desktop" = { profiles = [ "dev" "work" "alami" ]; };  # everything
+"alami-mbp"   = { profiles = [ "dev" "work" "alami" ]; };  # everything (portable)
+"mbp"          = { profiles = [];                       };  # minimal
+```
+
+To add dev tools to mbp later, just change to `profiles = [ "dev" ];`.
+To cherry-pick individual packages, add them to `hosts/mbp/`.
+
 ### Directory Structure
 
 ```
 nix-config/
-├── flake.nix                     # Entry point
-├── Makefile                      # Build commands
-├── common/                       # Shared configurations
-│   ├── home-manager.nix
-│   ├── homebrew.nix
-│   ├── nix-packages.nix
-│   └── system-defaults.nix
-├── hosts/                        # Machine-specific configurations
-│   ├── mac-desktop/
-│   │   ├── default.nix
-│   │   ├── home-manager.nix
-│   │   ├── homebrew.nix
-│   │   ├── nix-packages.nix
-│   │   └── system-defaults.nix
-│   ├── mbp/
-│   │   └── ... (same structure)
-│   └── alami-mbp/
-│       └── ... (same structure)
-├── programs/                     # Shared program configs (fish, atuin, etc.)
-├── app-config/
-│   ├── common/                   # Shared app configs
-│   └── hosts/                    # Machine-specific app configs
-├── scripts/                      # Installation scripts
-└── shells/                       # Development shells
+├── flake.nix                       # Entry point — defines hosts + profiles
+├── Makefile                        # Build commands
+│
+├── common/                         # ALL machines
+│   ├── homebrew.nix                #   browsers, media, utilities
+│   ├── nix-packages.nix            #   basic tools + fonts
+│   ├── home-manager.nix            #   SSH, karabiner, bat, ghostty config
+│   ├── system-defaults.nix         #   macOS settings (dock, finder, etc.)
+│   └── programs/                   #   shell & tool configs
+│       ├── fish/                   #     fish shell: mkcd, fcd, fkill, ls abbrs
+│       ├── atuin.nix               #     shell history
+│       └── fastfetch.nix           #     system info
+│
+├── profiles/                       # opt-in by profile
+│   ├── dev/                        #   developer tools
+│   │   ├── homebrew.nix            #     vscode, orbstack, bruno, gh, mise...
+│   │   ├── nix-packages.nix        #     delta, lazygit, ripgrep, forgit...
+│   │   ├── home-manager.nix        #     mise setup, wezterm, git delta theme
+│   │   ├── mise.nix                #     node/go version manager
+│   │   └── fish/                   #     git functions, git abbreviations
+│   ├── work/                       #   generic work apps
+│   │   ├── homebrew.nix            #     bloom, tableplus
+│   │   ├── home-manager.nix        #     work folder setup
+│   │   └── system-defaults.nix     #     Bloom in dock
+│   └── alami/                      #   Alami job-specific
+│       ├── homebrew.nix            #     slack, claude-code, pritunl, windsurf...
+│       ├── nix-packages.nix        #     sdkman, sftpgo, zstd
+│       ├── home-manager.nix        #     alami SSH, sdkman, sftpgo
+│       └── fish/                   #     gca commit workflow, ws shortcut
+│
+├── hosts/                          # per-machine unique
+│   ├── mac-desktop/                #   bettermouse, bettertouchtool, SoundSource
+│   ├── mbp/                        #   batfi, dock=50
+│   └── alami-mbp/                  #   batfi, masApps, dock=50
+│
+├── dotfiles/                       # raw config files (copied to ~)
+│   ├── common/                     #   ghostty, karabiner, bat, git, ssh...
+│   └── hosts/                      #   per-machine gitconfig, flashspace...
+│
+├── scripts/                        # installation scripts
+│   ├── setup-nix.sh                #   Xcode + Nix + Homebrew
+│   ├── install-desktop.sh          #   bootstrap mac-desktop
+│   ├── install-mbp.sh              #   bootstrap mbp
+│   └── install-alami.sh            #   bootstrap alami-mbp
+│
+└── shells/                         # nix develop environments (postgres, redis)
 ```
 
 ### Configuration Flow
 
+Each machine's final config is built by **merging** all its layers (not overriding):
+
+#### mac-desktop `profiles = [ "dev" "work" "alami" ]`
+
 ```mermaid
-flowchart TB
-    subgraph Entry["Entry Point"]
-        flake["flake.nix"]
+flowchart LR
+    subgraph common["common/"]
+        c_pkg["packages: git, bat, curl, fzf, fonts..."]
+        c_app["apps: chrome, brave, ghostty, raycast..."]
+        c_cfg["config: karabiner, SSH, bat theme"]
+        c_sys["system: dock, finder, keyboard defaults"]
+        c_prg["programs: fish, atuin, fastfetch"]
     end
 
-    subgraph Common["Common Modules"]
-        c_hm["common/home-manager.nix"]
-        c_hb["common/homebrew.nix"]
-        c_np["common/nix-packages.nix"]
-        c_sd["common/system-defaults.nix"]
+    subgraph dev["profiles/dev/"]
+        d_pkg["packages: delta, lazygit, ripgrep, forgit"]
+        d_app["apps: vscode, orbstack, bruno"]
+        d_cfg["config: mise, wezterm, git delta theme"]
+        d_fish["fish: git functions, git abbreviations"]
     end
 
-    subgraph Desktop["hosts/mac-desktop/"]
-        d_def["default.nix"]
-        d_hm["home-manager.nix"]
-        d_hb["homebrew.nix"]
-        d_np["nix-packages.nix"]
-        d_sd["system-defaults.nix"]
+    subgraph work["profiles/work/"]
+        w_app["apps: bloom, tableplus"]
+        w_cfg["config: work folder, Bloom in dock"]
     end
 
-    subgraph MBP["hosts/mbp/"]
-        m_def["default.nix"]
-        m_hm["home-manager.nix"]
-        m_hb["homebrew.nix"]
-        m_np["nix-packages.nix"]
-        m_sd["system-defaults.nix"]
+    subgraph alami["profiles/alami/"]
+        a_pkg["packages: sdkman, sftpgo, zstd"]
+        a_app["apps: slack, claude-code, pritunl, windsurf"]
+        a_cfg["config: alami SSH, sdkman, sftpgo"]
+        a_fish["fish: gca commit workflow, ws shortcut"]
     end
 
-    subgraph Alami["hosts/alami-mbp/"]
-        a_def["default.nix"]
-        a_hm["home-manager.nix"]
-        a_hb["homebrew.nix"]
-        a_np["nix-packages.nix"]
-        a_sd["system-defaults.nix"]
+    subgraph host["hosts/mac-desktop/"]
+        h_app["apps: bettermouse, bettertouchtool, SoundSource"]
+        h_sys["system: dock size 65, no battery %"]
     end
 
-    subgraph Programs["programs/"]
-        prog["default.nix"]
-        fish["fish.nix"]
-        atuin["atuin.nix"]
-        fastfetch["fastfetch.nix"]
-        mise["mise.nix"]
-    end
+    result["mac-desktop final config"]
 
-    flake --> c_hm & c_hb & c_np & c_sd
-    flake -->|"#mac-desktop"| d_def & d_hm & d_hb & d_np & d_sd
-    flake -->|"#mbp"| m_def & m_hm & m_hb & m_np & m_sd
-    flake -->|"#alami-mbp"| a_def & a_hm & a_hb & a_np & a_sd
-    c_hm --> prog
-    prog --> fish & atuin & fastfetch & mise
+    common --> result
+    dev --> result
+    work --> result
+    alami --> result
+    host --> result
+
+    style common fill:#74c7ec,color:#1e1e2e
+    style dev fill:#313244,color:#cdd6f4
+    style work fill:#a18072,color:#1e1e2e
+    style alami fill:#f5a97f,color:#1e1e2e
+    style host fill:#f38ba8,color:#1e1e2e
 ```
 
-### App Config Flow
+#### alami-mbp `profiles = [ "dev" "work" "alami" ]`
+
+Same layers as mac-desktop, different host-specific config:
 
 ```mermaid
-flowchart TB
-    subgraph CommonHM["common/home-manager.nix"]
-        chm_files["home.file"]
+flowchart LR
+    subgraph common["common/"]
+        c["packages + apps + programs + system defaults"]
     end
 
-    subgraph DesktopHM["hosts/mac-desktop/home-manager.nix"]
-        dhm_files["home.file"]
+    subgraph dev["profiles/dev/"]
+        d["packages + apps + mise + fish"]
     end
 
-    subgraph MBPHM["hosts/mbp/home-manager.nix"]
-        mhm_files["home.file"]
+    subgraph work["profiles/work/"]
+        w["apps + work folder + Bloom in dock"]
     end
 
-    subgraph AlamiHM["hosts/alami-mbp/home-manager.nix"]
-        ahm_files["home.file"]
+    subgraph alami["profiles/alami/"]
+        a["packages + apps + alami config + fish"]
     end
 
-    subgraph CommonConfig["app-config/common/"]
-        ac_ghostty["ghostty/config"]
-        ac_wezterm["wezterm/wezterm.lua"]
-        ac_git["git/.gitconfig-personal<br/>git/.gitconfig-alami-group<br/>git/.gitignore"]
-        ac_karabiner["karabiner/karabiner.json"]
-        ac_mise["mise/config.toml"]
-        ac_ssh["ssh/config<br/>ssh/id_github_personal.pub"]
+    subgraph host["hosts/alami-mbp/"]
+        h_app["apps: batfi, Flow, Numbers"]
+        h_sys["system: dock size 50, battery %"]
     end
 
-    subgraph DesktopConfig["app-config/hosts/mac-desktop/"]
-        ad_git["git/.gitconfig"]
-        ad_flash["flashspace/profiles.json<br/>flashspace/settings.json"]
-        ad_hammer["hammerflow/home.toml<br/>hammerflow/init.lua"]
-        ad_sftpgo["sftpgo/config.nix"]
+    result["alami-mbp final config"]
+
+    common --> result
+    dev --> result
+    work --> result
+    alami --> result
+    host --> result
+
+    style common fill:#74c7ec,color:#1e1e2e
+    style dev fill:#313244,color:#cdd6f4
+    style work fill:#a18072,color:#1e1e2e
+    style alami fill:#f5a97f,color:#1e1e2e
+    style host fill:#f38ba8,color:#1e1e2e
+```
+
+#### mbp `profiles = []`
+
+Minimal — only common + host:
+
+```mermaid
+flowchart LR
+    subgraph common["common/"]
+        c_pkg["packages: git, bat, curl, fzf, fonts..."]
+        c_app["apps: chrome, brave, ghostty, raycast..."]
+        c_cfg["config: karabiner, SSH, bat theme"]
+        c_sys["system: dock, finder, keyboard defaults"]
+        c_prg["programs: fish, atuin, fastfetch"]
     end
 
-    subgraph MBPConfig["app-config/hosts/mbp/"]
-        am_git["git/.gitconfig"]
-        am_flash["flashspace/profiles.json<br/>flashspace/settings.json"]
-        am_hammer["hammerflow/home.toml<br/>hammerflow/init.lua"]
+    subgraph host["hosts/mbp/"]
+        h_app["apps: batfi"]
+        h_sys["system: dock size 50, battery %"]
     end
 
-    subgraph AlamiConfig["app-config/hosts/alami-mbp/"]
-        aa_git["git/.gitconfig"]
-        aa_flash["flashspace/profiles.json<br/>flashspace/settings.json"]
-        aa_hammer["hammerflow/home.toml<br/>hammerflow/init.lua"]
-        aa_sftpgo["sftpgo/config.nix"]
-    end
+    result["mbp final config (minimal)"]
 
-    chm_files --> ac_ghostty & ac_wezterm & ac_git & ac_karabiner & ac_mise & ac_ssh
-    dhm_files --> ad_git & ad_flash & ad_hammer & ad_sftpgo
-    mhm_files --> am_git & am_flash & am_hammer
-    ahm_files --> aa_git & aa_flash & aa_hammer & aa_sftpgo
+    common --> result
+    host --> result
+
+    style common fill:#74c7ec,color:#1e1e2e
+    style host fill:#f38ba8,color:#1e1e2e
 ```
 
 ### Installation Flow
 
 ```mermaid
 flowchart LR
-    subgraph Make["Makefile"]
-        make_d["make install-desktop"]
-        make_m["make install-mbp"]
-        make_a["make install-alami"]
-    end
-
-    subgraph Scripts["scripts/"]
-        setup["setup-nix.sh"]
-        inst_d["install-desktop.sh"]
-        inst_m["install-mbp.sh"]
-        inst_a["install-alami.sh"]
-    end
-
-    subgraph Steps["Installation Steps"]
-        s1["1. Xcode CLI Tools"]
-        s2["2. Install Nix"]
-        s3d["3. Apply #mac-desktop"]
-        s3m["3. Apply #mbp"]
-        s3a["3. Apply #alami-mbp"]
-    end
-
-    make_d --> inst_d
-    make_m --> inst_m
-    make_a --> inst_a
-    inst_d --> setup
-    inst_m --> setup
-    inst_a --> setup
-    setup --> s1 --> s2
-    inst_d --> s3d
-    inst_m --> s3m
-    inst_a --> s3a
+    s1["1. Xcode CLI Tools"] --> s2["2. Install Nix"] --> s3["3. Install Homebrew"] --> s4["4. Apply nix-darwin"]
 ```
 
-### Module Merging
-
-Common and host-specific modules are **merged** (not sequential):
-
-```mermaid
-flowchart LR
-    subgraph Inputs
-        c_hb["common/homebrew.nix<br/>casks: [ghostty, raycast, ...]"]
-        d_hb["hosts/mac-desktop/homebrew.nix<br/>casks: [bruno, orbstack, ...]"]
-    end
-
-    subgraph Result
-        merged["Final homebrew.casks<br/>[ghostty, raycast, ..., bruno, orbstack, ...]"]
-    end
-
-    c_hb --> merged
-    d_hb --> merged
-```
+Run `make install-desktop`, `make install-mbp`, or `make install-alami` to execute all steps.
 
 ## Prerequisite
 
@@ -225,16 +318,6 @@ make install-mbp      # For MacBook Pro (personal)
 # or
 make install-alami    # For Alami MacBook Pro (work)
 ```
-
-
-> **Note:** When prompted about `Determinate` package, press `n` to skip.
->
-> ![Determinate Package](nix_determinate.png)
-> https://github.com/nix-darwin/nix-darwin/issues/1349
-
-> https://github.com/nix-darwin/nix-darwin/issues/1361
-
-> https://github.com/nix-darwin/nix-darwin/pull/1367
 
 After installation, restart your terminal to use fish shell.
 
@@ -274,13 +357,10 @@ sudo nix-collect-garbage -d
 ## Documentation
 
 - [Secrets Management](docs/secrets-management.md) - How to securely store SSH keys, API keys, etc.
+- [Paid Apps](docs/paid-apps.md) - License info and device limits for paid apps
 
 ## Reference
 
 - [github.com/r17x/universe](https://github.com/r17x/universe)
 - [github.com/torgeir/nix-darwin](https://github.com/torgeir/nix-darwin)
 - [github.com/linkarzu/dotfiles-latest](https://github.com/linkarzu/dotfiles-latest)
-
-## To Do
-
-- Use [nixos-unified](https://nixos-unified.org/index.html) to unify nix-darwin + home-manager

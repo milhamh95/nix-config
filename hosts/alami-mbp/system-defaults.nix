@@ -4,20 +4,11 @@
     dock = {
       # Smaller dock for laptop screen
       tilesize = 50;
-
-      # Laptop-specific dock apps (streamlined)
-      persistent-apps = [
-        { app = "/Applications/Bloom.app"; }
-        { spacer = { small = true; }; }
-      ];
     };
 
     controlcenter = {
       # Battery percentage critical for laptop
       BatteryShowPercentage = true;
-    };
-
-    universalaccess = {
     };
   };
 }

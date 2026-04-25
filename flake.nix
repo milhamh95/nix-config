@@ -22,20 +22,51 @@
 
   outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, sops-nix, flake-parts, ... }:
   let
-    # Host configurations - define username per machine
+    # Host configurations - define username and profiles per machine
     hostConfigs = {
       "mac-desktop" = {
         hostname = "mac-desktop";
         username = "milhamh95";
+        profiles = [ "dev" "work" "alami" ];
       };
       "mbp" = {
         hostname = "mbp";
-        username = "milhamh95";  # Change this to your MacBook Pro username
+        username = "milhamh95";
+        profiles = [];
       };
       "alami-mbp" = {
         hostname = "alami-mbp";
         username = "muhammadilhamhidayat";
+        profiles = [ "dev" "work" "alami" ];
       };
+    };
+
+    # Profile modules (system-level and home-manager-level)
+    profileSystemModules = {
+      "dev" = [
+        ./profiles/dev/nix-packages.nix
+        ./profiles/dev/homebrew.nix
+      ];
+      "work" = [
+        ./profiles/work/homebrew.nix
+        ./profiles/work/system-defaults.nix
+      ];
+      "alami" = [
+        ./profiles/alami/nix-packages.nix
+        ./profiles/alami/homebrew.nix
+      ];
+    };
+
+    profileHomeModules = {
+      "dev" = [
+        ./profiles/dev/home-manager.nix
+      ];
+      "work" = [
+        ./profiles/work/home-manager.nix
+      ];
+      "alami" = [
+        ./profiles/alami/home-manager.nix
+      ];
     };
 
     # Base configuration shared across all hosts
@@ -92,6 +123,17 @@
       let
         hostname = hostConfig.hostname;
         username = hostConfig.username;
+        profiles = hostConfig.profiles or [];
+
+        # Collect system-level modules from profiles
+        extraSystemModules = builtins.concatMap
+          (p: profileSystemModules.${p} or [])
+          profiles;
+
+        # Collect home-manager modules from profiles
+        extraHomeModules = builtins.concatMap
+          (p: profileHomeModules.${p} or [])
+          profiles;
       in
       nix-darwin.lib.darwinSystem {
         modules = [
@@ -102,16 +144,13 @@
           ./common/system-defaults.nix
           ./common/homebrew.nix
 
+          # Profile modules (role-based, e.g. dev, work)
+        ] ++ extraSystemModules ++ [
+
           # Host-specific modules
           ./hosts/${hostname}/default.nix
-          ./hosts/${hostname}/nix-packages.nix
           ./hosts/${hostname}/system-defaults.nix
           ./hosts/${hostname}/homebrew.nix
-
-          # Debug trace (optional)
-          ({ lib, ... }: {
-            nixpkgs.config = lib.mkOrder 1500 (builtins.trace "Building configuration for hostname: ${hostname}, username: ${username}" {});
-          })
 
           # Home-manager configuration
           home-manager.darwinModules.home-manager
@@ -123,6 +162,7 @@
               imports = [
                 inputs.sops-nix.homeManagerModules.sops
                 ./common/home-manager.nix
+              ] ++ extraHomeModules ++ [
                 ./hosts/${hostname}/home-manager.nix
               ];
             };

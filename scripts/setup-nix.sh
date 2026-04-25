@@ -20,7 +20,7 @@ echo ""
 echo "Step 2: Checking Nix..."
 if ! command -v nix &> /dev/null; then
     echo "Installing Nix..."
-    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.nixos.org/nix | \
       sh -s -- install
 
     # Source nix to make it available in current shell
@@ -28,4 +28,18 @@ if ! command -v nix &> /dev/null; then
     . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 else
     echo "Nix already installed"
+fi
+
+# Step 3: Install Homebrew
+echo ""
+echo "Step 3: Checking Homebrew..."
+if ! command -v brew &> /dev/null; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # Add Homebrew to PATH for current shell
+    echo "Loading Homebrew into current shell..."
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+    echo "Homebrew already installed"
 fi

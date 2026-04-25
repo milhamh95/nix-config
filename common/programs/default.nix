@@ -5,6 +5,6 @@
   imports = [
     ./atuin.nix
     ./fastfetch.nix
-    ./fish.nix
+    ./fish
   ];
 }

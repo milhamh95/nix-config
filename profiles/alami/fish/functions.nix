@@ -1,4 +1,4 @@
-# programs/fish-git-alami.nix - Alami git workflow (mac-desktop, alami-mbp only)
+# profiles/alami/fish/functions.nix - Alami git workflow functions
 { config, lib, pkgs, ... }:
 
 {
@@ -160,9 +160,5 @@
         echo "Done!"
       '';
     };
-  };
-
-  programs.fish.shellAbbrs = {
-    gca = "gca";  # git commit alami
   };
 }

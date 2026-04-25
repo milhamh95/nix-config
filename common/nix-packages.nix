@@ -8,25 +8,19 @@
     pkgs.atuin
     pkgs.bat
     pkgs.curl
-    pkgs.delta
     pkgs.fastfetch
     pkgs.fd
-    pkgs.fishPlugins.forgit
     pkgs.fishPlugins.tide
     pkgs.fishPlugins.sponge
-    pkgs.fishPlugins.colored-man-pages
     pkgs.fishPlugins.z
     pkgs.fishPlugins.done
     pkgs.fzf
     pkgs.git
-    pkgs.lazygit
     pkgs.lsd
     pkgs.openssl
-    pkgs.ripgrep
     pkgs.sops
     pkgs.vim
     pkgs.wget
-    pkgs.yarn-berry_4
   ];
 
   # Font configuration

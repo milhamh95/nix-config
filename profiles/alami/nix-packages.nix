@@ -1,8 +1,7 @@
-# hosts/mac-desktop/nix-packages.nix - Mac Desktop specific system packages
+# profiles/alami/nix-packages.nix - Alami work system packages
 { config, lib, pkgs, ... }:
 
 {
-  # Desktop-specific system packages
   environment.systemPackages = [
     pkgs.fishPlugins.sdkman-for-fish
     pkgs.sftpgo

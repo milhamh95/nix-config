@@ -16,7 +16,5 @@
       BatteryShowPercentage = true;
     };
 
-    universalaccess = {
-    };
   };
 }

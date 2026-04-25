@@ -5,13 +5,13 @@ set -e
 echo "Installing nix-darwin for: Mac Desktop"
 echo ""
 
-# Run shared setup (Xcode + Nix)
+# Run shared setup (Xcode + Nix + Homebrew)
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 bash "$SCRIPT_DIR/setup-nix.sh"
 
-# Step 3: Apply nix-darwin configuration
+# Step 4: Apply nix-darwin configuration
 echo ""
-echo "Step 3: Applying nix-darwin configuration..."
+echo "Step 4: Applying nix-darwin configuration..."
 cd ~/nix/nix-config
 nix run nix-darwin -- switch --flake .#mac-desktop
 

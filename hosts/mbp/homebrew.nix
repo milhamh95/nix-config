@@ -6,12 +6,7 @@
     # Laptop-specific casks
     casks = [
       "batfi"
-      "conar"
     ];
 
-    # Laptop-specific Mac App Store apps (add as needed)
-    masApps = {
-      # Currently none identified as laptop-exclusive
-    };
-  };
+};
 }

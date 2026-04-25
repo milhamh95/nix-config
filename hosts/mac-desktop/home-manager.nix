@@ -2,37 +2,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [
-    ../../programs/fish-git-alami.nix
-  ];
-  # Sops secrets configuration (mac-desktop only)
-  sops.secrets.id_github_alami_group = {
-    sopsFile = ../../secrets/id_github_alami_group.enc;
-    format = "binary";
-    path = "${config.home.homeDirectory}/.ssh/id_github_alami_group";
-    mode = "0600";
-  };
-
-  # Desktop-specific activation scripts
   home.activation = {
-    configureWorkFolder = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      if [ ! -d "$HOME/work" ]; then
-        echo "Creating Work directory... ⚙️"
-        $DRY_RUN_CMD mkdir -p "$HOME/work"
-        echo "Work directory created at $HOME/work ✅"
-      fi
-    '';
-
-    configureSdkman = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      if [ ! -e "$HOME/sdkman_configured" ]; then
-        echo "Configuring SDKMAN... ⚙️"
-        export PATH="/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
-        /usr/bin/curl -s "https://get.sdkman.io" | /bin/bash
-        $DRY_RUN_CMD touch "$HOME/sdkman_configured"
-        echo "SDKMAN configured ✅"
-      fi
-    '';
-
     installSoundSource = let
       soundsourceVersion = "5.8.12";
       soundsourceUrl = "https://rogueamoeba.com/legacy/downloads/SoundSource-5812.zip";
@@ -90,24 +60,10 @@
       fi
     '';
 
-    configureWorkSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      echo "Configuring work SSH..."
-      $DRY_RUN_CMD mkdir -p "$HOME/.ssh"
-      $DRY_RUN_CMD cp ${../../app-config/hosts/mac-desktop/ssh/id_github_alami_group.pub} "$HOME/.ssh/id_github_alami_group.pub"
-      $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_alami_group.pub"
-
-      # Append work SSH config if not already present
-      if ! grep -q "Host alami-group" "$HOME/.ssh/config" 2>/dev/null; then
-        echo "" >> "$HOME/.ssh/config"
-        $DRY_RUN_CMD cat ${../../app-config/hosts/mac-desktop/ssh/config} >> "$HOME/.ssh/config"
-      fi
-      echo "Work SSH configured"
-    '';
-
     installSwitor = lib.hm.dag.entryAfter ["writeBoundary"] ''
       echo "Checking Switor installation..."
       SWITOR_APP="/Applications/Switor.app"
-      SOURCE_APP="${../../app-config/switor/Switor.app}"
+      SOURCE_APP="${../../dotfiles/switor/Switor.app}"
 
       if [ -d "$SWITOR_APP" ]; then
         echo "Switor is already installed ✅"
@@ -119,61 +75,42 @@
     '';
   };
 
-  # Desktop-specific home file configurations
   home.file = {
-    # SFTPGo config (mac-desktop only)
-    ".config/sftpgo/sftpgo.json" = {
-      text = builtins.toJSON (import ../../app-config/hosts/mac-desktop/sftpgo/config.nix { inherit pkgs; });
-      onChange = ''
-        echo "SFTPGo config changed"
-      '';
-    };
-    ".config/sftpgo/templates".source = "${pkgs.sftpgo}/share/sftpgo/templates";
-    ".config/sftpgo/static".source = "${pkgs.sftpgo}/share/sftpgo/static";
-    ".config/sftpgo/openapi".source = "${pkgs.sftpgo}/share/sftpgo/openapi";
-
-    # Git config (host-specific due to username in paths)
+    # Git config (host-specific)
     ".gitconfig" = {
-      source = ../../app-config/hosts/mac-desktop/git/.gitconfig;
+      source = ../../dotfiles/hosts/mac-desktop/git/.gitconfig;
       onChange = ''
         echo "Git config changed"
       '';
     };
-    # Git work identity (mac-desktop only)
-    ".gitconfig-alami-group" = {
-      source = ../../app-config/common/git/.gitconfig-alami-group;
-      onChange = ''
-        echo "Git alami-group config changed"
-      '';
-    };
     ".config/flashspace/profiles.json" = {
-      source = ../../app-config/hosts/mac-desktop/flashspace/profiles.json;
+      source = ../../dotfiles/hosts/mac-desktop/flashspace/profiles.json;
       force = true;
       onChange = ''
         echo "Flashspace profiles changed"
       '';
     };
     ".config/flashspace/settings.json" = {
-      source = ../../app-config/hosts/mac-desktop/flashspace/settings.json;
+      source = ../../dotfiles/hosts/mac-desktop/flashspace/settings.json;
       force = true;
       onChange = ''
         echo "Flashspace settings changed"
       '';
     };
     ".hammerspoon/home.toml" = {
-      source = ../../app-config/hosts/mac-desktop/hammerflow/home.toml;
+      source = ../../dotfiles/hosts/mac-desktop/hammerflow/home.toml;
       onChange = ''
         echo "Hammerspoon home config changed"
       '';
     };
     ".hammerspoon/init.lua" = {
-      source = ../../app-config/hosts/mac-desktop/hammerflow/init.lua;
+      source = ../../dotfiles/hosts/mac-desktop/hammerflow/init.lua;
       onChange = ''
         echo "Hammerspoon init config changed"
       '';
     };
     ".config/switor/config.json" = {
-      source = ../../app-config/switor/config.json;
+      source = ../../dotfiles/switor/config.json;
       force = true;
       onChange = ''
         echo "Switor config changed"
@@ -181,10 +118,7 @@
     };
   };
 
-  # Desktop-specific shell abbreviations
   programs.fish.shellAbbrs = {
-    work = "cd $HOME/work";
     nixmd = "sudo darwin-rebuild switch --flake .#mac-desktop";
-    mocksftp = "sftpgo serve -c ~/.config/sftpgo";
   };
 }
