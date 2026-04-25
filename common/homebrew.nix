@@ -6,11 +6,7 @@
 {
   homebrew = {
     enable = true;
-    taps = [
-      "homebrew/core"
-      "homebrew/cask"
-      "homebrew/bundle"
-    ];
+    taps = [];
 
     # CLI tools (shared across all machines)
     brews = [
