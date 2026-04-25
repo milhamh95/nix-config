@@ -69,7 +69,7 @@
       # "Spokenly" = 6740315592;
     };
 
-    onActivation.cleanup = "zap";
+    # onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
   };
