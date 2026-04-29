@@ -29,12 +29,12 @@
     configureWorkSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
       echo "Configuring work SSH..."
       $DRY_RUN_CMD mkdir -p "$HOME/.ssh"
-      $DRY_RUN_CMD cp ${../../dotfiles/common/ssh/id_github_alami_group.pub} "$HOME/.ssh/id_github_alami_group.pub"
+      $DRY_RUN_CMD cp ${./dotfiles/ssh/id_github_alami_group.pub} "$HOME/.ssh/id_github_alami_group.pub"
       $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_alami_group.pub"
 
       if ! grep -q "Host alami-group" "$HOME/.ssh/config" 2>/dev/null; then
         echo "" >> "$HOME/.ssh/config"
-        $DRY_RUN_CMD cat ${../../dotfiles/common/ssh/config-work} >> "$HOME/.ssh/config"
+        $DRY_RUN_CMD cat ${./dotfiles/ssh/config} >> "$HOME/.ssh/config"
       fi
       echo "Work SSH configured"
     '';
@@ -43,7 +43,7 @@
   home.file = {
     # SFTPGo config
     ".config/sftpgo/sftpgo.json" = {
-      text = builtins.toJSON (import ../../dotfiles/common/sftpgo/config.nix { inherit pkgs; });
+      text = builtins.toJSON (import ./dotfiles/sftpgo/config.nix { inherit pkgs; });
       onChange = ''
         echo "SFTPGo config changed"
       '';
@@ -54,7 +54,7 @@
 
     # Git work identity
     ".gitconfig-alami-group" = {
-      source = ../../dotfiles/common/git/.gitconfig-alami-group;
+      source = ./dotfiles/git/.gitconfig-alami-group;
       onChange = ''
         echo "Git alami-group config changed"
       '';

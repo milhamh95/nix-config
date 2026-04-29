@@ -15,7 +15,7 @@
         echo "Mise directory created at $HOME/.config/mise ✅"
 
         echo "Copying Mise config files..."
-        $DRY_RUN_CMD cp ${../../dotfiles/common/mise/config.toml} "$HOME/.config/mise/config.toml"
+        $DRY_RUN_CMD cp ${./dotfiles/mise/config.toml} "$HOME/.config/mise/config.toml"
         echo "Mise configured ✅"
 
         echo "Installing Mise tools... ⚙️"
@@ -26,14 +26,8 @@
   };
 
   home.file = {
-    ".config/git/catppuccin-delta.gitconfig" = {
-      source = ../../dotfiles/common/git/catppuccin-delta.gitconfig;
-      onChange = ''
-        echo "Catppuccin delta theme changed"
-      '';
-    };
     ".wezterm.lua" = {
-      source = ../../dotfiles/common/wezterm/wezterm.lua;
+      source = ./dotfiles/wezterm/wezterm.lua;
       onChange = ''
         echo "WezTerm config changed"
       '';

@@ -3,7 +3,6 @@
 
 {
   environment.systemPackages = [
-    pkgs.delta
     pkgs.lazygit
     pkgs.ripgrep
     pkgs.yarn-berry_4

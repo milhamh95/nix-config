@@ -6,33 +6,33 @@
   home.file = {
     # Git config (host-specific due to username in paths)
     ".gitconfig" = {
-      source = ../../dotfiles/hosts/mbp/git/.gitconfig;
+      source = ./dotfiles/git/.gitconfig;
       onChange = ''
         echo "Git config changed"
       '';
     };
     ".config/flashspace/profiles.json" = {
-      source = ../../dotfiles/hosts/mbp/flashspace/profiles.json;
+      source = ./dotfiles/flashspace/profiles.json;
       force = true;
       onChange = ''
         echo "Flashspace profiles changed"
       '';
     };
     ".config/flashspace/settings.json" = {
-      source = ../../dotfiles/hosts/mbp/flashspace/settings.json;
+      source = ./dotfiles/flashspace/settings.json;
       force = true;
       onChange = ''
         echo "Flashspace settings changed"
       '';
     };
     ".hammerspoon/home.toml" = {
-      source = ../../dotfiles/hosts/mbp/hammerflow/home.toml;
+      source = ./dotfiles/hammerflow/home.toml;
       onChange = ''
         echo "Hammerspoon home config changed"
       '';
     };
     ".hammerspoon/init.lua" = {
-      source = ../../dotfiles/hosts/mbp/hammerflow/init.lua;
+      source = ./dotfiles/hammerflow/init.lua;
       onChange = ''
         echo "Hammerspoon init config changed"
       '';

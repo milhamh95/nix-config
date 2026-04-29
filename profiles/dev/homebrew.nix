@@ -6,8 +6,6 @@
     brews = [
       "gh"
       "mise"
-      "mole"
-      "rtk"
     ];
 
     casks = [

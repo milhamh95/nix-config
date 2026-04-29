@@ -15,6 +15,7 @@
     # CLI tools (shared across all machines)
     brews = [
       "mas"
+      "mole"
     ];
 
     # GUI Apps (shared across all machines)

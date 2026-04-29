@@ -9,6 +9,7 @@
       "github"
       "pritunl"
       "rewritebar"
+      "rtk"
       "slack"
       "windsurf"
       "wezterm"

@@ -22,7 +22,7 @@
 
       # Copy public key if not exists
       if [ ! -f "$HOME/.ssh/id_github_personal.pub" ]; then
-        $DRY_RUN_CMD cp ${../dotfiles/common/ssh/id_github_personal.pub} "$HOME/.ssh/id_github_personal.pub"
+        $DRY_RUN_CMD cp ${./dotfiles/ssh/id_github_personal.pub} "$HOME/.ssh/id_github_personal.pub"
         $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_personal.pub"
       fi
 
@@ -30,7 +30,7 @@
       if ! grep -q "Host personal" "$HOME/.ssh/config" 2>/dev/null; then
         echo "Adding personal SSH config..."
         echo "" >> "$HOME/.ssh/config"
-        $DRY_RUN_CMD cat ${../dotfiles/common/ssh/config} >> "$HOME/.ssh/config"
+        $DRY_RUN_CMD cat ${./dotfiles/ssh/config} >> "$HOME/.ssh/config"
         $DRY_RUN_CMD chmod 600 "$HOME/.ssh/config"
       fi
       echo "SSH configured"
@@ -99,45 +99,51 @@
   # Shared home file configurations (common app configs)
   home.file = {
     ".config/karabiner/karabiner.json" = {
-      source = ../dotfiles/common/karabiner/karabiner.json;
+      source = ./dotfiles/karabiner/karabiner.json;
       onChange = ''
         echo "Karabiner config changed"
       '';
     };
     # Note: .gitconfig is host-specific (in hosts/{hostname}/home-manager.nix)
     ".gitconfig-personal" = {
-      source = ../dotfiles/common/git/.gitconfig-personal;
+      source = ./dotfiles/git/.gitconfig-personal;
       onChange = ''
         echo "Git personal config changed"
       '';
     };
     # Note: .gitconfig-alami-group is mac-desktop only (in hosts/mac-desktop/home-manager.nix)
     ".gitignore" = {
-      source = ../dotfiles/common/git/.gitignore;
+      source = ./dotfiles/git/.gitignore;
       onChange = ''
         echo "Git ignore changed"
       '';
     };
+    ".config/git/catppuccin-delta.gitconfig" = {
+      source = ./dotfiles/git/catppuccin-delta.gitconfig;
+      onChange = ''
+        echo "Catppuccin delta theme changed"
+      '';
+    };
     ".config/bat/config" = {
-      source = ../dotfiles/common/bat/config;
+      source = ./dotfiles/bat/config;
       onChange = ''
         echo "Bat config changed"
       '';
     };
     ".config/bat/themes/Catppuccin Mocha.tmTheme" = {
-      source = ../dotfiles/common/bat/themes/Catppuccin-Mocha.tmTheme;
+      source = ./dotfiles/bat/themes/Catppuccin-Mocha.tmTheme;
       onChange = ''
         echo "Bat Catppuccin theme changed"
       '';
     };
     ".config/atuin/themes/catppuccin-mocha-red.toml" = {
-      source = ../dotfiles/common/atuin/themes/catppuccin-mocha-red.toml;
+      source = ./dotfiles/atuin/themes/catppuccin-mocha-red.toml;
       onChange = ''
         echo "Atuin Catppuccin theme changed"
       '';
     };
     ".config/ghostty/config" = {
-      source = ../dotfiles/common/ghostty/config;
+      source = ./dotfiles/ghostty/config;
       onChange = ''
         echo "Ghostty config changed"
       '';
