@@ -4,6 +4,7 @@
 {
   imports = [
     ./functions.nix
+    ./git-functions.nix
     ./abbreviations.nix
   ];
 

@@ -3,7 +3,6 @@
 
 {
   environment.systemPackages = [
-    pkgs.fishPlugins.sdkman-for-fish
     pkgs.sftpgo
     pkgs.zstd
   ];

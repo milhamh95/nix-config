@@ -12,7 +12,6 @@
       "rtk"
       "slack"
       "windsurf"
-      "wezterm"
     ];
   };
 }

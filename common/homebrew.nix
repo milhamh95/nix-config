@@ -14,7 +14,9 @@
 
     # CLI tools (shared across all machines)
     brews = [
+      "gh"
       "mas"
+      "mise"
       "mole"
     ];
 
@@ -22,6 +24,8 @@
     casks = [
       "appcleaner"
       "brave-browser"
+      "bruno"
+      "cmux"
       "discord"
       "flashspace"
       "ghostty"
@@ -33,16 +37,22 @@
       "jordanbaird-ice"
       "karabiner-elements"
       "keka"
+      "mockoon"
       "obsidian"
+      "orbstack"
       "raycast"
       "rectangle-pro"
       "rocket"
       "shottr"
+      "visual-studio-code"
       "vlc"
+      "wezterm"
       "zoom"
     ];
 
-    masApps = {};
+    masApps = {
+      "Flow" = 1423210932;
+    };
 
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;

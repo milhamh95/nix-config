@@ -15,13 +15,19 @@
     pkgs.fishPlugins.sponge
     pkgs.fishPlugins.z
     pkgs.fishPlugins.done
+    pkgs.fishPlugins.forgit
+    pkgs.fishPlugins.colored-man-pages
+    pkgs.fishPlugins.sdkman-for-fish
     pkgs.fzf
     pkgs.git
+    pkgs.lazygit
     pkgs.lsd
     pkgs.openssl
     pkgs.sops
+    pkgs.ripgrep
     pkgs.vim
     pkgs.wget
+    pkgs.yarn-berry_4
   ];
 
   # Font configuration

@@ -27,7 +27,7 @@
       "mac-desktop" = {
         hostname = "mac-desktop";
         username = "milhamh95";
-        profiles = [ "dev" "work" "alami" ];
+        profiles = [ "work" "alami" ];
       };
       "mbp" = {
         hostname = "mbp";
@@ -37,16 +37,12 @@
       "alami-mbp" = {
         hostname = "alami-mbp";
         username = "muhammadilhamhidayat";
-        profiles = [ "dev" "work" "alami" ];
+        profiles = [ "work" "alami" ];
       };
     };
 
     # Profile modules (system-level and home-manager-level)
     profileSystemModules = {
-      "dev" = [
-        ./profiles/dev/nix-packages.nix
-        ./profiles/dev/homebrew.nix
-      ];
       "work" = [
         ./profiles/work/homebrew.nix
         ./profiles/work/system-defaults.nix
@@ -58,9 +54,6 @@
     };
 
     profileHomeModules = {
-      "dev" = [
-        ./profiles/dev/home-manager.nix
-      ];
       "work" = [
         ./profiles/work/home-manager.nix
       ];

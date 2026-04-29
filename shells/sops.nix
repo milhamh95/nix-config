@@ -1,99 +1,120 @@
 { pkgs }:
 
-pkgs.mkShell {
-  packages = with pkgs; [ age sops ];
+let
+  keyDir = "$HOME/Library/Application Support/sops/age";
+  keyFile = "$HOME/Library/Application Support/sops/age/keys.txt";
 
-  shellHook = ''
-    # Configuration
-    export SOPS_AGE_KEY_DIR="$HOME/Library/Application Support/sops/age"
-    export SOPS_AGE_KEY_FILE="$SOPS_AGE_KEY_DIR/keys.txt"
+  sops_help = pkgs.writeShellScriptBin "sops_help" ''
+    echo "SOPS/Age Development Shell Commands:"
+    echo ""
+    echo "Age Key Management:"
+    echo "  sops_generate_key    - Generate a new age key"
+    echo "  sops_show_pubkey     - Show your age public key"
+    echo "  sops_key_status      - Check if age key exists"
+    echo ""
+    echo "SOPS Operations:"
+    echo "  sops_encrypt <file>  - Encrypt a file with sops"
+    echo "  sops_decrypt <file>  - Decrypt a file with sops"
+    echo "  sops_edit <file>     - Edit an encrypted file"
+    echo ""
+    echo "Key Location: ${keyFile}"
+    echo ""
+    echo "Setup Steps:"
+    echo "  1. sops_generate_key   # Generate age key"
+    echo "  2. sops_show_pubkey    # Copy this to .sops.yaml"
+    echo "  3. Backup keys.txt to password manager!"
+  '';
 
-    sops_help() {
-      echo "SOPS/Age Development Shell Commands:"
-      echo ""
-      echo "Age Key Management:"
-      echo "  sops_generate_key    - Generate a new age key"
-      echo "  sops_show_pubkey     - Show your age public key"
-      echo "  sops_key_status      - Check if age key exists"
-      echo ""
-      echo "SOPS Operations:"
-      echo "  sops_encrypt <file>  - Encrypt a file with sops"
-      echo "  sops_decrypt <file>  - Decrypt a file with sops"
-      echo "  sops_edit <file>     - Edit an encrypted file"
-      echo ""
-      echo "Key Location: $SOPS_AGE_KEY_FILE"
-      echo ""
-      echo "Setup Steps:"
-      echo "  1. sops_generate_key   # Generate age key"
-      echo "  2. sops_show_pubkey    # Copy this to .sops.yaml"
-      echo "  3. Backup keys.txt to password manager!"
-    }
+  sops_generate_key = pkgs.writeShellScriptBin "sops_generate_key" ''
+    KEY_DIR="${keyDir}"
+    KEY_FILE="${keyFile}"
 
-    sops_generate_key() {
-      if [ -f "$SOPS_AGE_KEY_FILE" ]; then
-        echo "Age key already exists at: $SOPS_AGE_KEY_FILE"
-        echo "To regenerate, first delete the existing key."
-        return 1
-      fi
+    if [ -f "$KEY_FILE" ]; then
+      echo "Age key already exists at: $KEY_FILE"
+      echo "To regenerate, first delete the existing key."
+      exit 1
+    fi
 
-      mkdir -p "$SOPS_AGE_KEY_DIR"
-      age-keygen -o "$SOPS_AGE_KEY_FILE"
-      chmod 600 "$SOPS_AGE_KEY_FILE"
+    mkdir -p "$KEY_DIR"
+    age-keygen -o "$KEY_FILE"
+    chmod 600 "$KEY_FILE"
 
-      echo ""
-      echo "Age key generated at: $SOPS_AGE_KEY_FILE"
-      echo ""
-      echo "IMPORTANT: Backup this key to your password manager!"
+    echo ""
+    echo "Age key generated at: $KEY_FILE"
+    echo ""
+    echo "IMPORTANT: Backup this key to your password manager!"
+    echo ""
+    sops_show_pubkey
+  '';
+
+  sops_show_pubkey = pkgs.writeShellScriptBin "sops_show_pubkey" ''
+    KEY_FILE="${keyFile}"
+
+    if [ ! -f "$KEY_FILE" ]; then
+      echo "No age key found. Run 'sops_generate_key' first."
+      exit 1
+    fi
+
+    echo "Your age public key (add this to .sops.yaml):"
+    echo ""
+    grep "public key:" "$KEY_FILE" | cut -d: -f2 | tr -d ' '
+  '';
+
+  sops_key_status = pkgs.writeShellScriptBin "sops_key_status" ''
+    KEY_FILE="${keyFile}"
+
+    if [ -f "$KEY_FILE" ]; then
+      echo "Age key exists at: $KEY_FILE"
       echo ""
       sops_show_pubkey
-    }
+    else
+      echo "No age key found."
+      echo "Run 'sops_generate_key' to create one."
+    fi
+  '';
 
-    sops_show_pubkey() {
-      if [ ! -f "$SOPS_AGE_KEY_FILE" ]; then
-        echo "No age key found. Run 'sops_generate_key' first."
-        return 1
-      fi
+  sops_encrypt = pkgs.writeShellScriptBin "sops_encrypt" ''
+    if [ -z "$1" ]; then
+      echo "Usage: sops_encrypt <file>"
+      exit 1
+    fi
+    sops -e -i "$1"
+    echo "Encrypted: $1"
+  '';
 
-      echo "Your age public key (add this to .sops.yaml):"
-      echo ""
-      grep "public key:" "$SOPS_AGE_KEY_FILE" | cut -d: -f2 | tr -d ' '
-    }
+  sops_decrypt = pkgs.writeShellScriptBin "sops_decrypt" ''
+    if [ -z "$1" ]; then
+      echo "Usage: sops_decrypt <file>"
+      exit 1
+    fi
+    sops -d "$1"
+  '';
 
-    sops_key_status() {
-      if [ -f "$SOPS_AGE_KEY_FILE" ]; then
-        echo "Age key exists at: $SOPS_AGE_KEY_FILE"
-        echo ""
-        sops_show_pubkey
-      else
-        echo "No age key found."
-        echo "Run 'sops_generate_key' to create one."
-      fi
-    }
+  sops_edit = pkgs.writeShellScriptBin "sops_edit" ''
+    if [ -z "$1" ]; then
+      echo "Usage: sops_edit <file>"
+      exit 1
+    fi
+    sops "$1"
+  '';
+in
 
-    sops_encrypt() {
-      if [ -z "$1" ]; then
-        echo "Usage: sops_encrypt <file>"
-        return 1
-      fi
-      sops -e -i "$1"
-      echo "Encrypted: $1"
-    }
+pkgs.mkShell {
+  packages = [
+    pkgs.age
+    pkgs.sops
+    sops_help
+    sops_generate_key
+    sops_show_pubkey
+    sops_key_status
+    sops_encrypt
+    sops_decrypt
+    sops_edit
+  ];
 
-    sops_decrypt() {
-      if [ -z "$1" ]; then
-        echo "Usage: sops_decrypt <file>"
-        return 1
-      fi
-      sops -d "$1"
-    }
-
-    sops_edit() {
-      if [ -z "$1" ]; then
-        echo "Usage: sops_edit <file>"
-        return 1
-      fi
-      sops "$1"
-    }
+  shellHook = ''
+    export SOPS_AGE_KEY_DIR="${keyDir}"
+    export SOPS_AGE_KEY_FILE="${keyFile}"
 
     echo "SOPS/Age Shell (run 'sops_help' for commands)"
     echo ""
