@@ -1,4 +1,4 @@
-.PHONY: install-desktop install-mbp install-alami switch-desktop switch-mbp switch-alami update check clean setup-secrets
+.PHONY: install-desktop install-mbp install-alami switch-desktop switch-mbp switch-alami update check clean setup-secrets export-age-key
 
 # First-time installation
 install-desktop:
@@ -33,6 +33,19 @@ clean:
 	nix-collect-garbage -d
 
 # Secrets management
+export-age-key:
+	@AGE_SRC="$$HOME/Library/Application Support/sops/age/keys.txt"; \
+	if [ ! -f "$$AGE_SRC" ]; then \
+		echo "⚠️  Age key not found at $$AGE_SRC"; \
+		echo "Run 'make setup-secrets' first to generate it."; \
+		exit 1; \
+	fi; \
+	mkdir -p secrets/age; \
+	cp "$$AGE_SRC" secrets/age/keys.txt; \
+	chmod 600 secrets/age/keys.txt; \
+	echo "✅ Age key copied to secrets/age/keys.txt"; \
+	echo "   Back this up to your password manager, then delete it from the repo folder."
+
 setup-secrets:
 	@echo "Setting up secrets..."
 	@echo "1. Put your private key in secrets/raw/id_github_personal"
@@ -61,3 +74,4 @@ help:
 	@echo ""
 	@echo "Secrets:"
 	@echo "  make setup-secrets    - Setup and encrypt secrets (age key + sops)"
+	@echo "  make export-age-key   - Copy age key to secrets/age/ for backup or new machine setup"
