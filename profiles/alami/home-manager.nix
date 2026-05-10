@@ -15,6 +15,14 @@
     mode = "0600";
   };
 
+  # Maven settings.xml (decrypted by sops, deployed to maven conf via activation script)
+  sops.secrets.maven_settings = {
+    sopsFile = ../../secrets/maven_settings.enc;
+    format = "binary";
+    path = "${config.home.homeDirectory}/.config/maven/settings.xml";
+    mode = "0600";
+  };
+
   home.activation = {
     installAlamiJavaCandidates = lib.hm.dag.entryAfter ["installSdkmanCandidates"] ''
       if [ ! -f "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
@@ -43,6 +51,21 @@
         echo "Setting default java to 17.0.19-tem... ⚙️"
         $DRY_RUN_CMD sdk default java 17.0.19-tem
         echo "Default java set to 17.0.19-tem ✅"
+      fi
+    '';
+
+    configureMavenSettings = lib.hm.dag.entryAfter ["installSdkmanCandidates"] ''
+      MAVEN_CONF="$HOME/.sdkman/candidates/maven/3.9.15/conf/settings.xml"
+      CUSTOM_SETTINGS="$HOME/.config/maven/settings.xml"
+
+      if [ ! -d "$HOME/.sdkman/candidates/maven/3.9.15" ]; then
+        echo "⚠️  Maven 3.9.15 not installed yet, skipping settings.xml configuration"
+      elif [ ! -f "$CUSTOM_SETTINGS" ]; then
+        echo "⚠️  Decrypted settings.xml not found at $CUSTOM_SETTINGS, skipping"
+      else
+        echo "Configuring Maven settings.xml... ⚙️"
+        $DRY_RUN_CMD cp "$CUSTOM_SETTINGS" "$MAVEN_CONF"
+        echo "Maven settings.xml configured ✅"
       fi
     '';
 
