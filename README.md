@@ -2,6 +2,8 @@
 
 Personal Nix configuration for macOS — manages system packages, dotfiles, and dev environment across 3 machines using a layered profile system.
 
+> **Note:** This config is coupled with encrypted secrets (SSH keys, maven settings). Other people can still use this config by using the `-nosecrets` commands — see [Installation without secrets](#installation-without-secrets).
+
 > For a more advanced nix config, check out [github.com/r17x/universe](https://github.com/r17x/universe)
 
 ## Machines
@@ -89,7 +91,21 @@ The install script will automatically copy the age key to the correct location, 
 
 Restart your terminal after installation to use fish shell.
 
+### Installation without secrets
+
+If you don't have the age key or want to skip secrets entirely, use the `-nosecrets` commands:
+
+```sh
+make install-desktop-nosecrets   # Mac Desktop (no secrets)
+make install-mbp-nosecrets       # MacBook Pro (no secrets)
+make install-alami-nosecrets     # Alami MacBook Pro (no secrets)
+```
+
+Everything installs normally — apps, packages, dotfiles, system settings — just without decrypting the encrypted secrets (SSH keys, maven settings, etc.).
+
 ## Usage
+
+Every command has a `-nosecrets` variant. Use the matching variant consistently — if you installed with `-nosecrets`, rebuild with `-nosecrets` too (until you set up your age key).
 
 <details>
 <summary>Rebuild commands</summary>
@@ -100,10 +116,15 @@ nixmd      # rebuild mac-desktop
 nixmbp     # rebuild mbp
 nixalami   # rebuild alami-mbp
 
-# Or via Makefile
+# Via Makefile (with secrets)
 make switch-desktop
 make switch-mbp
 make switch-alami
+
+# Via Makefile (without secrets)
+make switch-desktop-nosecrets
+make switch-mbp-nosecrets
+make switch-alami-nosecrets
 ```
 
 </details>
@@ -112,10 +133,12 @@ make switch-alami
 <summary>Other Makefile commands</summary>
 
 ```sh
-make update   # update flake inputs
-make check    # check configuration
-make clean    # garbage collection
-make help     # show all commands
+make update             # update flake inputs
+make check              # check configuration
+make clean              # garbage collection
+make setup-secrets      # encrypt raw secrets with sops/age
+make export-age-key     # copy age key to secrets/age/ for backup
+make help               # show all commands
 ```
 
 </details>
