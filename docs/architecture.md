@@ -286,6 +286,56 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 
 ---
 
+## What's in Each Profile
+
+### `profiles/work/`
+
+| What | Detail |
+|---|---|
+| Casks | bloom, tableplus |
+| Fish | `work` → `cd ~/work` |
+| System | Bloom pinned in dock |
+
+### `profiles/alami/`
+
+| What | Detail |
+|---|---|
+| Casks | claude-code, conductor, github, pritunl, rewritebar, rtk, slack, windsurf |
+| Nix packages | sftpgo, zstd |
+| Config | Alami SSH key, SFTPGo config, git work identity |
+| Fish | `mocksftp` abbreviation + alami-specific functions |
+
+---
+
+## What's in Each Host
+
+### `hosts/mac-desktop/`
+
+| What | Detail |
+|---|---|
+| Casks | bettermouse, bettertouchtool, betterdisplay |
+| Apps | Switor (bundled) |
+| Dock size | 65 |
+| Battery % | Hidden (always plugged in) |
+
+### `hosts/mbp/`
+
+| What | Detail |
+|---|---|
+| Casks | batfi |
+| Dock size | 50 |
+| Battery % | Shown |
+
+### `hosts/alami-mbp/`
+
+| What | Detail |
+|---|---|
+| Casks | batfi |
+| Dock size | 50 |
+| Battery % | Shown |
+
+---
+
 ## Per-Machine Config Flow
 
 ### mac-desktop — `profiles = ["work", "alami"]`
