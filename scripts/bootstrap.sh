@@ -2,15 +2,15 @@
 # Bootstrap script for setting up nix-config on a fresh Mac.
 #
 # Usage (no git or clone needed):
-#   curl -fsSL https://raw.githubusercontent.com/<username>/nix-config/main/scripts/bootstrap.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/bootstrap.sh | bash
 #
 # Or download first, then run:
-#   curl -fsSL https://raw.githubusercontent.com/<username>/nix-config/main/scripts/bootstrap.sh -o bootstrap.sh
+#   curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/bootstrap.sh -o bootstrap.sh
 #   bash bootstrap.sh
 
 set -e
 
-REPO_URL="https://github.com/<username>/nix-config.git"
+REPO_URL="https://github.com/milhamh95/nix-config.git"
 INSTALL_DIR="$HOME/nix/nix-config"
 
 # Colors
@@ -138,7 +138,7 @@ echo "Next steps:"
 echo "  1. Restart your terminal to use fish shell"
 echo "  2. Switch git remote to SSH (after restart):"
 echo "     cd $INSTALL_DIR"
-echo "     git remote set-url origin git@personal:<username>/nix-config.git"
+echo "     git remote set-url origin git@personal:milhamh95/nix-config.git"
 
 if [ "$SKIP_SECRETS" = true ]; then
     echo ""

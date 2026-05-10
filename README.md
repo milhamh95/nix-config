@@ -28,7 +28,7 @@ Each machine always gets the `common` layer. Profiles are opt-in on top of that.
 Run the bootstrap script on a fresh Mac — it handles everything interactively:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/<username>/nix-config/main/scripts/bootstrap.sh -o bootstrap.sh
+curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/bootstrap.sh -o bootstrap.sh
 bash bootstrap.sh
 ```
 
@@ -44,7 +44,7 @@ After install, restart your terminal and switch the git remote to SSH:
 
 ```sh
 cd ~/nix/nix-config
-git remote set-url origin git@personal:<username>/nix-config.git
+git remote set-url origin git@personal:milhamh95/nix-config.git
 ```
 
 <details>
@@ -60,7 +60,7 @@ xcode-select --install
 
 ```sh
 mkdir ~/nix && cd ~/nix
-git clone https://github.com/<username>/nix-config.git nix-config
+git clone https://github.com/milhamh95/nix-config.git nix-config
 cd nix-config
 ```
 
@@ -90,7 +90,7 @@ make install-alami-nosecrets
 **5. Switch git remote to SSH** (after secrets are decrypted)
 
 ```sh
-git remote set-url origin git@personal:<username>/nix-config.git
+git remote set-url origin git@personal:milhamh95/nix-config.git
 ```
 
 </details>
