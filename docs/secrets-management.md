@@ -398,16 +398,49 @@ On mbp, the secret will NOT be decrypted (no `~/.ssh/id_github_alami_group` file
 
 ## Setting Up on a New Machine
 
-1. Clone this repo
-2. Copy your age key to:
-   ```
-   ~/Library/Application Support/sops/age/keys.txt
-   ```
-3. Run:
-   ```bash
-   make switch-desktop  # or make switch-mbp
-   ```
-4. Done - secrets are automatically decrypted
+> **Critical**: The age key must be in place **before** running any install or rebuild command. If you run `darwin-rebuild` without the key, sops-nix will fail to decrypt secrets.
+
+### Step 1: Get your age key from your password manager
+
+Your age key was saved to your password manager when you first ran `make setup-secrets`. Retrieve it — it looks like this:
+
+```
+# created: 2024-01-01T00:00:00+07:00
+# public key: age1vfhs5y5nmtmw9n9tq5eqtx07a5u8j2qfjenjj08dmalaccesmq9quzctvw
+AGE-SECRET-KEY-1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+```
+
+### Step 2: Place the key on the new machine
+
+```bash
+# Create the directory
+mkdir -p ~/Library/Application\ Support/sops/age/
+
+# Create the key file and paste the full content from your password manager
+vim ~/Library/Application\ Support/sops/age/keys.txt
+
+# Set correct permissions
+chmod 600 ~/Library/Application\ Support/sops/age/keys.txt
+```
+
+### Step 3: Clone the repo and install
+
+```bash
+mkdir ~/nix && cd ~/nix
+git clone <repo-url> nix-config
+cd nix-config
+
+make install-desktop   # or install-mbp / install-alami
+```
+
+### Step 4: Verify
+
+After rebuild, check that secrets were decrypted:
+
+```bash
+ls -la ~/.ssh/id_github_personal        # should exist, permissions 600
+ls -la ~/.config/maven/settings.xml     # alami machines only
+```
 
 ---
 
