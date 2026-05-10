@@ -29,12 +29,13 @@ Run the bootstrap script on a fresh Mac — it handles everything interactively:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/bootstrap.sh -o bootstrap.sh
-bash bootstrap.sh
+bash bootstrap.sh              # clones main branch (default)
+bash bootstrap.sh feat/my-branch  # clones a specific branch
 ```
 
 The script will:
 1. Install Xcode Command Line Tools (gives you `git` and `make`)
-2. Clone the repo via HTTPS
+2. Clone the repo via HTTPS (from the specified branch, defaults to `main`)
 3. Ask if you want to install with or without secrets
 4. If with secrets — prompt for the path to your age key file
 5. Ask which machine to install

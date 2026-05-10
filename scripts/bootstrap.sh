@@ -7,10 +7,14 @@
 # Or download first, then run:
 #   curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/bootstrap.sh -o bootstrap.sh
 #   bash bootstrap.sh
+#
+# To clone a specific branch:
+#   bash bootstrap.sh <branch-name>
 
 set -e
 
 REPO_URL="https://github.com/milhamh95/nix-config.git"
+BRANCH="${1:-main}"
 INSTALL_DIR="$HOME/nix/nix-config"
 
 # Colors
@@ -43,8 +47,8 @@ if [ -d "$INSTALL_DIR" ]; then
     echo -e "${GREEN}$INSTALL_DIR already exists, skipping clone ✅${NC}"
 else
     mkdir -p "$(dirname "$INSTALL_DIR")"
-    git clone "$REPO_URL" "$INSTALL_DIR"
-    echo -e "${GREEN}Cloned to $INSTALL_DIR ✅${NC}"
+    git clone -b "$BRANCH" "$REPO_URL" "$INSTALL_DIR"
+    echo -e "${GREEN}Cloned branch '$BRANCH' to $INSTALL_DIR ✅${NC}"
 fi
 
 cd "$INSTALL_DIR"
