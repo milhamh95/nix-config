@@ -7,8 +7,5 @@
       "batfi"
     ];
 
-    masApps = {
-      "Numbers" = 409203825;
-    };
   };
 }
