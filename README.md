@@ -29,19 +29,33 @@ git clone <repo-url> nix-config
 cd nix-config
 ```
 
-**2. Place your age key** _(required for secrets decryption)_
+**2. Set up secrets**
 
 <details>
 <summary>First time setting up this repo</summary>
 
-Put your raw secrets in `secrets/raw/`, then run:
+This step generates the age key and encrypts your secrets into `.enc` files that get committed to git.
 
 ```sh
-make setup-secrets     # generates age key + encrypts all secrets
-make export-age-key    # copies key to secrets/age/keys.txt
-```
+# Put your raw secrets in secrets/raw/
+# (GitHub SSH key, maven settings, etc.)
+mkdir -p secrets/raw
+cp ~/.ssh/id_github_personal secrets/raw/id_github_personal
+cp ~/.sdkman/candidates/maven/current/conf/settings.xml secrets/raw/maven_settings.xml
 
-Back up `secrets/age/keys.txt` to your password manager — you'll need it for every new machine.
+# Encrypt them — also generates the age key
+make setup-secrets
+
+# Copy the age key to secrets/age/ so the install script can find it
+make export-age-key
+
+# Back up secrets/age/keys.txt to your password manager (1Password, Bitwarden, etc.)
+# You will need this key on every new machine
+
+# Commit the encrypted files
+git add secrets/*.enc .sops.yaml
+git commit -m "feat: add encrypted secrets"
+```
 
 Then continue to step 3.
 
@@ -50,11 +64,13 @@ Then continue to step 3.
 <details>
 <summary>Setting up on a new machine</summary>
 
-Retrieve your age key from your password manager and place it at `secrets/age/keys.txt`:
+The `.enc` files are already in git. You just need the age key to decrypt them.
 
 ```sh
+# Retrieve your age key from your password manager
+# and place it at secrets/age/keys.txt
 mkdir -p secrets/age
-vim secrets/age/keys.txt   # paste key, save and exit
+vim secrets/age/keys.txt   # paste the full key content, save and exit
 ```
 
 Then continue to step 3.
@@ -68,6 +84,8 @@ make install-desktop   # Mac Desktop
 make install-mbp       # MacBook Pro (personal)
 make install-alami     # Alami MacBook Pro (work)
 ```
+
+The install script will automatically copy the age key to the correct location, then apply the nix-darwin config — sops decrypts all secrets during this step.
 
 Restart your terminal after installation to use fish shell.
 
