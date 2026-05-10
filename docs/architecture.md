@@ -111,37 +111,176 @@ nix-config/
 Everything in `common/` is installed on **all three machines**.
 
 <details>
-<summary>Nix packages (CLI tools)</summary>
+<summary>Nix packages</summary>
 
-age, atuin, bat, curl, delta, fastfetch, fd, fzf, git, lazygit, lsd, openssl, ripgrep, sops, vim, wget, yarn
+**Shell & Navigation**
 
-Fish plugins: tide, sponge, z, done, forgit, colored-man-pages, sdkman-for-fish
+| Package | Purpose |
+|---|---|
+| atuin | Shell history with sync |
+| bat | `cat` with syntax highlighting |
+| fastfetch | System info display |
+| fd | Better `find` |
+| fzf | Fuzzy finder |
+| lsd | Better `ls` |
+| vim | Text editor |
 
-Fonts: JetBrains Mono, Hack, BlexMono, iM Writing (all Nerd Font variants)
+**Git**
+
+| Package | Purpose |
+|---|---|
+| git | Version control |
+| delta | Diff pager with syntax highlighting |
+| lazygit | Git TUI |
+
+**Network & Security**
+
+| Package | Purpose |
+|---|---|
+| age | File encryption |
+| curl | HTTP client |
+| openssl | TLS/SSL toolkit |
+| sops | Secrets manager |
+| wget | File downloader |
+
+**Other**
+
+| Package | Purpose |
+|---|---|
+| ripgrep | Fast grep |
+| yarn | JS package manager |
+
+**Fish plugins**
+
+| Plugin | Purpose |
+|---|---|
+| tide | Prompt theme |
+| sponge | Clean failed commands from history |
+| z | Directory jump by frecency |
+| done | Notification when long commands finish |
+| forgit | Interactive git with fzf |
+| colored-man-pages | Colorized man pages |
+| sdkman-for-fish | SDKMAN integration |
+
+**Fonts** (Nerd Font variants)
+
+JetBrains Mono · Hack · BlexMono · iM Writing
 
 </details>
 
 <details>
-<summary>Homebrew casks (GUI apps)</summary>
+<summary>Homebrew casks</summary>
 
-appcleaner, brave-browser, bruno, cmux, discord, flashspace, ghostty, google-chrome, google-chrome@beta, hammerspoon, homerow, iina, jordanbaird-ice, karabiner-elements, keka, mockoon, obsidian, orbstack, raycast, rectangle-pro, rocket, shottr, visual-studio-code, vlc, wezterm, zoom
+**Browsers**
+
+| App | Purpose |
+|---|---|
+| brave-browser | Primary browser |
+| google-chrome | Chrome |
+| google-chrome@beta | Chrome Beta |
+
+**Terminal & Editor**
+
+| App | Purpose |
+|---|---|
+| ghostty | Terminal emulator |
+| wezterm | Terminal emulator |
+| visual-studio-code | Code editor |
+
+**Dev Tools**
+
+| App | Purpose |
+|---|---|
+| bruno | API client |
+| cmux | tmux session manager |
+| mockoon | API mocking |
+| orbstack | Docker / Linux VMs |
+
+**Productivity**
+
+| App | Purpose |
+|---|---|
+| flashspace | Virtual workspaces |
+| hammerspoon | macOS automation |
+| homerow | Keyboard-driven UI navigation |
+| obsidian | Note-taking |
+| raycast | App launcher |
+| rectangle-pro | Window manager |
+| rocket | Emoji picker |
+| shottr | Screenshot tool |
+
+**Media**
+
+| App | Purpose |
+|---|---|
+| iina | Video player |
+| vlc | Media player |
+
+**System & Utilities**
+
+| App | Purpose |
+|---|---|
+| appcleaner | App uninstaller |
+| discord | Chat |
+| jordanbaird-ice | Menu bar manager |
+| karabiner-elements | Keyboard remapping |
+| keka | File archiver |
+| zoom | Video calls |
 
 </details>
 
 <details>
-<summary>Mac App Store apps (mas)</summary>
+<summary>Mac App Store apps</summary>
 
-Amphetamine, BarMarks, DaisyDisk, ExcalidrawZ, Fantastical, Flow, Folder Quick Look, iStat Menus, LilyView, Numbers, OpenIn, PastePal, PDF Expert, Presentify, rcmd, SnippetsLab, Spark, Spokenly
+**Productivity**
+
+| App | Purpose |
+|---|---|
+| Amphetamine | Keep display awake |
+| Fantastical | Calendar |
+| Flow | Focus / Pomodoro timer |
+| PastePal | Clipboard manager |
+| Presentify | Presentation annotations |
+| Spokenly | Text to speech |
+
+**System & Menu Bar**
+
+| App | Purpose |
+|---|---|
+| BarMarks | Menu bar bookmarks |
+| Folder Quick Look | Quick Look for folders |
+| iStat Menus | System monitor |
+| OpenIn | Default browser / app picker |
+| rcmd | App switcher via right ⌘ |
+
+**Notes, Code & Drawing**
+
+| App | Purpose |
+|---|---|
+| ExcalidrawZ | Diagramming |
+| SnippetsLab | Code snippets manager |
+
+**Files & Media**
+
+| App | Purpose |
+|---|---|
+| DaisyDisk | Disk usage analyzer |
+| LilyView | Image viewer |
+| Numbers | Spreadsheet |
+| PDF Expert | PDF editor |
+| Spark | Email client |
 
 </details>
 
 <details>
 <summary>Apps installed from GitHub Releases (auto-updated)</summary>
 
-These are downloaded and installed via activation scripts. On every `darwin-rebuild`, the script queries the GitHub API for the latest stable release and only downloads if a newer version is available.
+Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is queried for the latest **stable** release — pre-releases are skipped, and the download only runs if a newer version is available.
 
-- **BetterAudio** — [rokartur/BetterAudio](https://github.com/rokartur/BetterAudio/releases)
-- **Recordly** — [webadderallorg/Recordly](https://github.com/webadderallorg/Recordly/releases)
+| App | Repo |
+|---|---|
+| BetterAudio | [rokartur/BetterAudio](https://github.com/rokartur/BetterAudio/releases) |
+| Recordly | [webadderallorg/Recordly](https://github.com/webadderallorg/Recordly/releases) |
 
 </details>
 
