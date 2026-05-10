@@ -303,6 +303,7 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 | Casks | claude-code, conductor, github, pritunl, rewritebar, rtk, slack, windsurf |
 | Nix packages | sftpgo, zstd |
 | Java (sdkman) | 17.0.19-tem, 11.0.31-tem — default: 17.0.19-tem |
+| Maven (sdkman) | 3.9.15 — custom settings.xml (encrypted, auto-deployed) |
 | Config | Alami SSH key, SFTPGo config, git work identity |
 | Fish | `mocksftp` abbreviation + alami-specific functions |
 
@@ -443,7 +444,9 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    s1["1. Xcode CLI Tools"] --> s2["2. Install Nix"] --> s3["3. Install Homebrew"] --> s4["4. Apply nix-darwin"]
+    s1["1. Xcode CLI Tools"] --> s2["2. Install age key"] --> s3["3. Install Nix"] --> s4["4. Install Homebrew"] --> s5["5. Apply nix-darwin"]
 ```
 
 Run `make install-desktop`, `make install-mbp`, or `make install-alami` to execute all steps.
+
+> Place your age key at `secrets/age/keys.txt` before running install. See [Secrets Management](secrets-management.md#setting-up-on-a-new-machine) for details.

@@ -398,11 +398,19 @@ On mbp, the secret will NOT be decrypted (no `~/.ssh/id_github_alami_group` file
 
 ## Setting Up on a New Machine
 
-> **Critical**: The age key must be in place **before** running any install or rebuild command. If you run `darwin-rebuild` without the key, sops-nix will fail to decrypt secrets.
+The install scripts handle the age key automatically — you just need to place it in the repo before running install.
 
-### Step 1: Get your age key from your password manager
+### Step 1: Clone the repo
 
-Your age key was saved to your password manager when you first ran `make setup-secrets`. Retrieve it — it looks like this:
+```bash
+mkdir ~/nix && cd ~/nix
+git clone <repo-url> nix-config
+cd nix-config
+```
+
+### Step 2: Place your age key
+
+Retrieve your age key from your password manager. It looks like this:
 
 ```
 # created: 2024-01-01T00:00:00+07:00
@@ -410,28 +418,24 @@ Your age key was saved to your password manager when you first ran `make setup-s
 AGE-SECRET-KEY-1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
-### Step 2: Place the key on the new machine
+Create the file at `secrets/age/keys.txt` in the repo (this folder is gitignored — it will never be committed):
 
 ```bash
-# Create the directory
-mkdir -p ~/Library/Application\ Support/sops/age/
-
-# Create the key file and paste the full content from your password manager
-vim ~/Library/Application\ Support/sops/age/keys.txt
-
-# Set correct permissions
-chmod 600 ~/Library/Application\ Support/sops/age/keys.txt
+mkdir -p secrets/age
+vim secrets/age/keys.txt   # paste the full key content, save and exit
 ```
 
-### Step 3: Clone the repo and install
+### Step 3: Run install
 
 ```bash
-mkdir ~/nix && cd ~/nix
-git clone <repo-url> nix-config
-cd nix-config
-
 make install-desktop   # or install-mbp / install-alami
 ```
+
+The install script will automatically:
+1. Validate the age key
+2. Copy it to `~/Library/Application Support/sops/age/keys.txt`
+3. Install Nix + Homebrew
+4. Apply nix-darwin → sops decrypts all secrets automatically
 
 ### Step 4: Verify
 

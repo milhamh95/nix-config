@@ -11,7 +11,7 @@ bash "$SCRIPT_DIR/setup-nix.sh"
 
 # Step 4: Apply nix-darwin configuration
 echo ""
-echo "Step 4: Applying nix-darwin configuration..."
+echo "Step 5: Applying nix-darwin configuration..."
 cd ~/nix/nix-config
 nix run nix-darwin -- switch --flake .#mac-desktop
 
