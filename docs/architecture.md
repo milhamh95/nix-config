@@ -84,7 +84,7 @@ nix-config/
 │       └── fish/                   #     alami-specific functions & abbreviations
 │
 ├── hosts/                          # Per-machine unique config
-│   ├── mac-desktop/                #   bettermouse, bettertouchtool, betterdisplay, SoundSource, Switor
+│   ├── mac-desktop/                #   bettermouse, bettertouchtool, betterdisplay, Switor
 │   ├── mbp/                        #   batfi
 │   └── alami-mbp/                  #   batfi
 │
@@ -309,7 +309,7 @@ flowchart LR
     end
 
     subgraph host["hosts/mac-desktop/"]
-        h["bettermouse, bettertouchtool, betterdisplay, SoundSource, Switor"]
+        h["bettermouse, bettertouchtool, betterdisplay, Switor"]
         h_sys["dock size 65"]
     end
 
