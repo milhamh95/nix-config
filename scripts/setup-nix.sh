@@ -57,8 +57,8 @@ echo ""
 echo "Step 3: Checking Nix..."
 if ! command -v nix &> /dev/null; then
     echo "Installing Nix..."
-    curl --proto '=https' --tlsv1.2 -sSf -L https://install.nixos.org/nix | \
-      sh -s -- install
+    curl -sSfL https://artifacts.nixos.org/nix-installer | \
+      sh -s -- install --enable-flakes
 
     # Source nix to make it available in current shell
     echo "Loading Nix into current shell..."
