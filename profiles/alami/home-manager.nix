@@ -16,6 +16,36 @@
   };
 
   home.activation = {
+    installAlamiJavaCandidates = lib.hm.dag.entryAfter ["installSdkmanCandidates"] ''
+      if [ ! -f "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
+        echo "⚠️  SDKMAN not installed yet, skipping Alami Java installation"
+      else
+        export SDKMAN_DIR="$HOME/.sdkman"
+        export SDKMAN_AUTO_ANSWER=true
+        source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+        if [ ! -d "$HOME/.sdkman/candidates/java/17.0.19-tem" ]; then
+          echo "Installing java 17.0.19-tem... ⚙️"
+          $DRY_RUN_CMD sdk install java 17.0.19-tem
+          echo "java 17.0.19-tem installed ✅"
+        else
+          echo "java 17.0.19-tem already installed ✅"
+        fi
+
+        if [ ! -d "$HOME/.sdkman/candidates/java/11.0.31-tem" ]; then
+          echo "Installing java 11.0.31-tem... ⚙️"
+          $DRY_RUN_CMD sdk install java 11.0.31-tem
+          echo "java 11.0.31-tem installed ✅"
+        else
+          echo "java 11.0.31-tem already installed ✅"
+        fi
+
+        echo "Setting default java to 17.0.19-tem... ⚙️"
+        $DRY_RUN_CMD sdk default java 17.0.19-tem
+        echo "Default java set to 17.0.19-tem ✅"
+      fi
+    '';
+
     configureWorkSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
       echo "Configuring work SSH..."
       $DRY_RUN_CMD mkdir -p "$HOME/.ssh"

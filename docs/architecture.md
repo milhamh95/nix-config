@@ -65,7 +65,7 @@ nix-config/
 ├── common/                         # Applied to ALL machines
 │   ├── homebrew.nix                #   casks, brews, mas apps (18 App Store apps)
 │   ├── nix-packages.nix            #   CLI tools + nerd fonts
-│   ├── home-manager.nix            #   SSH, karabiner, bat, ghostty, BetterAudio, Recordly
+│   ├── home-manager.nix            #   SSH, karabiner, bat, ghostty, BetterAudio, Recordly, sdkman candidates
 │   ├── system-defaults.nix         #   macOS settings (dock, finder, keyboard)
 │   └── programs/                   #   shell & tool configs
 │       ├── fish/                   #     fish shell functions & abbreviations
@@ -302,6 +302,7 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 |---|---|
 | Casks | claude-code, conductor, github, pritunl, rewritebar, rtk, slack, windsurf |
 | Nix packages | sftpgo, zstd |
+| Java (sdkman) | 17.0.19-tem, 11.0.31-tem — default: 17.0.19-tem |
 | Config | Alami SSH key, SFTPGo config, git work identity |
 | Fish | `mocksftp` abbreviation + alami-specific functions |
 

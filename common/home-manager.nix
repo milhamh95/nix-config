@@ -72,6 +72,32 @@
       fi
     '';
 
+    installSdkmanCandidates = lib.hm.dag.entryAfter ["configureSdkman"] ''
+      if [ ! -f "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
+        echo "⚠️  SDKMAN not installed yet, skipping SDK candidate installation"
+      else
+        export SDKMAN_DIR="$HOME/.sdkman"
+        export SDKMAN_AUTO_ANSWER=true
+        source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+        if [ ! -d "$HOME/.sdkman/candidates/maven/3.9.15" ]; then
+          echo "Installing maven 3.9.15... ⚙️"
+          $DRY_RUN_CMD sdk install maven 3.9.15
+          echo "maven 3.9.15 installed ✅"
+        else
+          echo "maven 3.9.15 already installed ✅"
+        fi
+
+        if [ ! -d "$HOME/.sdkman/candidates/java/21.0.11-tem" ]; then
+          echo "Installing java 21.0.11-tem... ⚙️"
+          $DRY_RUN_CMD sdk install java 21.0.11-tem
+          echo "java 21.0.11-tem installed ✅"
+        else
+          echo "java 21.0.11-tem already installed ✅"
+        fi
+      fi
+    '';
+
     configureMise = lib.hm.dag.entryAfter ["writeBoundary"] ''
       if [ ! -d "$HOME/.mise" ]; then
         echo "Creating Mise directory... ⚙️"
