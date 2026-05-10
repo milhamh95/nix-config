@@ -23,24 +23,85 @@ Each machine always gets the `common` layer. Profiles are opt-in on top of that.
 
 ## Installation
 
-**1. Clone the repo**
+### Quick start (recommended)
+
+Run the bootstrap script on a fresh Mac — it handles everything interactively:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/<username>/nix-config/main/scripts/bootstrap.sh -o bootstrap.sh
+bash bootstrap.sh
+```
+
+The script will:
+1. Install Xcode Command Line Tools (gives you `git` and `make`)
+2. Clone the repo via HTTPS
+3. Ask if you want to install with or without secrets
+4. If with secrets — prompt for the path to your age key file
+5. Ask which machine to install
+6. Run the install
+
+After install, restart your terminal and switch the git remote to SSH:
+
+```sh
+cd ~/nix/nix-config
+git remote set-url origin git@personal:<username>/nix-config.git
+```
+
+<details>
+<summary>Manual installation (step by step)</summary>
+
+**1. Install Xcode Command Line Tools** (gives you `git` and `make`)
+
+```sh
+xcode-select --install
+```
+
+**2. Clone the repo via HTTPS** (SSH isn't set up yet)
 
 ```sh
 mkdir ~/nix && cd ~/nix
-git clone <repo-url> nix-config
+git clone https://github.com/<username>/nix-config.git nix-config
 cd nix-config
 ```
 
-**2. Set up secrets**
+**3. Set up age key** (skip this step to install without secrets)
+
+Save your age key from your password manager to `secrets/age/keys.txt`:
+
+```sh
+mkdir -p secrets/age
+vim secrets/age/keys.txt   # paste the full key content, save and exit
+```
+
+**4. Run install**
+
+```sh
+# With secrets (age key required)
+make install-desktop   # Mac Desktop
+make install-mbp       # MacBook Pro (personal)
+make install-alami     # Alami MacBook Pro (work)
+
+# Without secrets (no age key needed)
+make install-desktop-nosecrets
+make install-mbp-nosecrets
+make install-alami-nosecrets
+```
+
+**5. Switch git remote to SSH** (after secrets are decrypted)
+
+```sh
+git remote set-url origin git@personal:<username>/nix-config.git
+```
+
+</details>
 
 <details>
-<summary>First time setting up this repo</summary>
+<summary>First time setting up secrets (encrypting raw secrets)</summary>
 
-This step generates the age key and encrypts your secrets into `.enc` files that get committed to git.
+Only needed once when building this repo from scratch — not on new machines.
 
 ```sh
 # Put your raw secrets in secrets/raw/
-# (GitHub SSH key, maven settings, etc.)
 mkdir -p secrets/raw
 cp ~/.ssh/id_github_personal secrets/raw/id_github_personal
 cp ~/.sdkman/candidates/maven/current/conf/settings.xml secrets/raw/maven_settings.xml
@@ -48,10 +109,10 @@ cp ~/.sdkman/candidates/maven/current/conf/settings.xml secrets/raw/maven_settin
 # Encrypt them — also generates the age key
 make setup-secrets
 
-# Copy the age key to secrets/age/ so the install script can find it
+# Copy the age key for backup
 make export-age-key
 
-# Back up secrets/age/keys.txt to your password manager (1Password, Bitwarden, etc.)
+# Back up secrets/age/keys.txt to your password manager
 # You will need this key on every new machine
 
 # Commit the encrypted files
@@ -59,49 +120,7 @@ git add secrets/*.enc .sops.yaml
 git commit -m "feat: add encrypted secrets"
 ```
 
-Then continue to step 3.
-
 </details>
-
-<details>
-<summary>Setting up on a new machine</summary>
-
-The `.enc` files are already in git. You just need the age key to decrypt them.
-
-```sh
-# Retrieve your age key from your password manager
-# and place it at secrets/age/keys.txt
-mkdir -p secrets/age
-vim secrets/age/keys.txt   # paste the full key content, save and exit
-```
-
-Then continue to step 3.
-
-</details>
-
-**3. Run install**
-
-```sh
-make install-desktop   # Mac Desktop
-make install-mbp       # MacBook Pro (personal)
-make install-alami     # Alami MacBook Pro (work)
-```
-
-The install script will automatically copy the age key to the correct location, then apply the nix-darwin config — sops decrypts all secrets during this step.
-
-Restart your terminal after installation to use fish shell.
-
-### Installation without secrets
-
-If you don't have the age key or want to skip secrets entirely, use the `-nosecrets` commands:
-
-```sh
-make install-desktop-nosecrets   # Mac Desktop (no secrets)
-make install-mbp-nosecrets       # MacBook Pro (no secrets)
-make install-alami-nosecrets     # Alami MacBook Pro (no secrets)
-```
-
-Everything installs normally — apps, packages, dotfiles, system settings — just without decrypting the encrypted secrets (SSH keys, maven settings, etc.).
 
 ## Usage
 
