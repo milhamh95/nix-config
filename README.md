@@ -21,11 +21,49 @@ Each machine always gets the `common` layer. Profiles are opt-in on top of that.
 
 ## Installation
 
+**1. Clone the repo**
+
 ```sh
 mkdir ~/nix && cd ~/nix
 git clone <repo-url> nix-config
 cd nix-config
+```
 
+**2. Place your age key** _(required for secrets decryption)_
+
+<details>
+<summary>First time setting up this repo</summary>
+
+Put your raw secrets in `secrets/raw/`, then run:
+
+```sh
+make setup-secrets     # generates age key + encrypts all secrets
+make export-age-key    # copies key to secrets/age/keys.txt
+```
+
+Back up `secrets/age/keys.txt` to your password manager — you'll need it for every new machine.
+
+Then continue to step 3.
+
+</details>
+
+<details>
+<summary>Setting up on a new machine</summary>
+
+Retrieve your age key from your password manager and place it at `secrets/age/keys.txt`:
+
+```sh
+mkdir -p secrets/age
+vim secrets/age/keys.txt   # paste key, save and exit
+```
+
+Then continue to step 3.
+
+</details>
+
+**3. Run install**
+
+```sh
 make install-desktop   # Mac Desktop
 make install-mbp       # MacBook Pro (personal)
 make install-alami     # Alami MacBook Pro (work)
