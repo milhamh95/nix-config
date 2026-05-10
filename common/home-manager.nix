@@ -1,9 +1,12 @@
 # common/home-manager.nix - Shared home-manager configuration
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  enableSecrets = !(builtins.pathExists ../secrets/.skip);
+in {
   home.stateVersion = "25.05";
 
-  # Sops secrets configuration
-  sops = {
+  # Sops secrets configuration (skipped if secrets/.skip exists)
+  sops = lib.mkIf enableSecrets {
     age.keyFile = "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt";
 
     secrets.id_github_personal = {

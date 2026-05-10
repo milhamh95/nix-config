@@ -1,6 +1,7 @@
-# Secrets - ignore raw keys and age private key, allow encrypted
+# Secrets - ignore raw keys, age private key, and skip flag
 secrets/raw/
 secrets/age/
+secrets/.skip
 
 # macOS
 .DS_Store

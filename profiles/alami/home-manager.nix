@@ -1,26 +1,29 @@
 # profiles/alami/home-manager.nix - Alami-specific home-manager config
 # Used by: mac-desktop, alami-mbp
 { config, pkgs, lib, ... }:
-
+let
+  enableSecrets = !(builtins.pathExists ../../secrets/.skip);
+in
 {
   imports = [
     ./fish
   ];
 
-  # Alami SSH key (decrypted by sops)
-  sops.secrets.id_github_alami_group = {
-    sopsFile = ../../secrets/id_github_alami_group.enc;
-    format = "binary";
-    path = "${config.home.homeDirectory}/.ssh/id_github_alami_group";
-    mode = "0600";
-  };
+  # Alami secrets (skipped if secrets/.skip exists)
+  sops = lib.mkIf enableSecrets {
+    secrets.id_github_alami_group = {
+      sopsFile = ../../secrets/id_github_alami_group.enc;
+      format = "binary";
+      path = "${config.home.homeDirectory}/.ssh/id_github_alami_group";
+      mode = "0600";
+    };
 
-  # Maven settings.xml (decrypted by sops, deployed to maven conf via activation script)
-  sops.secrets.maven_settings = {
-    sopsFile = ../../secrets/maven_settings.enc;
-    format = "binary";
-    path = "${config.home.homeDirectory}/.config/maven/settings.xml";
-    mode = "0600";
+    secrets.maven_settings = {
+      sopsFile = ../../secrets/maven_settings.enc;
+      format = "binary";
+      path = "${config.home.homeDirectory}/.config/maven/settings.xml";
+      mode = "0600";
+    };
   };
 
   home.activation = {

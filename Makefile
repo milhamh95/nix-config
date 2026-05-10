@@ -1,4 +1,4 @@
-.PHONY: install-desktop install-mbp install-alami switch-desktop switch-mbp switch-alami update check clean setup-secrets export-age-key
+.PHONY: install-desktop install-mbp install-alami install-desktop-nosecrets install-mbp-nosecrets install-alami-nosecrets switch-desktop switch-mbp switch-alami switch-desktop-nosecrets switch-mbp-nosecrets switch-alami-nosecrets update check clean setup-secrets export-age-key
 
 # First-time installation
 install-desktop:
@@ -10,6 +10,22 @@ install-mbp:
 install-alami:
 	bash scripts/install-alami.sh
 
+# First-time installation (without secrets)
+install-desktop-nosecrets:
+	@touch secrets/.skip
+	bash scripts/install-desktop.sh
+	@rm -f secrets/.skip
+
+install-mbp-nosecrets:
+	@touch secrets/.skip
+	bash scripts/install-mbp.sh
+	@rm -f secrets/.skip
+
+install-alami-nosecrets:
+	@touch secrets/.skip
+	bash scripts/install-alami.sh
+	@rm -f secrets/.skip
+
 # Daily rebuild (after nix-darwin is installed)
 switch-desktop:
 	sudo darwin-rebuild switch --flake .#mac-desktop
@@ -19,6 +35,22 @@ switch-mbp:
 
 switch-alami:
 	sudo darwin-rebuild switch --flake .#alami-mbp
+
+# Daily rebuild (without secrets)
+switch-desktop-nosecrets:
+	@touch secrets/.skip
+	sudo darwin-rebuild switch --flake .#mac-desktop
+	@rm -f secrets/.skip
+
+switch-mbp-nosecrets:
+	@touch secrets/.skip
+	sudo darwin-rebuild switch --flake .#mbp
+	@rm -f secrets/.skip
+
+switch-alami-nosecrets:
+	@touch secrets/.skip
+	sudo darwin-rebuild switch --flake .#alami-mbp
+	@rm -f secrets/.skip
 
 # Update flake inputs
 update:
@@ -58,14 +90,20 @@ help:
 	@echo "Nix Darwin Configuration"
 	@echo ""
 	@echo "First-time installation:"
-	@echo "  make install-desktop  - Install for Mac Desktop"
-	@echo "  make install-mbp      - Install for MacBook Pro (personal)"
-	@echo "  make install-alami    - Install for Alami MacBook Pro (work)"
+	@echo "  make install-desktop             - Install for Mac Desktop"
+	@echo "  make install-mbp                 - Install for MacBook Pro (personal)"
+	@echo "  make install-alami               - Install for Alami MacBook Pro (work)"
+	@echo "  make install-desktop-nosecrets   - Install without secrets decryption"
+	@echo "  make install-mbp-nosecrets       - Install without secrets decryption"
+	@echo "  make install-alami-nosecrets     - Install without secrets decryption"
 	@echo ""
 	@echo "Daily usage:"
-	@echo "  make switch-desktop   - Rebuild Mac Desktop config"
-	@echo "  make switch-mbp       - Rebuild MacBook Pro config"
-	@echo "  make switch-alami     - Rebuild Alami MacBook Pro config"
+	@echo "  make switch-desktop              - Rebuild Mac Desktop config"
+	@echo "  make switch-mbp                  - Rebuild MacBook Pro config"
+	@echo "  make switch-alami                - Rebuild Alami MacBook Pro config"
+	@echo "  make switch-desktop-nosecrets    - Rebuild without secrets decryption"
+	@echo "  make switch-mbp-nosecrets        - Rebuild without secrets decryption"
+	@echo "  make switch-alami-nosecrets      - Rebuild without secrets decryption"
 	@echo ""
 	@echo "Maintenance:"
 	@echo "  make update           - Update flake inputs"
