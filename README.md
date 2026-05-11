@@ -20,6 +20,7 @@ Each machine always gets the `common` layer. Profiles are opt-in on top of that.
 
 1. **Login to Mac App Store** — required for `mas` to install App Store apps
 2. **Full Disk Access for Terminal** — System Settings → Privacy & Security → Full Disk Access
+   > **Important:** After granting Full Disk Access, **quit and reopen Terminal** (Cmd+Q) before running any install command. The permission only applies to new Terminal sessions — the Nix installer will fail with a "Read-only file system" error if the terminal wasn't restarted.
 
 ## Installation
 

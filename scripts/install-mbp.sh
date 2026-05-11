@@ -9,7 +9,15 @@ echo ""
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 bash "$SCRIPT_DIR/setup-nix.sh"
 
-# Step 4: Apply nix-darwin configuration
+# Load nix and homebrew into current shell (setup-nix.sh runs in a subshell)
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Step 5: Apply nix-darwin configuration
 echo ""
 echo "Step 5: Applying nix-darwin configuration..."
 cd ~/nix/nix-config
