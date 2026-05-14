@@ -7,6 +7,10 @@ Files that are no longer referenced in nix config and can be deleted after verif
 - [ ] `common/dotfiles/bat/config` — theme is now set in `programs.bat.config.theme`
 - Note: `common/dotfiles/bat/themes/Catppuccin-Mocha.tmTheme` is still used by `programs.bat.themes.src` — do NOT delete
 
+## Mise config (replaced by `programs.mise.globalConfig`)
+
+- [ ] `common/dotfiles/mise/config.toml` — tools and settings now in `programs.mise.globalConfig` (common/programs/mise.nix)
+
 ## Ghostty config (replaced by `programs.ghostty`)
 
 - [ ] `common/dotfiles/ghostty/config` — now managed by `programs.ghostty.settings` in common/home-manager.nix

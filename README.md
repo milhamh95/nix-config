@@ -2,8 +2,6 @@
 
 Personal Nix configuration for macOS — manages system packages, dotfiles, and dev environment across 3 machines using a layered profile system.
 
-> **Note:** This config is coupled with encrypted secrets (SSH keys, maven settings). Other people can still use this config by using the `-nosecrets` commands — see [Installation without secrets](#installation-without-secrets).
-
 > For a more advanced nix config, check out [github.com/r17x/universe](https://github.com/r17x/universe)
 
 ## Machines
@@ -11,8 +9,8 @@ Personal Nix configuration for macOS — manages system packages, dotfiles, and 
 | Machine | Profiles | Use |
 |---|---|---|
 | `mac-desktop` | work, alami | Main desktop |
-| `mbp` | — | Personal laptop (minimal) |
-| `alami-mbp` | work, alami | Work laptop |
+| `mbp` | laptop | Personal laptop (minimal) |
+| `alami-mbp` | laptop, work, alami | Work laptop |
 
 Each machine always gets the `common` layer. Profiles are opt-in on top of that. See [Architecture](docs/architecture.md) for details.
 
@@ -37,10 +35,9 @@ bash bootstrap.sh feat/my-branch  # clones a specific branch
 The script will:
 1. Install Xcode Command Line Tools (gives you `git` and `make`)
 2. Clone the repo via HTTPS (from the specified branch, defaults to `main`)
-3. Ask if you want to install with or without secrets
-4. If with secrets — prompt for the path to your age key file
-5. Ask which machine to install
-6. Run the install
+3. Prompt for the path to your age key file
+4. Ask which machine to install
+5. Run the install
 
 After install, restart your terminal and switch the git remote to SSH:
 
@@ -66,7 +63,7 @@ git clone https://github.com/milhamh95/nix-config.git nix-config
 cd nix-config
 ```
 
-**3. Set up age key** (skip this step to install without secrets)
+**3. Set up age key**
 
 Save your age key from your password manager to `secrets/age/keys.txt`:
 
@@ -78,15 +75,9 @@ vim secrets/age/keys.txt   # paste the full key content, save and exit
 **4. Run install**
 
 ```sh
-# With secrets (age key required)
 make install-desktop   # Mac Desktop
 make install-mbp       # MacBook Pro (personal)
 make install-alami     # Alami MacBook Pro (work)
-
-# Without secrets (no age key needed)
-make install-desktop-nosecrets
-make install-mbp-nosecrets
-make install-alami-nosecrets
 ```
 
 **5. Switch git remote to SSH** (after secrets are decrypted)
@@ -126,8 +117,6 @@ git commit -m "feat: add encrypted secrets"
 
 ## Usage
 
-Every command has a `-nosecrets` variant. Use the matching variant consistently — if you installed with `-nosecrets`, rebuild with `-nosecrets` too (until you set up your age key).
-
 <details>
 <summary>Rebuild commands</summary>
 
@@ -137,15 +126,24 @@ nixmd      # rebuild mac-desktop
 nixmbp     # rebuild mbp
 nixalami   # rebuild alami-mbp
 
-# Via Makefile (with secrets)
+# Via Makefile
 make switch-desktop
 make switch-mbp
 make switch-alami
+```
 
-# Via Makefile (without secrets)
-make switch-desktop-nosecrets
-make switch-mbp-nosecrets
-make switch-alami-nosecrets
+</details>
+
+<details>
+<summary>Dev shells</summary>
+
+```sh
+nix develop .#postgres   # PostgreSQL 17 dev shell (auto-enters fish)
+nix develop .#redis      # Redis dev shell (auto-enters fish)
+
+# Or use fish abbreviations
+pgshell
+rdshell
 ```
 
 </details>

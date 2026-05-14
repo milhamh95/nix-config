@@ -7,40 +7,48 @@ Configuration is built from layers that **merge together** — each machine opts
 ```mermaid
 block-beta
     columns 2
-    lbl4["Host"]:1
-    block:layer4["hosts/{machine}/"]:1
-        l4["machine-specific apps & system defaults"]
+    lbl5["Host"]:1
+    block:layer5["hosts/{machine}/"]:1
+        l5["machine-specific flashspace profiles, Switor"]
     end
-    lbl3["Alami Profile"]:1
-    block:layer3["profiles/alami/"]:1
-        l3["slack, claude-code, pritunl, alami SSH, sdkman"]
+    lbl4["Alami Profile"]:1
+    block:layer4["profiles/alami/"]:1
+        l4["slack, claude-code, pritunl, alami SSH, git work identity, sdkman"]
     end
-    lbl2["Work Profile"]:1
-    block:layer2["profiles/work/"]:1
-        l2["bloom, tableplus, work folder"]
+    lbl3["Work Profile"]:1
+    block:layer3["profiles/work/"]:1
+        l3["bloom, tableplus, hammerflow, flashspace settings"]
+    end
+    lbl2["Laptop Profile"]:1
+    block:layer2["profiles/laptop/"]:1
+        l2["batfi, dock size 50, battery %"]
     end
     lbl1["Common"]:1
     block:layer1["common/"]:1
-        l1["browsers, media, fonts, karabiner, raycast, git, mas apps"]
+        l1["browsers, media, fonts, karabiner, raycast, git, ssh, bat, delta, mas apps"]
     end
 
     style lbl1 fill:#74c7ec,color:#1e1e2e
-    style lbl2 fill:#a18072,color:#1e1e2e
-    style lbl3 fill:#f5a97f,color:#1e1e2e
-    style lbl4 fill:#f38ba8,color:#1e1e2e
+    style lbl2 fill:#94e2d5,color:#1e1e2e
+    style lbl3 fill:#a18072,color:#1e1e2e
+    style lbl4 fill:#f5a97f,color:#1e1e2e
+    style lbl5 fill:#f38ba8,color:#1e1e2e
     style layer1 fill:#74c7ec,color:#1e1e2e
-    style layer2 fill:#a18072,color:#1e1e2e
-    style layer3 fill:#f5a97f,color:#1e1e2e
-    style layer4 fill:#f38ba8,color:#1e1e2e
+    style layer2 fill:#94e2d5,color:#1e1e2e
+    style layer3 fill:#a18072,color:#1e1e2e
+    style layer4 fill:#f5a97f,color:#1e1e2e
+    style layer5 fill:#f38ba8,color:#1e1e2e
     style l1 fill:#74c7ec,color:#1e1e2e,stroke:#74c7ec
-    style l2 fill:#a18072,color:#1e1e2e,stroke:#a18072
-    style l3 fill:#f5a97f,color:#1e1e2e,stroke:#f5a97f
-    style l4 fill:#f38ba8,color:#1e1e2e,stroke:#f38ba8
+    style l2 fill:#94e2d5,color:#1e1e2e,stroke:#94e2d5
+    style l3 fill:#a18072,color:#1e1e2e,stroke:#a18072
+    style l4 fill:#f5a97f,color:#1e1e2e,stroke:#f5a97f
+    style l5 fill:#f38ba8,color:#1e1e2e,stroke:#f38ba8
 ```
 
 | Color | Layer | Applied to |
 |---|---|---|
 | 🔷 Cyan | `common/` | All machines |
+| 🟢 Teal | `profiles/laptop/` | Laptops (mbp, alami-mbp) |
 | 🟤 Brown | `profiles/work/` | Machines used for work |
 | 🟠 Peach | `profiles/alami/` | Machines for Alami job |
 | 🔴 Pink | `hosts/{machine}/` | This specific machine only |
@@ -49,8 +57,8 @@ Defined in `flake.nix`:
 
 ```nix
 "mac-desktop" = { profiles = [ "work" "alami" ]; };
-"alami-mbp"   = { profiles = [ "work" "alami" ]; };
-"mbp"         = { profiles = [];                 };  # minimal
+"alami-mbp"   = { profiles = [ "laptop" "work" "alami" ]; };
+"mbp"         = { profiles = [ "laptop" ];                 };  # minimal
 ```
 
 ---
@@ -65,28 +73,33 @@ nix-config/
 ├── common/                         # Applied to ALL machines
 │   ├── homebrew.nix                #   casks, brews, mas apps (18 App Store apps)
 │   ├── nix-packages.nix            #   CLI tools + nerd fonts
-│   ├── home-manager.nix            #   SSH, karabiner, bat, ghostty, BetterAudio, Recordly, sdkman candidates
+│   ├── home-manager.nix            #   programs.git, ssh, bat, delta, ghostty, wezterm, karabiner, BetterAudio, Recordly, sdkman
 │   ├── system-defaults.nix         #   macOS settings (dock, finder, keyboard)
 │   └── programs/                   #   shell & tool configs
 │       ├── fish/                   #     fish shell functions & abbreviations
 │       ├── atuin.nix               #     shell history (Catppuccin theme)
+│       ├── mise.nix                #     runtime version manager (go, node, rust, etc.)
 │       └── fastfetch.nix           #     system info display
 │
 ├── profiles/                       # Opt-in feature sets
+│   ├── laptop/                     #   Shared laptop settings
+│   │   ├── homebrew.nix            #     batfi
+│   │   └── system-defaults.nix     #     dock size 50, battery %
 │   ├── work/                       #   Generic work setup
 │   │   ├── homebrew.nix            #     bloom, tableplus
-│   │   ├── home-manager.nix        #     work folder setup
-│   │   └── system-defaults.nix     #     Bloom in dock
+│   │   ├── home-manager.nix        #     work folder, shared hammerflow & flashspace configs
+│   │   ├── system-defaults.nix     #     Bloom in dock
+│   │   └── dotfiles/               #     shared hammerflow + flashspace/settings.json
 │   └── alami/                      #   Alami job-specific
 │       ├── homebrew.nix            #     slack, claude-code, pritunl, windsurf, rtk...
 │       ├── nix-packages.nix        #     sftpgo, zstd
-│       ├── home-manager.nix        #     alami SSH, sdkman, sftpgo config
+│       ├── home-manager.nix        #     alami SSH matchBlock, git work identity, sdkman, sftpgo
 │       └── fish/                   #     alami-specific functions & abbreviations
 │
 ├── hosts/                          # Per-machine unique config
-│   ├── mac-desktop/                #   bettermouse, bettertouchtool, betterdisplay, Switor
-│   ├── mbp/                        #   batfi
-│   └── alami-mbp/                  #   batfi
+│   ├── mac-desktop/                #   bettermouse, bettertouchtool, betterdisplay, Switor, flashspace profiles
+│   ├── mbp/                        #   hammerflow, flashspace (different configs)
+│   └── alami-mbp/                  #   flashspace profiles
 │
 ├── shells/                         # nix develop environments
 │   ├── postgres.nix                #   PostgreSQL 17 with helper CLIs
@@ -113,41 +126,36 @@ Everything in `common/` is installed on **all three machines**.
 <details>
 <summary>Nix packages</summary>
 
-**Shell & Navigation**
+**Home-manager programs** (installed + configured via nix)
+
+| Program | Purpose |
+|---|---|
+| programs.git | Version control (with gitdir-based work identity) |
+| programs.delta | Diff pager (Catppuccin theme, auto-wired to git) |
+| programs.bat | `cat` with syntax highlighting (Catppuccin theme) |
+| programs.ssh | SSH config (GitHub keys, OrbStack, known_hosts) |
+| programs.ghostty | Terminal emulator config (installed via homebrew) |
+| programs.wezterm | Terminal emulator config (installed via homebrew) |
+| programs.atuin | Shell history with sync |
+| programs.mise | Runtime version manager (go, node, rust, erlang, etc.) |
+| programs.fish | Shell config (tide, functions, abbreviations) |
+
+**Nix packages** (CLI tools)
 
 | Package | Purpose |
 |---|---|
-| atuin | Shell history with sync |
-| bat | `cat` with syntax highlighting |
 | fastfetch | System info display |
 | fd | Better `find` |
 | fzf | Fuzzy finder |
+| lazygit | Git TUI |
 | lsd | Better `ls` |
 | vim | Text editor |
-
-**Git**
-
-| Package | Purpose |
-|---|---|
-| git | Version control |
-| delta | Diff pager with syntax highlighting |
-| lazygit | Git TUI |
-
-**Network & Security**
-
-| Package | Purpose |
-|---|---|
+| ripgrep | Fast grep |
 | age | File encryption |
 | curl | HTTP client |
 | openssl | TLS/SSL toolkit |
 | sops | Secrets manager |
 | wget | File downloader |
-
-**Other**
-
-| Package | Purpose |
-|---|---|
-| ripgrep | Fast grep |
 | yarn | JS package manager |
 
 **Fish plugins**
@@ -293,8 +301,16 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 | What | Detail |
 |---|---|
 | Casks | bloom, tableplus |
+| Dotfiles | shared hammerflow config, flashspace settings |
 | Fish | `work` → `cd ~/work` |
 | System | Bloom pinned in dock |
+
+### `profiles/laptop/`
+
+| What | Detail |
+|---|---|
+| Casks | batfi |
+| System | dock size 50, battery % shown |
 
 ### `profiles/alami/`
 
@@ -304,7 +320,9 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 | Nix packages | sftpgo, zstd |
 | Java (sdkman) | 17.0.19-tem, 11.0.31-tem — default: 17.0.19-tem |
 | Maven (sdkman) | 3.9.15 — custom settings.xml (encrypted, auto-deployed) |
-| Config | Alami SSH key, SFTPGo config, git work identity |
+| SSH | alami-group SSH matchBlock + public key |
+| Git | work identity via `programs.git.includes` (gitdir:~/work/alami-group/) |
+| Config | SFTPGo config |
 | Fish | `mocksftp` abbreviation + alami-specific functions |
 
 ---
@@ -317,6 +335,7 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 |---|---|
 | Casks | bettermouse, bettertouchtool, betterdisplay |
 | Apps | Switor (bundled) |
+| Config | flashspace profiles (Obsidian), Switor config |
 | Dock size | 65 |
 | Battery % | Hidden (always plugged in) |
 
@@ -324,17 +343,13 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 
 | What | Detail |
 |---|---|
-| Casks | batfi |
-| Dock size | 50 |
-| Battery % | Shown |
+| Config | hammerflow (Dracula theme), flashspace (personal only) |
 
 ### `hosts/alami-mbp/`
 
 | What | Detail |
 |---|---|
-| Casks | batfi |
-| Dock size | 50 |
-| Battery % | Shown |
+| Config | flashspace profiles (Heptabase) |
 
 ---
 
@@ -345,24 +360,24 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 ```mermaid
 flowchart LR
     subgraph common["common/"]
-        c_pkg["packages: git, bat, fzf, delta, lazygit, fonts..."]
+        c_pkg["programs: git, delta, bat, ssh, ghostty, wezterm, atuin, mise, fish"]
         c_app["apps: chrome, brave, ghostty, raycast, orbstack..."]
         c_mas["mas: Amphetamine, Flow, iStat Menus, Spark + 14 more"]
         c_gh["github releases: BetterAudio, Recordly"]
-        c_cfg["config: karabiner, SSH, bat theme, fish, atuin"]
+        c_cfg["config: karabiner, sdkman"]
     end
 
     subgraph work["profiles/work/"]
-        w["bloom, tableplus, work folder"]
+        w["bloom, tableplus, hammerflow, flashspace settings"]
     end
 
     subgraph alami["profiles/alami/"]
-        a["slack, claude-code, pritunl, windsurf, alami SSH, sdkman"]
+        a["slack, claude-code, pritunl, windsurf, alami SSH, git work identity, sdkman"]
     end
 
     subgraph host["hosts/mac-desktop/"]
         h["bettermouse, bettertouchtool, betterdisplay, Switor"]
-        h_sys["dock size 65"]
+        h_sys["dock size 65, flashspace profiles"]
     end
 
     result["mac-desktop"]
@@ -378,63 +393,73 @@ flowchart LR
     style host fill:#f38ba8,color:#1e1e2e
 ```
 
-### alami-mbp — `profiles = ["work", "alami"]`
+### alami-mbp — `profiles = ["laptop", "work", "alami"]`
 
-Same profiles as mac-desktop, different host config:
+Same as mac-desktop but with laptop profile:
 
 ```mermaid
 flowchart LR
     subgraph common["common/"]
-        c["packages + apps + mas apps + github releases + config"]
+        c["programs + apps + mas apps + github releases + config"]
+    end
+
+    subgraph laptop["profiles/laptop/"]
+        lp["batfi, dock size 50, battery %"]
     end
 
     subgraph work["profiles/work/"]
-        w["bloom, tableplus, work folder"]
+        w["bloom, tableplus, hammerflow, flashspace settings"]
     end
 
     subgraph alami["profiles/alami/"]
-        a["slack, claude-code, pritunl, windsurf, alami SSH, sdkman"]
+        a["slack, claude-code, pritunl, windsurf, alami SSH, git work identity, sdkman"]
     end
 
     subgraph host["hosts/alami-mbp/"]
-        h["batfi"]
-        h_sys["dock size 50, battery %"]
+        h["flashspace profiles"]
     end
 
     result["alami-mbp"]
 
     common --> result
+    laptop --> result
     work --> result
     alami --> result
     host --> result
 
     style common fill:#74c7ec,color:#1e1e2e
+    style laptop fill:#94e2d5,color:#1e1e2e
     style work fill:#a18072,color:#1e1e2e
     style alami fill:#f5a97f,color:#1e1e2e
     style host fill:#f38ba8,color:#1e1e2e
 ```
 
-### mbp — `profiles = []`
+### mbp — `profiles = ["laptop"]`
 
-Minimal — only common + host:
+Minimal — common + laptop + host:
 
 ```mermaid
 flowchart LR
     subgraph common["common/"]
-        c["packages + apps + mas apps + github releases + config"]
+        c["programs + apps + mas apps + github releases + config"]
+    end
+
+    subgraph laptop["profiles/laptop/"]
+        lp["batfi, dock size 50, battery %"]
     end
 
     subgraph host["hosts/mbp/"]
-        h["batfi"]
-        h_sys["dock size 50, battery %"]
+        h["hammerflow, flashspace"]
     end
 
     result["mbp (minimal)"]
 
     common --> result
+    laptop --> result
     host --> result
 
     style common fill:#74c7ec,color:#1e1e2e
+    style laptop fill:#94e2d5,color:#1e1e2e
     style host fill:#f38ba8,color:#1e1e2e
 ```
 

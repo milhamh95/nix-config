@@ -10,11 +10,18 @@
       settings = {
         experimental = false;
         verbose = false;
-        disable_tools = ["node"];
       };
       tools = {
+        go = ["latest" "1.25.1"];
+        erlang = "latest";
+        elixir = "latest";
         node = ["latest" "lts"];
-        go = ["1.24.6" "latest"];
+        bun = "latest";
+        deno = "latest";
+        yarn = "latest";
+        pnpm = "latest";
+        uv = "latest";
+        rust = "latest";
       };
     };
   };

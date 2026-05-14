@@ -5,7 +5,6 @@
   # System packages (shared across all machines)
   environment.systemPackages = [
     pkgs.age
-    pkgs.atuin
     pkgs.curl
     pkgs.fastfetch
     pkgs.fd
@@ -17,7 +16,6 @@
     pkgs.fishPlugins.colored-man-pages
     pkgs.fishPlugins.sdkman-for-fish
     pkgs.fzf
-    pkgs.git
     pkgs.lazygit
     pkgs.lsd
     pkgs.openssl
