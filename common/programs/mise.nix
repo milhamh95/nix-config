@@ -6,13 +6,12 @@
     enableZshIntegration = true;
     enableFishIntegration = true;
 
-    settings = {
-      experimental = false;
-      verbose = false;
-      disable_tools = ["node"];
-    };
-
     globalConfig = {
+      settings = {
+        experimental = false;
+        verbose = false;
+        disable_tools = ["node"];
+      };
       tools = {
         node = ["latest" "lts"];
         go = ["1.24.6" "latest"];

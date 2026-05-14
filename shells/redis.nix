@@ -129,9 +129,21 @@ pkgs.mkShell {
       mkdir -p "$REDIS_DATA"
     fi
 
-    echo "Redis Development Shell (run 'redis_help' for commands)"
+    echo "Redis Development Shell"
     echo "Port: $REDIS_PORT | Data: $REDIS_DATA"
     echo ""
     redis-server --version
+    echo ""
+    echo "Available commands:"
+    echo "  redis_start                - Start Redis server with port selection"
+    echo "  redis_stop                 - Stop Redis server"
+    echo "  redis_status               - Show Redis server status"
+    echo "  redis-cli -p \$REDIS_PORT   - Open Redis CLI"
+    echo "  redis_help                 - Show this help message"
+
+    # Auto-switch to fish if available
+    if [ -z "$FISH_VERSION" ] && command -v fish >/dev/null 2>&1; then
+      exec fish
+    fi
   '';
 }

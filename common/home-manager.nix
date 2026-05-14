@@ -19,26 +19,6 @@ in {
 
   # Shared activation scripts
   home.activation = {
-    configureSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      echo "Configuring SSH..."
-      $DRY_RUN_CMD mkdir -p "$HOME/.ssh"
-
-      # Copy public key if not exists
-      if [ ! -f "$HOME/.ssh/id_github_personal.pub" ]; then
-        $DRY_RUN_CMD cp ${./dotfiles/ssh/id_github_personal.pub} "$HOME/.ssh/id_github_personal.pub"
-        $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_personal.pub"
-      fi
-
-      # Append SSH config only if "Host personal" not already present
-      if ! grep -q "Host personal" "$HOME/.ssh/config" 2>/dev/null; then
-        echo "Adding personal SSH config..."
-        echo "" >> "$HOME/.ssh/config"
-        $DRY_RUN_CMD cat ${./dotfiles/ssh/config} >> "$HOME/.ssh/config"
-        $DRY_RUN_CMD chmod 600 "$HOME/.ssh/config"
-      fi
-      echo "SSH configured"
-    '';
-
     configureTide = lib.hm.dag.entryAfter ["writeBoundary"] ''
       if [ ! -e "$HOME/.config/fish/tide_configured" ]; then
         echo "Configuring Tide... ⚙️"
@@ -142,12 +122,6 @@ in {
         $DRY_RUN_CMD ${pkgs.git}/bin/git clone https://github.com/saml-dev/Hammerflow.spoon.git "$HOME/.hammerspoon/Spoons/Hammerflow.spoon"
         echo "Hammerflow configured ✅"
       fi
-    '';
-
-    configureBatTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      echo "Rebuilding bat cache for Catppuccin theme..."
-      $DRY_RUN_CMD ${pkgs.bat}/bin/bat cache --build
-      echo "Bat cache rebuilt ✅"
     '';
 
     installRecordly = lib.hm.dag.entryAfter ["writeBoundary"] ''
@@ -317,14 +291,6 @@ in {
         echo "Karabiner config changed"
       '';
     };
-    # Note: .gitconfig is host-specific (in hosts/{hostname}/home-manager.nix)
-    ".gitconfig-personal" = {
-      source = ./dotfiles/git/.gitconfig-personal;
-      onChange = ''
-        echo "Git personal config changed"
-      '';
-    };
-    # Note: .gitconfig-alami-group is mac-desktop only (in hosts/mac-desktop/home-manager.nix)
     ".gitignore" = {
       source = ./dotfiles/git/.gitignore;
       onChange = ''
@@ -337,34 +303,19 @@ in {
         echo "Catppuccin delta theme changed"
       '';
     };
-    ".config/bat/config" = {
-      source = ./dotfiles/bat/config;
-      onChange = ''
-        echo "Bat config changed"
-      '';
-    };
-    ".config/bat/themes/Catppuccin Mocha.tmTheme" = {
-      source = ./dotfiles/bat/themes/Catppuccin-Mocha.tmTheme;
-      onChange = ''
-        echo "Bat Catppuccin theme changed"
-      '';
-    };
     ".config/atuin/themes/catppuccin-mocha-red.toml" = {
       source = ./dotfiles/atuin/themes/catppuccin-mocha-red.toml;
       onChange = ''
         echo "Atuin Catppuccin theme changed"
       '';
     };
-    ".config/ghostty/config" = {
-      source = ./dotfiles/ghostty/config;
-      onChange = ''
-        echo "Ghostty config changed"
-      '';
+    ".ssh/id_github_personal.pub" = {
+      source = ./dotfiles/ssh/id_github_personal.pub;
     };
-    ".wezterm.lua" = {
-      source = ./dotfiles/wezterm/wezterm.lua;
-      onChange = ''
-        echo "WezTerm config changed"
+    ".ssh/known_hosts" = {
+      text = ''
+        github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+        ssh.github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
       '';
     };
   };
@@ -372,6 +323,114 @@ in {
   home.sessionPath = [
     "$HOME/go/bin"
   ];
+
+  programs.ghostty = {
+    enable = true;
+    package = pkgs.emptyDirectory;
+    settings = {
+      font-size = 16;
+      font-family = "BlexMono Nerd Font Mono";
+      theme = "Catppuccin Mocha";
+      cursor-style = "bar";
+      cursor-style-blink = true;
+      bold-is-bright = true;
+      confirm-close-surface = false;
+      command = "/run/current-system/sw/bin/fish";
+      shell-integration = "fish";
+      macos-titlebar-style = "transparent";
+      macos-option-as-alt = true;
+      macos-window-shadow = true;
+      custom-shader-animation = true;
+      window-padding-x = 8;
+      window-padding-y = 5;
+      window-padding-color = "extend";
+      background-opacity = 1;
+      window-inherit-working-directory = false;
+      tab-inherit-working-directory = false;
+      working-directory = "home";
+      keybind = {
+        "super+alt+left" = "previous_tab";
+        "super+alt+right" = "next_tab";
+      };
+    };
+  };
+
+  programs.ssh = {
+    enable = true;
+    includes = [ "~/.orbstack/ssh/config" ];
+    addKeysToAgent = "yes";
+    matchBlocks = {
+      "github.com" = {
+        hostname = "ssh.github.com";
+        port = 443;
+        user = "git";
+        identityFile = "~/.ssh/id_github_personal";
+        identitiesOnly = true;
+        extraOptions = {
+          UseKeychain = "yes";
+        };
+      };
+    };
+    userKnownHostsFile = "~/.ssh/known_hosts";
+  };
+
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "Catppuccin Mocha";
+    };
+    themes = {
+      "Catppuccin Mocha" = {
+        src = ./dotfiles/bat/themes/Catppuccin-Mocha.tmTheme;
+      };
+    };
+  };
+
+  programs.git = {
+    enable = true;
+
+    settings = {
+      user = {
+        name = "Muhammmad Ilham Hidayat";
+        email = "m.ilham.hidayat.95@gmail.com";
+      };
+      init.defaultBranch = "main";
+      pull.rebase = true;
+      core = {
+        excludesfile = "~/.gitignore";
+        editor = "code --wait";
+      };
+      merge.conflictstyle = "diff3";
+      diff.colorMoved = "default";
+      filter.lfs = {
+        clean = "git-lfs clean -- %f";
+        smudge = "git-lfs smudge -- %f";
+        process = "git-lfs filter-process";
+        required = true;
+      };
+      url."git@github.com:".insteadOf = "https://github.com/";
+    };
+
+    includes = [
+      { path = "~/.config/git/catppuccin-delta.gitconfig"; }
+    ];
+  };
+
+  programs.wezterm = {
+    enable = true;
+    package = pkgs.emptyDirectory;
+    extraConfig = builtins.readFile ./dotfiles/wezterm/wezterm.lua;
+  };
+
+  programs.delta = {
+    enable = true;
+    options = {
+      features = "catppuccin-mocha";
+      navigate = true;
+      line-numbers = true;
+      side-by-side = false;
+    };
+  };
 
   xdg.enable = true;
 

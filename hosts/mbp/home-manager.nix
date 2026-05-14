@@ -2,15 +2,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Laptop-specific home file configurations
   home.file = {
-    # Git config (host-specific due to username in paths)
-    ".gitconfig" = {
-      source = ./dotfiles/git/.gitconfig;
-      onChange = ''
-        echo "Git config changed"
-      '';
-    };
     ".config/flashspace/profiles.json" = {
       source = ./dotfiles/flashspace/profiles.json;
       force = true;
@@ -39,7 +31,6 @@
     };
   };
 
-  # Laptop-specific shell abbreviations
   programs.fish.shellAbbrs = {
     nixmbp = "sudo darwin-rebuild switch --flake .#mbp";
   };

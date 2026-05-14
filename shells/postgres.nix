@@ -174,9 +174,23 @@ pkgs.mkShell {
       fi
     fi
 
-    echo "PostgreSQL 17 Development Shell (run 'pg_help' for commands)"
+    echo "PostgreSQL 17 Development Shell"
     echo "Port: $PGPORT | Data: $dataDir"
     echo ""
     psql --version
+    echo ""
+    echo "Available commands:"
+    echo "  pg_start                      - Start PostgreSQL server with port selection"
+    echo "  pg_stop                       - Stop PostgreSQL server"
+    echo "  pg_status                     - Check PostgreSQL status and list databases"
+    echo "  pg_create_db <name>           - Create a new database"
+    echo "  pg_restore_db <db> <dumpfile> - Restore database from dump file"
+    echo "  psql                          - Connect to PostgreSQL"
+    echo "  pg_help                       - Show this help message"
+
+    # Auto-switch to fish if available
+    if [ -z "$FISH_VERSION" ] && command -v fish >/dev/null 2>&1; then
+      exec fish
+    fi
   '';
 }

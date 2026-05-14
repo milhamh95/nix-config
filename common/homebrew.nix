@@ -16,7 +16,6 @@
     brews = [
       "gh"
       "mas"
-      "mise"
       "mole"
     ];
 

@@ -12,6 +12,30 @@
     '';
   };
 
+  home.file = {
+    # Shared Hammerspoon/Hammerflow config
+    ".hammerspoon/home.toml" = {
+      source = ./dotfiles/hammerflow/home.toml;
+      onChange = ''
+        echo "Hammerspoon home config changed"
+      '';
+    };
+    ".hammerspoon/init.lua" = {
+      source = ./dotfiles/hammerflow/init.lua;
+      onChange = ''
+        echo "Hammerspoon init config changed"
+      '';
+    };
+    # Shared Flashspace settings
+    ".config/flashspace/settings.json" = {
+      source = ./dotfiles/flashspace/settings.json;
+      force = true;
+      onChange = ''
+        echo "Flashspace settings changed"
+      '';
+    };
+  };
+
   programs.fish.shellAbbrs = {
     work = "cd $HOME/work";
   };

@@ -3,10 +3,6 @@
 
 {
   homebrew = {
-    # Laptop-specific casks
-    casks = [
-      "batfi"
-    ];
-
-};
+    # Laptop-shared casks (batfi) are in profiles/laptop/
+  };
 }

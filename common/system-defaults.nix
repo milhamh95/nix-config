@@ -173,7 +173,10 @@
       wvous-tl-corner = 1;
       # hot corner action for top right corner. 1 -> disabled
       wvous-tr-corner = 1;
-      # Note: tilesize and persistent-apps are set per-host
+      # Note: tilesize is set per-host/profile
+      persistent-apps = [
+        { spacer = { small = true; }; }
+      ];
     };
 
     menuExtraClock = {

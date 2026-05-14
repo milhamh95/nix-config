@@ -32,17 +32,21 @@
       "mbp" = {
         hostname = "mbp";
         username = "milhamh95";
-        profiles = [];
+        profiles = [ "laptop" ];
       };
       "alami-mbp" = {
         hostname = "alami-mbp";
         username = "muhammadilhamhidayat";
-        profiles = [ "work" "alami" ];
+        profiles = [ "laptop" "work" "alami" ];
       };
     };
 
     # Profile modules (system-level and home-manager-level)
     profileSystemModules = {
+      "laptop" = [
+        ./profiles/laptop/system-defaults.nix
+        ./profiles/laptop/homebrew.nix
+      ];
       "work" = [
         ./profiles/work/homebrew.nix
         ./profiles/work/system-defaults.nix
