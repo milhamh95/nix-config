@@ -21,6 +21,7 @@ show_ui = true            # optional, default true, show the ui with your key ma
 f = "Flow"
 o = "OrbStack"
 p = "Pritunl"
+r = "Recordly"
 t = "TablePlus"
 v = ["Visual Studio Code", "VS Code"]
 w = "Windsurf"
@@ -33,9 +34,9 @@ r = "Bruno"
 
 [c]
 label = "[c]"
-a = "Cap"
 h = ["Google Chrome", "Chrome"]
 b = ["Google Chrome Beta", "Chrome Beta"]
+o = "Conductor"
 
 [g]
 label = "[g]"
