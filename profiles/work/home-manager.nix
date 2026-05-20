@@ -34,6 +34,13 @@
         echo "Flashspace settings changed"
       '';
     };
+    ".config/kickapp/config.json" = {
+      source = ./dotfiles/kickapp/config.json;
+      force = true;
+      onChange = ''
+        echo "KickApp config changed"
+      '';
+    };
   };
 
   programs.fish.shellAbbrs = {

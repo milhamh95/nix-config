@@ -302,6 +302,10 @@ in {
         ssh.github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
       '';
     };
+    "Applications/KickApp.app" = {
+      source = ./dotfiles/kickapp/KickApp.app;
+      recursive = true;
+    };
   };
 
   home.sessionPath = [

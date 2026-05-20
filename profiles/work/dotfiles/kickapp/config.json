@@ -1,0 +1,78 @@
+{
+  "groups" : [
+    {
+      "apps" : [
+        {
+          "id" : "CA61E281-8063-4C1E-A072-83EB2728ECFA",
+          "name" : "Ghostty",
+          "bundleIdentifier" : "com.mitchellh.ghostty",
+          "path" : "\/Applications\/Ghostty.app"
+        },
+        {
+          "id" : "944A21F2-E772-45FA-B1AE-96F99C0F7333",
+          "name" : "Windsurf",
+          "bundleIdentifier" : "com.exafunction.windsurf",
+          "path" : "\/Applications\/Windsurf.app"
+        },
+        {
+          "id" : "9A44BB05-ACDF-4C30-A9DD-790539081871",
+          "name" : "GitHub Desktop",
+          "bundleIdentifier" : "com.github.GitHubClient",
+          "path" : "\/Applications\/GitHub Desktop.app"
+        },
+        {
+          "id" : "F881567A-1359-40A3-ACC7-E8274636ED2A",
+          "name" : "Google Chrome",
+          "bundleIdentifier" : "com.google.Chrome",
+          "path" : "\/Applications\/Google Chrome.app"
+        },
+        {
+          "id" : "DB858F27-B393-4A14-BCC8-269C3C39B59E",
+          "name" : "Pritunl",
+          "bundleIdentifier" : "com.electron.pritunl",
+          "path" : "\/Applications\/Pritunl.app"
+        },
+        {
+          "id" : "7C478966-3E59-4367-A0BD-A685956DB8B5",
+          "name" : "Spark",
+          "bundleIdentifier" : "com.readdle.smartemail-Mac",
+          "path" : "\/Applications\/Spark.app"
+        },
+        {
+          "id" : "99043CA5-E23A-45E4-839B-6D2CAA8AF470",
+          "name" : "Bruno",
+          "bundleIdentifier" : "com.usebruno.app",
+          "path" : "\/Applications\/Bruno.app"
+        },
+        {
+          "id" : "3593E882-62D7-4470-9DDD-BE351C81B75A",
+          "name" : "TablePlus",
+          "bundleIdentifier" : "com.tinyapp.TablePlus",
+          "path" : "\/Applications\/TablePlus.app"
+        },
+        {
+          "id" : "38FB7315-A74A-4E6B-9B99-78A45FE79A73",
+          "name" : "Slack",
+          "bundleIdentifier" : "com.tinyspeck.slackmacgap",
+          "path" : "\/Applications\/Slack.app"
+        }
+      ],
+      "updatedAt" : "2026-05-20T11:41:06Z",
+      "name" : "Work",
+      "id" : "6DA8C789-C8F6-455A-BE24-3249D77325B8",
+      "createdAt" : "2026-05-14T12:01:13Z"
+    }
+  ],
+  "closeShortcutMap" : {
+    "6DA8C789-C8F6-455A-BE24-3249D77325B8" : {
+      "modifierFlags" : 2048,
+      "keyCode" : 33
+    }
+  },
+  "launchShortcutMap" : {
+    "6DA8C789-C8F6-455A-BE24-3249D77325B8" : {
+      "modifierFlags" : 2048,
+      "keyCode" : 30
+    }
+  }
+}
