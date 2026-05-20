@@ -27,7 +27,7 @@ Each machine always gets the `common` layer. Profiles are opt-in on top of that.
 Run the bootstrap script on a fresh Mac — it handles everything interactively:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/bootstrap.sh -o bootstrap.sh
+curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/feat/separate-brew/scripts/bootstrap.sh -o bootstrap.sh
 bash bootstrap.sh              # clones main branch (default)
 bash bootstrap.sh feat/my-branch  # clones a specific branch
 ```
