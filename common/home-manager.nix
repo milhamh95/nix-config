@@ -398,7 +398,7 @@ in {
 
   programs.wezterm = {
     enable = true;
-    package = null;
+    package = pkgs.emptyDirectory;
     extraConfig = builtins.readFile ./dotfiles/wezterm/wezterm.lua;
   };
 
