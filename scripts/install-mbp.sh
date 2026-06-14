@@ -21,7 +21,7 @@ fi
 echo ""
 echo "Step 5: Applying nix-darwin configuration..."
 cd ~/nix/nix-config
-nix run nix-darwin -- switch --flake .#mbp
+sudo nix run nix-darwin -- switch --flake .#mbp
 
 echo ""
 echo "Installation complete!"
