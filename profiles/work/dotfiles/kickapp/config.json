@@ -9,12 +9,6 @@
           "path" : "\/Applications\/Ghostty.app"
         },
         {
-          "id" : "944A21F2-E772-45FA-B1AE-96F99C0F7333",
-          "name" : "Windsurf",
-          "bundleIdentifier" : "com.exafunction.windsurf",
-          "path" : "\/Applications\/Windsurf.app"
-        },
-        {
           "id" : "9A44BB05-ACDF-4C30-A9DD-790539081871",
           "name" : "GitHub Desktop",
           "bundleIdentifier" : "com.github.GitHubClient",

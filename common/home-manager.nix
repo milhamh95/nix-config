@@ -97,17 +97,6 @@ in {
       fi
     '';
 
-    configureHammerflow = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-      if [ ! -d "$HOME/.hammerspoon/Spoons/Hammerflow.spoon" ]; then
-        echo "Creating Hammerspoon directories... ⚙️"
-        $DRY_RUN_CMD mkdir -p "$HOME/.hammerspoon/Spoons"
-
-        echo "Cloning Hammerflow repository... ⚙️"
-        $DRY_RUN_CMD ${pkgs.git}/bin/git clone https://github.com/saml-dev/Hammerflow.spoon.git "$HOME/.hammerspoon/Spoons/Hammerflow.spoon"
-        echo "Hammerflow configured ✅"
-      fi
-    '';
-
     installRecordly = lib.hm.dag.entryAfter ["writeBoundary"] ''
       echo "Checking Recordly installation..."
 

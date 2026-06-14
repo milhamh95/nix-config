@@ -17,7 +17,7 @@ block-beta
     end
     lbl3["Work Profile"]:1
     block:layer3["profiles/work/"]:1
-        l3["bloom, tableplus, hammerflow, flashspace settings"]
+        l3["bloom, tableplus, flashspace settings"]
     end
     lbl2["Laptop Profile"]:1
     block:layer2["profiles/laptop/"]:1
@@ -87,18 +87,18 @@ nix-config/
 │   │   └── system-defaults.nix     #     dock size 50, battery %
 │   ├── work/                       #   Generic work setup
 │   │   ├── homebrew.nix            #     bloom, tableplus
-│   │   ├── home-manager.nix        #     work folder, shared hammerflow & flashspace configs
+│   │   ├── home-manager.nix        #     work folder, shared flashspace configs
 │   │   ├── system-defaults.nix     #     Bloom in dock
-│   │   └── dotfiles/               #     shared hammerflow + flashspace/settings.json
+│   │   └── dotfiles/               #     flashspace/settings.json
 │   └── alami/                      #   Alami job-specific
-│       ├── homebrew.nix            #     slack, claude-code, pritunl, windsurf, rtk...
+│       ├── homebrew.nix            #     slack, claude-code, pritunl, rtk...
 │       ├── nix-packages.nix        #     sftpgo, zstd
 │       ├── home-manager.nix        #     alami SSH matchBlock, git work identity, sdkman, sftpgo
 │       └── fish/                   #     alami-specific functions & abbreviations
 │
 ├── hosts/                          # Per-machine unique config
 │   ├── mac-desktop/                #   bettermouse, bettertouchtool, betterdisplay, Switor, flashspace profiles
-│   ├── mbp/                        #   hammerflow, flashspace (different configs)
+│   ├── mbp/                        #   flashspace (different configs)
 │   └── alami-mbp/                  #   flashspace profiles
 │
 ├── shells/                         # nix develop environments
@@ -301,7 +301,7 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 | What | Detail |
 |---|---|
 | Casks | bloom, tableplus |
-| Dotfiles | shared hammerflow config, flashspace settings |
+| Dotfiles | flashspace settings |
 | Fish | `work` → `cd ~/work` |
 | System | Bloom pinned in dock |
 
@@ -316,7 +316,7 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 
 | What | Detail |
 |---|---|
-| Casks | claude-code, conductor, github, pritunl, rewritebar, rtk, slack, windsurf |
+| Casks | claude-code, conductor, github, pritunl, rewritebar, rtk, slack |
 | Nix packages | sftpgo, zstd |
 | Java (sdkman) | 17.0.19-tem, 11.0.31-tem — default: 17.0.19-tem |
 | Maven (sdkman) | 3.9.15 — custom settings.xml (encrypted, auto-deployed) |
@@ -343,7 +343,7 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 
 | What | Detail |
 |---|---|
-| Config | hammerflow (Dracula theme), flashspace (personal only) |
+| Config | flashspace (personal only) |
 
 ### `hosts/alami-mbp/`
 
@@ -368,11 +368,11 @@ flowchart LR
     end
 
     subgraph work["profiles/work/"]
-        w["bloom, tableplus, hammerflow, flashspace settings"]
+        w["bloom, tableplus, flashspace settings"]
     end
 
     subgraph alami["profiles/alami/"]
-        a["slack, claude-code, pritunl, windsurf, alami SSH, git work identity, sdkman"]
+        a["slack, claude-code, pritunl, alami SSH, git work identity, sdkman"]
     end
 
     subgraph host["hosts/mac-desktop/"]
@@ -408,11 +408,11 @@ flowchart LR
     end
 
     subgraph work["profiles/work/"]
-        w["bloom, tableplus, hammerflow, flashspace settings"]
+        w["bloom, tableplus, flashspace settings"]
     end
 
     subgraph alami["profiles/alami/"]
-        a["slack, claude-code, pritunl, windsurf, alami SSH, git work identity, sdkman"]
+        a["slack, claude-code, pritunl, alami SSH, git work identity, sdkman"]
     end
 
     subgraph host["hosts/alami-mbp/"]
@@ -449,7 +449,7 @@ flowchart LR
     end
 
     subgraph host["hosts/mbp/"]
-        h["hammerflow, flashspace"]
+        h["flashspace"]
     end
 
     result["mbp (minimal)"]

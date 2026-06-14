@@ -17,18 +17,6 @@
         echo "Flashspace settings changed"
       '';
     };
-    ".hammerspoon/home.toml" = {
-      source = ./dotfiles/hammerflow/home.toml;
-      onChange = ''
-        echo "Hammerspoon home config changed"
-      '';
-    };
-    ".hammerspoon/init.lua" = {
-      source = ./dotfiles/hammerflow/init.lua;
-      onChange = ''
-        echo "Hammerspoon init config changed"
-      '';
-    };
     ".config/kickapp/config.json" = {
       source = ./dotfiles/kickapp/config.json;
       force = true;

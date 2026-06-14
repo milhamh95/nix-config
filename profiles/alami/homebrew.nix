@@ -10,8 +10,8 @@
       "pritunl"
       "rewritebar"
       "rtk"
+      "devin-desktop"
       "slack"
-      "windsurf"
     ];
   };
 }
