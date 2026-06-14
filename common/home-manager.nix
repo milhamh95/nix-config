@@ -325,10 +325,10 @@ in {
       window-inherit-working-directory = false;
       tab-inherit-working-directory = false;
       working-directory = "home";
-      keybind = {
-        "super+alt+left" = "previous_tab";
-        "super+alt+right" = "next_tab";
-      };
+      keybind = [
+        "super+alt+left=previous_tab"
+        "super+alt+right=next_tab"
+      ];
     };
   };
 
