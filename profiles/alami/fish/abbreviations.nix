@@ -3,6 +3,6 @@
 
 {
   programs.fish.shellAbbrs = {
-    dv = "open -a \"Devin\"";
+    dv = "open $1 -a \"Devin\"";
   };
 }
