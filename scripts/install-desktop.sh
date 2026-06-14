@@ -21,7 +21,7 @@ fi
 echo ""
 echo "Step 5: Applying nix-darwin configuration..."
 cd ~/nix/nix-config
-sudo nix run nix-darwin -- switch --flake .#mac-desktop
+sudo env PATH="$PATH" nix run nix-darwin -- switch --flake .#mac-desktop
 
 echo ""
 echo "Installation complete!"

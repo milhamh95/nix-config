@@ -335,8 +335,11 @@ in {
   programs.ssh = {
     enable = true;
     includes = [ "~/.orbstack/ssh/config" ];
-    addKeysToAgent = "yes";
     matchBlocks = {
+      "*" = {
+        addKeysToAgent = "yes";
+        userKnownHostsFile = "~/.ssh/known_hosts";
+      };
       "github.com" = {
         hostname = "ssh.github.com";
         port = 443;
@@ -348,7 +351,6 @@ in {
         };
       };
     };
-    userKnownHostsFile = "~/.ssh/known_hosts";
   };
 
   programs.bat = {
