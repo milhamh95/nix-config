@@ -303,7 +303,7 @@ in {
 
   programs.ghostty = {
     enable = true;
-    package = pkgs.emptyDirectory;
+    package = null;
     settings = {
       font-size = 16;
       font-family = "BlexMono Nerd Font Mono";
@@ -334,6 +334,7 @@ in {
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     includes = [ "~/.orbstack/ssh/config" ];
     matchBlocks = {
       "*" = {
@@ -397,7 +398,7 @@ in {
 
   programs.wezterm = {
     enable = true;
-    package = pkgs.emptyDirectory;
+    package = null;
     extraConfig = builtins.readFile ./dotfiles/wezterm/wezterm.lua;
   };
 
