@@ -64,7 +64,6 @@
       "PastePal" = 1503446680;
       "PDF Expert" = 1055273043;
       "Presentify" = 1507246666;
-      "rcmd" = 1596283165;
       "SnippetsLab" = 1006087419;
       "Spark" = 1176895641;
       "Spokenly" = 6740315592;
