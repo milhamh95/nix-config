@@ -91,15 +91,13 @@ in
 
   };
 
-  programs.ssh.matchBlocks."alami-group" = {
-    hostname = "ssh.github.com";
-    port = 443;
-    user = "git";
-    identityFile = "~/.ssh/id_github_alami_group";
-    identitiesOnly = true;
-    extraOptions = {
-      UseKeychain = "yes";
-    };
+  programs.ssh.settings."alami-group" = {
+    HostName = "ssh.github.com";
+    Port = 443;
+    User = "git";
+    IdentityFile = "~/.ssh/id_github_alami_group";
+    IdentitiesOnly = true;
+    UseKeychain = "yes";
   };
 
   programs.git.includes = lib.mkAfter [

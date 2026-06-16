@@ -336,20 +336,18 @@ in {
     enable = true;
     enableDefaultConfig = false;
     includes = [ "~/.orbstack/ssh/config" ];
-    matchBlocks = {
+    settings = {
       "*" = {
-        addKeysToAgent = "yes";
-        userKnownHostsFile = "~/.ssh/known_hosts";
+        AddKeysToAgent = "yes";
+        UserKnownHostsFile = "~/.ssh/known_hosts";
       };
       "github.com" = {
-        hostname = "ssh.github.com";
-        port = 443;
-        user = "git";
-        identityFile = "~/.ssh/id_github_personal";
-        identitiesOnly = true;
-        extraOptions = {
-          UseKeychain = "yes";
-        };
+        HostName = "ssh.github.com";
+        Port = 443;
+        User = "git";
+        IdentityFile = "~/.ssh/id_github_personal";
+        IdentitiesOnly = true;
+        UseKeychain = "yes";
       };
     };
   };
