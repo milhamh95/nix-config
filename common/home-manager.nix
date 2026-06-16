@@ -49,7 +49,7 @@ in {
       if [ ! -e "$HOME/sdkman_configured" ]; then
         echo "Configuring SDKMAN... ⚙️"
         export PATH="/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
-        /usr/bin/curl -s "https://get.sdkman.io" | /bin/bash
+        /usr/bin/curl -s "https://get.sdkman.io" | /opt/homebrew/bin/bash
         $DRY_RUN_CMD touch "$HOME/sdkman_configured"
         echo "SDKMAN configured ✅"
       fi
