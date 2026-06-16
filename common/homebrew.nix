@@ -60,7 +60,6 @@
       "Folder Quick Look" = 6753110395;
       "iStat Menus" = 6499559693;
       "LilyView" = 529490330;
-      "Numbers" = 409203825;
       "OpenIn" = 1643649331;
       "PastePal" = 1503446680;
       "PDF Expert" = 1055273043;
