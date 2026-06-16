@@ -40,10 +40,12 @@
     '';
 
     interactiveShellInit = ''
-      # install catppuccin
+      # install catppuccin (skip if SSH key not available yet)
       if not test -e $__fish_config_dir/themes/Catppuccin\ Mocha.theme
-        fisher install catppuccin/fish
-        fish_config theme save "Catppuccin Mocha"
+        if test -f ~/.ssh/id_github_personal
+          fisher install catppuccin/fish
+          fish_config theme save "Catppuccin Mocha"
+        end
       end
 
       # remove PatrickF1/fzf.fish if installed (switched to native fzf)
@@ -56,9 +58,11 @@
         fzf --fish | source
       end
 
-      # activate mise
+      # activate mise (skip if SSH key not available yet)
       if type -q mise
-        mise activate fish | source
+        if test -f ~/.ssh/id_github_personal
+          mise activate fish | source
+        end
       end
     '';
   };
