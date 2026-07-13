@@ -170,7 +170,7 @@
   in
   flake-parts.lib.mkFlake { inherit inputs; } {
     # Supported systems
-    systems = [ "aarch64-darwin" "x86_64-darwin" ];
+    systems = [ "aarch64-darwin" ];
 
     # Flake-level outputs (darwin configurations)
     flake = {
