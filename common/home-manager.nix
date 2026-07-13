@@ -65,7 +65,6 @@ in {
         complete() { :; }
         source "$HOME/.sdkman/bin/sdkman-init.sh"
         unset -f complete
-        set -u
 
         if [ ! -d "$HOME/.sdkman/candidates/maven/3.9.15" ]; then
           echo "Installing maven 3.9.15... ⚙️"
@@ -82,6 +81,7 @@ in {
         else
           echo "java 21.0.11-tem already installed ✅"
         fi
+        set -u
       fi
     '';
 

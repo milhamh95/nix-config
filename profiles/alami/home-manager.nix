@@ -37,7 +37,6 @@ in
         complete() { :; }
         source "$HOME/.sdkman/bin/sdkman-init.sh"
         unset -f complete
-        set -u
 
         if [ ! -d "$HOME/.sdkman/candidates/java/17.0.19-tem" ]; then
           echo "Installing java 17.0.19-tem... ⚙️"
@@ -58,6 +57,7 @@ in
         echo "Setting default java to 17.0.19-tem... ⚙️"
         $DRY_RUN_CMD sdk default java 17.0.19-tem
         echo "Default java set to 17.0.19-tem ✅"
+        set -u
       fi
     '';
 
