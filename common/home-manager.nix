@@ -24,6 +24,7 @@ in {
     # Using a bash function bypasses PATH ordering entirely.
     fixReadlinkM = lib.hm.dag.entryBefore ["setupLaunchAgents"] ''
       readlink() { ${pkgs.coreutils}/bin/readlink "$@"; }
+      install() { ${pkgs.coreutils}/bin/install "$@"; }
     '';
 
     configureTide = lib.hm.dag.entryAfter ["writeBoundary"] ''
