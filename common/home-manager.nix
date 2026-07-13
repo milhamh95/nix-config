@@ -61,6 +61,7 @@ in {
       else
         export SDKMAN_DIR="$HOME/.sdkman"
         export SDKMAN_AUTO_ANSWER=true
+        export PATH="/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
         set +u
         complete() { :; }
         source "$HOME/.sdkman/bin/sdkman-init.sh"
