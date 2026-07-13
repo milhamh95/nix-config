@@ -2,7 +2,5 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.fish.shellAbbrs = {
-    dv = "open $1 -a \"Devin\"";
-  };
+  programs.fish.shellAbbrs = {};
 }
