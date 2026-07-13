@@ -33,7 +33,9 @@ in
       else
         export SDKMAN_DIR="$HOME/.sdkman"
         export SDKMAN_AUTO_ANSWER=true
+        set +u
         source "$HOME/.sdkman/bin/sdkman-init.sh"
+        set -u
 
         if [ ! -d "$HOME/.sdkman/candidates/java/17.0.19-tem" ]; then
           echo "Installing java 17.0.19-tem... ⚙️"
