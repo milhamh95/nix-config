@@ -4,7 +4,7 @@
   programs.mise = {
     enable = true;
     enableZshIntegration = true;
-    enableFishIntegration = true;
+    enableFishIntegration = false;
 
     globalConfig = {
       settings = {
@@ -18,7 +18,7 @@
         node = ["latest" "lts"];
         bun = "latest";
         deno = "latest";
-        yarn = "latest";
+        "npm:yarn" = "latest";
         pnpm = "latest";
         uv = "latest";
         rust = "latest";

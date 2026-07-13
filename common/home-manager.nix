@@ -62,7 +62,9 @@ in {
         export SDKMAN_DIR="$HOME/.sdkman"
         export SDKMAN_AUTO_ANSWER=true
         set +u
+        complete() { :; }
         source "$HOME/.sdkman/bin/sdkman-init.sh"
+        unset -f complete
         set -u
 
         if [ ! -d "$HOME/.sdkman/candidates/maven/3.9.15" ]; then
