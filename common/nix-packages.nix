@@ -5,6 +5,7 @@
   # System packages (shared across all machines)
   environment.systemPackages = [
     pkgs.age
+    pkgs.coreutils
     pkgs.curl
     pkgs.fastfetch
     pkgs.fd
