@@ -18,10 +18,17 @@ if [ -x /opt/homebrew/bin/brew ]; then
 fi
 
 # Step 5: Apply nix-darwin configuration
+# Note: first run on a fresh machine may fail at sops-nix launchd setup;
+# a second run succeeds once /run/current-system is established with GNU coreutils.
 echo ""
 echo "Step 5: Applying nix-darwin configuration..."
 cd ~/nix/nix-config
-sudo env PATH="$PATH" nix run nix-darwin -- switch --flake .#alami-mbp
+if ! sudo env PATH="$PATH" nix run nix-darwin -- switch --flake .#alami-mbp; then
+    echo ""
+    echo "First activation attempt failed (expected on fresh install), retrying..."
+    echo ""
+    sudo env PATH="$PATH" nix run nix-darwin -- switch --flake .#alami-mbp
+fi
 
 echo ""
 echo "Installation complete!"

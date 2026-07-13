@@ -19,10 +19,11 @@ in {
 
   # Shared activation scripts
   home.activation = {
-    # Ensure GNU coreutils readlink is in PATH before setupLaunchAgents runs
-    # (macOS BSD readlink doesn't support -m used by home-manager's launchd module)
-    fixCoreutilsPath = lib.hm.dag.entryBefore ["setupLaunchAgents"] ''
-      export PATH="${pkgs.coreutils}/bin:$PATH"
+    # Override readlink with GNU version before setupLaunchAgents runs.
+    # home-manager's launchd module uses readlink -m (GNU-only flag not in macOS BSD readlink).
+    # Using a bash function bypasses PATH ordering entirely.
+    fixReadlinkM = lib.hm.dag.entryBefore ["setupLaunchAgents"] ''
+      readlink() { ${pkgs.coreutils}/bin/readlink "$@"; }
     '';
 
     configureTide = lib.hm.dag.entryAfter ["writeBoundary"] ''
