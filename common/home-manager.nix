@@ -19,6 +19,12 @@ in {
 
   # Shared activation scripts
   home.activation = {
+    # Ensure GNU coreutils readlink is in PATH before setupLaunchAgents runs
+    # (macOS BSD readlink doesn't support -m used by home-manager's launchd module)
+    fixCoreutilsPath = lib.hm.dag.entryBefore ["setupLaunchAgents"] ''
+      export PATH="${pkgs.coreutils}/bin:$PATH"
+    '';
+
     configureTide = lib.hm.dag.entryAfter ["writeBoundary"] ''
       if [ ! -e "$HOME/.config/fish/tide_configured" ]; then
         echo "Configuring Tide... ⚙️"
