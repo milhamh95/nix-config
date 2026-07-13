@@ -41,10 +41,10 @@
 
     interactiveShellInit = ''
       # install catppuccin (skip if SSH key not available yet)
-      if not test -e $__fish_config_dir/themes/Catppuccin\ Mocha.theme
+      if not test -e $__fish_config_dir/themes/catppuccin-mocha.theme
         if test -f ~/.ssh/id_github_personal
           fisher install catppuccin/fish
-          fish_config theme save "Catppuccin Mocha"
+          fish_config theme choose catppuccin-mocha
         end
       end
 

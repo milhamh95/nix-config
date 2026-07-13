@@ -3,7 +3,7 @@
   system.defaults = {
     dock = {
       # Smaller dock for laptop screen
-      tilesize = 50;
+      tilesize = 65;
     };
 
     controlcenter = {
