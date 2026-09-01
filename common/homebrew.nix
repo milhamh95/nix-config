@@ -18,7 +18,7 @@
       "mas"
       "mise"
       "mole"
-      "opencode"
+      "pi-coding-agent"
       "rtk"
       "xcodegen"
     ];
