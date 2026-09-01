@@ -18,7 +18,9 @@
       "mas"
       "mise"
       "mole"
+      "opencode"
       "rtk"
+      "xcodegen"
     ];
 
     # GUI Apps (shared across all machines)

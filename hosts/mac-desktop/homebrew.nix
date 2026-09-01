@@ -8,6 +8,7 @@
       "bettermouse"
       "betterdisplay"
       "bloom"
+      "devin-desktop"
       "github"
       "google-chrome@beta"
       "pritunl"
