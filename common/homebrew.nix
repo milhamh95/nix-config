@@ -69,7 +69,7 @@
       "PastePal" = 1503446680;
       "PDF Expert – Edit, Sign PDFs" = 1055273043;
       "Presentify" = 1507246666;
-      "rcmd • App Switcher" = 1596283165;
+      # "rcmd • App Switcher" = 1596283165;
       "SnippetsLab" = 1006087419;
       "Spark Classic – Email App" = 1176895641;
       "Spokenly" = 6740315592;
