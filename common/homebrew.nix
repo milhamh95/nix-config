@@ -10,11 +10,12 @@
 
   homebrew = {
     enable = true;
-    taps = [];
+    taps = [ "stablyai/orca" ];
 
     # CLI tools (shared across all machines)
     brews = [
       "gh"
+      "herdr"
       "mas"
       "mise"
       "mole"
@@ -47,6 +48,7 @@
       "mockoon"
       "obsidian"
       "orbstack"
+      "stablyai/orca/orca"
       "raycast"
       "rectangle-pro"
       "rocket"
