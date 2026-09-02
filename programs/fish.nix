@@ -487,7 +487,6 @@ Tab to select multiple files, Enter to confirm"
 
     shellAbbrs = {
       vc = "open $1 -a \"Visual Studio Code\"";
-      ws = "open $1 -a \"Windsurf\"";
       g = "git";
       ga = "git add";
       gaa = "git add --all";

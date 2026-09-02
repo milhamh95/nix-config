@@ -162,33 +162,9 @@
         {
           "apps" : [
             {
-              "bundleIdentifier" : "com.exafunction.windsurf",
-              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
-              "name" : "Windsurf"
-            },
-            {
-              "bundleIdentifier" : "com.mitchellh.ghostty",
-              "iconPath" : "/Applications/Ghostty.app/Contents/Resources/Ghostty.icns",
-              "name" : "Ghostty"
-            }
-          ],
-          "display" : "XG27UCS",
-          "id" : "59BE9720-4CC4-4BB1-ABAD-1AA472398F75",
-          "name" : "W_Windsurf",
-          "openAppsOnActivation" : false,
-          "symbolIconName" : "2.circle.fill"
-        },
-        {
-          "apps" : [
-            {
               "bundleIdentifier" : "com.github.GitHubClient",
               "iconPath" : "/Applications/GitHub Desktop.app/Contents/Resources/electron.icns",
               "name" : "GitHub Desktop"
-            },
-            {
-              "bundleIdentifier" : "com.exafunction.windsurf",
-              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
-              "name" : "Windsurf"
             }
           ],
           "display" : "U28P2G6B",
@@ -222,11 +198,6 @@
               "bundleIdentifier" : "com.tinyapp.TablePlus",
               "iconPath" : "/Applications/TablePlus.app/Contents/Resources/AppIcon.icns",
               "name" : "TablePlus"
-            },
-            {
-              "bundleIdentifier" : "com.exafunction.windsurf",
-              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
-              "name" : "Windsurf"
             }
           ],
           "display" : "XG27UCS",
@@ -241,11 +212,6 @@
               "bundleIdentifier" : "com.usebruno.app",
               "iconPath" : "/Applications/Bruno.app/Contents/Resources/icon.icns",
               "name" : "Bruno"
-            },
-            {
-              "bundleIdentifier" : "com.exafunction.windsurf",
-              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
-              "name" : "Windsurf"
             }
           ],
           "display" : "U28P2G6B",
@@ -260,11 +226,6 @@
               "bundleIdentifier" : "com.readdle.PDFExpert-Mac",
               "iconPath" : "/Applications/PDF Expert.app/Contents/Resources/PE_OS26_icon.icns",
               "name" : "PDF Expert"
-            },
-            {
-              "bundleIdentifier" : "com.exafunction.windsurf",
-              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
-              "name" : "Windsurf"
             }
           ],
           "display" : "U28P2G6B",
@@ -279,11 +240,6 @@
               "bundleIdentifier" : "app.projectmeta.projectmeta",
               "iconPath" : "/Applications/Heptabase.app/Contents/Resources/icon.icns",
               "name" : "Heptabase"
-            },
-            {
-              "bundleIdentifier" : "com.exafunction.windsurf",
-              "iconPath" : "/Applications/Windsurf.app/Contents/Resources/Windsurf.icns",
-              "name" : "Windsurf"
             }
           ],
           "display" : "XG27UCS",

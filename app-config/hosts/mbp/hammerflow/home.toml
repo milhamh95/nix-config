@@ -15,7 +15,6 @@ show_ui = true            # optional, default true, show the ui with your key ma
 o = "OrbStack"
 t = "TablePlus"
 v = ["Visual Studio Code", "VS Code"]
-w = "Windsurf"
 
 [b]
 label = "[b]"

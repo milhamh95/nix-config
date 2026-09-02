@@ -14,7 +14,6 @@
       "rewritebar"
       "slack"
       "tableplus"
-      "windsurf"
       "wezterm"
       "zed"
       "batfi"

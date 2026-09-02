@@ -23,7 +23,6 @@ o = "OrbStack"
 p = "Pritunl"
 t = "TablePlus"
 v = ["Visual Studio Code", "VS Code"]
-w = "Windsurf"
 
 [b]
 label = "[b]"

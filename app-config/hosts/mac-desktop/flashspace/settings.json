@@ -36,11 +36,6 @@
       "name" : "Google Chrome Beta"
     },
     {
-      "bundleIdentifier" : "so.cap.desktop",
-      "iconPath" : "/Applications/Cap.app/Contents/Resources/icon.icns",
-      "name" : "Cap"
-    },
-    {
       "bundleIdentifier" : "com.google.Chrome",
       "iconPath" : "/Applications/Google Chrome.app/Contents/Resources/app.icns",
       "name" : "Google Chrome"
