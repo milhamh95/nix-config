@@ -4,6 +4,8 @@ Personal Nix configuration for managing system packages, dev environment, and do
 
 > For a more advanced nix config, check out [github.com/r17x/universe](https://github.com/r17x/universe)
 
+<!-- test edit for herdr git_status demo -->
+
 ## Architecture
 
 ### Directory Structure
