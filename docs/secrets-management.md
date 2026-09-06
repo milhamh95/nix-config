@@ -62,7 +62,7 @@ For any secret, the workflow is always the same:
 2. **Run** `make setup-secrets` to encrypt
 3. **Configure** home-manager to decrypt it
 4. **Commit** the `.enc` file (never commit raw files)
-5. **Rebuild** with `make switch-desktop` or `make switch-mbp`
+5. **Rebuild** with `make switch`
 
 > **Security Tip:** Don't use `echo "secret" > file` in terminal - it saves to shell history. Use a text editor instead (vim, nano, VS Code).
 
@@ -141,7 +141,7 @@ git commit -m "Add encrypted SSH private key"
 #### Step 6: Rebuild
 
 ```bash
-make switch-desktop  # or make switch-mbp
+make switch
 ```
 
 #### Step 7: Verify
@@ -212,7 +212,7 @@ sops = {
 ```bash
 git add secrets/claude_api_key.enc
 git commit -m "Add encrypted Claude API key"
-make switch-desktop
+make switch
 ```
 
 #### Step 5: Use the API key
@@ -292,7 +292,7 @@ sops = {
 ```bash
 git add secrets/*.enc
 git commit -m "Add encrypted secrets"
-make switch-desktop
+make switch
 ```
 
 ---
@@ -375,7 +375,7 @@ home.activation.configureWorkSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
 ```bash
 git add secrets/id_github_work_group.enc app-config/hosts/mac-desktop/ssh/
 git commit -m "Add work SSH key (mac-desktop only)"
-make switch-desktop
+make switch
 ```
 
 #### Step 7: Verify

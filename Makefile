@@ -1,4 +1,4 @@
-.PHONY: install-desktop install-mbp install-desktop-nosecrets install-mbp-nosecrets switch-desktop switch-mbp switch-desktop-nosecrets switch-mbp-nosecrets update check clean setup-secrets export-age-key
+.PHONY: install-desktop install-mbp install-desktop-nosecrets install-mbp-nosecrets switch switch-nosecrets update check clean setup-secrets export-age-key
 
 # First-time installation
 install-desktop:
@@ -18,22 +18,14 @@ install-mbp-nosecrets:
 	bash scripts/install-mbp.sh
 	@rm -f secrets/.skip
 
-# Daily rebuild (after nix-darwin is installed)
-switch-desktop:
-	sudo darwin-rebuild switch --flake .#mac-desktop
-
-switch-mbp:
-	sudo darwin-rebuild switch --flake .#mbp
+# Daily rebuild (after nix-darwin is installed) - auto-detects host from `hostname -s`
+switch:
+	bash scripts/switch.sh
 
 # Daily rebuild (without secrets)
-switch-desktop-nosecrets:
+switch-nosecrets:
 	@touch secrets/.skip
-	sudo darwin-rebuild switch --flake .#mac-desktop
-	@rm -f secrets/.skip
-
-switch-mbp-nosecrets:
-	@touch secrets/.skip
-	sudo darwin-rebuild switch --flake .#mbp
+	bash scripts/switch.sh
 	@rm -f secrets/.skip
 
 # Update flake inputs
@@ -80,10 +72,8 @@ help:
 	@echo "  make install-mbp-nosecrets       - Install without secrets decryption"
 	@echo ""
 	@echo "Daily usage:"
-	@echo "  make switch-desktop              - Rebuild Mac Desktop config"
-	@echo "  make switch-mbp                  - Rebuild MacBook Pro config"
-	@echo "  make switch-desktop-nosecrets    - Rebuild without secrets decryption"
-	@echo "  make switch-mbp-nosecrets        - Rebuild without secrets decryption"
+	@echo "  make switch               - Rebuild current Mac's config (auto-detects host)"
+	@echo "  make switch-nosecrets     - Rebuild without secrets decryption"
 	@echo ""
 	@echo "Maintenance:"
 	@echo "  make update           - Update flake inputs"

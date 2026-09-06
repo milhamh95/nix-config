@@ -9,7 +9,7 @@ Personal Nix configuration for macOS — manages system packages, dotfiles, and 
 | Machine | Profiles | Use |
 |---|---|---|
 | `mac-desktop` | work | Main desktop |
-| `mbp` | laptop | Personal laptop (minimal) |
+| `mbp` | — | Personal laptop (minimal) |
 
 Each machine always gets the `common` layer. Profiles are opt-in on top of that. See [Architecture](docs/architecture.md) for details.
 
@@ -23,12 +23,12 @@ Each machine always gets the `common` layer. Profiles are opt-in on top of that.
 
 ### Quick start (recommended)
 
-Run the bootstrap script on a fresh Mac — it handles everything interactively:
+Run the install script on a fresh Mac — it handles everything interactively:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/feat/separate-brew/scripts/bootstrap.sh -o bootstrap.sh
-bash bootstrap.sh              # clones main branch (default)
-bash bootstrap.sh feat/my-branch  # clones a specific branch
+curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/install.sh -o install.sh
+bash install.sh              # clones main branch (default)
+bash install.sh feat/my-branch  # clones a specific branch
 ```
 
 The script will:
@@ -123,9 +123,8 @@ git commit -m "feat: add encrypted secrets"
 nixmd      # rebuild mac-desktop
 nixmbp     # rebuild mbp
 
-# Via Makefile
-make switch-desktop
-make switch-mbp
+# Via Makefile (auto-detects host from `hostname -s`)
+make switch
 ```
 
 </details>

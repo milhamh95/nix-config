@@ -2,14 +2,14 @@
 # Bootstrap script for setting up nix-config on a fresh Mac.
 #
 # Usage (no git or clone needed):
-#   curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/bootstrap.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/install.sh | bash
 #
 # Or download first, then run:
-#   curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/bootstrap.sh -o bootstrap.sh
-#   bash bootstrap.sh
+#   curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/install.sh -o install.sh
+#   bash install.sh
 #
 # To clone a specific branch:
-#   bash bootstrap.sh <branch-name>
+#   bash install.sh <branch-name>
 
 set -e
 
@@ -146,5 +146,5 @@ if [ "$SKIP_SECRETS" = true ]; then
     echo -e "${YELLOW}Secrets were skipped.${NC}"
     echo "To enable secrets later:"
     echo "  1. Save your age key to $INSTALL_DIR/secrets/age/keys.txt"
-    echo "  2. Run the matching switch command (e.g., make switch-desktop)"
+    echo "  2. Run the matching switch command (e.g., make switch)"
 fi

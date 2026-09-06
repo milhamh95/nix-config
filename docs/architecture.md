@@ -15,25 +15,18 @@ block-beta
     block:layer3["profiles/work/"]:1
         l3["bloom, tableplus, flashspace settings"]
     end
-    lbl2["Laptop Profile"]:1
-    block:layer2["profiles/laptop/"]:1
-        l2["batfi, dock size 50, battery %"]
-    end
     lbl1["Common"]:1
     block:layer1["common/"]:1
         l1["browsers, media, fonts, karabiner, raycast, git, ssh, bat, delta, mas apps"]
     end
 
     style lbl1 fill:#74c7ec,color:#1e1e2e
-    style lbl2 fill:#94e2d5,color:#1e1e2e
     style lbl3 fill:#a18072,color:#1e1e2e
     style lbl5 fill:#f38ba8,color:#1e1e2e
     style layer1 fill:#74c7ec,color:#1e1e2e
-    style layer2 fill:#94e2d5,color:#1e1e2e
     style layer3 fill:#a18072,color:#1e1e2e
     style layer5 fill:#f38ba8,color:#1e1e2e
     style l1 fill:#74c7ec,color:#1e1e2e,stroke:#74c7ec
-    style l2 fill:#94e2d5,color:#1e1e2e,stroke:#94e2d5
     style l3 fill:#a18072,color:#1e1e2e,stroke:#a18072
     style l5 fill:#f38ba8,color:#1e1e2e,stroke:#f38ba8
 ```
@@ -41,15 +34,14 @@ block-beta
 | Color | Layer | Applied to |
 |---|---|---|
 | 🔷 Cyan | `common/` | All machines |
-| 🟢 Teal | `profiles/laptop/` | Laptops (mbp) |
 | 🟤 Brown | `profiles/work/` | Machines used for work |
 | 🔴 Pink | `hosts/{machine}/` | This specific machine only |
 
 Defined in `flake.nix`:
 
 ```nix
-"mac-desktop" = { profiles = [ "work" ];    };
-"mbp"         = { profiles = [ "laptop" ]; };  # minimal
+"mac-desktop" = { profiles = [ "work" ]; };
+"mbp"         = { profiles = [ ];       };  # minimal
 ```
 
 ---
@@ -73,9 +65,6 @@ nix-config/
 │       └── fastfetch.nix           #     system info display
 │
 ├── profiles/                       # Opt-in feature sets
-│   ├── laptop/                     #   Shared laptop settings
-│   │   ├── homebrew.nix            #     batfi
-│   │   └── system-defaults.nix     #     dock size 50, battery %
 │   └── work/                       #   Generic work setup
 │       ├── homebrew.nix            #     bloom, tableplus
 │       ├── home-manager.nix        #     work folder, shared flashspace configs
@@ -84,7 +73,7 @@ nix-config/
 │
 ├── hosts/                          # Per-machine unique config
 │   ├── mac-desktop/                #   bettermouse, bettertouchtool, betterdisplay, Switor, flashspace profiles
-│   └── mbp/                        #   flashspace (different configs)
+│   └── mbp/                        #   batfi, dock size 65, battery %, flashspace
 │
 ├── shells/                         # nix develop environments
 │   ├── postgres.nix                #   PostgreSQL 17 with helper CLIs
@@ -105,7 +94,7 @@ nix-config/
 
 ## What's in Common
 
-Everything in `common/` is installed on **all three machines**.
+Everything in `common/` is installed on **all machines**.
 
 <details>
 <summary>Nix packages</summary>
@@ -289,13 +278,6 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 | Fish | `work` → `cd ~/work` |
 | System | Bloom pinned in dock |
 
-### `profiles/laptop/`
-
-| What | Detail |
-|---|---|
-| Casks | batfi |
-| System | dock size 50, battery % shown |
-
 ---
 
 ## What's in Each Host
@@ -314,6 +296,8 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 
 | What | Detail |
 |---|---|
+| Casks | batfi |
+| System | dock size 65, battery % shown |
 | Config | flashspace (personal only) |
 
 ---
@@ -352,9 +336,9 @@ flowchart LR
     style host fill:#f38ba8,color:#1e1e2e
 ```
 
-### mbp — `profiles = ["laptop"]`
+### mbp — `profiles = []`
 
-Minimal — common + laptop + host:
+Minimal — common + host only, no profiles:
 
 ```mermaid
 flowchart LR
@@ -362,22 +346,16 @@ flowchart LR
         c["programs + apps + mas apps + github releases + config"]
     end
 
-    subgraph laptop["profiles/laptop/"]
-        lp["batfi, dock size 50, battery %"]
-    end
-
     subgraph host["hosts/mbp/"]
-        h["flashspace"]
+        h["batfi, dock size 65, battery %, flashspace"]
     end
 
     result["mbp (minimal)"]
 
     common --> result
-    laptop --> result
     host --> result
 
     style common fill:#74c7ec,color:#1e1e2e
-    style laptop fill:#94e2d5,color:#1e1e2e
     style host fill:#f38ba8,color:#1e1e2e
 ```
 
