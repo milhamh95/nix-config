@@ -107,22 +107,19 @@ echo -e "${BLUE}Step 4: Select machine to install${NC}"
 echo ""
 echo "  [1] mac-desktop"
 echo "  [2] mbp (personal)"
-echo "  [3] alami-mbp (work)"
 echo ""
-read -p "Choose [1/2/3]: " MACHINE_CHOICE
+read -p "Choose [1/2]: " MACHINE_CHOICE
 
 if [ "$SKIP_SECRETS" = true ]; then
     case "$MACHINE_CHOICE" in
         1) MAKE_TARGET="install-desktop-nosecrets" ;;
         2) MAKE_TARGET="install-mbp-nosecrets" ;;
-        3) MAKE_TARGET="install-alami-nosecrets" ;;
         *) echo -e "${RED}Invalid choice${NC}"; exit 1 ;;
     esac
 else
     case "$MACHINE_CHOICE" in
         1) MAKE_TARGET="install-desktop" ;;
         2) MAKE_TARGET="install-mbp" ;;
-        3) MAKE_TARGET="install-alami" ;;
         *) echo -e "${RED}Invalid choice${NC}"; exit 1 ;;
     esac
 fi

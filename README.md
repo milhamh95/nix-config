@@ -8,9 +8,8 @@ Personal Nix configuration for macOS — manages system packages, dotfiles, and 
 
 | Machine | Profiles | Use |
 |---|---|---|
-| `mac-desktop` | work, alami | Main desktop |
+| `mac-desktop` | work | Main desktop |
 | `mbp` | laptop | Personal laptop (minimal) |
-| `alami-mbp` | laptop, work, alami | Work laptop |
 
 Each machine always gets the `common` layer. Profiles are opt-in on top of that. See [Architecture](docs/architecture.md) for details.
 
@@ -77,7 +76,6 @@ vim secrets/age/keys.txt   # paste the full key content, save and exit
 ```sh
 make install-desktop   # Mac Desktop
 make install-mbp       # MacBook Pro (personal)
-make install-alami     # Alami MacBook Pro (work)
 ```
 
 **5. Switch git remote to SSH** (after secrets are decrypted)
@@ -124,12 +122,10 @@ git commit -m "feat: add encrypted secrets"
 # Fish abbreviations (recommended)
 nixmd      # rebuild mac-desktop
 nixmbp     # rebuild mbp
-nixalami   # rebuild alami-mbp
 
 # Via Makefile
 make switch-desktop
 make switch-mbp
-make switch-alami
 ```
 
 </details>

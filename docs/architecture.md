@@ -11,10 +11,6 @@ block-beta
     block:layer5["hosts/{machine}/"]:1
         l5["machine-specific flashspace profiles, Switor"]
     end
-    lbl4["Alami Profile"]:1
-    block:layer4["profiles/alami/"]:1
-        l4["slack, claude-code, pritunl, alami SSH, git work identity, sdkman"]
-    end
     lbl3["Work Profile"]:1
     block:layer3["profiles/work/"]:1
         l3["bloom, tableplus, flashspace settings"]
@@ -31,34 +27,29 @@ block-beta
     style lbl1 fill:#74c7ec,color:#1e1e2e
     style lbl2 fill:#94e2d5,color:#1e1e2e
     style lbl3 fill:#a18072,color:#1e1e2e
-    style lbl4 fill:#f5a97f,color:#1e1e2e
     style lbl5 fill:#f38ba8,color:#1e1e2e
     style layer1 fill:#74c7ec,color:#1e1e2e
     style layer2 fill:#94e2d5,color:#1e1e2e
     style layer3 fill:#a18072,color:#1e1e2e
-    style layer4 fill:#f5a97f,color:#1e1e2e
     style layer5 fill:#f38ba8,color:#1e1e2e
     style l1 fill:#74c7ec,color:#1e1e2e,stroke:#74c7ec
     style l2 fill:#94e2d5,color:#1e1e2e,stroke:#94e2d5
     style l3 fill:#a18072,color:#1e1e2e,stroke:#a18072
-    style l4 fill:#f5a97f,color:#1e1e2e,stroke:#f5a97f
     style l5 fill:#f38ba8,color:#1e1e2e,stroke:#f38ba8
 ```
 
 | Color | Layer | Applied to |
 |---|---|---|
 | 🔷 Cyan | `common/` | All machines |
-| 🟢 Teal | `profiles/laptop/` | Laptops (mbp, alami-mbp) |
+| 🟢 Teal | `profiles/laptop/` | Laptops (mbp) |
 | 🟤 Brown | `profiles/work/` | Machines used for work |
-| 🟠 Peach | `profiles/alami/` | Machines for Alami job |
 | 🔴 Pink | `hosts/{machine}/` | This specific machine only |
 
 Defined in `flake.nix`:
 
 ```nix
-"mac-desktop" = { profiles = [ "work" "alami" ]; };
-"alami-mbp"   = { profiles = [ "laptop" "work" "alami" ]; };
-"mbp"         = { profiles = [ "laptop" ];                 };  # minimal
+"mac-desktop" = { profiles = [ "work" ];    };
+"mbp"         = { profiles = [ "laptop" ]; };  # minimal
 ```
 
 ---
@@ -85,21 +76,15 @@ nix-config/
 │   ├── laptop/                     #   Shared laptop settings
 │   │   ├── homebrew.nix            #     batfi
 │   │   └── system-defaults.nix     #     dock size 50, battery %
-│   ├── work/                       #   Generic work setup
-│   │   ├── homebrew.nix            #     bloom, tableplus
-│   │   ├── home-manager.nix        #     work folder, shared flashspace configs
-│   │   ├── system-defaults.nix     #     Bloom in dock
-│   │   └── dotfiles/               #     flashspace/settings.json
-│   └── alami/                      #   Alami job-specific
-│       ├── homebrew.nix            #     slack, claude-code, pritunl, rtk...
-│       ├── nix-packages.nix        #     sftpgo, zstd
-│       ├── home-manager.nix        #     alami SSH matchBlock, git work identity, sdkman, sftpgo
-│       └── fish/                   #     alami-specific functions & abbreviations
+│   └── work/                       #   Generic work setup
+│       ├── homebrew.nix            #     bloom, tableplus
+│       ├── home-manager.nix        #     work folder, shared flashspace configs
+│       ├── system-defaults.nix     #     Bloom in dock
+│       └── dotfiles/               #     flashspace/settings.json
 │
 ├── hosts/                          # Per-machine unique config
 │   ├── mac-desktop/                #   bettermouse, bettertouchtool, betterdisplay, Switor, flashspace profiles
-│   ├── mbp/                        #   flashspace (different configs)
-│   └── alami-mbp/                  #   flashspace profiles
+│   └── mbp/                        #   flashspace (different configs)
 │
 ├── shells/                         # nix develop environments
 │   ├── postgres.nix                #   PostgreSQL 17 with helper CLIs
@@ -109,8 +94,7 @@ nix-config/
 ├── scripts/                        # Bootstrap scripts
 │   ├── setup-nix.sh                #   Xcode + Nix + Homebrew
 │   ├── install-desktop.sh
-│   ├── install-mbp.sh
-│   └── install-alami.sh
+│   └── install-mbp.sh
 │
 ├── secrets/                        # Encrypted SSH keys (sops-nix + age)
 │
@@ -312,19 +296,6 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 | Casks | batfi |
 | System | dock size 50, battery % shown |
 
-### `profiles/alami/`
-
-| What | Detail |
-|---|---|
-| Casks | claude-code, conductor, github, pritunl, rewritebar, rtk, slack |
-| Nix packages | sftpgo, zstd |
-| Java (sdkman) | 17.0.19-tem, 11.0.31-tem — default: 17.0.19-tem |
-| Maven (sdkman) | 3.9.15 — custom settings.xml (encrypted, auto-deployed) |
-| SSH | alami-group SSH matchBlock + public key |
-| Git | work identity via `programs.git.includes` (gitdir:~/work/alami-group/) |
-| Config | SFTPGo config |
-| Fish | `mocksftp` abbreviation + alami-specific functions |
-
 ---
 
 ## What's in Each Host
@@ -345,17 +316,11 @@ Installed via activation scripts. On every `darwin-rebuild`, the GitHub API is q
 |---|---|
 | Config | flashspace (personal only) |
 
-### `hosts/alami-mbp/`
-
-| What | Detail |
-|---|---|
-| Config | flashspace profiles (Heptabase) |
-
 ---
 
 ## Per-Machine Config Flow
 
-### mac-desktop — `profiles = ["work", "alami"]`
+### mac-desktop — `profiles = ["work"]`
 
 ```mermaid
 flowchart LR
@@ -371,10 +336,6 @@ flowchart LR
         w["bloom, tableplus, flashspace settings"]
     end
 
-    subgraph alami["profiles/alami/"]
-        a["slack, claude-code, pritunl, alami SSH, git work identity, sdkman"]
-    end
-
     subgraph host["hosts/mac-desktop/"]
         h["bettermouse, bettertouchtool, betterdisplay, Switor"]
         h_sys["dock size 65, flashspace profiles"]
@@ -384,53 +345,10 @@ flowchart LR
 
     common --> result
     work --> result
-    alami --> result
     host --> result
 
     style common fill:#74c7ec,color:#1e1e2e
     style work fill:#a18072,color:#1e1e2e
-    style alami fill:#f5a97f,color:#1e1e2e
-    style host fill:#f38ba8,color:#1e1e2e
-```
-
-### alami-mbp — `profiles = ["laptop", "work", "alami"]`
-
-Same as mac-desktop but with laptop profile:
-
-```mermaid
-flowchart LR
-    subgraph common["common/"]
-        c["programs + apps + mas apps + github releases + config"]
-    end
-
-    subgraph laptop["profiles/laptop/"]
-        lp["batfi, dock size 50, battery %"]
-    end
-
-    subgraph work["profiles/work/"]
-        w["bloom, tableplus, flashspace settings"]
-    end
-
-    subgraph alami["profiles/alami/"]
-        a["slack, claude-code, pritunl, alami SSH, git work identity, sdkman"]
-    end
-
-    subgraph host["hosts/alami-mbp/"]
-        h["flashspace profiles"]
-    end
-
-    result["alami-mbp"]
-
-    common --> result
-    laptop --> result
-    work --> result
-    alami --> result
-    host --> result
-
-    style common fill:#74c7ec,color:#1e1e2e
-    style laptop fill:#94e2d5,color:#1e1e2e
-    style work fill:#a18072,color:#1e1e2e
-    style alami fill:#f5a97f,color:#1e1e2e
     style host fill:#f38ba8,color:#1e1e2e
 ```
 
@@ -472,6 +390,6 @@ flowchart LR
     s1["1. Xcode CLI Tools"] --> s2["2. Install age key"] --> s3["3. Install Nix"] --> s4["4. Install Homebrew"] --> s5["5. Apply nix-darwin"]
 ```
 
-Run `make install-desktop`, `make install-mbp`, or `make install-alami` to execute all steps.
+Run `make install-desktop` or `make install-mbp` to execute all steps.
 
 > Place your age key at `secrets/age/keys.txt` before running install. See [Secrets Management](secrets-management.md#setting-up-on-a-new-machine) for details.

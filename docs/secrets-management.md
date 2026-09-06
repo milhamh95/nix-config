@@ -311,7 +311,7 @@ Some secrets should only be available on specific machines. For example, a work 
 #### Step 1: Create the secret file
 
 ```bash
-vim secrets/raw/id_github_alami_group
+vim secrets/raw/id_github_work_group
 # Paste your private key content, save and exit
 ```
 
@@ -327,7 +327,7 @@ Create the public key file:
 
 ```bash
 # Copy your public key
-cp ~/.ssh/id_github_alami_group.pub app-config/hosts/mac-desktop/ssh/id_github_alami_group.pub
+cp ~/.ssh/id_github_work_group.pub app-config/hosts/mac-desktop/ssh/id_github_work_group.pub
 ```
 
 #### Step 4: Add to host-specific home-manager.nix
@@ -339,10 +339,10 @@ Edit `hosts/mac-desktop/home-manager.nix` (NOT `common/home-manager.nix`):
 
 {
   # Sops secrets configuration (mac-desktop only)
-  sops.secrets.id_github_alami_group = {
-    sopsFile = ../../secrets/id_github_alami_group.enc;
+  sops.secrets.id_github_work_group = {
+    sopsFile = ../../secrets/id_github_work_group.enc;
     format = "binary";
-    path = "${config.home.homeDirectory}/.ssh/id_github_alami_group";
+    path = "${config.home.homeDirectory}/.ssh/id_github_work_group";
     mode = "0600";
   };
 
@@ -358,11 +358,11 @@ Also in `hosts/mac-desktop/home-manager.nix`, add an activation script:
 home.activation.configureWorkSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
   echo "Configuring work SSH..."
   $DRY_RUN_CMD mkdir -p "$HOME/.ssh"
-  $DRY_RUN_CMD cp ${../../app-config/hosts/mac-desktop/ssh/id_github_alami_group.pub} "$HOME/.ssh/id_github_alami_group.pub"
-  $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_alami_group.pub"
+  $DRY_RUN_CMD cp ${../../app-config/hosts/mac-desktop/ssh/id_github_work_group.pub} "$HOME/.ssh/id_github_work_group.pub"
+  $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_work_group.pub"
 
   # Append work SSH config if not already present
-  if ! grep -q "Host alami-group" "$HOME/.ssh/config" 2>/dev/null; then
+  if ! grep -q "Host work-group" "$HOME/.ssh/config" 2>/dev/null; then
     echo "" >> "$HOME/.ssh/config"
     $DRY_RUN_CMD cat ${../../app-config/hosts/mac-desktop/ssh/config} >> "$HOME/.ssh/config"
   fi
@@ -373,7 +373,7 @@ home.activation.configureWorkSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
 #### Step 6: Commit and rebuild
 
 ```bash
-git add secrets/id_github_alami_group.enc app-config/hosts/mac-desktop/ssh/
+git add secrets/id_github_work_group.enc app-config/hosts/mac-desktop/ssh/
 git commit -m "Add work SSH key (mac-desktop only)"
 make switch-desktop
 ```
@@ -382,17 +382,17 @@ make switch-desktop
 
 ```bash
 # Check files exist
-ls -la ~/.ssh/id_github_alami_group
-ls -la ~/.ssh/id_github_alami_group.pub
+ls -la ~/.ssh/id_github_work_group
+ls -la ~/.ssh/id_github_work_group.pub
 
 # Check SSH config
-grep -A7 "alami-group" ~/.ssh/config
+grep -A7 "work-group" ~/.ssh/config
 
 # Test connection
-ssh -T git@alami-group
+ssh -T git@work-group
 ```
 
-On mbp, the secret will NOT be decrypted (no `~/.ssh/id_github_alami_group` file).
+On mbp, the secret will NOT be decrypted (no `~/.ssh/id_github_work_group` file).
 
 ---
 
@@ -428,7 +428,7 @@ vim secrets/age/keys.txt   # paste the full key content, save and exit
 ### Step 3: Run install
 
 ```bash
-make install-desktop   # or install-mbp / install-alami
+make install-desktop   # or install-mbp
 ```
 
 The install script will automatically:
@@ -443,7 +443,6 @@ After rebuild, check that secrets were decrypted:
 
 ```bash
 ls -la ~/.ssh/id_github_personal        # should exist, permissions 600
-ls -la ~/.config/maven/settings.xml     # alami machines only
 ```
 
 ---

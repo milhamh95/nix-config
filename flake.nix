@@ -27,17 +27,12 @@
       "mac-desktop" = {
         hostname = "mac-desktop";
         username = "milhamh95";
-        profiles = [ "work" "alami" ];
+        profiles = [ "work" ];
       };
       "mbp" = {
         hostname = "mbp";
         username = "milhamh95";
         profiles = [ "laptop" ];
-      };
-      "alami-mbp" = {
-        hostname = "alami-mbp";
-        username = "muhammadilhamhidayat";
-        profiles = [ "laptop" "work" "alami" ];
       };
     };
 
@@ -51,18 +46,11 @@
         ./profiles/work/homebrew.nix
         ./profiles/work/system-defaults.nix
       ];
-      "alami" = [
-        ./profiles/alami/nix-packages.nix
-        ./profiles/alami/homebrew.nix
-      ];
     };
 
     profileHomeModules = {
       "work" = [
         ./profiles/work/home-manager.nix
-      ];
-      "alami" = [
-        ./profiles/alami/home-manager.nix
       ];
     };
 
@@ -177,7 +165,6 @@
       darwinConfigurations = {
         "mac-desktop" = mkDarwinConfig hostConfigs."mac-desktop";
         "mbp" = mkDarwinConfig hostConfigs."mbp";
-        "alami-mbp" = mkDarwinConfig hostConfigs."alami-mbp";
       };
     };
 
