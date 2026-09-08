@@ -18,6 +18,12 @@
 
     # flake-parts for modular flake structure
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    # AI coding agent packages (claude-code, etc), updated daily upstream
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, sops-nix, flake-parts, ... }:

@@ -19,6 +19,8 @@ let
     profiles;
 in
 nix-darwin.lib.darwinSystem {
+  specialArgs = { inherit inputs; };
+
   modules = [
     # Base system configuration
     (mkBaseConfiguration { inherit username; })

@@ -1,0 +1,13 @@
+name: check
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  flake-check:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v27
+      - run: nix flake check
