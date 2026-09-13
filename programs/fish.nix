@@ -6,6 +6,45 @@
     enable = true;
     functions = {
       current_branch = "git branch --show-current";
+      gclone = {
+        description = "Clone a repo, picking personal/alami-group profile (auto-rewrites SSH host + clones into the right folder for git identity)";
+        body = ''
+          if test (count $argv) -lt 1
+              echo "Usage: gclone <git@github.com:user/repo.git> [personal|alami-group]"
+              return 1
+          end
+
+          set -l url $argv[1]
+          set -l profile $argv[2]
+
+          if test -z "$profile"
+              set profile (printf '%s\n' personal alami-group | fzf --height 20% --header "Pick git profile")
+          end
+
+          if test -z "$profile"
+              echo "No profile selected"
+              return 1
+          end
+
+          set -l base_dir
+          set -l clone_url $url
+          switch $profile
+              case personal
+                  set base_dir "$HOME/personal"
+              case alami-group
+                  set base_dir "$HOME/work/alami-group"
+                  set clone_url (string replace "github.com" "alami-group" $url)
+              case '*'
+                  echo "Unknown profile: $profile (expected personal or alami-group)"
+                  return 1
+          end
+
+          set -l repo_name (basename $url .git)
+          mkdir -p $base_dir
+          echo "Cloning into $base_dir/$repo_name (profile: $profile)..."
+          git clone $clone_url $base_dir/$repo_name; and cd $base_dir/$repo_name
+        '';
+      };
       gsync = {
         description = "Fetch and reset current branch to match remote (no rebase, no conflicts)";
         body = ''
