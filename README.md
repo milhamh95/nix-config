@@ -1,286 +1,199 @@
 # Nix Config
 
-Personal Nix configuration for managing system packages, dev environment, and dotfiles on macOS.
+Personal Nix configuration for macOS — manages system packages, dotfiles, and dev environment across multiple machines, built with [denful/den](https://github.com/denful/den) and [flake-parts](https://flake.parts). Every `.nix` file under `modules/` is auto-loaded by [import-tree](https://github.com/denful/import-tree); one file, one feature, across both the system and user layer.
 
 > For a more advanced nix config, check out [github.com/r17x/universe](https://github.com/r17x/universe)
 
-## Architecture
+## Machines
 
-### Directory Structure
+| Machine | Identity | Plugged layers | Use |
+|---|---|---|---|
+| `mac-desktop` | `milhamh95` | work | Main desktop |
+| `mbp` | `milhamh95` | personal | Personal laptop |
 
-```
-nix-config/
-├── flake.nix                     # Entry point
-├── Makefile                      # Build commands
-├── common/                       # Shared configurations
-│   ├── home-manager.nix
-│   ├── homebrew.nix
-│   ├── nix-packages.nix
-│   └── system-defaults.nix
-├── hosts/                        # Machine-specific configurations
-│   ├── mac-desktop/
-│   │   ├── default.nix
-│   │   ├── home-manager.nix
-│   │   ├── homebrew.nix
-│   │   ├── nix-packages.nix
-│   │   └── system-defaults.nix
-│   ├── mbp/
-│   │   └── ... (same structure)
-│   └── alami-mbp/
-│       └── ... (same structure)
-├── programs/                     # Shared program configs (fish, atuin, etc.)
-├── app-config/
-│   ├── common/                   # Shared app configs
-│   └── hosts/                    # Machine-specific app configs
-├── scripts/                      # Installation scripts
-└── shells/                       # Development shells
-```
+Every machine always gets `den.aspects.common` (git, fish, terminal apps, ...).
+`work` and `personal` are pluggable layers, switched on per host with one line
+in `modules/hosts/<name>.nix` (`provides.to-users.includes = [ den.aspects.work ]`).
+Delete the line to unplug. See [Architecture](docs/architecture.md) for the
+full layer diagram, directory structure, and what's installed where.
 
-### Configuration Flow
+## Prerequisites
 
-```mermaid
-flowchart TB
-    subgraph Entry["Entry Point"]
-        flake["flake.nix"]
-    end
-
-    subgraph Common["Common Modules"]
-        c_hm["common/home-manager.nix"]
-        c_hb["common/homebrew.nix"]
-        c_np["common/nix-packages.nix"]
-        c_sd["common/system-defaults.nix"]
-    end
-
-    subgraph Desktop["hosts/mac-desktop/"]
-        d_def["default.nix"]
-        d_hm["home-manager.nix"]
-        d_hb["homebrew.nix"]
-        d_np["nix-packages.nix"]
-        d_sd["system-defaults.nix"]
-    end
-
-    subgraph MBP["hosts/mbp/"]
-        m_def["default.nix"]
-        m_hm["home-manager.nix"]
-        m_hb["homebrew.nix"]
-        m_np["nix-packages.nix"]
-        m_sd["system-defaults.nix"]
-    end
-
-    subgraph Alami["hosts/alami-mbp/"]
-        a_def["default.nix"]
-        a_hm["home-manager.nix"]
-        a_hb["homebrew.nix"]
-        a_np["nix-packages.nix"]
-        a_sd["system-defaults.nix"]
-    end
-
-    subgraph Programs["programs/"]
-        prog["default.nix"]
-        fish["fish.nix"]
-        atuin["atuin.nix"]
-        fastfetch["fastfetch.nix"]
-        mise["mise.nix"]
-    end
-
-    flake --> c_hm & c_hb & c_np & c_sd
-    flake -->|"#mac-desktop"| d_def & d_hm & d_hb & d_np & d_sd
-    flake -->|"#mbp"| m_def & m_hm & m_hb & m_np & m_sd
-    flake -->|"#alami-mbp"| a_def & a_hm & a_hb & a_np & a_sd
-    c_hm --> prog
-    prog --> fish & atuin & fastfetch & mise
-```
-
-### App Config Flow
-
-```mermaid
-flowchart TB
-    subgraph CommonHM["common/home-manager.nix"]
-        chm_files["home.file"]
-    end
-
-    subgraph DesktopHM["hosts/mac-desktop/home-manager.nix"]
-        dhm_files["home.file"]
-    end
-
-    subgraph MBPHM["hosts/mbp/home-manager.nix"]
-        mhm_files["home.file"]
-    end
-
-    subgraph AlamiHM["hosts/alami-mbp/home-manager.nix"]
-        ahm_files["home.file"]
-    end
-
-    subgraph CommonConfig["app-config/common/"]
-        ac_ghostty["ghostty/config"]
-        ac_wezterm["wezterm/wezterm.lua"]
-        ac_git["git/.gitconfig-personal<br/>git/.gitconfig-alami-group<br/>git/.gitignore"]
-        ac_karabiner["karabiner/karabiner.json"]
-        ac_mise["mise/config.toml"]
-        ac_ssh["ssh/config<br/>ssh/id_github_personal.pub"]
-    end
-
-    subgraph DesktopConfig["app-config/hosts/mac-desktop/"]
-        ad_git["git/.gitconfig"]
-        ad_flash["flashspace/profiles.json<br/>flashspace/settings.json"]
-        ad_hammer["hammerflow/home.toml<br/>hammerflow/init.lua"]
-        ad_sftpgo["sftpgo/config.nix"]
-    end
-
-    subgraph MBPConfig["app-config/hosts/mbp/"]
-        am_git["git/.gitconfig"]
-        am_flash["flashspace/profiles.json<br/>flashspace/settings.json"]
-        am_hammer["hammerflow/home.toml<br/>hammerflow/init.lua"]
-    end
-
-    subgraph AlamiConfig["app-config/hosts/alami-mbp/"]
-        aa_git["git/.gitconfig"]
-        aa_flash["flashspace/profiles.json<br/>flashspace/settings.json"]
-        aa_hammer["hammerflow/home.toml<br/>hammerflow/init.lua"]
-        aa_sftpgo["sftpgo/config.nix"]
-    end
-
-    chm_files --> ac_ghostty & ac_wezterm & ac_git & ac_karabiner & ac_mise & ac_ssh
-    dhm_files --> ad_git & ad_flash & ad_hammer & ad_sftpgo
-    mhm_files --> am_git & am_flash & am_hammer
-    ahm_files --> aa_git & aa_flash & aa_hammer & aa_sftpgo
-```
-
-### Installation Flow
-
-```mermaid
-flowchart LR
-    subgraph Make["Makefile"]
-        make_d["make install-desktop"]
-        make_m["make install-mbp"]
-        make_a["make install-alami"]
-    end
-
-    subgraph Scripts["scripts/"]
-        setup["setup-nix.sh"]
-        inst_d["install-desktop.sh"]
-        inst_m["install-mbp.sh"]
-        inst_a["install-alami.sh"]
-    end
-
-    subgraph Steps["Installation Steps"]
-        s1["1. Xcode CLI Tools"]
-        s2["2. Install Nix"]
-        s3d["3. Apply #mac-desktop"]
-        s3m["3. Apply #mbp"]
-        s3a["3. Apply #alami-mbp"]
-    end
-
-    make_d --> inst_d
-    make_m --> inst_m
-    make_a --> inst_a
-    inst_d --> setup
-    inst_m --> setup
-    inst_a --> setup
-    setup --> s1 --> s2
-    inst_d --> s3d
-    inst_m --> s3m
-    inst_a --> s3a
-```
-
-### Module Merging
-
-Common and host-specific modules are **merged** (not sequential):
-
-```mermaid
-flowchart LR
-    subgraph Inputs
-        c_hb["common/homebrew.nix<br/>casks: [ghostty, raycast, ...]"]
-        d_hb["hosts/mac-desktop/homebrew.nix<br/>casks: [bruno, orbstack, ...]"]
-    end
-
-    subgraph Result
-        merged["Final homebrew.casks<br/>[ghostty, raycast, ..., bruno, orbstack, ...]"]
-    end
-
-    c_hb --> merged
-    d_hb --> merged
-```
-
-## Prerequisite
-
-1. **Login to Mac App Store** - Required to install packages using `mas`
-
-2. **Add Full Disk Access to Terminal** - Go to `System Settings > Privacy & Security > Full Disk Access` and add your terminal app
+1. **Login to Mac App Store** — required for `mas` to install App Store apps
+2. **Full Disk Access for Terminal** — System Settings → Privacy & Security → Full Disk Access
+   > **Important:** After granting Full Disk Access, **quit and reopen Terminal** (Cmd+Q) before running any install command. The permission only applies to new Terminal sessions — the Nix installer will fail with a "Read-only file system" error if the terminal wasn't restarted.
 
 ## Installation
 
+### Quick start (recommended)
+
+Run the install script on a fresh Mac — it handles everything interactively:
+
 ```sh
-# 1. Create nix folder
-mkdir ~/nix && cd ~/nix
-
-# 2. Clone repo
-git clone <repo-url> nix-config
-cd nix-config
-
-# 3. Run installation
-make install-desktop  # For Mac Desktop
-# or
-make install-mbp      # For MacBook Pro (personal)
-# or
-make install-alami    # For Alami MacBook Pro (work)
+curl -fsSL https://raw.githubusercontent.com/milhamh95/nix-config/main/scripts/install.sh -o install.sh
+bash install.sh              # clones main branch (default)
+bash install.sh feat/my-branch  # clones a specific branch
 ```
 
+The script will:
+1. Install Xcode Command Line Tools (gives you `git` and `make`)
+2. Clone the repo via HTTPS (from the specified branch, defaults to `main`)
+3. Prompt for the path to your age key file
+4. Ask which machine to install
+5. Run the install
 
-> **Note:** When prompted about `Determinate` package, press `n` to skip.
->
-> ![Determinate Package](nix_determinate.png)
-> https://github.com/nix-darwin/nix-darwin/issues/1349
+After install, restart your terminal and switch the git remote to SSH:
 
-> https://github.com/nix-darwin/nix-darwin/issues/1361
+```sh
+cd ~/nix/nix-config
+git remote set-url origin git@personal:milhamh95/nix-config.git
+```
 
-> https://github.com/nix-darwin/nix-darwin/pull/1367
+<details>
+<summary>Manual installation (step by step)</summary>
 
-After installation, restart your terminal to use fish shell.
+**1. Install Xcode Command Line Tools** (gives you `git` and `make`)
+
+```sh
+xcode-select --install
+```
+
+**2. Clone the repo via HTTPS** (SSH isn't set up yet)
+
+```sh
+mkdir ~/nix && cd ~/nix
+git clone https://github.com/milhamh95/nix-config.git nix-config
+cd nix-config
+```
+
+**3. Set up age key**
+
+Save your age key from your password manager to `secrets/age/keys.txt`:
+
+```sh
+mkdir -p secrets/age
+vim secrets/age/keys.txt   # paste the full key content, save and exit
+```
+
+**4. Run install**
+
+```sh
+make install-desktop   # Mac Desktop
+make install-mbp       # MacBook Pro (personal)
+```
+
+No age key yet, or just trying this config out? Append `-nosecrets` to skip
+secrets decryption entirely — `make install-desktop-nosecrets` /
+`make install-mbp-nosecrets`. Same for daily rebuilds: `make switch-nosecrets`.
+
+**5. Switch git remote to SSH** (after secrets are decrypted)
+
+```sh
+git remote set-url origin git@personal:milhamh95/nix-config.git
+```
+
+</details>
+
+<details>
+<summary>First time setting up secrets (encrypting raw secrets)</summary>
+
+Only needed once when building this repo from scratch — not on new machines.
+
+```sh
+# Put your raw secrets in secrets/raw/
+mkdir -p secrets/raw
+cp ~/.ssh/id_github_personal secrets/raw/id_github_personal
+cp ~/.sdkman/candidates/maven/current/conf/settings.xml secrets/raw/maven_settings.xml
+
+# Encrypt them — also generates the age key
+make setup-secrets
+
+# Copy the age key for backup
+make export-age-key
+
+# Back up secrets/age/keys.txt to your password manager
+# You will need this key on every new machine
+
+# Commit the encrypted files
+git add secrets/*.enc .sops.yaml
+git commit -m "feat: add encrypted secrets"
+```
+
+</details>
 
 ## Usage
 
-```sh
-# Fish abbreviations (recommended for daily use)
-nixmd                 # Rebuild Mac Desktop
-nixmbp                # Rebuild MacBook Pro (personal)
-nixalami              # Rebuild Alami MacBook Pro (work)
+<details>
+<summary>Rebuild commands</summary>
 
-# Or use Makefile
-make switch-desktop   # Rebuild Mac Desktop
-make switch-mbp       # Rebuild MacBook Pro
-make switch-alami     # Rebuild Alami MacBook Pro
-make update           # Update flake inputs
-make check            # Check configuration
-make clean            # Garbage collection
-make help             # Show all commands
+```sh
+# Fish abbreviations (recommended)
+nixmd      # rebuild mac-desktop
+nixmbp     # rebuild mbp
+
+# Via Makefile (auto-detects host from `hostname -s`)
+make switch
 ```
 
+</details>
+
+<details>
+<summary>Dev shells</summary>
+
+```sh
+nix develop .#postgres   # PostgreSQL 17 dev shell (auto-enters fish)
+nix develop .#redis      # Redis dev shell (auto-enters fish)
+
+# Or use fish abbreviations
+pgshell
+rdshell
+```
+
+</details>
+
+<details>
+<summary>Other Makefile commands</summary>
+
+```sh
+make update             # update flake inputs
+make check              # check configuration
+make clean              # garbage collection
+make setup-secrets      # encrypt raw secrets with sops/age
+make export-age-key     # copy age key to secrets/age/ for backup
+make help               # show all commands
+```
+
+</details>
+
 ## Maintenance
+
+<details>
+<summary>Garbage collection & generations</summary>
 
 ```sh
 # View all generations
 darwin-rebuild --list-generations
 
-# Clean up older than 7 days
+# Clean generations older than 7 days
 nix-collect-garbage --delete-older-than 7d
 sudo nix-collect-garbage --delete-older-than 7d
 
-# Clean up all (or use: make clean)
+# Clean all (or: make clean)
 nix-collect-garbage -d
 sudo nix-collect-garbage -d
 ```
 
+</details>
+
 ## Documentation
 
-- [Secrets Management](docs/secrets-management.md) - How to securely store SSH keys, API keys, etc.
+- [Architecture](docs/architecture.md) — layer system, directory structure, per-machine config
+- [den Concepts](docs/den.md) — aspects, hosts, includes, generated den diagrams
+- [Secrets Management](docs/secrets-management.md) — SSH keys, sops/age setup
+- [Paid Apps](docs/paid-apps.md) — license info and device limits
 
 ## Reference
 
 - [github.com/r17x/universe](https://github.com/r17x/universe)
 - [github.com/torgeir/nix-darwin](https://github.com/torgeir/nix-darwin)
 - [github.com/linkarzu/dotfiles-latest](https://github.com/linkarzu/dotfiles-latest)
-
-## To Do
-
-- Use [nixos-unified](https://nixos-unified.org/index.html) to unify nix-darwin + home-manager

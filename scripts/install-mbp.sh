@@ -5,15 +5,27 @@ set -e
 echo "Installing nix-darwin for: MacBook Pro"
 echo ""
 
-# Run shared setup (Xcode + Nix)
+# Run shared setup (Xcode + Nix + Homebrew)
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 bash "$SCRIPT_DIR/setup-nix.sh"
 
-# Step 3: Apply nix-darwin configuration
+# Load nix and homebrew into current shell (setup-nix.sh runs in a subshell)
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Step 5: Apply nix-darwin configuration
 echo ""
-echo "Step 3: Applying nix-darwin configuration..."
+echo "Step 5: Applying nix-darwin configuration..."
 cd ~/nix/nix-config
-nix run nix-darwin -- switch --flake .#mbp
+if [ "$NIX_SKIP_SECRETS" = "1" ]; then
+    sudo env PATH="$PATH" NIX_SKIP_SECRETS=1 nix run nix-darwin -- switch --flake .#mbp --impure
+else
+    sudo env PATH="$PATH" nix run nix-darwin -- switch --flake .#mbp
+fi
 
 echo ""
 echo "Installation complete!"
