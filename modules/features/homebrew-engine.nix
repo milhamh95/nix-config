@@ -11,12 +11,17 @@
 
       homebrew = {
         enable = true;
-        taps = [ ];
+        taps = [ "stablyai/orca" ];
 
         brews = [
           "bash"
+          "herdr"
           "mas"
           "mole"
+          "opencode"
+          "pi-coding-agent"
+          "stablyai/orca/orca"
+          "xcodegen"
         ];
 
         onActivation.autoUpdate = true;
