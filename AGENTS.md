@@ -20,7 +20,11 @@ nix eval .#darwinConfigurations.<host>.config.home-manager.users.milhamh95.<opt>
 nix run .#write-diagrams                                                            # regen docs/diagrams/den + docs/den.md section after aspect changes
 ```
 
-**Commits:** Conventional Commits (`feat:`, `fix:`, `docs:`, `ref:`).
+**Commits:** Conventional Commits, scoped — `type(scope): summary`. Scope is
+the aspect/host/layer touched (`feat(git): ...`, `fix(mbp): ...`,
+`docs(den): ...`) or a cross-cutting area (`ci`, `flake`, `secrets`) when no
+single aspect fits. Omit scope only for a repo-wide change. Types: `feat`,
+`fix`, `docs`, `ref`, `chore`, `test`.
 
 **Dotfile paths:** always `inputs.self + "/dotfiles/..."` (or `self.lib.dotfile`
 helper). Never relative — breaks when the referencing file moves.
