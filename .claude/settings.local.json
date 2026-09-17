@@ -1,3 +1,10 @@
 {
-  "outputStyle": "ELI5"
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls:*)",
+      "Bash(rtk wc:*)",
+      "Bash(rtk grep:*)",
+      "Bash(rtk diff:*)"
+    ]
+  }
 }
