@@ -1,4 +1,10 @@
 {
+  den.aspects.activation-fix.darwin = {
+    # Pre-existing dotfiles (not yet nix-managed) would otherwise abort
+    # the whole activation; back them up instead of failing the switch.
+    home-manager.backupFileExtension = "backup";
+  };
+
   den.aspects.activation-fix.homeManager =
     { pkgs, lib, ... }:
     {
@@ -9,9 +15,5 @@
         readlink() { ${pkgs.coreutils}/bin/readlink "$@"; }
         install() { ${pkgs.coreutils}/bin/install "$@"; }
       '';
-
-      # Pre-existing dotfiles (not yet nix-managed) would otherwise abort
-      # the whole activation; back them up instead of failing the switch.
-      home.backupFileExtension = "backup";
     };
 }
