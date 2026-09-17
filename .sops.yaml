@@ -6,3 +6,7 @@ creation_rules:
     key_groups:
       - age:
           - *user_age
+  - path_regex: secrets/.*\.enc$
+    key_groups:
+      - age:
+          - *user_age

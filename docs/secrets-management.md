@@ -62,9 +62,22 @@ For any secret, the workflow is always the same:
 2. **Run** `make setup-secrets` to encrypt
 3. **Configure** home-manager to decrypt it
 4. **Commit** the `.enc` file (never commit raw files)
-5. **Rebuild** with `make switch-desktop` or `make switch-mbp`
+5. **Rebuild** with `make switch`
 
 > **Security Tip:** Don't use `echo "secret" > file` in terminal - it saves to shell history. Use a text editor instead (vim, nano, VS Code).
+
+### Skipping secrets entirely
+
+No age key, or just trying this config out on a throwaway Mac? Append
+`-nosecrets` to install or switch and sops decryption is skipped completely
+— `make install-mbp-nosecrets`, `make install-desktop-nosecrets`,
+`make switch-nosecrets`. Everything else in the config still builds; only
+`~/.ssh/id_github_personal` (and any other secret you add) won't be written.
+
+Under the hood this passes `NIX_SKIP_SECRETS=1` and `--impure` to
+`darwin-rebuild` — see `modules/features/sops.nix`. A plain
+`darwin-rebuild switch --flake .` (no env var, no `--impure`) always keeps
+secrets on, so forgetting the flag never silently skips them.
 
 ---
 
@@ -113,23 +126,21 @@ Location: ~/Library/Application Support/sops/age/keys.txt
 
 Save it to your password manager (1Password, Bitwarden, etc.)
 
-#### Step 4: Add sops config to home-manager
+#### Step 4: Add sops config
 
-Edit `common/home-manager.nix` and add your secret:
+Edit `modules/features/sops.nix` and add your secret:
 
 ```nix
-# Sops secrets configuration
-sops = {
-  age.keyFile = "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt";
-
-  secrets.id_github_personal = {
-    sopsFile = ../secrets/id_github_personal.enc;
-    format = "binary";
-    path = "${config.home.homeDirectory}/.ssh/id_github_personal";
-    mode = "0600";
-  };
+sops.secrets.id_github_personal = {
+  sopsFile = inputs.self + "/secrets/id_github_personal.enc";
+  format = "binary";
+  path = "${config.home.homeDirectory}/.ssh/id_github_personal";
+  mode = "0600";
 };
 ```
+
+(`sops.age.keyFile` and the `sops-nix.homeManagerModules.sops` import are
+already set up in that file — you're only adding a `secrets.<name>` entry.)
 
 #### Step 5: Commit encrypted file
 
@@ -141,7 +152,7 @@ git commit -m "Add encrypted SSH private key"
 #### Step 6: Rebuild
 
 ```bash
-make switch-desktop  # or make switch-mbp
+make switch
 ```
 
 #### Step 7: Verify
@@ -182,28 +193,17 @@ make setup-secrets
 
 This creates `secrets/claude_api_key.enc` (or `secrets/claude_api_key.txt.enc`).
 
-#### Step 3: Add to home-manager
+#### Step 3: Add to sops.nix
 
-Edit `common/home-manager.nix`:
+Edit `modules/features/sops.nix`, add another entry next to
+`id_github_personal`:
 
 ```nix
-sops = {
-  age.keyFile = "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt";
-
-  secrets.id_github_personal = {
-    sopsFile = ../secrets/id_github_personal.enc;
-    format = "binary";
-    path = "${config.home.homeDirectory}/.ssh/id_github_personal";
-    mode = "0600";
-  };
-
-  # Add API key
-  secrets.claude_api_key = {
-    sopsFile = ../secrets/claude_api_key.enc;
-    format = "binary";
-    path = "${config.home.homeDirectory}/.config/secrets/claude_api_key";
-    mode = "0600";
-  };
+sops.secrets.claude_api_key = {
+  sopsFile = inputs.self + "/secrets/claude_api_key.enc";
+  format = "binary";
+  path = "${config.home.homeDirectory}/.config/secrets/claude_api_key";
+  mode = "0600";
 };
 ```
 
@@ -212,7 +212,7 @@ sops = {
 ```bash
 git add secrets/claude_api_key.enc
 git commit -m "Add encrypted Claude API key"
-make switch-desktop
+make switch
 ```
 
 #### Step 5: Use the API key
@@ -251,35 +251,33 @@ vim secrets/raw/id_github_work
 make setup-secrets
 ```
 
-### 3. Add all to home-manager.nix
+### 3. Add all to `modules/features/sops.nix`
 
 ```nix
-sops = {
-  age.keyFile = "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt";
-
-  secrets.id_github_personal = {
-    sopsFile = ../secrets/id_github_personal.enc;
+sops.secrets = {
+  id_github_personal = {
+    sopsFile = inputs.self + "/secrets/id_github_personal.enc";
     format = "binary";
     path = "${config.home.homeDirectory}/.ssh/id_github_personal";
     mode = "0600";
   };
 
-  secrets.id_github_work = {
-    sopsFile = ../secrets/id_github_work.enc;
+  id_github_work = {
+    sopsFile = inputs.self + "/secrets/id_github_work.enc";
     format = "binary";
     path = "${config.home.homeDirectory}/.ssh/id_github_work";
     mode = "0600";
   };
 
-  secrets.claude_api_key = {
-    sopsFile = ../secrets/claude_api_key.enc;
+  claude_api_key = {
+    sopsFile = inputs.self + "/secrets/claude_api_key.enc";
     format = "binary";
     path = "${config.home.homeDirectory}/.config/secrets/claude_api_key";
     mode = "0600";
   };
 
-  secrets.openai_api_key = {
-    sopsFile = ../secrets/openai_api_key.enc;
+  openai_api_key = {
+    sopsFile = inputs.self + "/secrets/openai_api_key.enc";
     format = "binary";
     path = "${config.home.homeDirectory}/.config/secrets/openai_api_key";
     mode = "0600";
@@ -292,7 +290,7 @@ sops = {
 ```bash
 git add secrets/*.enc
 git commit -m "Add encrypted secrets"
-make switch-desktop
+make switch
 ```
 
 ---
@@ -303,15 +301,20 @@ Some secrets should only be available on specific machines. For example, a work 
 
 ### Architecture
 
-- **Common secrets**: Configured in `common/home-manager.nix` - available on all hosts
-- **Host-specific secrets**: Configured in `hosts/<hostname>/home-manager.nix` - only available on that host
+- **Common secrets**: Configured in `modules/features/sops.nix` — every
+  aspect it defines is included by `common`, so it reaches both hosts.
+- **Host-specific secrets**: Add the `sops.secrets.*` entry directly in
+  `modules/hosts/<hostname>.nix` instead, under
+  `den.aspects.<hostname>.provides.to-users.homeManager` — same trap as any
+  other host-scoped `home.file`/`home.activation`: it must go through
+  `provides.to-users`, plain `homeManager` on a host aspect is inert.
 
-### Example: Work SSH Key (mac-desktop only)
+### Example: Work SSH key (mac-desktop only)
 
 #### Step 1: Create the secret file
 
 ```bash
-vim secrets/raw/id_github_alami_group
+vim secrets/raw/id_github_work_group
 # Paste your private key content, save and exit
 ```
 
@@ -321,93 +324,111 @@ vim secrets/raw/id_github_alami_group
 make setup-secrets
 ```
 
-#### Step 3: Add public key to app-config
-
-Create the public key file:
+#### Step 3: Add the public key to dotfiles
 
 ```bash
-# Copy your public key
-cp ~/.ssh/id_github_alami_group.pub app-config/hosts/mac-desktop/ssh/id_github_alami_group.pub
+mkdir -p dotfiles/mac-desktop/ssh
+cp ~/.ssh/id_github_work_group.pub dotfiles/mac-desktop/ssh/id_github_work_group.pub
 ```
 
-#### Step 4: Add to host-specific home-manager.nix
-
-Edit `hosts/mac-desktop/home-manager.nix` (NOT `common/home-manager.nix`):
+#### Step 4: Add to `modules/hosts/mac-desktop.nix`
 
 ```nix
-{ config, pkgs, lib, ... }:
-
+{ inputs, den, self, config, lib, ... }:
 {
-  # Sops secrets configuration (mac-desktop only)
-  sops.secrets.id_github_alami_group = {
-    sopsFile = ../../secrets/id_github_alami_group.enc;
-    format = "binary";
-    path = "${config.home.homeDirectory}/.ssh/id_github_alami_group";
-    mode = "0600";
-  };
+  # ... existing mac-desktop config ...
 
-  # ... rest of the file
+  den.aspects.mac-desktop.provides.to-users.homeManager =
+    { config, lib, ... }:
+    {
+      sops.secrets.id_github_work_group = {
+        sopsFile = inputs.self + "/secrets/id_github_work_group.enc";
+        format = "binary";
+        path = "${config.home.homeDirectory}/.ssh/id_github_work_group";
+        mode = "0600";
+      };
+
+      home.file.".ssh/id_github_work_group.pub".source =
+        inputs.self + "/dotfiles/mac-desktop/ssh/id_github_work_group.pub";
+
+      # ... rest of the mac-desktop homeManager block ...
+    };
 }
 ```
 
-#### Step 5: Add activation script for SSH config
-
-Also in `hosts/mac-desktop/home-manager.nix`, add an activation script:
-
-```nix
-home.activation.configureWorkSsh = lib.hm.dag.entryAfter ["writeBoundary"] ''
-  echo "Configuring work SSH..."
-  $DRY_RUN_CMD mkdir -p "$HOME/.ssh"
-  $DRY_RUN_CMD cp ${../../app-config/hosts/mac-desktop/ssh/id_github_alami_group.pub} "$HOME/.ssh/id_github_alami_group.pub"
-  $DRY_RUN_CMD chmod 644 "$HOME/.ssh/id_github_alami_group.pub"
-
-  # Append work SSH config if not already present
-  if ! grep -q "Host alami-group" "$HOME/.ssh/config" 2>/dev/null; then
-    echo "" >> "$HOME/.ssh/config"
-    $DRY_RUN_CMD cat ${../../app-config/hosts/mac-desktop/ssh/config} >> "$HOME/.ssh/config"
-  fi
-  echo "Work SSH configured"
-'';
-```
-
-#### Step 6: Commit and rebuild
+#### Step 5: Commit and rebuild
 
 ```bash
-git add secrets/id_github_alami_group.enc app-config/hosts/mac-desktop/ssh/
+git add secrets/id_github_work_group.enc dotfiles/mac-desktop/ssh/
 git commit -m "Add work SSH key (mac-desktop only)"
-make switch-desktop
+make switch
 ```
 
-#### Step 7: Verify
+#### Step 6: Verify
 
 ```bash
-# Check files exist
-ls -la ~/.ssh/id_github_alami_group
-ls -la ~/.ssh/id_github_alami_group.pub
-
-# Check SSH config
-grep -A7 "alami-group" ~/.ssh/config
-
-# Test connection
-ssh -T git@alami-group
+ls -la ~/.ssh/id_github_work_group        # should exist, permissions 600
+ls -la ~/.ssh/id_github_work_group.pub
 ```
 
-On mbp, the secret will NOT be decrypted (no `~/.ssh/id_github_alami_group` file).
+To also wire up an SSH `Host` block (so `git@work-group` resolves), add a
+`programs.ssh.settings."work-group" = { ... }` entry alongside the secret in
+the same homeManager block — see `modules/features/ssh.nix` for the pattern
+already used for `github.com`. Aspects merge, so a host-only match block does
+not need any activation-script text-appending.
+
+On mbp, the secret will NOT be decrypted (no `~/.ssh/id_github_work_group` file).
 
 ---
 
 ## Setting Up on a New Machine
 
-1. Clone this repo
-2. Copy your age key to:
-   ```
-   ~/Library/Application Support/sops/age/keys.txt
-   ```
-3. Run:
-   ```bash
-   make switch-desktop  # or make switch-mbp
-   ```
-4. Done - secrets are automatically decrypted
+The install scripts handle the age key automatically — you just need to place it in the repo before running install.
+
+### Step 1: Clone the repo
+
+```bash
+mkdir ~/nix && cd ~/nix
+git clone <repo-url> nix-config
+cd nix-config
+```
+
+### Step 2: Place your age key
+
+Retrieve your age key from your password manager. It looks like this:
+
+```
+# created: 2024-01-01T00:00:00+07:00
+# public key: age1vfhs5y5nmtmw9n9tq5eqtx07a5u8j2qfjenjj08dmalaccesmq9quzctvw
+AGE-SECRET-KEY-1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+```
+
+Create the file at `secrets/age/keys.txt` in the repo (this folder is gitignored — it will never be committed):
+
+```bash
+mkdir -p secrets/age
+vim secrets/age/keys.txt   # paste the full key content, save and exit
+```
+
+### Step 3: Run install
+
+```bash
+make install-desktop   # or install-mbp
+```
+
+The install script will automatically:
+1. Validate the age key
+2. Copy it to `~/Library/Application Support/sops/age/keys.txt`
+3. Install Nix + Homebrew
+4. Apply nix-darwin → sops decrypts all secrets automatically
+
+### Step 4: Verify
+
+After rebuild, check that secrets were decrypted:
+
+```bash
+ls -la ~/.ssh/id_github_personal        # should exist, permissions 600
+```
 
 ---
 
@@ -422,8 +443,9 @@ nix-config/
 │   │   └── claude_api_key        ← your API key
 │   ├── id_github_personal.enc    ← encrypted SSH key (safe to commit)
 │   └── claude_api_key.enc        ← encrypted API key (safe to commit)
-└── common/
-    └── home-manager.nix          ← sops decryption config
+└── modules/
+    └── features/
+        └── sops.nix               ← sops decryption config, in `common`
 ```
 
 ---
