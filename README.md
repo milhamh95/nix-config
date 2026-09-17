@@ -46,7 +46,7 @@ After install, restart your terminal and switch the git remote to SSH:
 
 ```sh
 cd ~/nix/nix-config
-git remote set-url origin git@personal:milhamh95/nix-config.git
+git remote set-url origin git@github.com:milhamh95/nix-config.git
 ```
 
 <details>
@@ -89,7 +89,7 @@ secrets decryption entirely — `make install-desktop-nosecrets` /
 **5. Switch git remote to SSH** (after secrets are decrypted)
 
 ```sh
-git remote set-url origin git@personal:milhamh95/nix-config.git
+git remote set-url origin git@github.com:milhamh95/nix-config.git
 ```
 
 </details>
