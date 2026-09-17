@@ -20,9 +20,10 @@
           "mole"
           "opencode"
           "pi-coding-agent"
-          "stablyai/orca/orca"
           "xcodegen"
         ];
+
+        casks = [ "stablyai/orca/orca" ];
 
         onActivation.autoUpdate = true;
         onActivation.upgrade = true;
