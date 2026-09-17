@@ -3,7 +3,8 @@
 # if the installed version is missing or out of date.
 #
 # Usage: install-github-app.sh <AppName> <owner/repo>
-# Requires curl, jq, unzip, hdiutil, /usr/libexec/PlistBuddy on PATH.
+# Requires curl, jq, unzip on PATH; hdiutil and PlistBuddy called by full path
+# since home-manager activation strips /usr/bin from PATH.
 # Honors DRY_RUN_CMD (set by home-manager activation) for the copy/remove steps.
 
 set -uo pipefail
@@ -57,8 +58,8 @@ echo "Download complete, installing..."
 
 if echo "$FILENAME" | grep -qi '\.dmg$'; then
   MOUNT_POINT=$(mktemp -d)
-  hdiutil attach "$TEMP_DIR/$FILENAME" -mountpoint "$MOUNT_POINT" -quiet -nobrowse
-  APP_SRC=$(find "$MOUNT_POINT" -name "*.app" -maxdepth 2 | head -1)
+  /usr/bin/hdiutil attach "$TEMP_DIR/$FILENAME" -mountpoint "$MOUNT_POINT" -quiet -nobrowse
+  APP_SRC=$(find "$MOUNT_POINT" -maxdepth 2 -name "*.app" | head -1)
   if [ -n "$APP_SRC" ]; then
     [ -d "$APP_PATH" ] && $DRY_RUN_CMD rm -rf "$APP_PATH"
     $DRY_RUN_CMD cp -R "$APP_SRC" /Applications/
@@ -66,7 +67,7 @@ if echo "$FILENAME" | grep -qi '\.dmg$'; then
   else
     echo "⚠️  Could not find .app in DMG"
   fi
-  hdiutil detach "$MOUNT_POINT" -quiet
+  /usr/bin/hdiutil detach "$MOUNT_POINT" -quiet
   rm -rf "$MOUNT_POINT"
 elif echo "$FILENAME" | grep -qi '\.zip$'; then
   mkdir -p "$TEMP_DIR/extracted"
