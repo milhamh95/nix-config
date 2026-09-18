@@ -6,6 +6,7 @@
       "bettermouse"
       "bettertouchtool"
       "betterdisplay"
+      "rectangle-pro"
     ];
   };
 
