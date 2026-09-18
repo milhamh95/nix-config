@@ -28,6 +28,7 @@
     den.aspects.sops
     den.aspects.activation-fix
     den.aspects.shottr
+    den.aspects.revpdf
     den.aspects.recordly
     den.aspects.tinycast
     den.aspects.karabiner

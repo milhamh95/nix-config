@@ -11,7 +11,6 @@
     "LilyView" = 529490330;
     "OpenIn" = 1643649331;
     "PastePal" = 1503446680;
-    "PDF Expert" = 1055273043;
     "Presentify" = 1507246666;
     "SnippetsLab" = 1006087419;
     "Spark" = 1176895641;
